@@ -29,67 +29,14 @@ Q_DECLARE_METATYPE(UIntList)
 
 typedef struct
 {
-    QString id;
-    QString description;
-    QString loadState;
-    QString activeState;
-    QString subState;
-    QString following;
-    QDBusObjectPath path;
-    uint jobId;
-    QString jobType;
-    QDBusObjectPath jobPath;
-} ManagerDBusUnit;
-Q_DECLARE_METATYPE(ManagerDBusUnit)
+    QString controller;
+    QString name;
+    QString value;
+} DBusCGroupAttrs;
+Q_DECLARE_METATYPE(DBusCGroupAttrs)
 
-QDBusArgument &operator<<(QDBusArgument &argument, const ManagerDBusUnit &unit);
-const QDBusArgument &operator>>(const QDBusArgument &argument, ManagerDBusUnit &unit);
-
-typedef struct
-{
-    uint id;
-    QString unitId;
-    QString type;
-    QString state;
-    QDBusObjectPath path;
-    QDBusObjectPath unitPath;
-} ManagerDBusJob;
-Q_DECLARE_METATYPE(ManagerDBusJob)
-
-QDBusArgument &operator<<(QDBusArgument &argument, const ManagerDBusJob &job);
-const QDBusArgument &operator>>(const QDBusArgument &argument, ManagerDBusJob &job);
-
-
-typedef struct
-{
-    QString path;
-    QString state;
-} DBusUnitFileList;
-Q_DECLARE_METATYPE(DBusUnitFileList)
-
-QDBusArgument &operator<<(QDBusArgument &argument, const DBusUnitFileList &unitFileList);
-const QDBusArgument &operator>>(const QDBusArgument &argument, DBusUnitFileList &unitFileList);
-
-typedef struct
-{
-    QString type;
-    QString path;
-    QString source;
-} DBusUnitFileChange;
-Q_DECLARE_METATYPE(DBusUnitFileChange)
-
-QDBusArgument &operator<<(QDBusArgument &argument, const DBusUnitFileChange &unitFileChange);
-const QDBusArgument &operator>>(const QDBusArgument &argument, DBusUnitFileChange &unitFileChange);
-
-typedef struct
-{
-    QString id;
-    QDBusObjectPath unit;
-} JobDBusUnit;
-Q_DECLARE_METATYPE(JobDBusUnit)
-
-QDBusArgument &operator<<(QDBusArgument &argument, const JobDBusUnit &unit);
-const QDBusArgument &operator>>(const QDBusArgument &argument, JobDBusUnit &unit);
+QDBusArgument &operator<<(QDBusArgument &argument, const DBusCGroupAttrs &cGroupAttrs);
+const QDBusArgument &operator>>(const QDBusArgument &argument, DBusCGroupAttrs &cGroupAttrs);
 
 typedef struct
 {
@@ -109,14 +56,58 @@ const QDBusArgument &operator>>(const QDBusArgument &argument, DBusExecCommand &
 
 typedef struct
 {
-    QString controller;
-    QString name;
-    QString value;
-} DBusCGroupAttrs;
-Q_DECLARE_METATYPE(DBusCGroupAttrs)
+    QString type;
+    QString path;
+    QString source;
+} DBusUnitFileChange;
+Q_DECLARE_METATYPE(DBusUnitFileChange)
 
-QDBusArgument &operator<<(QDBusArgument &argument, const DBusCGroupAttrs &cGroupAttrs);
-const QDBusArgument &operator>>(const QDBusArgument &argument, DBusCGroupAttrs &cGroupAttrs);
+QDBusArgument &operator<<(QDBusArgument &argument, const DBusUnitFileChange &unitFileChange);
+const QDBusArgument &operator>>(const QDBusArgument &argument, DBusUnitFileChange &unitFileChange);
+
+typedef struct
+{
+    QString path;
+    QString state;
+} DBusUnitFileList;
+Q_DECLARE_METATYPE(DBusUnitFileList)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const DBusUnitFileList &unitFileList);
+const QDBusArgument &operator>>(const QDBusArgument &argument, DBusUnitFileList &unitFileList);
+
+typedef struct
+{
+    QString id;
+    QDBusObjectPath unit;
+} JobDBusUnit;
+Q_DECLARE_METATYPE(JobDBusUnit)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const JobDBusUnit &unit);
+const QDBusArgument &operator>>(const QDBusArgument &argument, JobDBusUnit &unit);
+
+typedef struct
+{
+    QString what;
+    QString who;
+    QString why;
+    QString mode;
+    uint uid;
+    uint pid;
+} LoginDBusInhibitor;
+Q_DECLARE_METATYPE(LoginDBusInhibitor)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const LoginDBusInhibitor &inhibitors);
+const QDBusArgument &operator>>(const QDBusArgument &argument, LoginDBusInhibitor &inhibitors);
+
+typedef struct
+{
+    QString id;
+    QDBusObjectPath seat;
+} LoginDBusSeat;
+Q_DECLARE_METATYPE(LoginDBusSeat)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const LoginDBusSeat &seat);
+const QDBusArgument &operator>>(const QDBusArgument &argument, LoginDBusSeat &seat);
 
 typedef struct
 {
@@ -144,27 +135,35 @@ const QDBusArgument &operator>>(const QDBusArgument &argument, LoginDBusUser &us
 
 typedef struct
 {
-    QString id;
-    QDBusObjectPath seat;
-} LoginDBusSeat;
-Q_DECLARE_METATYPE(LoginDBusSeat)
+    uint id;
+    QString unitId;
+    QString type;
+    QString state;
+    QDBusObjectPath path;
+    QDBusObjectPath unitPath;
+} ManagerDBusJob;
+Q_DECLARE_METATYPE(ManagerDBusJob)
 
-QDBusArgument &operator<<(QDBusArgument &argument, const LoginDBusSeat &seat);
-const QDBusArgument &operator>>(const QDBusArgument &argument, LoginDBusSeat &seat);
+QDBusArgument &operator<<(QDBusArgument &argument, const ManagerDBusJob &job);
+const QDBusArgument &operator>>(const QDBusArgument &argument, ManagerDBusJob &job);
 
 typedef struct
 {
-    QString what;
-    QString who;
-    QString why;
-    QString mode;
-    uint uid;
-    uint pid;
-} LoginDBusInhibitor;
-Q_DECLARE_METATYPE(LoginDBusInhibitor)
+    QString id;
+    QString description;
+    QString loadState;
+    QString activeState;
+    QString subState;
+    QString following;
+    QDBusObjectPath path;
+    uint jobId;
+    QString jobType;
+    QDBusObjectPath jobPath;
+} ManagerDBusUnit;
+Q_DECLARE_METATYPE(ManagerDBusUnit)
 
-QDBusArgument &operator<<(QDBusArgument &argument, const LoginDBusInhibitor &inhibitors);
-const QDBusArgument &operator>>(const QDBusArgument &argument, LoginDBusInhibitor &inhibitors);
+QDBusArgument &operator<<(QDBusArgument &argument, const ManagerDBusUnit &unit);
+const QDBusArgument &operator>>(const QDBusArgument &argument, ManagerDBusUnit &unit);
 
 typedef struct
 {
@@ -179,17 +178,6 @@ const QDBusArgument &operator>>(const QDBusArgument &argument, PathDBusPath &pat
 typedef struct
 {
     QString timerBase;
-    qlonglong value;
-    qlonglong nextElapse;
-} TimerDBusMonotonicTimer;
-Q_DECLARE_METATYPE(TimerDBusMonotonicTimer)
-
-QDBusArgument &operator<<(QDBusArgument &argument, const TimerDBusMonotonicTimer &monotonicTimer);
-const QDBusArgument &operator>>(const QDBusArgument &argument, TimerDBusMonotonicTimer &monotonicTimer);
-
-typedef struct
-{
-    QString timerBase;
     QString calendarSpec;
     qlonglong nextElapse;
 } TimerDBusCalendarTimer;
@@ -197,6 +185,17 @@ Q_DECLARE_METATYPE(TimerDBusCalendarTimer)
 
 QDBusArgument &operator<<(QDBusArgument &argument, const TimerDBusCalendarTimer &calendarTimer);
 const QDBusArgument &operator>>(const QDBusArgument &argument, TimerDBusCalendarTimer &calendarTimer);
+
+typedef struct
+{
+    QString timerBase;
+    qlonglong value;
+    qlonglong nextElapse;
+} TimerDBusMonotonicTimer;
+Q_DECLARE_METATYPE(TimerDBusMonotonicTimer)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const TimerDBusMonotonicTimer &monotonicTimer);
+const QDBusArgument &operator>>(const QDBusArgument &argument, TimerDBusMonotonicTimer &monotonicTimer);
 
 typedef struct
 {

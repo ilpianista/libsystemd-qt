@@ -23,9 +23,11 @@ include_directories(${QT_INCLUDES}
 add_subdirectory(dbus)
 
 set(QtSystemd_HEADERS
+    dbus/generic-types.h
 )
 
 set(QtSystemd_PART_SRCS
+    dbus/generic-types.cpp
 )
 
 set(DBUS_INTERFACE_SRCS
