@@ -24,13 +24,13 @@ set( INTERFACE_INTROSPECTION_XML_FILES
      introspection/org.freedesktop.systemd1.Manager.xml
      introspection/org.freedesktop.systemd1.Mount.xml
      introspection/org.freedesktop.systemd1.Path.xml
-#     introspection/org.freedesktop.systemd1.Service.xml
+     introspection/org.freedesktop.systemd1.Service.xml
      introspection/org.freedesktop.systemd1.Snapshot.xml
-#     introspection/org.freedesktop.systemd1.Socket.xml
-#     introspection/org.freedesktop.systemd1.Swap.xml
+     introspection/org.freedesktop.systemd1.Socket.xml
+     introspection/org.freedesktop.systemd1.Swap.xml
      introspection/org.freedesktop.systemd1.Target.xml
-#     introspection/org.freedesktop.systemd1.Timer.xml
-#     introspection/org.freedesktop.systemd1.Unit.xml
+     introspection/org.freedesktop.systemd1.Timer.xml
+     introspection/org.freedesktop.systemd1.Unit.xml
      introspection/org.freedesktop.timedate1.xml
    )
 

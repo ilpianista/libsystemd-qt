@@ -3,8 +3,12 @@
 <node>
  <interface name="org.freedesktop.systemd1.Timer">
   <property name="Unit" type="s" access="read"/>
-  <property name="TimersMonotonic" type="a(stt)" access="read"/>
-  <property name="TimersCalendar" type="a(sst)" access="read"/>
+  <property name="TimersMonotonic" type="a(stt)" access="read">
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="TimerDBusMonotonicTimer"/>
+  </property>
+  <property name="TimersCalendar" type="a(sst)" access="read">
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="TimerDBusCalendarTimer"/>
+  </property>
   <property name="NextElapseUSecRealtime" type="t" access="read"/>
   <property name="NextElapseUSecMonotonic" type="t" access="read"/>
   <property name="Result" type="s" access="read"/>

@@ -80,7 +80,9 @@
   <property name="CanStop" type="b" access="read"/>
   <property name="CanReload" type="b" access="read"/>
   <property name="CanIsolate" type="b" access="read"/>
-  <property name="Job" type="(uo)" access="read"/>
+  <property name="Job" type="(uo)" access="read">
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="UnitDBusJob"/>
+  </property>
   <property name="StopWhenUnneeded" type="b" access="read"/>
   <property name="RefuseManualStart" type="b" access="read"/>
   <property name="RefuseManualStop" type="b" access="read"/>
@@ -94,6 +96,8 @@
   <property name="ConditionTimestamp" type="t" access="read"/>
   <property name="ConditionTimestampMonotonic" type="t" access="read"/>
   <property name="ConditionResult" type="b" access="read"/>
-  <property name="LoadError" type="(ss)" access="read"/>
+  <property name="LoadError" type="(ss)" access="read">
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="UnitDBusLoadError"/>
+  </property>
  </interface>
 </node>

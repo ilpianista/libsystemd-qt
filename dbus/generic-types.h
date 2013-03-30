@@ -96,27 +96,27 @@ typedef struct
     QString path;
     QList<QString> argv;
     bool ignore;
-    qulonglong startTimestamp;
-    qulonglong exitTimestamp;
+    qlonglong startTimestamp;
+    qlonglong exitTimestamp;
     uint pid;
     int exitCode;
     int exitStatus;
-} MountDBusExecCommand;
-Q_DECLARE_METATYPE(MountDBusExecCommand)
+} DBusExecCommand;
+Q_DECLARE_METATYPE(DBusExecCommand)
 
-QDBusArgument &operator<<(QDBusArgument &argument, const MountDBusExecCommand &execCommand);
-const QDBusArgument &operator>>(const QDBusArgument &argument, MountDBusExecCommand &execCommand);
+QDBusArgument &operator<<(QDBusArgument &argument, const DBusExecCommand &execCommand);
+const QDBusArgument &operator>>(const QDBusArgument &argument, DBusExecCommand &execCommand);
 
 typedef struct
 {
     QString controller;
     QString name;
     QString value;
-} MountDBusCGroupAttrs;
-Q_DECLARE_METATYPE(MountDBusCGroupAttrs)
+} DBusCGroupAttrs;
+Q_DECLARE_METATYPE(DBusCGroupAttrs)
 
-QDBusArgument &operator<<(QDBusArgument &argument, const MountDBusCGroupAttrs &cGroupAttrs);
-const QDBusArgument &operator>>(const QDBusArgument &argument, MountDBusCGroupAttrs &cGroupAttrs);
+QDBusArgument &operator<<(QDBusArgument &argument, const DBusCGroupAttrs &cGroupAttrs);
+const QDBusArgument &operator>>(const QDBusArgument &argument, DBusCGroupAttrs &cGroupAttrs);
 
 typedef struct
 {
@@ -175,5 +175,47 @@ Q_DECLARE_METATYPE(PathDBusPath)
 
 QDBusArgument &operator<<(QDBusArgument &argument, const PathDBusPath &path);
 const QDBusArgument &operator>>(const QDBusArgument &argument, PathDBusPath &path);
+
+typedef struct
+{
+    QString timerBase;
+    qlonglong value;
+    qlonglong nextElapse;
+} TimerDBusMonotonicTimer;
+Q_DECLARE_METATYPE(TimerDBusMonotonicTimer)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const TimerDBusMonotonicTimer &monotonicTimer);
+const QDBusArgument &operator>>(const QDBusArgument &argument, TimerDBusMonotonicTimer &monotonicTimer);
+
+typedef struct
+{
+    QString timerBase;
+    QString calendarSpec;
+    qlonglong nextElapse;
+} TimerDBusCalendarTimer;
+Q_DECLARE_METATYPE(TimerDBusCalendarTimer)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const TimerDBusCalendarTimer &calendarTimer);
+const QDBusArgument &operator>>(const QDBusArgument &argument, TimerDBusCalendarTimer &calendarTimer);
+
+typedef struct
+{
+    QString id;
+    QDBusObjectPath job;
+} UnitDBusJob;
+Q_DECLARE_METATYPE(UnitDBusJob)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const UnitDBusJob &job);
+const QDBusArgument &operator>>(const QDBusArgument &argument, UnitDBusJob &job);
+
+typedef struct
+{
+    QString name;
+    QString message;
+} UnitDBusLoadError;
+Q_DECLARE_METATYPE(UnitDBusLoadError)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const UnitDBusLoadError &loadError);
+const QDBusArgument &operator>>(const QDBusArgument &argument, UnitDBusLoadError &loadError);
 
 #endif // GENERIC_TYPES_H

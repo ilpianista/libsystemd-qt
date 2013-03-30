@@ -8,13 +8,13 @@
   <property name="Type" type="s" access="read"/>
   <property name="TimeoutUSec" type="t" access="read"/>
   <property name="ExecMount" type="a(sasbttuii)" access="read">
-      <annotation name="org.qtproject.QtDBus.QtTypeName" value="MountDBusExecStructure"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommand"/>
   </property>
   <property name="ExecUnmount" type="a(sasbttuii)" access="read">
-      <annotation name="org.qtproject.QtDBus.QtTypeName" value="MountDBusExecStructure"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommand"/>
   </property>
   <property name="ExecRemount" type="a(sasbttuii)" access="read">
-      <annotation name="org.qtproject.QtDBus.QtTypeName" value="MountDBusExecStructure"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommand"/>
   </property>
   <property name="Environment" type="as" access="read"/>
   <property name="UMask" type="u" access="read"/>
@@ -86,7 +86,7 @@
   <property name="DefaultControlGroup" type="s" access="read"/>
   <property name="ControlGroups" type="as" access="read"/>
   <property name="ControlGroupAttributes" type="a(sss)" access="read">
-      <annotation name="org.qtproject.QtDBus.QtTypeName" value="MountDBusControlGroupAttributes"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusCGroupAttrs"/>
   </property>
   <method name="SetControlGroup">
    <arg name="group" type="s" direction="in"/>

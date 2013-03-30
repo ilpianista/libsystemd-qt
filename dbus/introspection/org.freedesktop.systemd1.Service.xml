@@ -14,12 +14,24 @@
   <property name="StartLimitInterval" type="t" access="read"/>
   <property name="StartLimitBurst" type="u" access="read"/>
   <property name="StartLimitAction" type="s" access="readwrite"/>
-  <property name="ExecStartPre" type="a(sasbttuii)" access="read"/>
-  <property name="ExecStart" type="a(sasbttuii)" access="read"/>
-  <property name="ExecStartPost" type="a(sasbttuii)" access="read"/>
-  <property name="ExecReload" type="a(sasbttuii)" access="read"/>
-  <property name="ExecStop" type="a(sasbttuii)" access="read"/>
-  <property name="ExecStopPost" type="a(sasbttuii)" access="read"/>
+  <property name="ExecStartPre" type="a(sasbttuii)" access="read">
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommand"/>
+  </property>
+  <property name="ExecStart" type="a(sasbttuii)" access="read">
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommand"/>
+  </property>
+  <property name="ExecStartPost" type="a(sasbttuii)" access="read">
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommand"/>
+  </property>
+  <property name="ExecReload" type="a(sasbttuii)" access="read">
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommand"/>
+  </property>
+  <property name="ExecStop" type="a(sasbttuii)" access="read">
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommand"/>
+  </property>
+  <property name="ExecStopPost" type="a(sasbttuii)" access="read">
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommand"/>
+  </property>
   <property name="Environment" type="as" access="read"/>
   <property name="UMask" type="u" access="read"/>
   <property name="LimitCPU" type="t" access="read"/>
@@ -81,13 +93,17 @@
   <property name="PrivateNetwork" type="b" access="read"/>
   <property name="IgnoreSIGPIPE" type="b" access="read"/>
   <property name="NoNewPrivileges" type="b" access="read"/>
-  <property name="SystemCallFilter" type="au" access="read"/>
+  <property name="SystemCallFilter" type="au" access="read">
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="UIntList"/>
+  </property>
   <property name="KillMode" type="s" access="read"/>
   <property name="KillSignal" type="i" access="read"/>
   <property name="SendSIGKILL" type="b" access="read"/>
   <property name="DefaultControlGroup" type="s" access="read"/>
   <property name="ControlGroups" type="as" access="read"/>
-  <property name="ControlGroupAttributes" type="a(sss)" access="read"/>
+  <property name="ControlGroupAttributes" type="a(sss)" access="read">
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusCGroupAttrs"/>
+  </property>
   <method name="SetControlGroup">
    <arg name="group" type="s" direction="in"/>
    <arg name="mode" type="s" direction="in"/>
