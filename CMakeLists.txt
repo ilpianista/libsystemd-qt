@@ -24,6 +24,7 @@ include_directories(${QT_INCLUDES}
 
 set(QtSystemd_HEADERS
     dbus/generic-types.h
+    QtSystemd-export.h
 )
 
 set(QtSystemd_PART_SRCS
