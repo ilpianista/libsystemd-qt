@@ -17,7 +17,7 @@
 set( INTERFACE_INTROSPECTION_XML_FILES
      introspection/org.freedesktop.hostname1.xml
      introspection/org.freedesktop.locale1.xml
-#     introspection/org.freedesktop.login1.xml
+     introspection/org.freedesktop.login1.xml
      introspection/org.freedesktop.systemd1.Automount.xml
      introspection/org.freedesktop.systemd1.Device.xml
      introspection/org.freedesktop.systemd1.Job.xml

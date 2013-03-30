@@ -18,20 +18,26 @@
       <arg name="seat" type="o" direction="out"/>
     </method>
     <method name="ListSessions">
-      <arg name="sessions" type="a(susso)" direction="out"/>
+      <arg name="sessions" type="a(susso)" direction="out">
+          <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="LoginDBusSession"/>
+      </arg>
     </method>
     <method name="ListUsers">
-      <arg name="users" type="a(uso)" direction="out"/>
+      <arg name="users" type="a(uso)" direction="out">
+          <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="LoginDBusUser"/>
+      </arg>
     </method>
     <method name="ListSeats">
-      <arg name="seats" type="a(so)" direction="out"/>
+      <arg name="seats" type="a(so)" direction="out">
+          <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="LoginDBusSeat"/>
+      </arg>
     </method>
     <method name="CreateSession">
       <arg name="uid" type="u" direction="in"/>
       <arg name="leader" type="u" direction="in"/>
       <arg name="sevice" type="s" direction="in"/>
       <arg name="type" type="s" direction="in"/>
-      <arg name="class" type="s" direction="in"/>
+      <arg name="class_" type="s" direction="in"/>
       <arg name="seat" type="s" direction="in"/>
       <arg name="vtnr" type="u" direction="in"/>
       <arg name="tty" type="s" direction="in"/>
@@ -137,7 +143,9 @@
       <arg name="fd" type="h" direction="out"/>
     </method>
     <method name="ListInhibitors">
-      <arg name="inhibitors" type="a(ssssuu)" direction="out"/>
+      <arg name="inhibitors" type="a(ssssuu)" direction="out">
+          <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="LoginDBusInhibitor"/>
+      </arg>
     </method>
     <signal name="SessionNew">
       <arg name="id" type="s"/>
@@ -199,7 +207,9 @@
     </method>
     <method name="GetAll">
       <arg name="interface" direction="in" type="s"/>
-      <arg name="properties" direction="out" type="a{sv}"/>
+      <arg name="properties" direction="out" type="a{sv}">
+          <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QVariantMap"/>
+      </arg>
     </method>
     <method name="Set">
       <arg name="interface" direction="in" type="s"/>
@@ -208,7 +218,9 @@
     </method>
     <signal name="PropertiesChanged">
       <arg type="s" name="interface"/>
-      <arg type="a{sv}" name="changed_properties"/>
+      <arg type="a{sv}" name="changed_properties">
+          <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="QVariantMap"/>
+      </arg>
       <arg type="as" name="invalidated_properties"/>
     </signal>
   </interface>
