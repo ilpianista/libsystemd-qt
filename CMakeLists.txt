@@ -20,7 +20,7 @@ include_directories(${QT_INCLUDES}
                     ${CMAKE_CURRENT_SOURCE_DIR}/dbus
                     ${CMAKE_CURRENT_BUILD_DIR})
 
-add_subdirectory(dbus)
+#add_subdirectory(dbus)
 
 set(QtSystemd_HEADERS
     dbus/generic-types.h
@@ -31,6 +31,23 @@ set(QtSystemd_PART_SRCS
 )
 
 set(DBUS_INTERFACE_SRCS
+    dbus/automountinterface.cpp
+    dbus/deviceinterface.cpp
+    dbus/hostname1interface.cpp
+    dbus/jobinterface.cpp
+    dbus/locale1interface.cpp
+    dbus/login1interface.cpp
+    dbus/managerinterface.cpp
+    dbus/mountinterface.cpp
+    dbus/pathinterface.cpp
+    dbus/serviceinterface.cpp
+    dbus/snapshotinterface.cpp
+    dbus/socketinterface.cpp
+    dbus/swapinterface.cpp
+    dbus/targetinterface.cpp
+    dbus/timedate1interface.cpp
+    dbus/timerinterface.cpp
+    dbus/unitinterface.cpp
 )
 
 add_library(QtSystemd SHARED ${QtSystemd_PART_SRCS} ${DBUS_INTERFACE_SRCS})
