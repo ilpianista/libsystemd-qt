@@ -23,11 +23,17 @@ include_directories(${QT_INCLUDES}
 #add_subdirectory(dbus)
 
 set(QtSystemd_HEADERS
+    manager.h
     dbus/generic-types.h
     QtSystemd-export.h
 )
 
+set(QtSystemd_PRIVATE_HEADERS
+    manager_p.h
+)
+
 set(QtSystemd_PART_SRCS
+    manager.cpp
     dbus/generic-types.cpp
 )
 
