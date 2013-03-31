@@ -19,20 +19,48 @@
 
 #include "manager.h"
 #include "manager_p.h"
+#include "macros.h"
 
 const QString Systemd::SystemdPrivate::SD_DBUS_SERVICE(QString::fromLatin1("org.freedesktop.systemd1"));
 const QString Systemd::SystemdPrivate::SD_DBUS_DAEMON_PATH(QString::fromLatin1("org/freedesktop/systemd1"));
 const QString Systemd::SystemdPrivate::LD_DBUS_SERVICE(QString::fromLatin1("org.freedesktop.login1"));
 const QString Systemd::SystemdPrivate::LD_DBUS_DAEMON_PATH(QString::fromLatin1("org/freedesktop/login1"));
 
+SD_GLOBAL_STATIC(Systemd::SystemdPrivate, globalSystemd)
+
 Systemd::SystemdPrivate::SystemdPrivate() :
     isdface( Systemd::SystemdPrivate::SD_DBUS_SERVICE, Systemd::SystemdPrivate::SD_DBUS_DAEMON_PATH, QDBusConnection::systemBus()),
     ildface( Systemd::SystemdPrivate::LD_DBUS_SERVICE, Systemd::SystemdPrivate::LD_DBUS_DAEMON_PATH, QDBusConnection::systemBus())
 {
-    init();
 }
 
-void Systemd::SystemdPrivate::init()
+bool Systemd::SystemdPrivate::enableUnitFiles(const QStringList &files, bool runtime, bool force)
 {
+    QDBusReply<bool> reply = isdface.EnableUnitFiles(files, runtime, force);
 
+    if (!reply.isValid())
+        return false;
+
+    return reply.value();
+}
+
+bool Systemd::SystemdPrivate::disableUnitFiles(const QStringList &files, bool runtime)
+{
+    QDBusReply<DBusUnitFileChange> reply = isdface.DisableUnitFiles(files, runtime);
+
+    if (!reply.isValid())
+        return false;
+
+    // FIXME
+    return !reply.value().path.isEmpty();
+}
+
+bool Systemd::enableUnitFiles(const QStringList &files, bool runtime, bool force)
+{
+    return globalSystemd->enableUnitFiles(files, runtime, force);
+}
+
+bool Systemd::disableUnitFiles(const QStringList &files, bool runtime)
+{
+    return globalSystemd->disableUnitFiles(files, runtime);
 }

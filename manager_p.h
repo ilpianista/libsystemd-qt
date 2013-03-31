@@ -39,8 +39,8 @@ namespace Systemd {
         OrgFreedesktopSystemd1ManagerInterface isdface;
         OrgFreedesktopLogin1ManagerInterface ildface;
 
-    protected Q_SLOTS:
-        void init();
+        bool enableUnitFiles(const QStringList &files, bool runtime, bool force);
+        bool disableUnitFiles(const QStringList &files, bool runtime);
     };
 }
 

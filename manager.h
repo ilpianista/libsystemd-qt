@@ -20,6 +20,8 @@
 #ifndef SD_MANAGER_H
 #define SD_MANAGER_H
 
+#include <QStringList>
+
 #include "QtSystemd-export.h"
 
 /**
@@ -31,6 +33,9 @@
  */
 namespace Systemd {
 
+    SDQT_EXPORT bool enableUnitFiles(const QStringList &files, bool runtime, bool force);
+
+    SDQT_EXPORT bool disableUnitFiles(const QStringList &files, bool runtime);
 }
 
 #endif
