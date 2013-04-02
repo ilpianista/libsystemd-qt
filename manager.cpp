@@ -22,9 +22,9 @@
 #include "macros.h"
 
 const QString Systemd::SystemdPrivate::SD_DBUS_SERVICE(QString::fromLatin1("org.freedesktop.systemd1"));
-const QString Systemd::SystemdPrivate::SD_DBUS_DAEMON_PATH(QString::fromLatin1("org/freedesktop/systemd1"));
+const QString Systemd::SystemdPrivate::SD_DBUS_DAEMON_PATH(QString::fromLatin1("/org/freedesktop/systemd1"));
 const QString Systemd::SystemdPrivate::LD_DBUS_SERVICE(QString::fromLatin1("org.freedesktop.login1"));
-const QString Systemd::SystemdPrivate::LD_DBUS_DAEMON_PATH(QString::fromLatin1("org/freedesktop/login1"));
+const QString Systemd::SystemdPrivate::LD_DBUS_DAEMON_PATH(QString::fromLatin1("/org/freedesktop/login1"));
 
 SD_GLOBAL_STATIC(Systemd::SystemdPrivate, globalSystemd)
 
@@ -34,25 +34,40 @@ Systemd::SystemdPrivate::SystemdPrivate() :
 {
 }
 
+Systemd::SystemdPrivate::~SystemdPrivate()
+{
+}
+
 bool Systemd::SystemdPrivate::enableUnitFiles(const QStringList &files, bool runtime, bool force)
 {
-    QDBusReply<bool> reply = isdface.EnableUnitFiles(files, runtime, force);
+    qDBusRegisterMetaType<DBusUnitFileChange>();
+    QDBusPendingReply<bool, DBusUnitFileChange> reply = isdface.EnableUnitFiles(files, runtime, force);
+    reply.waitForFinished();
 
-    if (!reply.isValid())
+    if (reply.isError()) {
+        qDebug() << reply.error();
         return false;
+    }
 
-    return reply.value();
+    qDebug() << reply.value();
+
+    return true;
 }
 
 bool Systemd::SystemdPrivate::disableUnitFiles(const QStringList &files, bool runtime)
 {
-    QDBusReply<DBusUnitFileChange> reply = isdface.DisableUnitFiles(files, runtime);
+    qDBusRegisterMetaType<DBusUnitFileChange>();
+    QDBusPendingReply<DBusUnitFileChange> reply = isdface.DisableUnitFiles(files, runtime);
+    reply.waitForFinished();
 
-    if (!reply.isValid())
+    if (reply.isError()) {
+        qDebug() << reply.error();
         return false;
+    }
 
-    // FIXME
-    return !reply.value().path.isEmpty();
+    qDebug() << reply.value().path;
+
+    return true;
 }
 
 bool Systemd::enableUnitFiles(const QStringList &files, bool runtime, bool force)
