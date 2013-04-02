@@ -36,14 +36,18 @@ namespace Systemd {
     // See http://www.freedesktop.org/wiki/Software/systemd/dbus for more info.
 
     /*
-     * Enable a unit in the system. Return false if something goes wrong.
-    */
-    SDQT_EXPORT bool enableUnitFiles(const QStringList &files, bool runtime, bool force);
-
-    /*
      * Disable a unit in the system. Return false if something goes wrong.
      */
     SDQT_EXPORT bool disableUnitFiles(const QStringList &files, bool runtime);
+
+    /*
+     * Enable a unit in the system. Return false if something goes wrong.
+     */
+    SDQT_EXPORT bool enableUnitFiles(const QStringList &files, bool runtime, bool force);
+
+    SDQT_EXPORT QString getUnit(const QString &name);
+
+    SDQT_EXPORT QString getUnitByPID(const uint &pid);
 
     /*
      * Lists the name of all units loaded.

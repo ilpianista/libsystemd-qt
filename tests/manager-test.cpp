@@ -8,6 +8,16 @@ public:
     {
     }
 
+    static void disableUnitFiles()
+    {
+        QStringList f;
+        f << QLatin1String("upower.service");
+
+        qDebug() << f;
+        bool ret = Systemd::disableUnitFiles(f, false);;
+        qDebug() << ret;
+    }
+
     static void enableUnitFiles()
     {
         QStringList f;
@@ -18,14 +28,14 @@ public:
         qDebug() << ret;
     }
 
-    static void disableUnitFiles()
+    static void getUnit()
     {
-        QStringList f;
-        f << QLatin1String("upower.service");
+        qDebug() << Systemd::getUnit("mysqld.service");
+    }
 
-        qDebug() << f;
-        bool ret = Systemd::disableUnitFiles(f, false);;
-        qDebug() << ret;
+    static void getUnitByPID()
+    {
+        qDebug() << Systemd::getUnitByPID(31493);
     }
 
     static void listUnits()
@@ -48,11 +58,15 @@ public:
 
 int main(int argc, char* argv[])
 {
-//     ManagerTest::enableUnitFiles();
-
 //     ManagerTest::disableUnitFiles();
 
-    ManagerTest::listUnits();
+//     ManagerTest::enableUnitFiles();
+
+//    ManagerTest::getUnit();
+
+    ManagerTest::getUnitByPID();
+
+//    ManagerTest::listUnits();
 
 //     ManagerTest::startUnit();
 

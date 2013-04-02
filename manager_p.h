@@ -39,8 +39,10 @@ namespace Systemd {
         OrgFreedesktopSystemd1ManagerInterface isdface;
         OrgFreedesktopLogin1ManagerInterface ildface;
 
-        bool enableUnitFiles(const QStringList &files, bool runtime, bool force);
         bool disableUnitFiles(const QStringList &files, bool runtime);
+        bool enableUnitFiles(const QStringList &files, bool runtime, bool force);
+        QString getUnit(const QString &name);
+        QString getUnitByPID(const uint &pid);
         QStringList listUnits();
         bool startUnit(const QString &name, const QString &mode);
         bool stopUnit(const QString &name, const QString &mode);

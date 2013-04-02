@@ -37,6 +37,21 @@ Systemd::SystemdPrivate::~SystemdPrivate()
 {
 }
 
+bool Systemd::SystemdPrivate::disableUnitFiles(const QStringList &files, bool runtime)
+{
+    qDBusRegisterMetaType<DBusUnitFileChange>();
+    qDBusRegisterMetaType<DBusUnitFileChangeList>();
+    QDBusPendingReply<DBusUnitFileChangeList> reply = isdface.DisableUnitFiles(files, runtime);
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error();
+        return false;
+    }
+
+    return true;
+}
+
 bool Systemd::SystemdPrivate::enableUnitFiles(const QStringList &files, bool runtime, bool force)
 {
     qDBusRegisterMetaType<DBusUnitFileChange>();
@@ -52,19 +67,30 @@ bool Systemd::SystemdPrivate::enableUnitFiles(const QStringList &files, bool run
     return true;
 }
 
-bool Systemd::SystemdPrivate::disableUnitFiles(const QStringList &files, bool runtime)
+QString Systemd::SystemdPrivate::getUnit(const QString &name)
 {
-    qDBusRegisterMetaType<DBusUnitFileChange>();
-    qDBusRegisterMetaType<DBusUnitFileChangeList>();
-    QDBusPendingReply<DBusUnitFileChangeList> reply = isdface.DisableUnitFiles(files, runtime);
+    QDBusPendingReply<QDBusObjectPath> reply = isdface.GetUnit(name);
     reply.waitForFinished();
 
     if (reply.isError()) {
         qDebug() << reply.error();
-        return false;
+        return QString();
     }
 
-    return true;
+    return qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
+}
+
+QString Systemd::SystemdPrivate::getUnitByPID(const uint &pid)
+{
+    QDBusPendingReply<QDBusObjectPath> reply = isdface.GetUnitByPID(pid);
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error();
+        return QString();
+    }
+
+    return qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
 }
 
 QStringList Systemd::SystemdPrivate::listUnits()
@@ -123,14 +149,24 @@ bool Systemd::SystemdPrivate::stopUnit(const QString &name, const QString &mode)
     return true;
 }
 
+bool Systemd::disableUnitFiles(const QStringList &files, bool runtime)
+{
+    return globalSystemd()->disableUnitFiles(files, runtime);
+}
+
 bool Systemd::enableUnitFiles(const QStringList &files, bool runtime, bool force)
 {
     return globalSystemd()->enableUnitFiles(files, runtime, force);
 }
 
-bool Systemd::disableUnitFiles(const QStringList &files, bool runtime)
+QString Systemd::getUnit(const QString &name)
 {
-    return globalSystemd()->disableUnitFiles(files, runtime);
+    return globalSystemd()->getUnit(name);
+}
+
+QString Systemd::getUnitByPID(const uint &pid)
+{
+    return globalSystemd()->getUnitByPID(pid);
 }
 
 QStringList Systemd::listUnits()
