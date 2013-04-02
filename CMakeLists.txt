@@ -5,7 +5,8 @@ cmake_minimum_required(VERSION 2.8.8)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
-find_package(Qt4 REQUIRED)
+find_package(Qt5Core REQUIRED)
+find_package(Qt5DBus REQUIRED)
 find_package(PkgConfig)
 
 set(LIB_SUFFIX "" CACHE STRING "Define suffix of library directory name (32/64)" )
@@ -16,7 +17,8 @@ if (NOT SYSTEMD_FOUND)
     message(FATAL_ERROR "ERROR: Systemd not found")
 endif (NOT SYSTEMD_FOUND)
 
-include_directories(${QT_INCLUDES}
+include_directories(${Qt5Core_INCLUDE_DIRS}
+                    ${Qt5DBus_INCLUDE_DIRS}
                     ${CMAKE_CURRENT_SOURCE_DIR}/dbus
                     ${CMAKE_CURRENT_BUILD_DIR})
 
@@ -59,7 +61,7 @@ set(DBUS_INTERFACE_SRCS
 
 add_library(QtSystemd SHARED ${QtSystemd_PART_SRCS} ${DBUS_INTERFACE_SRCS})
 
-target_link_libraries(QtSystemd ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY})
+target_link_libraries(QtSystemd ${Qt5Core_LIBRARIES} ${Qt5DBus_LIBRARIES})
 install(TARGETS QtSystemd DESTINATION lib${LIB_SUFFIX})
 
 install( FILES
