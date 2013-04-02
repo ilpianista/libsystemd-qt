@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef UNITINTERFACE_H_1364661212
-#define UNITINTERFACE_H_1364661212
+#ifndef UNITINTERFACE_H_1364907522
+#define UNITINTERFACE_H_1364907522
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>

@@ -19,17 +19,17 @@
     </method>
     <method name="ListSessions">
       <arg name="sessions" type="a(susso)" direction="out">
-          <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="LoginDBusSession"/>
+          <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="LoginDBusSessionList"/>
       </arg>
     </method>
     <method name="ListUsers">
       <arg name="users" type="a(uso)" direction="out">
-          <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="LoginDBusUser"/>
+          <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="LoginDBusUserList"/>
       </arg>
     </method>
     <method name="ListSeats">
       <arg name="seats" type="a(so)" direction="out">
-          <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="LoginDBusSeat"/>
+          <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="LoginDBusSeatList"/>
       </arg>
     </method>
     <method name="CreateSession">
@@ -144,7 +144,7 @@
     </method>
     <method name="ListInhibitors">
       <arg name="inhibitors" type="a(ssssuu)" direction="out">
-          <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="LoginDBusInhibitor"/>
+          <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="LoginDBusInhibitorList"/>
       </arg>
     </method>
     <signal name="SessionNew">

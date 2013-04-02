@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef LOGIN1INTERFACE_H_1364658757
-#define LOGIN1INTERFACE_H_1364658757
+#ifndef LOGIN1INTERFACE_H_1364907519
+#define LOGIN1INTERFACE_H_1364907519
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
@@ -361,25 +361,25 @@ public Q_SLOTS: // METHODS
         return asyncCallWithArgumentList(QLatin1String("KillUser"), argumentList);
     }
 
-    inline QDBusPendingReply<LoginDBusInhibitor> ListInhibitors()
+    inline QDBusPendingReply<LoginDBusInhibitorList> ListInhibitors()
     {
         QList<QVariant> argumentList;
         return asyncCallWithArgumentList(QLatin1String("ListInhibitors"), argumentList);
     }
 
-    inline QDBusPendingReply<LoginDBusSeat> ListSeats()
+    inline QDBusPendingReply<LoginDBusSeatList> ListSeats()
     {
         QList<QVariant> argumentList;
         return asyncCallWithArgumentList(QLatin1String("ListSeats"), argumentList);
     }
 
-    inline QDBusPendingReply<LoginDBusSession> ListSessions()
+    inline QDBusPendingReply<LoginDBusSessionList> ListSessions()
     {
         QList<QVariant> argumentList;
         return asyncCallWithArgumentList(QLatin1String("ListSessions"), argumentList);
     }
 
-    inline QDBusPendingReply<LoginDBusUser> ListUsers()
+    inline QDBusPendingReply<LoginDBusUserList> ListUsers()
     {
         QList<QVariant> argumentList;
         return asyncCallWithArgumentList(QLatin1String("ListUsers"), argumentList);

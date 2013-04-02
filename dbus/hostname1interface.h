@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef HOSTNAME1INTERFACE_H_1364657297
-#define HOSTNAME1INTERFACE_H_1364657297
+#ifndef HOSTNAME1INTERFACE_H_1364907519
+#define HOSTNAME1INTERFACE_H_1364907519
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>

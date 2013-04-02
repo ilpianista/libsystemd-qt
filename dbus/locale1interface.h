@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef LOCALE1INTERFACE_H_1364657298
-#define LOCALE1INTERFACE_H_1364657298
+#ifndef LOCALE1INTERFACE_H_1364907519
+#define LOCALE1INTERFACE_H_1364907519
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>

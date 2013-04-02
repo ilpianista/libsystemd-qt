@@ -15,22 +15,22 @@
   <property name="StartLimitBurst" type="u" access="read"/>
   <property name="StartLimitAction" type="s" access="readwrite"/>
   <property name="ExecStartPre" type="a(sasbttuii)" access="read">
-      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommand"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommandList"/>
   </property>
   <property name="ExecStart" type="a(sasbttuii)" access="read">
-      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommand"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommandList"/>
   </property>
   <property name="ExecStartPost" type="a(sasbttuii)" access="read">
-      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommand"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommandList"/>
   </property>
   <property name="ExecReload" type="a(sasbttuii)" access="read">
-      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommand"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommandList"/>
   </property>
   <property name="ExecStop" type="a(sasbttuii)" access="read">
-      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommand"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommandList"/>
   </property>
   <property name="ExecStopPost" type="a(sasbttuii)" access="read">
-      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommand"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommandList"/>
   </property>
   <property name="Environment" type="as" access="read"/>
   <property name="UMask" type="u" access="read"/>
@@ -102,7 +102,7 @@
   <property name="DefaultControlGroup" type="s" access="read"/>
   <property name="ControlGroups" type="as" access="read"/>
   <property name="ControlGroupAttributes" type="a(sss)" access="read">
-      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusCGroupAttrs"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusCGroupAttrsList"/>
   </property>
   <method name="SetControlGroup">
    <arg name="group" type="s" direction="in"/>

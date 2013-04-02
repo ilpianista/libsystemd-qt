@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef PATHINTERFACE_H_1364659059
-#define PATHINTERFACE_H_1364659059
+#ifndef PATHINTERFACE_H_1364907520
+#define PATHINTERFACE_H_1364907520
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
@@ -44,9 +44,9 @@ public:
     inline bool makeDirectory() const
     { return qvariant_cast< bool >(property("MakeDirectory")); }
 
-    Q_PROPERTY(PathDBusPath Paths READ paths)
-    inline PathDBusPath paths() const
-    { return qvariant_cast< PathDBusPath >(property("Paths")); }
+    Q_PROPERTY(PathDBusPathList Paths READ paths)
+    inline PathDBusPathList paths() const
+    { return qvariant_cast< PathDBusPathList >(property("Paths")); }
 
     Q_PROPERTY(QString Result READ result)
     inline QString result() const

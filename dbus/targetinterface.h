@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef TARGETINTERFACE_H_1364657300
-#define TARGETINTERFACE_H_1364657300
+#ifndef TARGETINTERFACE_H_1364907522
+#define TARGETINTERFACE_H_1364907522
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>

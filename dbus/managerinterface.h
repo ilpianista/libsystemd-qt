@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef MANAGERINTERFACE_H_1364657299
-#define MANAGERINTERFACE_H_1364657299
+#ifndef MANAGERINTERFACE_H_1364907520
+#define MANAGERINTERFACE_H_1364907520
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
@@ -197,7 +197,7 @@ public Q_SLOTS: // METHODS
         return asyncCallWithArgumentList(QLatin1String("CreateSnapshot"), argumentList);
     }
 
-    inline QDBusPendingReply<DBusUnitFileChange> DisableUnitFiles(const QStringList &files, bool runtime)
+    inline QDBusPendingReply<DBusUnitFileChangeList> DisableUnitFiles(const QStringList &files, bool runtime)
     {
         QList<QVariant> argumentList;
         argumentList << QVariant::fromValue(files) << QVariant::fromValue(runtime);
@@ -210,19 +210,19 @@ public Q_SLOTS: // METHODS
         return asyncCallWithArgumentList(QLatin1String("Dump"), argumentList);
     }
 
-    inline QDBusPendingReply<bool, DBusUnitFileChange> EnableUnitFiles(const QStringList &files, bool runtime, bool force)
+    inline QDBusPendingReply<bool, DBusUnitFileChangeList> EnableUnitFiles(const QStringList &files, bool runtime, bool force)
     {
         QList<QVariant> argumentList;
         argumentList << QVariant::fromValue(files) << QVariant::fromValue(runtime) << QVariant::fromValue(force);
         return asyncCallWithArgumentList(QLatin1String("EnableUnitFiles"), argumentList);
     }
-    inline QDBusReply<bool> EnableUnitFiles(const QStringList &files, bool runtime, bool force, DBusUnitFileChange &changes)
+    inline QDBusReply<bool> EnableUnitFiles(const QStringList &files, bool runtime, bool force, DBusUnitFileChangeList &changes)
     {
         QList<QVariant> argumentList;
         argumentList << QVariant::fromValue(files) << QVariant::fromValue(runtime) << QVariant::fromValue(force);
         QDBusMessage reply = callWithArgumentList(QDBus::Block, QLatin1String("EnableUnitFiles"), argumentList);
         if (reply.type() == QDBusMessage::ReplyMessage && reply.arguments().count() == 2) {
-            changes = qdbus_cast<DBusUnitFileChange>(reply.arguments().at(1));
+            changes = qdbus_cast<DBusUnitFileChangeList>(reply.arguments().at(1));
         }
         return reply;
     }
@@ -287,26 +287,26 @@ public Q_SLOTS: // METHODS
         return asyncCallWithArgumentList(QLatin1String("KillUnit"), argumentList);
     }
 
-    inline QDBusPendingReply<DBusUnitFileChange> LinkUnitFiles(const QStringList &files, bool runtime, bool force)
+    inline QDBusPendingReply<DBusUnitFileChangeList> LinkUnitFiles(const QStringList &files, bool runtime, bool force)
     {
         QList<QVariant> argumentList;
         argumentList << QVariant::fromValue(files) << QVariant::fromValue(runtime) << QVariant::fromValue(force);
         return asyncCallWithArgumentList(QLatin1String("LinkUnitFiles"), argumentList);
     }
 
-    inline QDBusPendingReply<ManagerDBusJob> ListJobs()
+    inline QDBusPendingReply<ManagerDBusJobList> ListJobs()
     {
         QList<QVariant> argumentList;
         return asyncCallWithArgumentList(QLatin1String("ListJobs"), argumentList);
     }
 
-    inline QDBusPendingReply<DBusUnitFileList> ListUnitFiles()
+    inline QDBusPendingReply<DBusUnitFileListList> ListUnitFiles()
     {
         QList<QVariant> argumentList;
         return asyncCallWithArgumentList(QLatin1String("ListUnitFiles"), argumentList);
     }
 
-    inline QDBusPendingReply<ManagerDBusUnit> ListUnits()
+    inline QDBusPendingReply<ManagerDBusUnitList> ListUnits()
     {
         QList<QVariant> argumentList;
         return asyncCallWithArgumentList(QLatin1String("ListUnits"), argumentList);
@@ -319,7 +319,7 @@ public Q_SLOTS: // METHODS
         return asyncCallWithArgumentList(QLatin1String("LoadUnit"), argumentList);
     }
 
-    inline QDBusPendingReply<DBusUnitFileChange> MaskUnitFiles(const QStringList &files, bool runtime, bool force)
+    inline QDBusPendingReply<DBusUnitFileChangeList> MaskUnitFiles(const QStringList &files, bool runtime, bool force)
     {
         QList<QVariant> argumentList;
         argumentList << QVariant::fromValue(files) << QVariant::fromValue(runtime) << QVariant::fromValue(force);
@@ -332,19 +332,19 @@ public Q_SLOTS: // METHODS
         return asyncCallWithArgumentList(QLatin1String("PowerOff"), argumentList);
     }
 
-    inline QDBusPendingReply<bool, DBusUnitFileChange> PresetUnitFiles(const QStringList &files, bool runtime, bool force)
+    inline QDBusPendingReply<bool, DBusUnitFileChangeList> PresetUnitFiles(const QStringList &files, bool runtime, bool force)
     {
         QList<QVariant> argumentList;
         argumentList << QVariant::fromValue(files) << QVariant::fromValue(runtime) << QVariant::fromValue(force);
         return asyncCallWithArgumentList(QLatin1String("PresetUnitFiles"), argumentList);
     }
-    inline QDBusReply<bool> PresetUnitFiles(const QStringList &files, bool runtime, bool force, DBusUnitFileChange &changes)
+    inline QDBusReply<bool> PresetUnitFiles(const QStringList &files, bool runtime, bool force, DBusUnitFileChangeList &changes)
     {
         QList<QVariant> argumentList;
         argumentList << QVariant::fromValue(files) << QVariant::fromValue(runtime) << QVariant::fromValue(force);
         QDBusMessage reply = callWithArgumentList(QDBus::Block, QLatin1String("PresetUnitFiles"), argumentList);
         if (reply.type() == QDBusMessage::ReplyMessage && reply.arguments().count() == 2) {
-            changes = qdbus_cast<DBusUnitFileChange>(reply.arguments().at(1));
+            changes = qdbus_cast<DBusUnitFileChangeList>(reply.arguments().at(1));
         }
         return reply;
     }
@@ -355,19 +355,19 @@ public Q_SLOTS: // METHODS
         return asyncCallWithArgumentList(QLatin1String("Reboot"), argumentList);
     }
 
-    inline QDBusPendingReply<bool, DBusUnitFileChange> ReenableUnitFiles(const QStringList &files, bool runtime, bool force)
+    inline QDBusPendingReply<bool, DBusUnitFileChangeList> ReenableUnitFiles(const QStringList &files, bool runtime, bool force)
     {
         QList<QVariant> argumentList;
         argumentList << QVariant::fromValue(files) << QVariant::fromValue(runtime) << QVariant::fromValue(force);
         return asyncCallWithArgumentList(QLatin1String("ReenableUnitFiles"), argumentList);
     }
-    inline QDBusReply<bool> ReenableUnitFiles(const QStringList &files, bool runtime, bool force, DBusUnitFileChange &changes)
+    inline QDBusReply<bool> ReenableUnitFiles(const QStringList &files, bool runtime, bool force, DBusUnitFileChangeList &changes)
     {
         QList<QVariant> argumentList;
         argumentList << QVariant::fromValue(files) << QVariant::fromValue(runtime) << QVariant::fromValue(force);
         QDBusMessage reply = callWithArgumentList(QDBus::Block, QLatin1String("ReenableUnitFiles"), argumentList);
         if (reply.type() == QDBusMessage::ReplyMessage && reply.arguments().count() == 2) {
-            changes = qdbus_cast<DBusUnitFileChange>(reply.arguments().at(1));
+            changes = qdbus_cast<DBusUnitFileChangeList>(reply.arguments().at(1));
         }
         return reply;
     }
@@ -494,7 +494,7 @@ public Q_SLOTS: // METHODS
         return asyncCallWithArgumentList(QLatin1String("TryRestartUnit"), argumentList);
     }
 
-    inline QDBusPendingReply<DBusUnitFileChange> UnmaskUnitFiles(const QStringList &files, bool runtime)
+    inline QDBusPendingReply<DBusUnitFileChangeList> UnmaskUnitFiles(const QStringList &files, bool runtime)
     {
         QList<QVariant> argumentList;
         argumentList << QVariant::fromValue(files) << QVariant::fromValue(runtime);

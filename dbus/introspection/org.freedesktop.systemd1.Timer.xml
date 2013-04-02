@@ -4,10 +4,10 @@
  <interface name="org.freedesktop.systemd1.Timer">
   <property name="Unit" type="s" access="read"/>
   <property name="TimersMonotonic" type="a(stt)" access="read">
-      <annotation name="org.qtproject.QtDBus.QtTypeName" value="TimerDBusMonotonicTimer"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="TimerDBusMonotonicTimerList"/>
   </property>
   <property name="TimersCalendar" type="a(sst)" access="read">
-      <annotation name="org.qtproject.QtDBus.QtTypeName" value="TimerDBusCalendarTimer"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="TimerDBusCalendarTimerList"/>
   </property>
   <property name="NextElapseUSecRealtime" type="t" access="read"/>
   <property name="NextElapseUSecMonotonic" type="t" access="read"/>

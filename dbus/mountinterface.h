@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef MOUNTINTERFACE_H_1364660188
-#define MOUNTINTERFACE_H_1364660188
+#ifndef MOUNTINTERFACE_H_1364907520
+#define MOUNTINTERFACE_H_1364907520
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
@@ -60,9 +60,9 @@ public:
     inline qulonglong capabilityBoundingSet() const
     { return qvariant_cast< qulonglong >(property("CapabilityBoundingSet")); }
 
-    Q_PROPERTY(DBusCGroupAttrs ControlGroupAttributes READ controlGroupAttributes)
-    inline DBusCGroupAttrs controlGroupAttributes() const
-    { return qvariant_cast< DBusCGroupAttrs >(property("ControlGroupAttributes")); }
+    Q_PROPERTY(DBusCGroupAttrsList ControlGroupAttributes READ controlGroupAttributes)
+    inline DBusCGroupAttrsList controlGroupAttributes() const
+    { return qvariant_cast< DBusCGroupAttrsList >(property("ControlGroupAttributes")); }
 
     Q_PROPERTY(bool ControlGroupModify READ controlGroupModify)
     inline bool controlGroupModify() const
@@ -92,17 +92,17 @@ public:
     inline QStringList environment() const
     { return qvariant_cast< QStringList >(property("Environment")); }
 
-    Q_PROPERTY(DBusExecCommand ExecMount READ execMount)
-    inline DBusExecCommand execMount() const
-    { return qvariant_cast< DBusExecCommand >(property("ExecMount")); }
+    Q_PROPERTY(DBusExecCommandList ExecMount READ execMount)
+    inline DBusExecCommandList execMount() const
+    { return qvariant_cast< DBusExecCommandList >(property("ExecMount")); }
 
-    Q_PROPERTY(DBusExecCommand ExecRemount READ execRemount)
-    inline DBusExecCommand execRemount() const
-    { return qvariant_cast< DBusExecCommand >(property("ExecRemount")); }
+    Q_PROPERTY(DBusExecCommandList ExecRemount READ execRemount)
+    inline DBusExecCommandList execRemount() const
+    { return qvariant_cast< DBusExecCommandList >(property("ExecRemount")); }
 
-    Q_PROPERTY(DBusExecCommand ExecUnmount READ execUnmount)
-    inline DBusExecCommand execUnmount() const
-    { return qvariant_cast< DBusExecCommand >(property("ExecUnmount")); }
+    Q_PROPERTY(DBusExecCommandList ExecUnmount READ execUnmount)
+    inline DBusExecCommandList execUnmount() const
+    { return qvariant_cast< DBusExecCommandList >(property("ExecUnmount")); }
 
     Q_PROPERTY(QString Group READ group)
     inline QString group() const

@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef SWAPINTERFACE_H_1364660349
-#define SWAPINTERFACE_H_1364660349
+#ifndef SWAPINTERFACE_H_1364907521
+#define SWAPINTERFACE_H_1364907521
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
@@ -60,9 +60,9 @@ public:
     inline qulonglong capabilityBoundingSet() const
     { return qvariant_cast< qulonglong >(property("CapabilityBoundingSet")); }
 
-    Q_PROPERTY(DBusCGroupAttrs ControlGroupAttributes READ controlGroupAttributes)
-    inline DBusCGroupAttrs controlGroupAttributes() const
-    { return qvariant_cast< DBusCGroupAttrs >(property("ControlGroupAttributes")); }
+    Q_PROPERTY(DBusCGroupAttrsList ControlGroupAttributes READ controlGroupAttributes)
+    inline DBusCGroupAttrsList controlGroupAttributes() const
+    { return qvariant_cast< DBusCGroupAttrsList >(property("ControlGroupAttributes")); }
 
     Q_PROPERTY(bool ControlGroupModify READ controlGroupModify)
     inline bool controlGroupModify() const
@@ -88,13 +88,13 @@ public:
     inline QStringList environment() const
     { return qvariant_cast< QStringList >(property("Environment")); }
 
-    Q_PROPERTY(DBusExecCommand ExecActivate READ execActivate)
-    inline DBusExecCommand execActivate() const
-    { return qvariant_cast< DBusExecCommand >(property("ExecActivate")); }
+    Q_PROPERTY(DBusExecCommandList ExecActivate READ execActivate)
+    inline DBusExecCommandList execActivate() const
+    { return qvariant_cast< DBusExecCommandList >(property("ExecActivate")); }
 
-    Q_PROPERTY(DBusExecCommand ExecDeactivate READ execDeactivate)
-    inline DBusExecCommand execDeactivate() const
-    { return qvariant_cast< DBusExecCommand >(property("ExecDeactivate")); }
+    Q_PROPERTY(DBusExecCommandList ExecDeactivate READ execDeactivate)
+    inline DBusExecCommandList execDeactivate() const
+    { return qvariant_cast< DBusExecCommandList >(property("ExecDeactivate")); }
 
     Q_PROPERTY(QString Group READ group)
     inline QString group() const

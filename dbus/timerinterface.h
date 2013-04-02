@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef TIMERINTERFACE_H_1364660948
-#define TIMERINTERFACE_H_1364660948
+#ifndef TIMERINTERFACE_H_1364907522
+#define TIMERINTERFACE_H_1364907522
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
@@ -48,13 +48,13 @@ public:
     inline QString result() const
     { return qvariant_cast< QString >(property("Result")); }
 
-    Q_PROPERTY(TimerDBusCalendarTimer TimersCalendar READ timersCalendar)
-    inline TimerDBusCalendarTimer timersCalendar() const
-    { return qvariant_cast< TimerDBusCalendarTimer >(property("TimersCalendar")); }
+    Q_PROPERTY(TimerDBusCalendarTimerList TimersCalendar READ timersCalendar)
+    inline TimerDBusCalendarTimerList timersCalendar() const
+    { return qvariant_cast< TimerDBusCalendarTimerList >(property("TimersCalendar")); }
 
-    Q_PROPERTY(TimerDBusMonotonicTimer TimersMonotonic READ timersMonotonic)
-    inline TimerDBusMonotonicTimer timersMonotonic() const
-    { return qvariant_cast< TimerDBusMonotonicTimer >(property("TimersMonotonic")); }
+    Q_PROPERTY(TimerDBusMonotonicTimerList TimersMonotonic READ timersMonotonic)
+    inline TimerDBusMonotonicTimerList timersMonotonic() const
+    { return qvariant_cast< TimerDBusMonotonicTimerList >(property("TimersMonotonic")); }
 
     Q_PROPERTY(QString Unit READ unit)
     inline QString unit() const

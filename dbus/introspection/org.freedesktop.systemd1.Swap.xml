@@ -6,10 +6,10 @@
   <property name="Priority" type="i" access="read"/>
   <property name="TimeoutUSec" type="t" access="read"/>
   <property name="ExecActivate" type="a(sasbttuii)" access="read">
-      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommand"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommandList"/>
   </property>
   <property name="ExecDeactivate" type="a(sasbttuii)" access="read">
-      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommand"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommandList"/>
   </property>
   <property name="Environment" type="as" access="read"/>
   <property name="UMask" type="u" access="read"/>
@@ -81,7 +81,7 @@
   <property name="DefaultControlGroup" type="s" access="read"/>
   <property name="ControlGroups" type="as" access="read"/>
   <property name="ControlGroupAttributes" type="a(sss)" access="read">
-      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusCGroupAttrs"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusCGroupAttrsList"/>
   </property>
   <method name="SetControlGroup">
    <arg name="group" type="s" direction="in"/>

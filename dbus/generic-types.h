@@ -34,6 +34,8 @@ typedef struct
     QString value;
 } DBusCGroupAttrs;
 Q_DECLARE_METATYPE(DBusCGroupAttrs)
+typedef QList<DBusCGroupAttrs> DBusCGroupAttrsList;
+Q_DECLARE_METATYPE(DBusCGroupAttrsList)
 
 QDBusArgument &operator<<(QDBusArgument &argument, const DBusCGroupAttrs &cGroupAttrs);
 const QDBusArgument &operator>>(const QDBusArgument &argument, DBusCGroupAttrs &cGroupAttrs);
@@ -50,6 +52,8 @@ typedef struct
     int exitStatus;
 } DBusExecCommand;
 Q_DECLARE_METATYPE(DBusExecCommand)
+typedef QList<DBusExecCommand> DBusExecCommandList;
+Q_DECLARE_METATYPE(DBusExecCommandList)
 
 QDBusArgument &operator<<(QDBusArgument &argument, const DBusExecCommand &execCommand);
 const QDBusArgument &operator>>(const QDBusArgument &argument, DBusExecCommand &execCommand);
@@ -61,6 +65,8 @@ typedef struct
     QString source;
 } DBusUnitFileChange;
 Q_DECLARE_METATYPE(DBusUnitFileChange)
+typedef QList<DBusUnitFileChange> DBusUnitFileChangeList;
+Q_DECLARE_METATYPE(DBusUnitFileChangeList)
 
 QDBusArgument &operator<<(QDBusArgument &argument, const DBusUnitFileChange &unitFileChange);
 const QDBusArgument &operator>>(const QDBusArgument &argument, DBusUnitFileChange &unitFileChange);
@@ -71,6 +77,8 @@ typedef struct
     QString state;
 } DBusUnitFileList;
 Q_DECLARE_METATYPE(DBusUnitFileList)
+typedef QList<DBusUnitFileList> DBusUnitFileListList;
+Q_DECLARE_METATYPE(DBusUnitFileListList);
 
 QDBusArgument &operator<<(QDBusArgument &argument, const DBusUnitFileList &unitFileList);
 const QDBusArgument &operator>>(const QDBusArgument &argument, DBusUnitFileList &unitFileList);
@@ -95,6 +103,8 @@ typedef struct
     uint pid;
 } LoginDBusInhibitor;
 Q_DECLARE_METATYPE(LoginDBusInhibitor)
+typedef QList<LoginDBusInhibitor> LoginDBusInhibitorList;
+Q_DECLARE_METATYPE(LoginDBusInhibitorList)
 
 QDBusArgument &operator<<(QDBusArgument &argument, const LoginDBusInhibitor &inhibitors);
 const QDBusArgument &operator>>(const QDBusArgument &argument, LoginDBusInhibitor &inhibitors);
@@ -105,6 +115,8 @@ typedef struct
     QDBusObjectPath seat;
 } LoginDBusSeat;
 Q_DECLARE_METATYPE(LoginDBusSeat)
+typedef QList<LoginDBusSeat> LoginDBusSeatList;
+Q_DECLARE_METATYPE(LoginDBusSeatList)
 
 QDBusArgument &operator<<(QDBusArgument &argument, const LoginDBusSeat &seat);
 const QDBusArgument &operator>>(const QDBusArgument &argument, LoginDBusSeat &seat);
@@ -118,6 +130,8 @@ typedef struct
     QDBusObjectPath session;
 } LoginDBusSession;
 Q_DECLARE_METATYPE(LoginDBusSession)
+typedef QList<LoginDBusSession> LoginDBusSessionList;
+Q_DECLARE_METATYPE(LoginDBusSessionList)
 
 QDBusArgument &operator<<(QDBusArgument &argument, const LoginDBusSession &session);
 const QDBusArgument &operator>>(const QDBusArgument &argument, LoginDBusSession &session);
@@ -129,6 +143,8 @@ typedef struct
     QDBusObjectPath user;
 } LoginDBusUser;
 Q_DECLARE_METATYPE(LoginDBusUser)
+typedef QList<LoginDBusUser> LoginDBusUserList;
+Q_DECLARE_METATYPE(LoginDBusUserList)
 
 QDBusArgument &operator<<(QDBusArgument &argument, const LoginDBusUser &user);
 const QDBusArgument &operator>>(const QDBusArgument &argument, LoginDBusUser &user);
@@ -143,6 +159,8 @@ typedef struct
     QDBusObjectPath unitPath;
 } ManagerDBusJob;
 Q_DECLARE_METATYPE(ManagerDBusJob)
+typedef QList<ManagerDBusJob> ManagerDBusJobList;
+Q_DECLARE_METATYPE(ManagerDBusJobList)
 
 QDBusArgument &operator<<(QDBusArgument &argument, const ManagerDBusJob &job);
 const QDBusArgument &operator>>(const QDBusArgument &argument, ManagerDBusJob &job);
@@ -161,6 +179,8 @@ typedef struct
     QDBusObjectPath jobPath;
 } ManagerDBusUnit;
 Q_DECLARE_METATYPE(ManagerDBusUnit)
+typedef QList<ManagerDBusUnit> ManagerDBusUnitList;
+Q_DECLARE_METATYPE(ManagerDBusUnitList)
 
 QDBusArgument &operator<<(QDBusArgument &argument, const ManagerDBusUnit &unit);
 const QDBusArgument &operator>>(const QDBusArgument &argument, ManagerDBusUnit &unit);
@@ -171,6 +191,8 @@ typedef struct
     QString path;
 } PathDBusPath;
 Q_DECLARE_METATYPE(PathDBusPath)
+typedef QList<PathDBusPath> PathDBusPathList;
+Q_DECLARE_METATYPE(PathDBusPathList)
 
 QDBusArgument &operator<<(QDBusArgument &argument, const PathDBusPath &path);
 const QDBusArgument &operator>>(const QDBusArgument &argument, PathDBusPath &path);
@@ -182,6 +204,8 @@ typedef struct
     qlonglong nextElapse;
 } TimerDBusCalendarTimer;
 Q_DECLARE_METATYPE(TimerDBusCalendarTimer)
+typedef QList<TimerDBusCalendarTimer> TimerDBusCalendarTimerList;
+Q_DECLARE_METATYPE(TimerDBusCalendarTimerList)
 
 QDBusArgument &operator<<(QDBusArgument &argument, const TimerDBusCalendarTimer &calendarTimer);
 const QDBusArgument &operator>>(const QDBusArgument &argument, TimerDBusCalendarTimer &calendarTimer);
@@ -193,6 +217,8 @@ typedef struct
     qlonglong nextElapse;
 } TimerDBusMonotonicTimer;
 Q_DECLARE_METATYPE(TimerDBusMonotonicTimer)
+typedef QList<TimerDBusMonotonicTimer> TimerDBusMonotonicTimerList;
+Q_DECLARE_METATYPE(TimerDBusMonotonicTimerList)
 
 QDBusArgument &operator<<(QDBusArgument &argument, const TimerDBusMonotonicTimer &monotonicTimer);
 const QDBusArgument &operator>>(const QDBusArgument &argument, TimerDBusMonotonicTimer &monotonicTimer);

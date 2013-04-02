@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef SNAPSHOTINTERFACE_H_1364657300
-#define SNAPSHOTINTERFACE_H_1364657300
+#ifndef SNAPSHOTINTERFACE_H_1364907521
+#define SNAPSHOTINTERFACE_H_1364907521
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>

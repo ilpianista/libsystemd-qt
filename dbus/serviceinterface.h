@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef SERVICEINTERFACE_H_1364660188
-#define SERVICEINTERFACE_H_1364660188
+#ifndef SERVICEINTERFACE_H_1364907521
+#define SERVICEINTERFACE_H_1364907521
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
@@ -64,9 +64,9 @@ public:
     inline qulonglong capabilityBoundingSet() const
     { return qvariant_cast< qulonglong >(property("CapabilityBoundingSet")); }
 
-    Q_PROPERTY(DBusCGroupAttrs ControlGroupAttributes READ controlGroupAttributes)
-    inline DBusCGroupAttrs controlGroupAttributes() const
-    { return qvariant_cast< DBusCGroupAttrs >(property("ControlGroupAttributes")); }
+    Q_PROPERTY(DBusCGroupAttrsList ControlGroupAttributes READ controlGroupAttributes)
+    inline DBusCGroupAttrsList controlGroupAttributes() const
+    { return qvariant_cast< DBusCGroupAttrsList >(property("ControlGroupAttributes")); }
 
     Q_PROPERTY(bool ControlGroupModify READ controlGroupModify)
     inline bool controlGroupModify() const
@@ -120,29 +120,29 @@ public:
     inline int execMainStatus() const
     { return qvariant_cast< int >(property("ExecMainStatus")); }
 
-    Q_PROPERTY(DBusExecCommand ExecReload READ execReload)
-    inline DBusExecCommand execReload() const
-    { return qvariant_cast< DBusExecCommand >(property("ExecReload")); }
+    Q_PROPERTY(DBusExecCommandList ExecReload READ execReload)
+    inline DBusExecCommandList execReload() const
+    { return qvariant_cast< DBusExecCommandList >(property("ExecReload")); }
 
-    Q_PROPERTY(DBusExecCommand ExecStart READ execStart)
-    inline DBusExecCommand execStart() const
-    { return qvariant_cast< DBusExecCommand >(property("ExecStart")); }
+    Q_PROPERTY(DBusExecCommandList ExecStart READ execStart)
+    inline DBusExecCommandList execStart() const
+    { return qvariant_cast< DBusExecCommandList >(property("ExecStart")); }
 
-    Q_PROPERTY(DBusExecCommand ExecStartPost READ execStartPost)
-    inline DBusExecCommand execStartPost() const
-    { return qvariant_cast< DBusExecCommand >(property("ExecStartPost")); }
+    Q_PROPERTY(DBusExecCommandList ExecStartPost READ execStartPost)
+    inline DBusExecCommandList execStartPost() const
+    { return qvariant_cast< DBusExecCommandList >(property("ExecStartPost")); }
 
-    Q_PROPERTY(DBusExecCommand ExecStartPre READ execStartPre)
-    inline DBusExecCommand execStartPre() const
-    { return qvariant_cast< DBusExecCommand >(property("ExecStartPre")); }
+    Q_PROPERTY(DBusExecCommandList ExecStartPre READ execStartPre)
+    inline DBusExecCommandList execStartPre() const
+    { return qvariant_cast< DBusExecCommandList >(property("ExecStartPre")); }
 
-    Q_PROPERTY(DBusExecCommand ExecStop READ execStop)
-    inline DBusExecCommand execStop() const
-    { return qvariant_cast< DBusExecCommand >(property("ExecStop")); }
+    Q_PROPERTY(DBusExecCommandList ExecStop READ execStop)
+    inline DBusExecCommandList execStop() const
+    { return qvariant_cast< DBusExecCommandList >(property("ExecStop")); }
 
-    Q_PROPERTY(DBusExecCommand ExecStopPost READ execStopPost)
-    inline DBusExecCommand execStopPost() const
-    { return qvariant_cast< DBusExecCommand >(property("ExecStopPost")); }
+    Q_PROPERTY(DBusExecCommandList ExecStopPost READ execStopPost)
+    inline DBusExecCommandList execStopPost() const
+    { return qvariant_cast< DBusExecCommandList >(property("ExecStopPost")); }
 
     Q_PROPERTY(QString Group READ group)
     inline QString group() const

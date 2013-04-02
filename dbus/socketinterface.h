@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef SOCKETINTERFACE_H_1364660292
-#define SOCKETINTERFACE_H_1364660292
+#ifndef SOCKETINTERFACE_H_1364907521
+#define SOCKETINTERFACE_H_1364907521
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
@@ -80,9 +80,9 @@ public:
     inline qulonglong capabilityBoundingSet() const
     { return qvariant_cast< qulonglong >(property("CapabilityBoundingSet")); }
 
-    Q_PROPERTY(DBusCGroupAttrs ControlGroupAttributes READ controlGroupAttributes)
-    inline DBusCGroupAttrs controlGroupAttributes() const
-    { return qvariant_cast< DBusCGroupAttrs >(property("ControlGroupAttributes")); }
+    Q_PROPERTY(DBusCGroupAttrsList ControlGroupAttributes READ controlGroupAttributes)
+    inline DBusCGroupAttrsList controlGroupAttributes() const
+    { return qvariant_cast< DBusCGroupAttrsList >(property("ControlGroupAttributes")); }
 
     Q_PROPERTY(bool ControlGroupModify READ controlGroupModify)
     inline bool controlGroupModify() const
@@ -112,21 +112,21 @@ public:
     inline QStringList environment() const
     { return qvariant_cast< QStringList >(property("Environment")); }
 
-    Q_PROPERTY(DBusExecCommand ExecStartPost READ execStartPost)
-    inline DBusExecCommand execStartPost() const
-    { return qvariant_cast< DBusExecCommand >(property("ExecStartPost")); }
+    Q_PROPERTY(DBusExecCommandList ExecStartPost READ execStartPost)
+    inline DBusExecCommandList execStartPost() const
+    { return qvariant_cast< DBusExecCommandList >(property("ExecStartPost")); }
 
-    Q_PROPERTY(DBusExecCommand ExecStartPre READ execStartPre)
-    inline DBusExecCommand execStartPre() const
-    { return qvariant_cast< DBusExecCommand >(property("ExecStartPre")); }
+    Q_PROPERTY(DBusExecCommandList ExecStartPre READ execStartPre)
+    inline DBusExecCommandList execStartPre() const
+    { return qvariant_cast< DBusExecCommandList >(property("ExecStartPre")); }
 
-    Q_PROPERTY(DBusExecCommand ExecStopPost READ execStopPost)
-    inline DBusExecCommand execStopPost() const
-    { return qvariant_cast< DBusExecCommand >(property("ExecStopPost")); }
+    Q_PROPERTY(DBusExecCommandList ExecStopPost READ execStopPost)
+    inline DBusExecCommandList execStopPost() const
+    { return qvariant_cast< DBusExecCommandList >(property("ExecStopPost")); }
 
-    Q_PROPERTY(DBusExecCommand ExecStopPre READ execStopPre)
-    inline DBusExecCommand execStopPre() const
-    { return qvariant_cast< DBusExecCommand >(property("ExecStopPre")); }
+    Q_PROPERTY(DBusExecCommandList ExecStopPre READ execStopPre)
+    inline DBusExecCommandList execStopPre() const
+    { return qvariant_cast< DBusExecCommandList >(property("ExecStopPre")); }
 
     Q_PROPERTY(bool FreeBind READ freeBind)
     inline bool freeBind() const

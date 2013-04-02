@@ -4,7 +4,7 @@
  <interface name="org.freedesktop.systemd1.Path">
   <property name="Unit" type="s" access="read"/>
   <property name="Paths" type="a(ss)" access="read">
-      <annotation name="org.qtproject.QtDBus.QtTypeName" value="PathDBusPath"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="PathDBusPathList"/>
   </property>
   <property name="MakeDirectory" type="b" access="read"/>
   <property name="DirectoryMode" type="u" access="read"/>
