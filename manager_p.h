@@ -41,6 +41,7 @@ namespace Systemd {
 
         bool enableUnitFiles(const QStringList &files, bool runtime, bool force);
         bool disableUnitFiles(const QStringList &files, bool runtime);
+        QStringList listUnits();
         bool startUnit(const QString &name, const QString &mode);
         bool stopUnit(const QString &name, const QString &mode);
     };

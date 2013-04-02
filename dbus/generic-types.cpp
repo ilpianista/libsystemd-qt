@@ -193,8 +193,8 @@ QDBusArgument& operator<<(QDBusArgument& argument, const ManagerDBusUnit& unit)
 {
     argument.beginStructure();
     argument << unit.id << unit.description << unit.loadState << unit.activeState;
-    argument << unit.activeState << unit.subState << unit.following << unit.path;
-    argument << unit.jobId << unit.jobType << unit.jobPath;
+    argument << unit.subState << unit.following << unit.path << unit.jobId;
+    argument << unit.jobType << unit.jobPath;
     argument.endStructure();
     return argument;
 }
@@ -203,8 +203,8 @@ const QDBusArgument& operator>>(const QDBusArgument& argument, ManagerDBusUnit& 
 {
     argument.beginStructure();
     argument >> unit.id >> unit.description >> unit.loadState >> unit.activeState;
-    argument >> unit.activeState >> unit.subState >> unit.following >> unit.path;
-    argument >> unit.jobId >> unit.jobType >> unit.jobPath;
+    argument >> unit.subState >> unit.following >> unit.path >> unit.jobId;
+    argument >> unit.jobType >> unit.jobPath;
     argument.endStructure();
     return argument;
 }

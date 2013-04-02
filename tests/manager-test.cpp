@@ -28,6 +28,11 @@ public:
         qDebug() << ret;
     }
 
+    static void listUnits()
+    {
+        qDebug() << Systemd::listUnits();
+    }
+
     static void startUnit()
     {
         bool ret = Systemd::startUnit(QLatin1String("mysqld.service"), QLatin1String("replace"));
@@ -43,11 +48,13 @@ public:
 
 int main(int argc, char* argv[])
 {
-    ManagerTest::enableUnitFiles();
+//     ManagerTest::enableUnitFiles();
 
-    ManagerTest::disableUnitFiles();
+//     ManagerTest::disableUnitFiles();
 
-    ManagerTest::startUnit();
+    ManagerTest::listUnits();
 
-    ManagerTest::stopUnit();
+//     ManagerTest::startUnit();
+
+//     ManagerTest::stopUnit();
 }

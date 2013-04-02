@@ -67,6 +67,30 @@ bool Systemd::SystemdPrivate::disableUnitFiles(const QStringList &files, bool ru
     return true;
 }
 
+QStringList Systemd::SystemdPrivate::listUnits()
+{
+    qDBusRegisterMetaType<ManagerDBusUnit>();
+    qDBusRegisterMetaType<ManagerDBusUnitList>();
+    QDBusPendingReply<ManagerDBusUnitList> reply = isdface.ListUnits();
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error();
+        return QStringList();
+    }
+
+    QStringList loaded;
+    const QDBusMessage message = reply.reply();
+    if (message.type() == QDBusMessage::ReplyMessage) {
+        const ManagerDBusUnitList units = qdbus_cast<ManagerDBusUnitList>(message.arguments().first());
+        Q_FOREACH(const ManagerDBusUnit unit, units) {
+            loaded << unit.id;
+        }
+    }
+
+    return loaded;
+}
+
 bool Systemd::SystemdPrivate::startUnit(const QString &name, const QString &mode)
 {
     QDBusPendingReply<QDBusObjectPath> reply = isdface.StartUnit(name, mode);
@@ -107,6 +131,11 @@ bool Systemd::enableUnitFiles(const QStringList &files, bool runtime, bool force
 bool Systemd::disableUnitFiles(const QStringList &files, bool runtime)
 {
     return globalSystemd()->disableUnitFiles(files, runtime);
+}
+
+QStringList Systemd::listUnits()
+{
+    return globalSystemd()->listUnits();
 }
 
 bool Systemd::startUnit(const QString& name, const QString& mode)
