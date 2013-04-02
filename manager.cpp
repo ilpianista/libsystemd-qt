@@ -40,6 +40,7 @@ Systemd::SystemdPrivate::~SystemdPrivate()
 
 bool Systemd::SystemdPrivate::enableUnitFiles(const QStringList &files, bool runtime, bool force)
 {
+    qDBusRegisterMetaType<DBusUnitFileChange>();
     qDBusRegisterMetaType<DBusUnitFileChangeList>();
     QDBusPendingReply<bool, DBusUnitFileChangeList> reply = isdface.EnableUnitFiles(files, runtime, force);
     reply.waitForFinished();
@@ -49,13 +50,12 @@ bool Systemd::SystemdPrivate::enableUnitFiles(const QStringList &files, bool run
         return false;
     }
 
-//     qDebug() << reply.value();
-
     return true;
 }
 
 bool Systemd::SystemdPrivate::disableUnitFiles(const QStringList &files, bool runtime)
 {
+    qDBusRegisterMetaType<DBusUnitFileChange>();
     qDBusRegisterMetaType<DBusUnitFileChangeList>();
     QDBusPendingReply<DBusUnitFileChangeList> reply = isdface.DisableUnitFiles(files, runtime);
     reply.waitForFinished();
@@ -64,8 +64,6 @@ bool Systemd::SystemdPrivate::disableUnitFiles(const QStringList &files, bool ru
         qDebug() << reply.error();
         return false;
     }
-
-//     qDebug() << reply.value()
 
     return true;
 }
