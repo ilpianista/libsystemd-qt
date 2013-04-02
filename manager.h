@@ -54,6 +54,8 @@ namespace Systemd {
      */
     SDQT_EXPORT QStringList listUnits();
 
+    SDQT_EXPORT QString loadUnit(const QString &name);
+
     /*
      * Start a unit. Return false if something goes wrong.
      */

@@ -45,7 +45,7 @@ bool Systemd::SystemdPrivate::disableUnitFiles(const QStringList &files, bool ru
     reply.waitForFinished();
 
     if (reply.isError()) {
-        qDebug() << reply.error();
+        qDebug() << reply.error().message();
         return false;
     }
 
@@ -60,7 +60,7 @@ bool Systemd::SystemdPrivate::enableUnitFiles(const QStringList &files, bool run
     reply.waitForFinished();
 
     if (reply.isError()) {
-        qDebug() << reply.error();
+        qDebug() << reply.error().message();
         return false;
     }
 
@@ -73,7 +73,7 @@ QString Systemd::SystemdPrivate::getUnit(const QString &name)
     reply.waitForFinished();
 
     if (reply.isError()) {
-        qDebug() << reply.error();
+        qDebug() << reply.error().message();
         return QString();
     }
 
@@ -86,7 +86,7 @@ QString Systemd::SystemdPrivate::getUnitByPID(const uint &pid)
     reply.waitForFinished();
 
     if (reply.isError()) {
-        qDebug() << reply.error();
+        qDebug() << reply.error().message();
         return QString();
     }
 
@@ -101,7 +101,7 @@ QStringList Systemd::SystemdPrivate::listUnits()
     reply.waitForFinished();
 
     if (reply.isError()) {
-        qDebug() << reply.error();
+        qDebug() << reply.error().message();
         return QStringList();
     }
 
@@ -117,13 +117,26 @@ QStringList Systemd::SystemdPrivate::listUnits()
     return loaded;
 }
 
+QString Systemd::SystemdPrivate::loadUnit(const QString &name)
+{
+    QDBusPendingReply<QDBusObjectPath> reply = isdface.LoadUnit(name);
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+        return QString();
+    }
+
+    return qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
+}
+
 bool Systemd::SystemdPrivate::startUnit(const QString &name, const QString &mode)
 {
     QDBusPendingReply<QDBusObjectPath> reply = isdface.StartUnit(name, mode);
     reply.waitForFinished();
 
     if (reply.isError()) {
-        qDebug() << reply.error();
+        qDebug() << reply.error().message();
         return false;
     }
 
@@ -139,7 +152,7 @@ bool Systemd::SystemdPrivate::stopUnit(const QString &name, const QString &mode)
     reply.waitForFinished();
 
     if (reply.isError()) {
-        qDebug() << reply.error();
+        qDebug() << reply.error().message();
         return false;
     }
 
@@ -172,6 +185,11 @@ QString Systemd::getUnitByPID(const uint &pid)
 QStringList Systemd::listUnits()
 {
     return globalSystemd()->listUnits();
+}
+
+QString Systemd::loadUnit(const QString &name)
+{
+    return globalSystemd()->loadUnit(name);
 }
 
 bool Systemd::startUnit(const QString& name, const QString& mode)

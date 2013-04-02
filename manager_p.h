@@ -44,6 +44,7 @@ namespace Systemd {
         QString getUnit(const QString &name);
         QString getUnitByPID(const uint &pid);
         QStringList listUnits();
+        QString loadUnit(const QString &name);
         bool startUnit(const QString &name, const QString &mode);
         bool stopUnit(const QString &name, const QString &mode);
     };
