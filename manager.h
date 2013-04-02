@@ -36,6 +36,10 @@ namespace Systemd {
     SDQT_EXPORT bool enableUnitFiles(const QStringList &files, bool runtime, bool force);
 
     SDQT_EXPORT bool disableUnitFiles(const QStringList &files, bool runtime);
+
+    SDQT_EXPORT bool startUnit(const QString &name, const QString &mode);
+
+    SDQT_EXPORT bool stopUnit(const QString &name, const QString &mode);
 }
 
 #endif

@@ -67,6 +67,38 @@ bool Systemd::SystemdPrivate::disableUnitFiles(const QStringList &files, bool ru
     return true;
 }
 
+bool Systemd::SystemdPrivate::startUnit(const QString &name, const QString &mode)
+{
+    QDBusPendingReply<QDBusObjectPath> reply = isdface.StartUnit(name, mode);
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error();
+        return false;
+    }
+
+    if (reply.reply().arguments().isEmpty())
+        return false;
+
+    return true;
+}
+
+bool Systemd::SystemdPrivate::stopUnit(const QString &name, const QString &mode)
+{
+    QDBusPendingReply<QDBusObjectPath> reply = isdface.StopUnit(name, mode);
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error();
+        return false;
+    }
+
+    if (reply.reply().arguments().isEmpty())
+        return false;
+
+    return true;
+}
+
 bool Systemd::enableUnitFiles(const QStringList &files, bool runtime, bool force)
 {
     return globalSystemd()->enableUnitFiles(files, runtime, force);
@@ -75,4 +107,14 @@ bool Systemd::enableUnitFiles(const QStringList &files, bool runtime, bool force
 bool Systemd::disableUnitFiles(const QStringList &files, bool runtime)
 {
     return globalSystemd()->disableUnitFiles(files, runtime);
+}
+
+bool Systemd::startUnit(const QString& name, const QString& mode)
+{
+    globalSystemd()->startUnit(name, mode);
+}
+
+bool Systemd::stopUnit(const QString& name, const QString& mode)
+{
+    globalSystemd()->stopUnit(name, mode);
 }
