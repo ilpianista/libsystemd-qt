@@ -49,7 +49,7 @@ bool Systemd::SystemdPrivate::enableUnitFiles(const QStringList &files, bool run
         return false;
     }
 
-    return reply.value();
+    return true;
 }
 
 bool Systemd::SystemdPrivate::disableUnitFiles(const QStringList &files, bool runtime)
@@ -63,8 +63,6 @@ bool Systemd::SystemdPrivate::disableUnitFiles(const QStringList &files, bool ru
         qDebug() << reply.error();
         return false;
     }
-
-    qDebug() << reply.value().first().path;
 
     return true;
 }
