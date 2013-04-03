@@ -109,6 +109,56 @@ Systemd::Permission Systemd::LogindPrivate::canSuspend()
     return stringToPermission(permission);
 }
 
+void Systemd::LogindPrivate::hibernate(const bool interactive)
+{
+    QDBusPendingReply<void> reply = ildface.Hibernate(interactive);
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+    }
+}
+
+void Systemd::LogindPrivate::hybridsleep(const bool interactive)
+{
+    QDBusPendingReply<void> reply = ildface.HybridSleep(interactive);
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+    }
+}
+
+void Systemd::LogindPrivate::powerOff(const bool interactive)
+{
+    QDBusPendingReply<void> reply = ildface.PowerOff(interactive);
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+    }
+}
+
+void Systemd::LogindPrivate::reboot(const bool interactive)
+{
+    QDBusPendingReply<void> reply = ildface.Reboot(interactive);
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+    }
+}
+
+void Systemd::LogindPrivate::suspend(const bool interactive)
+{
+    QDBusPendingReply<void> reply = ildface.Suspend(interactive);
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+    }
+}
+
 Systemd::Permission Systemd::LogindPrivate::stringToPermission(const QString &permission)
 {
     if (permission == QLatin1String("na")) {
@@ -147,4 +197,29 @@ Systemd::Permission Systemd::canReboot()
 Systemd::Permission Systemd::canSuspend()
 {
     return globalLogind()->canSuspend();
+}
+
+void Systemd::hibernate(const bool interactive)
+{
+    globalLogind()->hibernate(interactive);
+}
+
+void Systemd::hybridsleep(const bool interactive)
+{
+    globalLogind()->hybridsleep(interactive);
+}
+
+void Systemd::poweroff(const bool interactive)
+{
+    globalLogind()->powerOff(interactive);
+}
+
+void Systemd::reboot(const bool interactive)
+{
+    globalLogind()->reboot(interactive);
+}
+
+void Systemd::suspend(const bool interactive)
+{
+    globalLogind()->suspend(interactive);
 }
