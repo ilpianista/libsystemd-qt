@@ -37,6 +37,15 @@ namespace Systemd {
         LogindPrivate();
         ~LogindPrivate();
         OrgFreedesktopLogin1ManagerInterface ildface;
+
+        Systemd::Permission canHibernate();
+        Systemd::Permission canHybridSleep();
+        Systemd::Permission canPowerOff();
+        Systemd::Permission canReboot();
+        Systemd::Permission canSuspend();
+
+    private:
+        Systemd::Permission stringToPermission(const QString &permission);
     };
 }
 

@@ -5,6 +5,8 @@ cmake_minimum_required(VERSION 2.8.8)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
 find_package(Qt5Core REQUIRED)
 find_package(Qt5DBus REQUIRED)
 find_package(PkgConfig)
@@ -79,8 +81,6 @@ install( FILES
 set_property(TARGET QtSystemd PROPERTY COMPILE_DEFINITIONS MAKE_SDQT_LIB)
 set_property(TARGET QtSystemd PROPERTY VERSION ${VERSION})
 set_property(TARGET QtSystemd PROPERTY SOVERSION 0)
-
-set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 message(STATUS "Writing pkg-config file...")
 configure_file(${CMAKE_SOURCE_DIR}/QtSystemd.pc.cmake ${CMAKE_BINARY_DIR}/QtSystemd.pc @ONLY)

@@ -31,6 +31,24 @@
  */
 namespace Systemd {
 
+    enum Permission {
+        Na,
+        Yes,
+        No,
+        Challenge,
+        Unknown
+    };
+
+    SDQT_EXPORT Systemd::Permission canHibernate();
+
+    SDQT_EXPORT Systemd::Permission canHybridSleep();
+
+    SDQT_EXPORT Systemd::Permission canPowerOff();
+
+    SDQT_EXPORT Systemd::Permission canReboot();
+
+    SDQT_EXPORT Systemd::Permission canSuspend();
+
 }
 
 #endif

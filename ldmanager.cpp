@@ -33,3 +33,118 @@ ildface( Systemd::LogindPrivate::LD_DBUS_SERVICE, Systemd::LogindPrivate::LD_DBU
 Systemd::LogindPrivate::~LogindPrivate()
 {
 }
+
+Systemd::Permission Systemd::LogindPrivate::canHibernate()
+{
+    QDBusPendingReply<QString> reply = ildface.CanHibernate();
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+        return Systemd::Unknown;
+    }
+
+    const QString permission = qdbus_cast<QString>(reply.reply().arguments().first());
+
+    return stringToPermission(permission);
+}
+
+Systemd::Permission Systemd::LogindPrivate::canHybridSleep()
+{
+    QDBusPendingReply<QString> reply = ildface.CanHybridSleep();
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+        return Systemd::Unknown;
+    }
+
+    const QString permission = qdbus_cast<QString>(reply.reply().arguments().first());
+
+    return stringToPermission(permission);
+}
+
+Systemd::Permission Systemd::LogindPrivate::canPowerOff()
+{
+    QDBusPendingReply<QString> reply = ildface.CanPowerOff();
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+        return Systemd::Unknown;
+    }
+
+    const QString permission = qdbus_cast<QString>(reply.reply().arguments().first());
+
+    return stringToPermission(permission);
+}
+
+Systemd::Permission Systemd::LogindPrivate::canReboot()
+{
+    QDBusPendingReply<QString> reply = ildface.CanReboot();
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+        return Systemd::Unknown;
+    }
+
+    const QString permission = qdbus_cast<QString>(reply.reply().arguments().first());
+
+    return stringToPermission(permission);
+}
+
+Systemd::Permission Systemd::LogindPrivate::canSuspend()
+{
+    QDBusPendingReply<QString> reply = ildface.CanSuspend();
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+        return Systemd::Unknown;
+    }
+
+    const QString permission = qdbus_cast<QString>(reply.reply().arguments().first());
+
+    return stringToPermission(permission);
+}
+
+Systemd::Permission Systemd::LogindPrivate::stringToPermission(const QString &permission)
+{
+    if (permission == QLatin1String("na")) {
+        return Systemd::Na;
+    } else if (permission == QLatin1String("yes")) {
+        return Systemd::Yes;
+    } else if (permission == QLatin1String("no")) {
+        return Systemd::No;
+    } else if (permission == QLatin1String("challenge")) {
+        return Systemd::Challenge;
+    } else {
+        return Systemd::Unknown;
+    }
+}
+
+Systemd::Permission Systemd::canHibernate()
+{
+    return globalLogind()->canHibernate();
+}
+
+Systemd::Permission Systemd::canHybridSleep()
+{
+    return globalLogind()->canHybridSleep();
+}
+
+Systemd::Permission Systemd::canPowerOff()
+{
+    return globalLogind()->canPowerOff();
+}
+
+Systemd::Permission Systemd::canReboot()
+{
+    return globalLogind()->canReboot();
+}
+
+Systemd::Permission Systemd::canSuspend()
+{
+    return globalLogind()->canSuspend();
+}
