@@ -93,7 +93,32 @@ QString Systemd::SystemdPrivate::getUnitByPID(const uint pid)
     return qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
 }
 
-QStringList Systemd::SystemdPrivate::listUnits()
+QList<Systemd::Job*> Systemd::SystemdPrivate::listJobs()
+{
+    qDBusRegisterMetaType<ManagerDBusJob>();
+    qDBusRegisterMetaType<ManagerDBusJobList>();
+    QDBusPendingReply<ManagerDBusJobList> reply = isdface.ListJobs();
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+        return QList<Systemd::Job*>();
+    }
+
+    QList<Systemd::Job*> queued;
+    const QDBusMessage message = reply.reply();
+    if (message.type() == QDBusMessage::ReplyMessage) {
+        const ManagerDBusJobList jobs = qdbus_cast<ManagerDBusJobList>(message.arguments().first());
+        Q_FOREACH(const ManagerDBusJob job, jobs) {
+            Systemd::Job *j = new Systemd::Job(job.id, job.unitId, job.type, job.state);
+            queued.append(j);
+        }
+    }
+
+    return queued;
+}
+
+QList<Systemd::Unit*> Systemd::SystemdPrivate::listUnits()
 {
     qDBusRegisterMetaType<ManagerDBusUnit>();
     qDBusRegisterMetaType<ManagerDBusUnitList>();
@@ -102,15 +127,16 @@ QStringList Systemd::SystemdPrivate::listUnits()
 
     if (reply.isError()) {
         qDebug() << reply.error().message();
-        return QStringList();
+        return QList<Systemd::Unit*>();
     }
 
-    QStringList loaded;
+    QList<Systemd::Unit*> loaded;
     const QDBusMessage message = reply.reply();
     if (message.type() == QDBusMessage::ReplyMessage) {
         const ManagerDBusUnitList units = qdbus_cast<ManagerDBusUnitList>(message.arguments().first());
         Q_FOREACH(const ManagerDBusUnit unit, units) {
-            loaded << unit.id;
+            Systemd::Unit *u = new Systemd::Unit(unit.id, unit.description, unit.loadState, unit.activeState, unit.subState, unit.jobId);
+            loaded.append(u);
         }
     }
 
@@ -226,7 +252,12 @@ QString Systemd::getUnitByPID(const uint pid)
     return globalSystemd()->getUnitByPID(pid);
 }
 
-QStringList Systemd::listUnits()
+QList<Systemd::Job*> Systemd::listJobs()
+{
+    return globalSystemd()->listJobs();
+}
+
+QList<Systemd::Unit*> Systemd::listUnits()
 {
     return globalSystemd()->listUnits();
 }

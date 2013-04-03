@@ -46,7 +46,8 @@ namespace Systemd {
         bool enableUnitFiles(const QStringList &files, bool runtime, bool force);
         QString getUnit(const QString &name);
         QString getUnitByPID(const uint pid);
-        QStringList listUnits();
+        QList<Systemd::Job*> listJobs();
+        QList<Systemd::Unit*> listUnits();
         QString loadUnit(const QString &name);
         bool reloadUnit(const QString &name, const Systemd::Mode mode);
         bool restartUnit(const QString &name, const Systemd::Mode mode);

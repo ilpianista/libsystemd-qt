@@ -24,6 +24,9 @@
 
 #include "QtSystemd-export.h"
 
+#include "job.h"
+#include "unit.h"
+
 /**
  * This class allows querying the underlying system.
  *
@@ -57,10 +60,12 @@ namespace Systemd {
 
     SDQT_EXPORT QString getUnitByPID(const uint pid);
 
+    SDQT_EXPORT QList<Systemd::Job*> listJobs();
+
     /*
      * Lists the name of all units loaded.
      */
-    SDQT_EXPORT QStringList listUnits();
+    SDQT_EXPORT QList<Systemd::Unit*> listUnits();
 
     SDQT_EXPORT QString loadUnit(const QString &name);
 

@@ -25,7 +25,9 @@ include_directories(${Qt5Core_INCLUDE_DIRS}
 #add_subdirectory(dbus)
 
 set(QtSystemd_HEADERS
+    job.h
     manager.h
+    unit.h
     dbus/generic-types.h
     QtSystemd-export.h
 )
@@ -35,7 +37,9 @@ set(QtSystemd_PRIVATE_HEADERS
 )
 
 set(QtSystemd_PART_SRCS
+    job.cpp
     manager.cpp
+    unit.cpp
     dbus/generic-types.cpp
 )
 
