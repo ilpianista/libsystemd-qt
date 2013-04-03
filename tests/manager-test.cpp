@@ -1,4 +1,5 @@
 #include <QDebug>
+#include <QCoreApplication>
 
 #include "../manager.h"
 
@@ -86,6 +87,7 @@ public:
 
 int main(int argc, char* argv[])
 {
+    QCoreApplication app(argc, argv);
 //     ManagerTest::disableUnitFiles();
 
 //     ManagerTest::enableUnitFiles();
