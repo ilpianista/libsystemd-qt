@@ -21,7 +21,6 @@
 #define SD_MANAGER_P_H
 
 #include "dbus/managerinterface.h"
-#include "dbus/login1interface.h"
 
 #include "sdmanager.h"
 

@@ -26,6 +26,7 @@ include_directories(${Qt5Core_INCLUDE_DIRS}
 
 set(QtSystemd_HEADERS
     job.h
+    ldmanager.h
     sdmanager.h
     unit.h
     dbus/generic-types.h
@@ -33,11 +34,13 @@ set(QtSystemd_HEADERS
 )
 
 set(QtSystemd_PRIVATE_HEADERS
+    ldmanager_p.h
     sdmanager_p.h
 )
 
 set(QtSystemd_PART_SRCS
     job.cpp
+    ldmanager.cpp
     sdmanager.cpp
     unit.cpp
     dbus/generic-types.cpp
