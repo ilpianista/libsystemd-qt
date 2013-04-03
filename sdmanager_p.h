@@ -23,7 +23,7 @@
 #include "dbus/managerinterface.h"
 #include "dbus/login1interface.h"
 
-#include "manager.h"
+#include "sdmanager.h"
 
 namespace Systemd {
 
@@ -34,13 +34,10 @@ namespace Systemd {
     public:
         static const QString SD_DBUS_SERVICE;
         static const QString SD_DBUS_DAEMON_PATH;
-        static const QString LD_DBUS_SERVICE;
-        static const QString LD_DBUS_DAEMON_PATH;
 
         SystemdPrivate();
         ~SystemdPrivate();
         OrgFreedesktopSystemd1ManagerInterface isdface;
-        OrgFreedesktopLogin1ManagerInterface ildface;
 
         bool disableUnitFiles(const QStringList &files, bool runtime);
         bool enableUnitFiles(const QStringList &files, bool runtime, bool force);

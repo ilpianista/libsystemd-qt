@@ -17,19 +17,16 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  ***************************************************************************/
 
-#include "manager.h"
-#include "manager_p.h"
+#include "sdmanager.h"
+#include "sdmanager_p.h"
 
 const QString Systemd::SystemdPrivate::SD_DBUS_SERVICE(QString::fromLatin1("org.freedesktop.systemd1"));
 const QString Systemd::SystemdPrivate::SD_DBUS_DAEMON_PATH(QString::fromLatin1("/org/freedesktop/systemd1"));
-const QString Systemd::SystemdPrivate::LD_DBUS_SERVICE(QString::fromLatin1("org.freedesktop.login1"));
-const QString Systemd::SystemdPrivate::LD_DBUS_DAEMON_PATH(QString::fromLatin1("/org/freedesktop/login1"));
 
 Q_GLOBAL_STATIC(Systemd::SystemdPrivate, globalSystemd)
 
 Systemd::SystemdPrivate::SystemdPrivate() :
-    isdface( Systemd::SystemdPrivate::SD_DBUS_SERVICE, Systemd::SystemdPrivate::SD_DBUS_DAEMON_PATH, QDBusConnection::systemBus()),
-    ildface( Systemd::SystemdPrivate::LD_DBUS_SERVICE, Systemd::SystemdPrivate::LD_DBUS_DAEMON_PATH, QDBusConnection::systemBus())
+    isdface( Systemd::SystemdPrivate::SD_DBUS_SERVICE, Systemd::SystemdPrivate::SD_DBUS_DAEMON_PATH, QDBusConnection::systemBus())
 {
 }
 

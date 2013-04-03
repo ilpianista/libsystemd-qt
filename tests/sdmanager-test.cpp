@@ -1,10 +1,10 @@
 #include <QDebug>
 
-#include "../manager.h"
+#include "../sdmanager.h"
 
-class ManagerTest {
+class SDManagerTest {
 public:
-    ManagerTest()
+    SDManagerTest()
     {
     }
 
@@ -86,25 +86,25 @@ public:
 
 int main(int argc, char* argv[])
 {
-//     ManagerTest::disableUnitFiles();
+//     SDManagerTest::disableUnitFiles();
 
-//     ManagerTest::enableUnitFiles();
+//     SDManagerTest::enableUnitFiles();
 
-//     ManagerTest::getUnit();
+//     SDManagerTest::getUnit();
 
-//     ManagerTest::getUnitByPID();
+//     SDManagerTest::getUnitByPID();
 
-    ManagerTest::listJobs();
+    SDManagerTest::listJobs();
 
-    ManagerTest::listUnits();
+    SDManagerTest::listUnits();
 
-//     ManagerTest::loadUnit();
+//     SDManagerTest::loadUnit();
 
-//     ManagerTest::reloadUnit();
+//     SDManagerTest::reloadUnit();
 
-//     ManagerTest::restartUnit();
+//     SDManagerTest::restartUnit();
 
-//     ManagerTest::startUnit();
+//     SDManagerTest::startUnit();
 
-//     ManagerTest::stopUnit();
+//     SDManagerTest::stopUnit();
 }

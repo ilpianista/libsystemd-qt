@@ -1,7 +1,7 @@
 set(QtSystemdTest_SRCS
-    manager-test.cpp
+    sdmanager-test.cpp
     )
 
-add_executable(manager-test ${QtSystemdTest_SRCS})
+add_executable(sdmanager-test ${QtSystemdTest_SRCS})
 
-target_link_libraries(manager-test QtSystemd)
+target_link_libraries(sdmanager-test QtSystemd)
