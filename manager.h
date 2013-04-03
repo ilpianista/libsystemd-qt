@@ -33,6 +33,14 @@
  */
 namespace Systemd {
 
+    enum Mode {
+        Replace,
+        Fail,
+        Isolate,
+        IgnoreDependencies,
+        IgnoreRequirements
+    };
+
     // See http://www.freedesktop.org/wiki/Software/systemd/dbus for more info.
 
     /*
@@ -47,7 +55,7 @@ namespace Systemd {
 
     SDQT_EXPORT QString getUnit(const QString &name);
 
-    SDQT_EXPORT QString getUnitByPID(const uint &pid);
+    SDQT_EXPORT QString getUnitByPID(const uint pid);
 
     /*
      * Lists the name of all units loaded.
@@ -56,15 +64,19 @@ namespace Systemd {
 
     SDQT_EXPORT QString loadUnit(const QString &name);
 
+    SDQT_EXPORT bool reloadUnit(const QString &name, const Systemd::Mode mode);
+
+    SDQT_EXPORT bool restartUnit(const QString &name, const Systemd::Mode mode);
+
     /*
      * Start a unit. Return false if something goes wrong.
      */
-    SDQT_EXPORT bool startUnit(const QString &name, const QString &mode);
+    SDQT_EXPORT bool startUnit(const QString &name, const Systemd::Mode mode);
 
     /*
      * Stop a unit. Return false if something goes wrong.
      */
-    SDQT_EXPORT bool stopUnit(const QString &name, const QString &mode);
+    SDQT_EXPORT bool stopUnit(const QString &name, const Systemd::Mode mode);
 }
 
 #endif

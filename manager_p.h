@@ -23,11 +23,14 @@
 #include "dbus/managerinterface.h"
 #include "dbus/login1interface.h"
 
+#include "manager.h"
+
 namespace Systemd {
 
     class SystemdPrivate : public QObject
     {
     Q_OBJECT
+
     public:
         static const QString SD_DBUS_SERVICE;
         static const QString SD_DBUS_DAEMON_PATH;
@@ -42,11 +45,16 @@ namespace Systemd {
         bool disableUnitFiles(const QStringList &files, bool runtime);
         bool enableUnitFiles(const QStringList &files, bool runtime, bool force);
         QString getUnit(const QString &name);
-        QString getUnitByPID(const uint &pid);
+        QString getUnitByPID(const uint pid);
         QStringList listUnits();
         QString loadUnit(const QString &name);
-        bool startUnit(const QString &name, const QString &mode);
-        bool stopUnit(const QString &name, const QString &mode);
+        bool reloadUnit(const QString &name, const Systemd::Mode mode);
+        bool restartUnit(const QString &name, const Systemd::Mode mode);
+        bool startUnit(const QString &name, const Systemd::Mode mode);
+        bool stopUnit(const QString &name, const Systemd::Mode mode);
+
+    private:
+        QString modeToString(const Systemd::Mode mode);
     };
 }
 

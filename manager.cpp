@@ -80,7 +80,7 @@ QString Systemd::SystemdPrivate::getUnit(const QString &name)
     return qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
 }
 
-QString Systemd::SystemdPrivate::getUnitByPID(const uint &pid)
+QString Systemd::SystemdPrivate::getUnitByPID(const uint pid)
 {
     QDBusPendingReply<QDBusObjectPath> reply = isdface.GetUnitByPID(pid);
     reply.waitForFinished();
@@ -130,9 +130,9 @@ QString Systemd::SystemdPrivate::loadUnit(const QString &name)
     return qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
 }
 
-bool Systemd::SystemdPrivate::startUnit(const QString &name, const QString &mode)
+bool Systemd::SystemdPrivate::reloadUnit(const QString &name, const Systemd::Mode mode)
 {
-    QDBusPendingReply<QDBusObjectPath> reply = isdface.StartUnit(name, mode);
+    QDBusPendingReply<QDBusObjectPath> reply = isdface.ReloadUnit(name, modeToString(mode));
     reply.waitForFinished();
 
     if (reply.isError()) {
@@ -146,9 +146,9 @@ bool Systemd::SystemdPrivate::startUnit(const QString &name, const QString &mode
     return true;
 }
 
-bool Systemd::SystemdPrivate::stopUnit(const QString &name, const QString &mode)
+bool Systemd::SystemdPrivate::restartUnit(const QString &name, const Systemd::Mode mode)
 {
-    QDBusPendingReply<QDBusObjectPath> reply = isdface.StopUnit(name, mode);
+    QDBusPendingReply<QDBusObjectPath> reply = isdface.RestartUnit(name, modeToString(mode));
     reply.waitForFinished();
 
     if (reply.isError()) {
@@ -160,6 +160,50 @@ bool Systemd::SystemdPrivate::stopUnit(const QString &name, const QString &mode)
         return false;
 
     return true;
+}
+
+bool Systemd::SystemdPrivate::startUnit(const QString &name, const Systemd::Mode mode)
+{
+    QDBusPendingReply<QDBusObjectPath> reply = isdface.StartUnit(name, modeToString(mode));
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+        return false;
+    }
+
+    if (reply.reply().arguments().isEmpty())
+        return false;
+
+    return true;
+}
+
+bool Systemd::SystemdPrivate::stopUnit(const QString &name, const Systemd::Mode mode)
+{
+    QDBusPendingReply<QDBusObjectPath> reply = isdface.StopUnit(name, modeToString(mode));
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+        return false;
+    }
+
+    if (reply.reply().arguments().isEmpty())
+        return false;
+
+    return true;
+}
+
+QString Systemd::SystemdPrivate::modeToString(const Systemd::Mode mode)
+{
+    switch(mode) {
+        case Fail: return "fail";
+        case IgnoreDependencies: return "ignore-dependencies";
+        case IgnoreRequirements: return "ignore-requirements";
+        case Isolate: return "isolate";
+        case Replace: return "replace";
+        default: return QString();
+    }
 }
 
 bool Systemd::disableUnitFiles(const QStringList &files, bool runtime)
@@ -177,7 +221,7 @@ QString Systemd::getUnit(const QString &name)
     return globalSystemd()->getUnit(name);
 }
 
-QString Systemd::getUnitByPID(const uint &pid)
+QString Systemd::getUnitByPID(const uint pid)
 {
     return globalSystemd()->getUnitByPID(pid);
 }
@@ -192,12 +236,22 @@ QString Systemd::loadUnit(const QString &name)
     return globalSystemd()->loadUnit(name);
 }
 
-bool Systemd::startUnit(const QString& name, const QString& mode)
+bool Systemd::reloadUnit(const QString &name, const Systemd::Mode mode)
 {
-    globalSystemd()->startUnit(name, mode);
+    return globalSystemd()->reloadUnit(name, mode);
 }
 
-bool Systemd::stopUnit(const QString& name, const QString& mode)
+bool Systemd::restartUnit(const QString &name, const Systemd::Mode mode)
 {
-    globalSystemd()->stopUnit(name, mode);
+    return globalSystemd()->restartUnit(name, mode);
+}
+
+bool Systemd::startUnit(const QString &name, const Systemd::Mode mode)
+{
+    return globalSystemd()->startUnit(name, mode);
+}
+
+bool Systemd::stopUnit(const QString &name, const Systemd::Mode mode)
+{
+    return globalSystemd()->stopUnit(name, mode);
 }

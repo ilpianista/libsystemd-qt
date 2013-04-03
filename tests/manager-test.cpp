@@ -48,15 +48,27 @@ public:
         qDebug() << Systemd::loadUnit("mysqld.service");
     }
 
+    static void reloadUnit()
+    {
+        bool ret = Systemd::reloadUnit(QLatin1String("mysqld.service"), Systemd::Replace);
+        qDebug() << ret;
+    }
+
+    static void restartUnit()
+    {
+        bool ret = Systemd::restartUnit(QLatin1String("mysqld.service"), Systemd::Replace);
+        qDebug() << ret;
+    }
+
     static void startUnit()
     {
-        bool ret = Systemd::startUnit(QLatin1String("mysqld.service"), QLatin1String("replace"));
+        bool ret = Systemd::startUnit(QLatin1String("mysqld.service"), Systemd::Replace);
         qDebug() << ret;
     }
 
     static void stopUnit()
     {
-        bool ret = Systemd::stopUnit(QLatin1String("mysqld.service"), QLatin1String("replace"));
+        bool ret = Systemd::stopUnit(QLatin1String("mysqld.service"), Systemd::Replace);
         qDebug() << ret;
     }
 };
@@ -73,7 +85,11 @@ int main(int argc, char* argv[])
 
 //     ManagerTest::listUnits();
 
-    ManagerTest::loadUnit();
+//     ManagerTest::loadUnit();
+
+     ManagerTest::reloadUnit();
+
+//     ManagerTest::restartUnit();
 
 //     ManagerTest::startUnit();
 
