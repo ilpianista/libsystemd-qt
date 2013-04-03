@@ -44,7 +44,7 @@ namespace Systemd {
         Systemd::Permission canReboot();
         Systemd::Permission canSuspend();
         void hibernate(const bool interactive);
-        void hybridsleep(const bool interactive);
+        void hybridSleep(const bool interactive);
         void powerOff(const bool interactive);
         void reboot(const bool interactive);
         void suspend(const bool interactive);

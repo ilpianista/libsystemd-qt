@@ -119,7 +119,7 @@ void Systemd::LogindPrivate::hibernate(const bool interactive)
     }
 }
 
-void Systemd::LogindPrivate::hybridsleep(const bool interactive)
+void Systemd::LogindPrivate::hybridSleep(const bool interactive)
 {
     QDBusPendingReply<void> reply = ildface.HybridSleep(interactive);
     reply.waitForFinished();
@@ -204,12 +204,12 @@ void Systemd::hibernate(const bool interactive)
     globalLogind()->hibernate(interactive);
 }
 
-void Systemd::hybridsleep(const bool interactive)
+void Systemd::hybridSleep(const bool interactive)
 {
-    globalLogind()->hybridsleep(interactive);
+    globalLogind()->hybridSleep(interactive);
 }
 
-void Systemd::poweroff(const bool interactive)
+void Systemd::powerOff(const bool interactive)
 {
     globalLogind()->powerOff(interactive);
 }

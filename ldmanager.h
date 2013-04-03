@@ -51,9 +51,9 @@ namespace Systemd {
 
     SDQT_EXPORT void hibernate(const bool interactive);
 
-    SDQT_EXPORT void hybridsleep(const bool interactive);
+    SDQT_EXPORT void hybridSleep(const bool interactive);
 
-    SDQT_EXPORT void poweroff(const bool interactive);
+    SDQT_EXPORT void powerOff(const bool interactive);
 
     SDQT_EXPORT void reboot(const bool interactive);
 
