@@ -1,4 +1,4 @@
-#include <QDebug>
+#include <QCoreApplication>
 
 #include "../sdmanager.h"
 
@@ -86,6 +86,8 @@ public:
 
 int main(int argc, char* argv[])
 {
+    QCoreApplication app(argc, argv);
+
 //     SDManagerTest::disableUnitFiles();
 
 //     SDManagerTest::enableUnitFiles();

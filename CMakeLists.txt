@@ -80,6 +80,8 @@ set_property(TARGET QtSystemd PROPERTY COMPILE_DEFINITIONS MAKE_SDQT_LIB)
 set_property(TARGET QtSystemd PROPERTY VERSION ${VERSION})
 set_property(TARGET QtSystemd PROPERTY SOVERSION 0)
 
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
 message(STATUS "Writing pkg-config file...")
 configure_file(${CMAKE_SOURCE_DIR}/QtSystemd.pc.cmake ${CMAKE_BINARY_DIR}/QtSystemd.pc @ONLY)
 install(FILES ${CMAKE_BINARY_DIR}/QtSystemd.pc DESTINATION "${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/pkgconfig/")
