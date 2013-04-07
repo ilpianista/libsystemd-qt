@@ -90,7 +90,7 @@ const QDBusArgument& operator>>(const QDBusArgument& argument, DBusUnitFileList&
 QDBusArgument& operator<<(QDBusArgument& argument, const JobDBusUnit& unit)
 {
     argument.beginStructure();
-    argument << unit.id << unit.unit;
+    argument << unit.id << unit.path;
     argument.endStructure();
     return argument;
 }
@@ -98,7 +98,7 @@ QDBusArgument& operator<<(QDBusArgument& argument, const JobDBusUnit& unit)
 const QDBusArgument& operator>>(const QDBusArgument& argument, JobDBusUnit& unit)
 {
     argument.beginStructure();
-    argument >> unit.id >> unit.unit;
+    argument >> unit.id >> unit.path;
     argument.endStructure();
     return argument;
 }
@@ -124,7 +124,7 @@ const QDBusArgument& operator>>(const QDBusArgument& argument, LoginDBusInhibito
 QDBusArgument& operator<<(QDBusArgument& argument, const LoginDBusSeat& seat)
 {
     argument.beginStructure();
-    argument << seat.id << seat.seat;
+    argument << seat.id << seat.path;
     argument.endStructure();
     return argument;
 }
@@ -132,7 +132,7 @@ QDBusArgument& operator<<(QDBusArgument& argument, const LoginDBusSeat& seat)
 const QDBusArgument& operator>>(const QDBusArgument& argument, LoginDBusSeat& seat)
 {
     argument.beginStructure();
-    argument >> seat.id >> seat.seat;
+    argument >> seat.id >> seat.path;
     argument.endStructure();
     return argument;
 }
@@ -141,7 +141,7 @@ QDBusArgument& operator<<(QDBusArgument& argument, const LoginDBusSession& sessi
 {
     argument.beginStructure();
     argument << session.id << session.uid << session.name << session.seatId;
-    argument << session.session;
+    argument << session.path;
     argument.endStructure();
     return argument;
 }
@@ -150,7 +150,7 @@ const QDBusArgument& operator>>(const QDBusArgument& argument, LoginDBusSession&
 {
     argument.beginStructure();
     argument >> session.id >> session.uid >> session.name >> session.seatId;
-    argument >> session.session;
+    argument >> session.path;
     argument.endStructure();
     return argument;
 }
@@ -158,7 +158,7 @@ const QDBusArgument& operator>>(const QDBusArgument& argument, LoginDBusSession&
 QDBusArgument& operator<<(QDBusArgument& argument, const LoginDBusUser& user)
 {
     argument.beginStructure();
-    argument << user.uid << user.name << user.user;
+    argument << user.uid << user.name << user.path;
     argument.endStructure();
     return argument;
 }
@@ -166,7 +166,7 @@ QDBusArgument& operator<<(QDBusArgument& argument, const LoginDBusUser& user)
 const QDBusArgument& operator>>(const QDBusArgument& argument, LoginDBusUser& user)
 {
     argument.beginStructure();
-    argument >> user.uid >> user.name >> user.user;
+    argument >> user.uid >> user.name >> user.path;
     argument.endStructure();
     return argument;
 }
@@ -260,7 +260,7 @@ const QDBusArgument& operator>>(const QDBusArgument& argument, TimerDBusMonotoni
 QDBusArgument& operator<<(QDBusArgument& argument, const UnitDBusJob& job)
 {
     argument.beginStructure();
-    argument << job.id << job.job;
+    argument << job.id << job.path;
     argument.endStructure();
     return argument;
 }
@@ -268,7 +268,7 @@ QDBusArgument& operator<<(QDBusArgument& argument, const UnitDBusJob& job)
 const QDBusArgument& operator>>(const QDBusArgument& argument, UnitDBusJob& job)
 {
     argument.beginStructure();
-    argument >> job.id >> job.job;
+    argument >> job.id >> job.path;
     argument.endStructure();
     return argument;
 }

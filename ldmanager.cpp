@@ -26,8 +26,8 @@ const QString Systemd::LogindPrivate::LD_DBUS_DAEMON_PATH(QString::fromLatin1("/
 Q_GLOBAL_STATIC(Systemd::LogindPrivate, globalLogind)
 
 Systemd::LogindPrivate::LogindPrivate() :
-ildface( Systemd::LogindPrivate::LD_DBUS_SERVICE,
-         Systemd::LogindPrivate::LD_DBUS_DAEMON_PATH, QDBusConnection::systemBus())
+    ildface( Systemd::LogindPrivate::LD_DBUS_SERVICE,
+             Systemd::LogindPrivate::LD_DBUS_DAEMON_PATH, QDBusConnection::systemBus())
 {
     connect(&ildface, SIGNAL(SeatNew(QString,QDBusObjectPath)), this,
             SLOT(onSeatNew(QString,QDBusObjectPath)));
@@ -38,6 +38,30 @@ ildface( Systemd::LogindPrivate::LD_DBUS_SERVICE,
 
 Systemd::LogindPrivate::~LogindPrivate()
 {
+}
+
+QStringList Systemd::LogindPrivate::listSeats()
+{
+    qDBusRegisterMetaType<LoginDBusSeat>;
+    qDBusRegisterMetaType<LoginDBusSeatList>;
+    QDBusPendingReply<LoginDBusSeatList> reply = ildface.ListSeats();
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+        return QStringList();
+    }
+
+    QStringList seatLists;
+    const QDBusMessage message = reply.reply();
+    if (message.type() == QDBusMessage::ReplyMessage) {
+        const LoginDBusSeatList seats = qdbus_cast<LoginDBusSeatList>(message.arguments().first());
+        Q_FOREACH(const LoginDBusSeat seat, seats) {
+            seatLists.append(seat.id);
+        }
+    }
+
+    return seatLists;
 }
 
 Systemd::Permission Systemd::LogindPrivate::canHibernate()
@@ -223,6 +247,11 @@ void Systemd::hibernate(const bool interactive)
 void Systemd::hybridSleep(const bool interactive)
 {
     globalLogind()->hybridSleep(interactive);
+}
+
+QStringList Systemd::listSeats()
+{
+    return globalLogind()->listSeats();
 }
 
 void Systemd::powerOff(const bool interactive)

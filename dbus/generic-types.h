@@ -86,7 +86,7 @@ const QDBusArgument &operator>>(const QDBusArgument &argument, DBusUnitFileList 
 typedef struct
 {
     QString id;
-    QDBusObjectPath unit;
+    QDBusObjectPath path;
 } JobDBusUnit;
 Q_DECLARE_METATYPE(JobDBusUnit)
 
@@ -112,7 +112,7 @@ const QDBusArgument &operator>>(const QDBusArgument &argument, LoginDBusInhibito
 typedef struct
 {
     QString id;
-    QDBusObjectPath seat;
+    QDBusObjectPath path;
 } LoginDBusSeat;
 Q_DECLARE_METATYPE(LoginDBusSeat)
 typedef QList<LoginDBusSeat> LoginDBusSeatList;
@@ -127,7 +127,7 @@ typedef struct
     uint uid;
     QString name;
     QString seatId;
-    QDBusObjectPath session;
+    QDBusObjectPath path;
 } LoginDBusSession;
 Q_DECLARE_METATYPE(LoginDBusSession)
 typedef QList<LoginDBusSession> LoginDBusSessionList;
@@ -140,7 +140,7 @@ typedef struct
 {
     uint uid;
     QString name;
-    QDBusObjectPath user;
+    QDBusObjectPath path;
 } LoginDBusUser;
 Q_DECLARE_METATYPE(LoginDBusUser)
 typedef QList<LoginDBusUser> LoginDBusUserList;
@@ -226,7 +226,7 @@ const QDBusArgument &operator>>(const QDBusArgument &argument, TimerDBusMonotoni
 typedef struct
 {
     QString id;
-    QDBusObjectPath job;
+    QDBusObjectPath path;
 } UnitDBusJob;
 Q_DECLARE_METATYPE(UnitDBusJob)
 

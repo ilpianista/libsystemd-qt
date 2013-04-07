@@ -45,6 +45,7 @@ public:
     Systemd::Permission canSuspend();
     void hibernate(const bool interactive);
     void hybridSleep(const bool interactive);
+    QStringList listSeats();
     void powerOff(const bool interactive);
     void reboot(const bool interactive);
     void suspend(const bool interactive);

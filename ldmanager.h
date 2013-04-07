@@ -63,6 +63,8 @@ namespace Systemd {
 
     SDQT_EXPORT void hybridSleep(const bool interactive);
 
+    SDQT_EXPORT QStringList listSeats();
+
     SDQT_EXPORT void powerOff(const bool interactive);
 
     SDQT_EXPORT void reboot(const bool interactive);

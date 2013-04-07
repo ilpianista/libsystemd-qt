@@ -132,7 +132,9 @@ QList<Systemd::Unit*> Systemd::SystemdPrivate::listUnits()
     if (message.type() == QDBusMessage::ReplyMessage) {
         const ManagerDBusUnitList units = qdbus_cast<ManagerDBusUnitList>(message.arguments().first());
         Q_FOREACH(const ManagerDBusUnit unit, units) {
-            Systemd::Unit *u = new Systemd::Unit(unit.id, unit.description, unit.loadState, unit.activeState, unit.subState, unit.jobId);
+            Systemd::Unit *u = new Systemd::Unit(unit.id, unit.description,
+                                                 unit.loadState, unit.activeState,
+                                                 unit.subState, unit.jobId);
             loaded.append(u);
         }
     }
