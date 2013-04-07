@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef JOBINTERFACE_H_1364907520
-#define JOBINTERFACE_H_1364907520
+#ifndef JOBINTERFACE_H_1365342323
+#define JOBINTERFACE_H_1365342323
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>

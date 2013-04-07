@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef DEVICEINTERFACE_H_1364907519
-#define DEVICEINTERFACE_H_1364907519
+#ifndef DEVICEINTERFACE_H_1365342322
+#define DEVICEINTERFACE_H_1365342322
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>

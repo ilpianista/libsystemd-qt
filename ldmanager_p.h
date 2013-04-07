@@ -20,7 +20,7 @@
 #ifndef LD_MANAGER_P_H
 #define LD_MANAGER_P_H
 
-#include "dbus/login1interface.h"
+#include "dbus/ldmanagerinterface.h"
 
 #include "ldmanager.h"
 

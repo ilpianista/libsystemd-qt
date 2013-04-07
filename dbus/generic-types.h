@@ -199,6 +199,38 @@ const QDBusArgument &operator>>(const QDBusArgument &argument, PathDBusPath &pat
 
 typedef struct
 {
+    QString id;
+    QDBusObjectPath path;
+} SeatDBusSession;
+Q_DECLARE_METATYPE(SeatDBusSession)
+typedef QList<SeatDBusSession> SeatDBusSessionList;
+Q_DECLARE_METATYPE(SeatDBusSessionList)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const SeatDBusSession &session);
+const QDBusArgument &operator>>(const QDBusArgument &argument, SeatDBusSession &session);
+
+typedef struct
+{
+    QString id;
+    QDBusObjectPath path;
+} SessionDBusSeat;
+Q_DECLARE_METATYPE(SessionDBusSeat)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const SessionDBusSeat &seat);
+const QDBusArgument &operator>>(const QDBusArgument &argument, SessionDBusSeat &seat);
+
+typedef struct
+{
+    QString id;
+    QDBusObjectPath path;
+} SessionDBusUser;
+Q_DECLARE_METATYPE(SessionDBusUser)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const SessionDBusUser &user);
+const QDBusArgument &operator>>(const QDBusArgument &argument, SessionDBusUser &user);
+
+typedef struct
+{
     QString timerBase;
     QString calendarSpec;
     qlonglong nextElapse;
@@ -242,5 +274,17 @@ Q_DECLARE_METATYPE(UnitDBusLoadError)
 
 QDBusArgument &operator<<(QDBusArgument &argument, const UnitDBusLoadError &loadError);
 const QDBusArgument &operator>>(const QDBusArgument &argument, UnitDBusLoadError &loadError);
+
+typedef struct
+{
+    QString id;
+    QDBusObjectPath path;
+} UserDBusSession;
+Q_DECLARE_METATYPE(UserDBusSession)
+typedef QList<UserDBusSession> UserDBusSessionList;
+Q_DECLARE_METATYPE(UserDBusSessionList)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const UserDBusSession &session);
+const QDBusArgument &operator>>(const QDBusArgument &argument, UserDBusSession &session);
 
 #endif // GENERIC_TYPES_H

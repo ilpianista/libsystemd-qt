@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef SOCKETINTERFACE_H_1364907521
-#define SOCKETINTERFACE_H_1364907521
+#ifndef SOCKETINTERFACE_H_1365342324
+#define SOCKETINTERFACE_H_1365342324
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>

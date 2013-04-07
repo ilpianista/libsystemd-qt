@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef SWAPINTERFACE_H_1364907521
-#define SWAPINTERFACE_H_1364907521
+#ifndef SWAPINTERFACE_H_1365342325
+#define SWAPINTERFACE_H_1365342325
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>

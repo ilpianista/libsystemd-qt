@@ -17,7 +17,10 @@
 set( INTERFACE_INTROSPECTION_XML_FILES
      introspection/org.freedesktop.hostname1.xml
      introspection/org.freedesktop.locale1.xml
-     introspection/org.freedesktop.login1.xml
+     introspection/org.freedesktop.login1.LDManager.xml
+     introspection/org.freedesktop.login1.Seat.xml
+     introspection/org.freedesktop.login1.Session.xml
+     introspection/org.freedesktop.login1.User.xml
      introspection/org.freedesktop.systemd1.Automount.xml
      introspection/org.freedesktop.systemd1.Device.xml
      introspection/org.freedesktop.systemd1.Job.xml
@@ -53,9 +56,10 @@ set ( UNUSED_FILES
 set( UNUSED_GENERATED_FILES
 )
 
+find_package(Qt4)
 QT4_ADD_DBUS_INTERFACES( FILES_TO_BUILD ${INTERFACE_INTROSPECTION_XML_FILES} )
 foreach(adaptor ${ADAPTER_INTROSPECTION_XML_FILES})
-    qt4_add_dbus_adaptor( FILES_TO_BUILD ${adaptor} "generic-types.h")
+    qt5_add_dbus_adaptor( FILES_TO_BUILD ${adaptor} "generic-types.h")
 endforeach(adaptor ${ADAPTER_INTROSPECTION_XML_FILES})
 
 #message(status "before patch in ${CMAKE_CURRENT_BUILD_DIR}")
@@ -64,4 +68,4 @@ endforeach(adaptor ${ADAPTER_INTROSPECTION_XML_FILES})
 
 add_library(systemddbus ${FILES_TO_BUILD})
 
-TARGET_LINK_LIBRARIES(systemddbus ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY})
+TARGET_LINK_LIBRARIES(systemddbus ${Qt5Core_LIBRARIES} ${Qt5DBus_LIBRARIES})

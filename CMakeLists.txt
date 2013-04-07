@@ -54,11 +54,13 @@ set(DBUS_INTERFACE_SRCS
     dbus/hostname1interface.cpp
     dbus/jobinterface.cpp
     dbus/locale1interface.cpp
-    dbus/login1interface.cpp
+    dbus/ldmanagerinterface.cpp
     dbus/managerinterface.cpp
     dbus/mountinterface.cpp
     dbus/pathinterface.cpp
+    dbus/seatinterface.cpp
     dbus/serviceinterface.cpp
+    dbus/sessioninterface.cpp
     dbus/snapshotinterface.cpp
     dbus/socketinterface.cpp
     dbus/swapinterface.cpp
@@ -66,6 +68,7 @@ set(DBUS_INTERFACE_SRCS
     dbus/timedate1interface.cpp
     dbus/timerinterface.cpp
     dbus/unitinterface.cpp
+    dbus/userinterface.cpp
 )
 
 add_library(QtSystemd SHARED ${QtSystemd_PART_SRCS} ${DBUS_INTERFACE_SRCS})

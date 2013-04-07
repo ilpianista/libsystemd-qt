@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef TIMERINTERFACE_H_1364907522
-#define TIMERINTERFACE_H_1364907522
+#ifndef TIMERINTERFACE_H_1365342325
+#define TIMERINTERFACE_H_1365342325
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>

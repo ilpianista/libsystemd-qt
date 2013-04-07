@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef AUTOMOUNTINTERFACE_H_1364907519
-#define AUTOMOUNTINTERFACE_H_1364907519
+#ifndef AUTOMOUNTINTERFACE_H_1365342322
+#define AUTOMOUNTINTERFACE_H_1365342322
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>

@@ -37,7 +37,10 @@
       <arg name="leader" type="u" direction="in"/>
       <arg name="sevice" type="s" direction="in"/>
       <arg name="type" type="s" direction="in"/>
-      <arg name="class_" type="s" direction="in"/>
+<!--       <arg name="class" type="s" direction="in"> -->
+<!--           <annotation name="org.qtproject.QtDBus.PropertyGetter.In4" value="sessionClass"/> -->
+<!--           <annotation name="org.qtproject.QtDBus.PropertySetter.In4" value="setSessionClass"/> -->
+<!--       </arg> -->
       <arg name="seat" type="s" direction="in"/>
       <arg name="vtnr" type="u" direction="in"/>
       <arg name="tty" type="s" direction="in"/>
@@ -199,43 +202,4 @@
     <property name="PreparingForShutdown" type="b" access="read"/>
     <property name="PreparingForSleep" type="b" access="read"/>
   </interface>
-  <interface name="org.freedesktop.DBus.Properties">
-    <method name="Get">
-      <arg name="interface" direction="in" type="s"/>
-      <arg name="property" direction="in" type="s"/>
-      <arg name="value" direction="out" type="v"/>
-    </method>
-    <method name="GetAll">
-      <arg name="interface" direction="in" type="s"/>
-      <arg name="properties" direction="out" type="a{sv}">
-          <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QVariantMap"/>
-      </arg>
-    </method>
-    <method name="Set">
-      <arg name="interface" direction="in" type="s"/>
-      <arg name="property" direction="in" type="s"/>
-      <arg name="value" direction="in" type="v"/>
-    </method>
-    <signal name="PropertiesChanged">
-      <arg type="s" name="interface"/>
-      <arg type="a{sv}" name="changed_properties">
-          <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="QVariantMap"/>
-      </arg>
-      <arg type="as" name="invalidated_properties"/>
-    </signal>
-  </interface>
-  <interface name="org.freedesktop.DBus.Peer">
-    <method name="Ping"/>
-    <method name="GetMachineId">
-      <arg type="s" name="machine_uuid" direction="out"/>
-    </method>
-  </interface>
-  <interface name="org.freedesktop.DBus.Introspectable">
-    <method name="Introspect">
-      <arg name="data" type="s" direction="out"/>
-    </method>
-  </interface>
-  <node name="seat/seat0"/>
-  <node name="user/1000"/>
-  <node name="session/_31"/>
 </node>

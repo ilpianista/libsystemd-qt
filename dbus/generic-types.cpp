@@ -225,6 +225,54 @@ const QDBusArgument& operator>>(const QDBusArgument& argument, PathDBusPath& pat
     return argument;
 }
 
+QDBusArgument& operator<<(QDBusArgument& argument, const SeatDBusSession& session)
+{
+    argument.beginStructure();
+    argument << session.id << session.path;
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument& operator>>(const QDBusArgument& argument, SeatDBusSession& session)
+{
+    argument.beginStructure();
+    argument >> session.id >> session.path;
+    argument.endStructure();
+    return argument;
+}
+
+QDBusArgument& operator<<(QDBusArgument& argument, const SessionDBusSeat& seat)
+{
+    argument.beginStructure();
+    argument << seat.id << seat.path;
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument& operator>>(const QDBusArgument& argument, SessionDBusSeat& seat)
+{
+    argument.beginStructure();
+    argument >> seat.id >> seat.path;
+    argument.endStructure();
+    return argument;
+}
+
+QDBusArgument& operator<<(QDBusArgument& argument, const SessionDBusUser& user)
+{
+    argument.beginStructure();
+    argument << user.id << user.path;
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument& operator>>(const QDBusArgument& argument, SessionDBusUser& user)
+{
+    argument.beginStructure();
+    argument >> user.id >> user.path;
+    argument.endStructure();
+    return argument;
+}
+
 QDBusArgument& operator<<(QDBusArgument& argument, const TimerDBusCalendarTimer& calendarTimer)
 {
     argument.beginStructure();
@@ -285,6 +333,22 @@ const QDBusArgument& operator>>(const QDBusArgument& argument, UnitDBusLoadError
 {
     argument.beginStructure();
     argument >> loadError.name >> loadError.message;
+    argument.endStructure();
+    return argument;
+}
+
+QDBusArgument& operator<<(QDBusArgument& argument, const UserDBusSession& session)
+{
+    argument.beginStructure();
+    argument << session.id << session.path;
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument& operator>>(const QDBusArgument& argument, UserDBusSession& session)
+{
+    argument.beginStructure();
+    argument >> session.id >> session.path;
     argument.endStructure();
     return argument;
 }
