@@ -26,7 +26,7 @@
 
 namespace Systemd {
 
-    class LogindPrivate : public QObject
+    class LogindPrivate : public Systemd::LDNotifier
     {
         Q_OBJECT
 
@@ -48,6 +48,10 @@ namespace Systemd {
         void powerOff(const bool interactive);
         void reboot(const bool interactive);
         void suspend(const bool interactive);
+
+    protected Q_SLOTS:
+        void onSeatNew(const QString &id, const QDBusObjectPath &path);
+        void onSeatRemoved(const QString &id, const QDBusObjectPath &path);
 
     private:
         Systemd::Permission stringToPermission(const QString &permission);

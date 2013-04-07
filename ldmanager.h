@@ -22,6 +22,8 @@
 
 #include "QtSystemd-export.h"
 
+#include <QObject>
+
 /**
  * This class allows querying the underlying system.
  *
@@ -37,6 +39,14 @@ namespace Systemd {
         No,
         Challenge,
         Unknown
+    };
+
+    class SDQT_EXPORT LDNotifier : public QObject
+    {
+    Q_OBJECT
+    Q_SIGNALS:
+        void seatNew(const QString &id);
+        void seatRemoved(const QString &id);
     };
 
     SDQT_EXPORT Systemd::Permission canHibernate();
@@ -58,6 +68,8 @@ namespace Systemd {
     SDQT_EXPORT void reboot(const bool interactive);
 
     SDQT_EXPORT void suspend(const bool interactive);
+
+    SDQT_EXPORT LDNotifier* ldnotifier();
 }
 
 #endif

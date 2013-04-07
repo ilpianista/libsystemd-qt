@@ -26,8 +26,14 @@ const QString Systemd::LogindPrivate::LD_DBUS_DAEMON_PATH(QString::fromLatin1("/
 Q_GLOBAL_STATIC(Systemd::LogindPrivate, globalLogind)
 
 Systemd::LogindPrivate::LogindPrivate() :
-ildface( Systemd::LogindPrivate::LD_DBUS_SERVICE, Systemd::LogindPrivate::LD_DBUS_DAEMON_PATH, QDBusConnection::systemBus())
+ildface( Systemd::LogindPrivate::LD_DBUS_SERVICE,
+         Systemd::LogindPrivate::LD_DBUS_DAEMON_PATH, QDBusConnection::systemBus())
 {
+    connect(&ildface, SIGNAL(SeatNew(QString,QDBusObjectPath)), this,
+            SLOT(onSeatNew(QString,QDBusObjectPath)));
+
+    connect(&ildface, SIGNAL(SeatRemoved(QString,QDBusObjectPath)), this,
+            SLOT(onSeatRemoved(QString,QDBusObjectPath)));
 }
 
 Systemd::LogindPrivate::~LogindPrivate()
@@ -129,6 +135,16 @@ void Systemd::LogindPrivate::hybridSleep(const bool interactive)
     }
 }
 
+void Systemd::LogindPrivate::onSeatNew(const QString &id, const QDBusObjectPath &path)
+{
+    emit seatNew(id);
+}
+
+void Systemd::LogindPrivate::onSeatRemoved(const QString &id, const QDBusObjectPath &path)
+{
+    emit seatRemoved(id);
+}
+
 void Systemd::LogindPrivate::powerOff(const bool interactive)
 {
     QDBusPendingReply<void> reply = ildface.PowerOff(interactive);
@@ -222,4 +238,9 @@ void Systemd::reboot(const bool interactive)
 void Systemd::suspend(const bool interactive)
 {
     globalLogind()->suspend(interactive);
+}
+
+Systemd::LDNotifier* Systemd::ldnotifier()
+{
+    return globalLogind();
 }
