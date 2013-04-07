@@ -26,36 +26,36 @@
 
 namespace Systemd {
 
-    class LogindPrivate : public Systemd::LDNotifier
-    {
-        Q_OBJECT
+class LogindPrivate : public Systemd::LDNotifier
+{
+Q_OBJECT
 
-    public:
-        static const QString LD_DBUS_SERVICE;
-        static const QString LD_DBUS_DAEMON_PATH;
+public:
+    static const QString LD_DBUS_SERVICE;
+    static const QString LD_DBUS_DAEMON_PATH;
 
-        LogindPrivate();
-        ~LogindPrivate();
-        OrgFreedesktopLogin1ManagerInterface ildface;
+    LogindPrivate();
+    ~LogindPrivate();
+    OrgFreedesktopLogin1ManagerInterface ildface;
 
-        Systemd::Permission canHibernate();
-        Systemd::Permission canHybridSleep();
-        Systemd::Permission canPowerOff();
-        Systemd::Permission canReboot();
-        Systemd::Permission canSuspend();
-        void hibernate(const bool interactive);
-        void hybridSleep(const bool interactive);
-        void powerOff(const bool interactive);
-        void reboot(const bool interactive);
-        void suspend(const bool interactive);
+    Systemd::Permission canHibernate();
+    Systemd::Permission canHybridSleep();
+    Systemd::Permission canPowerOff();
+    Systemd::Permission canReboot();
+    Systemd::Permission canSuspend();
+    void hibernate(const bool interactive);
+    void hybridSleep(const bool interactive);
+    void powerOff(const bool interactive);
+    void reboot(const bool interactive);
+    void suspend(const bool interactive);
 
-    protected Q_SLOTS:
-        void onSeatNew(const QString &id, const QDBusObjectPath &path);
-        void onSeatRemoved(const QString &id, const QDBusObjectPath &path);
+protected Q_SLOTS:
+    void onSeatNew(const QString &id, const QDBusObjectPath &path);
+    void onSeatRemoved(const QString &id, const QDBusObjectPath &path);
 
-    private:
-        Systemd::Permission stringToPermission(const QString &permission);
-    };
+private:
+    Systemd::Permission stringToPermission(const QString &permission);
+};
 }
 
 #endif

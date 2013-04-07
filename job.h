@@ -24,25 +24,26 @@
 
 namespace Systemd {
 
-    class Job : public QObject
-    {
-        Q_OBJECT
-    public:
-        explicit Job(const uint id, const QString &unitId, const QString &type,
-                     const QString &state);
-        virtual ~Job();
+class Job : public QObject
+{
+Q_OBJECT
 
-        uint id();
-        QString unitId();
-        QString type();
-        QString state();
+public:
+    explicit Job(const uint id, const QString &unitId, const QString &type,
+                    const QString &state);
+    virtual ~Job();
 
-    private:
-        uint m_id;
-        QString m_unitId;
-        QString m_type;
-        QString m_state;
-    };
+    uint id();
+    QString unitId();
+    QString type();
+    QString state();
+
+private:
+    uint m_id;
+    QString m_unitId;
+    QString m_type;
+    QString m_state;
+};
 }
 
 #endif

@@ -24,30 +24,31 @@
 
 namespace Systemd {
 
-    class Unit : public QObject
-    {
-        Q_OBJECT
-    public:
-        explicit Unit(const QString &id, const QString &description,
-                      const QString &loadState, const QString &activeState,
-                      const QString &subState, const uint jobId = 0);
-        virtual ~Unit();
+class Unit : public QObject
+{
+Q_OBJECT
 
-        QString id();
-        QString description();
-        QString loadState();
-        QString activeState();
-        QString subState();
-        uint jobId();
+public:
+    explicit Unit(const QString &id, const QString &description,
+                    const QString &loadState, const QString &activeState,
+                    const QString &subState, const uint jobId = 0);
+    virtual ~Unit();
 
-    private:
-        QString m_id;
-        QString m_description;
-        QString m_loadState;
-        QString m_activeState;
-        QString m_subState;
-        uint m_jobId;
-    };
+    QString id();
+    QString description();
+    QString loadState();
+    QString activeState();
+    QString subState();
+    uint jobId();
+
+private:
+    QString m_id;
+    QString m_description;
+    QString m_loadState;
+    QString m_activeState;
+    QString m_subState;
+    uint m_jobId;
+};
 }
 
 #endif
