@@ -30,17 +30,17 @@ Systemd::LogindPrivate::LogindPrivate() :
             Systemd::LogindPrivate::LD_DBUS_DAEMON_PATH, QDBusConnection::systemBus())
 {
     connect(&ildface, SIGNAL(SeatNew(QString,QDBusObjectPath)), this,
-            SLOT(onSeatNew(QString,QDBusObjectPath)));
+            SLOT(onSeatNew(QString)));
 
     connect(&ildface, SIGNAL(SeatRemoved(QString,QDBusObjectPath)), this,
-            SLOT(onSeatRemoved(QString,QDBusObjectPath)));
+            SLOT(onSeatRemoved(QString)));
 }
 
 Systemd::LogindPrivate::~LogindPrivate()
 {
 }
 
-QStringList Systemd::LogindPrivate::listSeats()
+QList<Systemd::Seat*> Systemd::LogindPrivate::listSeats()
 {
     qDBusRegisterMetaType<LoginDBusSeat>;
     qDBusRegisterMetaType<LoginDBusSeatList>;
@@ -49,15 +49,16 @@ QStringList Systemd::LogindPrivate::listSeats()
 
     if (reply.isError()) {
         qDebug() << reply.error().message();
-        return QStringList();
+        return QList<Systemd::Seat*>();
     }
 
-    QStringList seatLists;
+    QList<Systemd::Seat*> seatLists;
     const QDBusMessage message = reply.reply();
     if (message.type() == QDBusMessage::ReplyMessage) {
         const LoginDBusSeatList seats = qdbus_cast<LoginDBusSeatList>(message.arguments().first());
         Q_FOREACH(const LoginDBusSeat seat, seats) {
-            seatLists.append(seat.id);
+            Systemd::Seat *s = new Systemd::Seat(seat.path.path());
+            seatLists.append(s);
         }
     }
 
@@ -161,12 +162,12 @@ void Systemd::LogindPrivate::hybridSleep(const bool interactive)
 
 void Systemd::LogindPrivate::onSeatNew(const QString &id, const QDBusObjectPath &path)
 {
-    emit seatNew(id);
+    emit seatNew(path.path());
 }
 
 void Systemd::LogindPrivate::onSeatRemoved(const QString &id, const QDBusObjectPath &path)
 {
-    emit seatRemoved(id);
+    emit seatRemoved(path.path());
 }
 
 void Systemd::LogindPrivate::powerOff(const bool interactive)
@@ -249,7 +250,7 @@ void Systemd::hybridSleep(const bool interactive)
     globalLogind()->hybridSleep(interactive);
 }
 
-QStringList Systemd::listSeats()
+QList<Systemd::Seat*> Systemd::listSeats()
 {
     return globalLogind()->listSeats();
 }

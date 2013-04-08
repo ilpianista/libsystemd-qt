@@ -20,9 +20,10 @@
 #ifndef LD_MANAGER_H
 #define LD_MANAGER_H
 
-#include "QtSystemd-export.h"
-
 #include <QObject>
+
+#include "QtSystemd-export.h"
+#include "seat.h"
 
 /**
  * This class allows querying the underlying system.
@@ -43,10 +44,11 @@ namespace Systemd {
 
     class SDQT_EXPORT LDNotifier : public QObject
     {
-    Q_OBJECT
+        Q_OBJECT
+
     Q_SIGNALS:
-        void seatNew(const QString &id);
-        void seatRemoved(const QString &id);
+        void seatNew(const QString &seatPath);
+        void seatRemoved(const QString &seatPath);
     };
 
     SDQT_EXPORT Systemd::Permission canHibernate();
@@ -63,7 +65,7 @@ namespace Systemd {
 
     SDQT_EXPORT void hybridSleep(const bool interactive);
 
-    SDQT_EXPORT QStringList listSeats();
+    SDQT_EXPORT QList<Systemd::Seat*> listSeats();
 
     SDQT_EXPORT void powerOff(const bool interactive);
 
