@@ -51,6 +51,7 @@ namespace Systemd
     Q_SIGNALS:
         void unitNew(const QString &unitPath);
         void unitRemoved(const QString &unitPath);
+        void unitFilesChanged();
     };
 
     // See http://www.freedesktop.org/wiki/Software/systemd/dbus for more info.

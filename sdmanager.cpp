@@ -33,6 +33,8 @@ Systemd::SystemdPrivate::SystemdPrivate() :
             SLOT(onUnitNew(QString,QDBusObjectPath)));
     connect(&isdface, SIGNAL(UnitRemoved(QString,QDBusObjectPath)), this,
             SLOT(onUnitRemoved(QString,QDBusObjectPath)));
+    connect(&isdface, SIGNAL(UnitFilesChanged()), this,
+            SLOT(onUnitFilesChanged()));
 
     init();
 }
@@ -184,6 +186,11 @@ void Systemd::SystemdPrivate::onUnitNew(const QString &id, const QDBusObjectPath
 void Systemd::SystemdPrivate::onUnitRemoved(const QString &id, const QDBusObjectPath &unit)
 {
     emit Notifier::unitRemoved(unit.path());
+}
+
+void Systemd::SystemdPrivate::onUnitFilesChanged()
+{
+    emit Notifier::unitFilesChanged();
 }
 
 bool Systemd::SystemdPrivate::reloadUnit(const QString &name, const Systemd::Mode mode)

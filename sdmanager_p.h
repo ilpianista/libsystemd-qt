@@ -54,6 +54,7 @@ public:
 protected Q_SLOTS:
     void onUnitNew(const QString &id, const QDBusObjectPath &unit);
     void onUnitRemoved(const QString &id, const QDBusObjectPath &unit);
+    void onUnitFilesChanged();
 
 private:
     QString modeToString(const Mode mode);
