@@ -34,8 +34,8 @@
  *
  * Note that it is implemented as a singleton
  */
-namespace Systemd {
-
+namespace Systemd
+{
     enum Mode {
         Replace,
         Fail,
@@ -44,7 +44,7 @@ namespace Systemd {
         IgnoreRequirements
     };
 
-    class SDQT_EXPORT SDNotifier : public QObject
+    class SDQT_EXPORT Notifier : public QObject
     {
         Q_OBJECT
 
@@ -94,7 +94,7 @@ namespace Systemd {
      */
     SDQT_EXPORT bool stopUnit(const QString &name, const Mode mode);
 
-    SDQT_EXPORT SDNotifier *sdnotifier();
+    SDQT_EXPORT Notifier *notifier();
 }
 
 #endif

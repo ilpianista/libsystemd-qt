@@ -178,12 +178,12 @@ QString Systemd::SystemdPrivate::loadUnit(const QString &name)
 
 void Systemd::SystemdPrivate::onUnitNew(const QString &id, const QDBusObjectPath &unit)
 {
-    emit unitNew(unit.path());
+    emit Notifier::unitNew(unit.path());
 }
 
 void Systemd::SystemdPrivate::onUnitRemoved(const QString &id, const QDBusObjectPath &unit)
 {
-    emit unitRemoved(unit.path());
+    emit Notifier::unitRemoved(unit.path());
 }
 
 bool Systemd::SystemdPrivate::reloadUnit(const QString &name, const Systemd::Mode mode)
@@ -322,7 +322,7 @@ bool Systemd::stopUnit(const QString &name, const Systemd::Mode mode)
     return globalSystemd()->stopUnit(name, mode);
 }
 
-Systemd::SDNotifier* Systemd::sdnotifier()
+Systemd::Notifier *Systemd::notifier()
 {
     return globalSystemd();
 }

@@ -26,7 +26,7 @@
 
 namespace Systemd {
 
-class SystemdPrivate : public Systemd::SDNotifier
+class SystemdPrivate : public Notifier
 {
     Q_OBJECT
 
