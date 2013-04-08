@@ -24,9 +24,11 @@
 
 #include "ldmanager.h"
 
-namespace Systemd {
-
-class LogindPrivate : public Systemd::LDNotifier
+namespace Systemd
+{
+namespace Logind
+{
+class LogindPrivate : public Notifier
 {
     Q_OBJECT
 
@@ -38,14 +40,14 @@ public:
     ~LogindPrivate();
     OrgFreedesktopLogin1ManagerInterface ildface;
 
-    Systemd::Permission canHibernate();
-    Systemd::Permission canHybridSleep();
-    Systemd::Permission canPowerOff();
-    Systemd::Permission canReboot();
-    Systemd::Permission canSuspend();
+    Permission canHibernate();
+    Permission canHybridSleep();
+    Permission canPowerOff();
+    Permission canReboot();
+    Permission canSuspend();
     void hibernate(const bool interactive);
     void hybridSleep(const bool interactive);
-    QList<Systemd::Seat*> listSeats();
+    QList<Seat*> listSeats();
     void powerOff(const bool interactive);
     void reboot(const bool interactive);
     void suspend(const bool interactive);
@@ -55,9 +57,10 @@ protected Q_SLOTS:
     void onSeatRemoved(const QString &id, const QDBusObjectPath &seat);
 
 private:
-    Systemd::Permission stringToPermission(const QString &permission);
+    Permission stringToPermission(const QString &permission);
     void init();
 };
+}
 }
 
 #endif

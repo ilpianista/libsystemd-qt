@@ -21,32 +21,32 @@
 #include "seat_p.h"
 #include "ldmanager_p.h"
 
-Systemd::SeatPrivate::SeatPrivate(const QString &path, QObject *parent) :
-    seatIface(Systemd::LogindPrivate::LD_DBUS_SERVICE, path, QDBusConnection::systemBus())
+Systemd::Logind::SeatPrivate::SeatPrivate(const QString &path, QObject *parent) :
+    seatIface(Systemd::Logind::LogindPrivate::LD_DBUS_SERVICE, path, QDBusConnection::systemBus())
 {
     canGraphical = seatIface.canGraphical();
 }
 
-Systemd::SeatPrivate::~SeatPrivate()
+Systemd::Logind::SeatPrivate::~SeatPrivate()
 {
 }
 
-Systemd::Seat::Seat(const QString &path, QObject *parent) :
+Systemd::Logind::Seat::Seat(const QString &path, QObject *parent) :
                     QObject(parent), d_ptr(new SeatPrivate(path, this))
 {
 }
 
-Systemd::Seat::Seat(SeatPrivate &seat, QObject *parent) :
+Systemd::Logind::Seat::Seat(SeatPrivate &seat, QObject *parent) :
                     QObject(parent), d_ptr(&seat)
 {
 }
 
-Systemd::Seat::~Seat()
+Systemd::Logind::Seat::~Seat()
 {
     delete d_ptr;
 }
 
-bool Systemd::Seat::canGraphical() const
+bool Systemd::Logind::Seat::canGraphical() const
 {
     Q_D(const Seat);
     return d->canGraphical;

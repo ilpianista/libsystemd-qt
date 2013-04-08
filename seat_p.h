@@ -24,8 +24,10 @@
 
 #include "seat.h"
 
-namespace Systemd {
-
+namespace Systemd
+{
+namespace Logind
+{
 class SeatPrivate
 {
 
@@ -37,6 +39,7 @@ public:
 
     bool canGraphical;
 };
+}
 }
 
 #endif

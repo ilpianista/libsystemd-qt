@@ -32,8 +32,10 @@
  *
  * Note that it is implemented as a singleton
  */
-namespace Systemd {
-
+namespace Systemd
+{
+namespace Logind
+{
     enum Permission {
         Na,
         Yes,
@@ -42,7 +44,7 @@ namespace Systemd {
         Unknown
     };
 
-    class SDQT_EXPORT LDNotifier : public QObject
+    class SDQT_EXPORT Notifier : public QObject
     {
         Q_OBJECT
 
@@ -51,21 +53,21 @@ namespace Systemd {
         void seatRemoved(const QString &seatPath);
     };
 
-    SDQT_EXPORT Systemd::Permission canHibernate();
+    SDQT_EXPORT Permission canHibernate();
 
-    SDQT_EXPORT Systemd::Permission canHybridSleep();
+    SDQT_EXPORT Permission canHybridSleep();
 
-    SDQT_EXPORT Systemd::Permission canPowerOff();
+    SDQT_EXPORT Permission canPowerOff();
 
-    SDQT_EXPORT Systemd::Permission canReboot();
+    SDQT_EXPORT Permission canReboot();
 
-    SDQT_EXPORT Systemd::Permission canSuspend();
+    SDQT_EXPORT Permission canSuspend();
 
     SDQT_EXPORT void hibernate(const bool interactive);
 
     SDQT_EXPORT void hybridSleep(const bool interactive);
 
-    SDQT_EXPORT QList<Systemd::Seat*> listSeats();
+    SDQT_EXPORT QList<Seat*> listSeats();
 
     SDQT_EXPORT void powerOff(const bool interactive);
 
@@ -73,7 +75,8 @@ namespace Systemd {
 
     SDQT_EXPORT void suspend(const bool interactive);
 
-    SDQT_EXPORT LDNotifier *ldnotifier();
+    SDQT_EXPORT Notifier *notifier();
+}
 }
 
 #endif

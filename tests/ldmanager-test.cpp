@@ -29,8 +29,8 @@ public:
     }
 
     static void canHibernate() {
-        Systemd::Permission perm = Systemd::canHibernate();
-        if (perm == Systemd::Yes) {
+        Systemd::Logind::Permission perm = Systemd::Logind::canHibernate();
+        if (perm == Systemd::Logind::Yes) {
             qDebug() << "Yes";
         } else {
             qDebug() << "Some other value";
@@ -38,8 +38,8 @@ public:
     }
 
     static void canHybridSleep() {
-        Systemd::Permission perm = Systemd::canHybridSleep();
-        if (perm == Systemd::Yes) {
+        Systemd::Logind::Permission perm = Systemd::Logind::canHybridSleep();
+        if (perm == Systemd::Logind::Yes) {
             qDebug() << "Yes";
         } else {
             qDebug() << "Some other value";
@@ -47,8 +47,8 @@ public:
     }
 
     static void canPowerOff() {
-        Systemd::Permission perm = Systemd::canPowerOff();
-        if (perm == Systemd::Yes) {
+        Systemd::Logind::Permission perm = Systemd::Logind::canPowerOff();
+        if (perm == Systemd::Logind::Yes) {
             qDebug() << "Yes";
         } else {
             qDebug() << "Some other value";
@@ -56,8 +56,8 @@ public:
     }
 
     static void canReboot() {
-        Systemd::Permission perm = Systemd::canReboot();
-        if (perm == Systemd::Yes) {
+        Systemd::Logind::Permission perm = Systemd::Logind::canReboot();
+        if (perm == Systemd::Logind::Yes) {
             qDebug() << "Yes";
         } else {
             qDebug() << "Some other value";
@@ -65,8 +65,8 @@ public:
     }
 
     static void canSuspend() {
-        Systemd::Permission perm = Systemd::canSuspend();
-        if (perm == Systemd::Yes) {
+        Systemd::Logind::Permission perm = Systemd::Logind::canSuspend();
+        if (perm == Systemd::Logind::Yes) {
             qDebug() << "Yes";
         } else {
             qDebug() << "Some other value";

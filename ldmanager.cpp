@@ -20,14 +20,14 @@
 #include "ldmanager.h"
 #include "ldmanager_p.h"
 
-const QString Systemd::LogindPrivate::LD_DBUS_SERVICE(QString::fromLatin1("org.freedesktop.login1"));
-const QString Systemd::LogindPrivate::LD_DBUS_DAEMON_PATH(QString::fromLatin1("/org/freedesktop/login1"));
+const QString Systemd::Logind::LogindPrivate::LD_DBUS_SERVICE(QString::fromLatin1("org.freedesktop.login1"));
+const QString Systemd::Logind::LogindPrivate::LD_DBUS_DAEMON_PATH(QString::fromLatin1("/org/freedesktop/login1"));
 
-Q_GLOBAL_STATIC(Systemd::LogindPrivate, globalLogind)
+Q_GLOBAL_STATIC(Systemd::Logind::LogindPrivate, globalLogind)
 
-Systemd::LogindPrivate::LogindPrivate() :
-    ildface(Systemd::LogindPrivate::LD_DBUS_SERVICE,
-            Systemd::LogindPrivate::LD_DBUS_DAEMON_PATH, QDBusConnection::systemBus())
+Systemd::Logind::LogindPrivate::LogindPrivate() :
+    ildface(Systemd::Logind::LogindPrivate::LD_DBUS_SERVICE,
+            Systemd::Logind::LogindPrivate::LD_DBUS_DAEMON_PATH, QDBusConnection::systemBus())
 {
     connect(&ildface, SIGNAL(SeatNew(QString,QDBusObjectPath)), this,
             SLOT(onSeatNew(QString,QDBusObjectPath)));
@@ -37,15 +37,15 @@ Systemd::LogindPrivate::LogindPrivate() :
     init();
 }
 
-Systemd::LogindPrivate::~LogindPrivate()
+Systemd::Logind::LogindPrivate::~LogindPrivate()
 {
 }
 
-void Systemd::LogindPrivate::init()
+void Systemd::Logind::LogindPrivate::init()
 {
 }
 
-QList<Systemd::Seat*> Systemd::LogindPrivate::listSeats()
+QList<Systemd::Logind::Seat*> Systemd::Logind::LogindPrivate::listSeats()
 {
     qDBusRegisterMetaType<LoginDBusSeat>;
     qDBusRegisterMetaType<LoginDBusSeatList>;
@@ -54,15 +54,15 @@ QList<Systemd::Seat*> Systemd::LogindPrivate::listSeats()
 
     if (reply.isError()) {
         qDebug() << reply.error().message();
-        return QList<Systemd::Seat*>();
+        return QList<Systemd::Logind::Seat*>();
     }
 
-    QList<Systemd::Seat*> seatLists;
+    QList<Systemd::Logind::Seat*> seatLists;
     const QDBusMessage message = reply.reply();
     if (message.type() == QDBusMessage::ReplyMessage) {
         const LoginDBusSeatList seats = qdbus_cast<LoginDBusSeatList>(message.arguments().first());
         Q_FOREACH(const LoginDBusSeat seat, seats) {
-            Systemd::Seat *s = new Systemd::Seat(seat.path.path());
+            Systemd::Logind::Seat *s = new Systemd::Logind::Seat(seat.path.path());
             seatLists.append(s);
         }
     }
@@ -70,14 +70,14 @@ QList<Systemd::Seat*> Systemd::LogindPrivate::listSeats()
     return seatLists;
 }
 
-Systemd::Permission Systemd::LogindPrivate::canHibernate()
+Systemd::Logind::Permission Systemd::Logind::LogindPrivate::canHibernate()
 {
     QDBusPendingReply<QString> reply = ildface.CanHibernate();
     reply.waitForFinished();
 
     if (reply.isError()) {
         qDebug() << reply.error().message();
-        return Systemd::Unknown;
+        return Systemd::Logind::Unknown;
     }
 
     const QString permission = qdbus_cast<QString>(reply.reply().arguments().first());
@@ -85,14 +85,14 @@ Systemd::Permission Systemd::LogindPrivate::canHibernate()
     return stringToPermission(permission);
 }
 
-Systemd::Permission Systemd::LogindPrivate::canHybridSleep()
+Systemd::Logind::Permission Systemd::Logind::LogindPrivate::canHybridSleep()
 {
     QDBusPendingReply<QString> reply = ildface.CanHybridSleep();
     reply.waitForFinished();
 
     if (reply.isError()) {
         qDebug() << reply.error().message();
-        return Systemd::Unknown;
+        return Systemd::Logind::Unknown;
     }
 
     const QString permission = qdbus_cast<QString>(reply.reply().arguments().first());
@@ -100,14 +100,14 @@ Systemd::Permission Systemd::LogindPrivate::canHybridSleep()
     return stringToPermission(permission);
 }
 
-Systemd::Permission Systemd::LogindPrivate::canPowerOff()
+Systemd::Logind::Permission Systemd::Logind::LogindPrivate::canPowerOff()
 {
     QDBusPendingReply<QString> reply = ildface.CanPowerOff();
     reply.waitForFinished();
 
     if (reply.isError()) {
         qDebug() << reply.error().message();
-        return Systemd::Unknown;
+        return Systemd::Logind::Unknown;
     }
 
     const QString permission = qdbus_cast<QString>(reply.reply().arguments().first());
@@ -115,14 +115,14 @@ Systemd::Permission Systemd::LogindPrivate::canPowerOff()
     return stringToPermission(permission);
 }
 
-Systemd::Permission Systemd::LogindPrivate::canReboot()
+Systemd::Logind::Permission Systemd::Logind::LogindPrivate::canReboot()
 {
     QDBusPendingReply<QString> reply = ildface.CanReboot();
     reply.waitForFinished();
 
     if (reply.isError()) {
         qDebug() << reply.error().message();
-        return Systemd::Unknown;
+        return Systemd::Logind::Unknown;
     }
 
     const QString permission = qdbus_cast<QString>(reply.reply().arguments().first());
@@ -130,14 +130,14 @@ Systemd::Permission Systemd::LogindPrivate::canReboot()
     return stringToPermission(permission);
 }
 
-Systemd::Permission Systemd::LogindPrivate::canSuspend()
+Systemd::Logind::Permission Systemd::Logind::LogindPrivate::canSuspend()
 {
     QDBusPendingReply<QString> reply = ildface.CanSuspend();
     reply.waitForFinished();
 
     if (reply.isError()) {
         qDebug() << reply.error().message();
-        return Systemd::Unknown;
+        return Systemd::Logind::Unknown;
     }
 
     const QString permission = qdbus_cast<QString>(reply.reply().arguments().first());
@@ -145,7 +145,7 @@ Systemd::Permission Systemd::LogindPrivate::canSuspend()
     return stringToPermission(permission);
 }
 
-void Systemd::LogindPrivate::hibernate(const bool interactive)
+void Systemd::Logind::LogindPrivate::hibernate(const bool interactive)
 {
     QDBusPendingReply<void> reply = ildface.Hibernate(interactive);
     reply.waitForFinished();
@@ -155,7 +155,7 @@ void Systemd::LogindPrivate::hibernate(const bool interactive)
     }
 }
 
-void Systemd::LogindPrivate::hybridSleep(const bool interactive)
+void Systemd::Logind::LogindPrivate::hybridSleep(const bool interactive)
 {
     QDBusPendingReply<void> reply = ildface.HybridSleep(interactive);
     reply.waitForFinished();
@@ -165,17 +165,17 @@ void Systemd::LogindPrivate::hybridSleep(const bool interactive)
     }
 }
 
-void Systemd::LogindPrivate::onSeatNew(const QString &id, const QDBusObjectPath &seat)
+void Systemd::Logind::LogindPrivate::onSeatNew(const QString &id, const QDBusObjectPath &seat)
 {
-    emit seatNew(seat.path());
+    emit Logind::Notifier::seatNew(seat.path());
 }
 
-void Systemd::LogindPrivate::onSeatRemoved(const QString &id, const QDBusObjectPath &seat)
+void Systemd::Logind::LogindPrivate::onSeatRemoved(const QString &id, const QDBusObjectPath &seat)
 {
-    emit seatRemoved(seat.path());
+    emit Logind::Notifier::seatRemoved(seat.path());
 }
 
-void Systemd::LogindPrivate::powerOff(const bool interactive)
+void Systemd::Logind::LogindPrivate::powerOff(const bool interactive)
 {
     QDBusPendingReply<void> reply = ildface.PowerOff(interactive);
     reply.waitForFinished();
@@ -185,7 +185,7 @@ void Systemd::LogindPrivate::powerOff(const bool interactive)
     }
 }
 
-void Systemd::LogindPrivate::reboot(const bool interactive)
+void Systemd::Logind::LogindPrivate::reboot(const bool interactive)
 {
     QDBusPendingReply<void> reply = ildface.Reboot(interactive);
     reply.waitForFinished();
@@ -195,7 +195,7 @@ void Systemd::LogindPrivate::reboot(const bool interactive)
     }
 }
 
-void Systemd::LogindPrivate::suspend(const bool interactive)
+void Systemd::Logind::LogindPrivate::suspend(const bool interactive)
 {
     QDBusPendingReply<void> reply = ildface.Suspend(interactive);
     reply.waitForFinished();
@@ -205,77 +205,77 @@ void Systemd::LogindPrivate::suspend(const bool interactive)
     }
 }
 
-Systemd::Permission Systemd::LogindPrivate::stringToPermission(const QString &permission)
+Systemd::Logind::Permission Systemd::Logind::LogindPrivate::stringToPermission(const QString &permission)
 {
     if (permission == QLatin1String("na")) {
-        return Systemd::Na;
+        return Systemd::Logind::Na;
     } else if (permission == QLatin1String("yes")) {
-        return Systemd::Yes;
+        return Systemd::Logind::Yes;
     } else if (permission == QLatin1String("no")) {
-        return Systemd::No;
+        return Systemd::Logind::No;
     } else if (permission == QLatin1String("challenge")) {
-        return Systemd::Challenge;
+        return Systemd::Logind::Challenge;
     } else {
-        return Systemd::Unknown;
+        return Systemd::Logind::Unknown;
     }
 }
 
-Systemd::Permission Systemd::canHibernate()
+Systemd::Logind::Permission Systemd::Logind::canHibernate()
 {
     return globalLogind()->canHibernate();
 }
 
-Systemd::Permission Systemd::canHybridSleep()
+Systemd::Logind::Permission Systemd::Logind::canHybridSleep()
 {
     return globalLogind()->canHybridSleep();
 }
 
-Systemd::Permission Systemd::canPowerOff()
+Systemd::Logind::Permission Systemd::Logind::canPowerOff()
 {
     return globalLogind()->canPowerOff();
 }
 
-Systemd::Permission Systemd::canReboot()
+Systemd::Logind::Permission Systemd::Logind::canReboot()
 {
     return globalLogind()->canReboot();
 }
 
-Systemd::Permission Systemd::canSuspend()
+Systemd::Logind::Permission Systemd::Logind::canSuspend()
 {
     return globalLogind()->canSuspend();
 }
 
-void Systemd::hibernate(const bool interactive)
+void Systemd::Logind::hibernate(const bool interactive)
 {
     globalLogind()->hibernate(interactive);
 }
 
-void Systemd::hybridSleep(const bool interactive)
+void Systemd::Logind::hybridSleep(const bool interactive)
 {
     globalLogind()->hybridSleep(interactive);
 }
 
-QList<Systemd::Seat*> Systemd::listSeats()
+QList<Systemd::Logind::Seat*> Systemd::Logind::listSeats()
 {
     return globalLogind()->listSeats();
 }
 
-void Systemd::powerOff(const bool interactive)
+void Systemd::Logind::powerOff(const bool interactive)
 {
     globalLogind()->powerOff(interactive);
 }
 
-void Systemd::reboot(const bool interactive)
+void Systemd::Logind::reboot(const bool interactive)
 {
     globalLogind()->reboot(interactive);
 }
 
-void Systemd::suspend(const bool interactive)
+void Systemd::Logind::suspend(const bool interactive)
 {
     globalLogind()->suspend(interactive);
 }
 
-Systemd::LDNotifier* Systemd::ldnotifier()
+Systemd::Logind::Notifier *Systemd::Logind::notifier()
 {
     return globalLogind();
 }

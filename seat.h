@@ -24,8 +24,10 @@
 
 #include "QtSystemd-export.h"
 
-namespace Systemd {
-
+namespace Systemd
+{
+namespace Logind
+{
 class SeatPrivate;
 
 class SDQT_EXPORT Seat : public QObject
@@ -43,6 +45,7 @@ public:
 protected:
     SeatPrivate *d_ptr;
 };
+}
 }
 
 #endif
