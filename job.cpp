@@ -37,12 +37,21 @@ Systemd::JobPrivate::~JobPrivate()
 Systemd::Job::Job(const QString &path, QObject *parent) :
                   QObject(parent), d_ptr(new JobPrivate(path, this))
 {
+    init();
 }
 
-Systemd::Job::Job(JobPrivate &seat,  QObject *parent) :
-                  QObject(parent), d_ptr(&seat)
+Systemd::Job::Job(JobPrivate &job, QObject *parent) :
+                  QObject(parent), d_ptr(&job)
 {
+    init();
 }
+
+void Systemd::Job::init()
+{
+    Q_D(Job);
+    qDBusRegisterMetaType<JobDBusUnit>();
+}
+
 
 Systemd::Job::~Job()
 {

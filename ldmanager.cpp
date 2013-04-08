@@ -30,10 +30,10 @@ Systemd::LogindPrivate::LogindPrivate() :
             Systemd::LogindPrivate::LD_DBUS_DAEMON_PATH, QDBusConnection::systemBus())
 {
     connect(&ildface, SIGNAL(SeatNew(QString,QDBusObjectPath)), this,
-            SLOT(onSeatNew(QString)));
+            SLOT(onSeatNew(QString,QDBusObjectPath)));
 
     connect(&ildface, SIGNAL(SeatRemoved(QString,QDBusObjectPath)), this,
-            SLOT(onSeatRemoved(QString)));
+            SLOT(onSeatRemoved(QString,QDBusObjectPath)));
 }
 
 Systemd::LogindPrivate::~LogindPrivate()

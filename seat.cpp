@@ -36,7 +36,7 @@ Systemd::Seat::Seat(const QString &path, QObject *parent) :
 {
 }
 
-Systemd::Seat::Seat(SeatPrivate &seat,  QObject *parent) :
+Systemd::Seat::Seat(SeatPrivate &seat, QObject *parent) :
                     QObject(parent), d_ptr(&seat)
 {
 }

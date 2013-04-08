@@ -50,6 +50,9 @@ public:
 
 protected:
     UnitPrivate *d_ptr;
+
+private:
+    void init();
 };
 }
 

@@ -40,11 +40,19 @@ Systemd::UnitPrivate::~UnitPrivate()
 Systemd::Unit::Unit(const QString &path, QObject *parent) :
                     QObject(parent), d_ptr(new UnitPrivate(path, this))
 {
+    init();
 }
 
-Systemd::Unit::Unit(UnitPrivate &seat,  QObject *parent) :
-                    QObject(parent), d_ptr(&seat)
+Systemd::Unit::Unit(UnitPrivate &unit, QObject *parent) :
+                    QObject(parent), d_ptr(&unit)
 {
+    init();
+}
+
+void Systemd::Unit::init()
+{
+    Q_D(Unit);
+    qDBusRegisterMetaType<UnitDBusJob>();
 }
 
 Systemd::Unit::~Unit()

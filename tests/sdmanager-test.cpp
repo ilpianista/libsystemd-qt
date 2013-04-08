@@ -60,17 +60,15 @@ public:
 
     static void listJobs()
     {
-        const QList<Systemd::Job*> jobs = Systemd::listJobs();
-        for (int i=0; i < jobs.size(); i++) {
-            qDebug() << jobs.at(i)->id();
+        Q_FOREACH(Systemd::Job *j, Systemd::listJobs()) {
+            qDebug() << j->id();
         }
     }
 
     static void listUnits()
     {
-        const QList<Systemd::Unit*> units = Systemd::listUnits();
-        for (int i=0; i < units.size(); i++) {
-            qDebug() << units.at(i)->id();
+        Q_FOREACH(Systemd::Unit *u, Systemd::listUnits()) {
+            qDebug() << u->id();
         }
     }
 

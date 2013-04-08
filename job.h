@@ -43,6 +43,9 @@ public:
 
 protected:
     JobPrivate *d_ptr;
+
+private:
+    void init();
 };
 }
 
