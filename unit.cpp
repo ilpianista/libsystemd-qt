@@ -19,10 +19,10 @@
 
 #include "unit.h"
 #include "unit_p.h"
-#include "ldmanager_p.h"
+#include "sdmanager_p.h"
 
 Systemd::UnitPrivate::UnitPrivate(const QString &path, QObject *parent) :
-    unitIface(Systemd::LogindPrivate::LD_DBUS_SERVICE, path, QDBusConnection::systemBus())
+    unitIface(Systemd::SystemdPrivate::SD_DBUS_SERVICE, path, QDBusConnection::systemBus())
 {
     id = unitIface.id();
     description = unitIface.description();

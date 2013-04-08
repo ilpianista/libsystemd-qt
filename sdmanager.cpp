@@ -26,12 +26,19 @@ const QString Systemd::SystemdPrivate::SD_DBUS_DAEMON_PATH(QString::fromLatin1("
 Q_GLOBAL_STATIC(Systemd::SystemdPrivate, globalSystemd)
 
 Systemd::SystemdPrivate::SystemdPrivate() :
-    isdface( Systemd::SystemdPrivate::SD_DBUS_SERVICE, Systemd::SystemdPrivate::SD_DBUS_DAEMON_PATH, QDBusConnection::systemBus())
+    isdface(Systemd::SystemdPrivate::SD_DBUS_SERVICE, Systemd::SystemdPrivate::SD_DBUS_DAEMON_PATH,
+            QDBusConnection::systemBus())
 {
+    init();
 }
 
 Systemd::SystemdPrivate::~SystemdPrivate()
 {
+}
+
+void Systemd::SystemdPrivate::init()
+{
+    qDBusRegisterMetaType<UnitDBusJob>();
 }
 
 bool Systemd::SystemdPrivate::disableUnitFiles(const QStringList &files, bool runtime)
@@ -107,8 +114,7 @@ QList<Systemd::Job*> Systemd::SystemdPrivate::listJobs()
     if (message.type() == QDBusMessage::ReplyMessage) {
         const ManagerDBusJobList jobs = qdbus_cast<ManagerDBusJobList>(message.arguments().first());
         Q_FOREACH(const ManagerDBusJob job, jobs) {
-            Systemd::Job *j = new Systemd::Job(job.path.path());
-            queued.append(j);
+            queued.append(new Systemd::Job(job.path.path()));
         }
     }
 
@@ -132,8 +138,7 @@ QList<Systemd::Unit*> Systemd::SystemdPrivate::listUnits()
     if (message.type() == QDBusMessage::ReplyMessage) {
         const ManagerDBusUnitList units = qdbus_cast<ManagerDBusUnitList>(message.arguments().first());
         Q_FOREACH(const ManagerDBusUnit unit, units) {
-            Systemd::Unit *u = new Systemd::Unit(unit.path.path());
-            loaded.append(u);
+            loaded.append(new Systemd::Unit(unit.path.path(), this));
         }
     }
 

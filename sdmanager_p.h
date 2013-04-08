@@ -52,6 +52,7 @@ public:
 
 private:
     QString modeToString(const Systemd::Mode mode);
+    void init();
 };
 }
 

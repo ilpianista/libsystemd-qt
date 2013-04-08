@@ -56,6 +56,7 @@ protected Q_SLOTS:
 
 private:
     Systemd::Permission stringToPermission(const QString &permission);
+    void init();
 };
 }
 

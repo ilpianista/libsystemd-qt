@@ -31,12 +31,17 @@ Systemd::LogindPrivate::LogindPrivate() :
 {
     connect(&ildface, SIGNAL(SeatNew(QString,QDBusObjectPath)), this,
             SLOT(onSeatNew(QString,QDBusObjectPath)));
-
     connect(&ildface, SIGNAL(SeatRemoved(QString,QDBusObjectPath)), this,
             SLOT(onSeatRemoved(QString,QDBusObjectPath)));
+
+    init();
 }
 
 Systemd::LogindPrivate::~LogindPrivate()
+{
+}
+
+void Systemd::LogindPrivate::init()
 {
 }
 

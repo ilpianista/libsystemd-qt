@@ -19,10 +19,10 @@
 
 #include "job.h"
 #include "job_p.h"
-#include "ldmanager_p.h"
+#include "sdmanager_p.h"
 
 Systemd::JobPrivate::JobPrivate(const QString &path, QObject *parent) :
-    jobIface(Systemd::LogindPrivate::LD_DBUS_SERVICE, path, QDBusConnection::systemBus())
+    jobIface(Systemd::SystemdPrivate::SD_DBUS_SERVICE, path, QDBusConnection::systemBus())
 {
     id = jobIface.id();
     type = jobIface.jobType();
