@@ -107,7 +107,7 @@ QList<Systemd::Job*> Systemd::SystemdPrivate::listJobs()
     if (message.type() == QDBusMessage::ReplyMessage) {
         const ManagerDBusJobList jobs = qdbus_cast<ManagerDBusJobList>(message.arguments().first());
         Q_FOREACH(const ManagerDBusJob job, jobs) {
-            Systemd::Job *j = new Systemd::Job(job.id, job.unitId, job.type, job.state);
+            Systemd::Job *j = new Systemd::Job(job.path.path());
             queued.append(j);
         }
     }
@@ -132,9 +132,7 @@ QList<Systemd::Unit*> Systemd::SystemdPrivate::listUnits()
     if (message.type() == QDBusMessage::ReplyMessage) {
         const ManagerDBusUnitList units = qdbus_cast<ManagerDBusUnitList>(message.arguments().first());
         Q_FOREACH(const ManagerDBusUnit unit, units) {
-            Systemd::Unit *u = new Systemd::Unit(unit.id, unit.description,
-                                                 unit.loadState, unit.activeState,
-                                                 unit.subState, unit.jobId);
+            Systemd::Unit *u = new Systemd::Unit(unit.path.path());
             loaded.append(u);
         }
     }

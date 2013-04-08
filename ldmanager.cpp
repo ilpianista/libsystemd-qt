@@ -26,8 +26,8 @@ const QString Systemd::LogindPrivate::LD_DBUS_DAEMON_PATH(QString::fromLatin1("/
 Q_GLOBAL_STATIC(Systemd::LogindPrivate, globalLogind)
 
 Systemd::LogindPrivate::LogindPrivate() :
-    ildface( Systemd::LogindPrivate::LD_DBUS_SERVICE,
-             Systemd::LogindPrivate::LD_DBUS_DAEMON_PATH, QDBusConnection::systemBus())
+    ildface(Systemd::LogindPrivate::LD_DBUS_SERVICE,
+            Systemd::LogindPrivate::LD_DBUS_DAEMON_PATH, QDBusConnection::systemBus())
 {
     connect(&ildface, SIGNAL(SeatNew(QString,QDBusObjectPath)), this,
             SLOT(onSeatNew(QString,QDBusObjectPath)));

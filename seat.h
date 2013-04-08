@@ -17,32 +17,31 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  ***************************************************************************/
 
-#ifndef SD_JOB_H
-#define SD_JOB_H
+#ifndef SD_SEAT_H
+#define SD_SEAT_H
 
 #include <QObject>
 
+#include "QtSystemd-export.h"
+
 namespace Systemd {
 
-class JobPrivate;
+class SeatPrivate;
 
-class Job : public QObject
+class SDQT_EXPORT Seat : public QObject
 {
     Q_OBJECT
-    Q_DECLARE_PRIVATE(Job)
+    Q_DECLARE_PRIVATE(Seat)
 
 public:
-    explicit Job(const QString &path, QObject *parent = 0);
-    Job(JobPrivate &job, QObject *parent = 0);
-    virtual ~Job();
+    explicit Seat(const QString &path, QObject *parent = 0);
+    Seat(SeatPrivate &seat, QObject *parent = 0);
+    virtual ~Seat();
 
-    uint id() const;
-    QString unitId() const;
-    QString type() const;
-    QString state() const;
+    bool canGraphical() const;
 
 protected:
-    JobPrivate *d_ptr;
+    SeatPrivate *d_ptr;
 };
 }
 

@@ -30,6 +30,7 @@ set(QtSystemd_HEADERS
     job.h
     ldmanager.h
     sdmanager.h
+    seat.h
     unit.h
     dbus/generic-types.h
     QtSystemd-export.h
@@ -44,6 +45,7 @@ set(QtSystemd_PART_SRCS
     job.cpp
     ldmanager.cpp
     sdmanager.cpp
+    seat.cpp
     unit.cpp
     dbus/generic-types.cpp
 )

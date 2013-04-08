@@ -17,32 +17,31 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  ***************************************************************************/
 
-#ifndef SD_JOB_H
-#define SD_JOB_H
+#ifndef SD_UNIT_P_H
+#define SD_UNIT_P_H
 
-#include <QObject>
+#include "dbus/unitinterface.h"
+
+#include "unit.h"
 
 namespace Systemd {
 
-class JobPrivate;
-
-class Job : public QObject
+class UnitPrivate
 {
-    Q_OBJECT
-    Q_DECLARE_PRIVATE(Job)
 
 public:
-    explicit Job(const QString &path, QObject *parent = 0);
-    Job(JobPrivate &job, QObject *parent = 0);
-    virtual ~Job();
+    UnitPrivate(const QString &path, QObject *parent = 0);
+    ~UnitPrivate();
 
-    uint id() const;
-    QString unitId() const;
-    QString type() const;
-    QString state() const;
+    OrgFreedesktopSystemd1UnitInterface unitIface;
 
-protected:
-    JobPrivate *d_ptr;
+    QString id;
+    QString description;
+    QString loadState;
+    QString activeState;
+    QString subState;
+    QString following;
+    QString jobId;
 };
 }
 

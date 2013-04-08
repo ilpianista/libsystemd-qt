@@ -24,30 +24,32 @@
 
 namespace Systemd {
 
+class UnitPrivate;
+
 class Unit : public QObject
 {
-Q_OBJECT
+    Q_OBJECT
+    Q_DECLARE_PRIVATE(Unit)
+
+    Q_PROPERTY(QString id READ id)
+    Q_PROPERTY(QString loadState READ activeState)
+    Q_PROPERTY(QString activeState READ activeState)
 
 public:
-    explicit Unit(const QString &id, const QString &description,
-                    const QString &loadState, const QString &activeState,
-                    const QString &subState, const uint jobId = 0);
+    explicit Unit(const QString &path, QObject *parent = 0);
+    Unit(UnitPrivate &unit, QObject *parent = 0);
     virtual ~Unit();
 
-    QString id();
-    QString description();
-    QString loadState();
-    QString activeState();
-    QString subState();
-    uint jobId();
+    QString id() const;
+    QString description() const;
+    QString loadState() const;
+    QString activeState() const;
+    QString subState() const;
+    QString following() const;
+    QString jobId() const;
 
-private:
-    QString m_id;
-    QString m_description;
-    QString m_loadState;
-    QString m_activeState;
-    QString m_subState;
-    uint m_jobId;
+protected:
+    UnitPrivate *d_ptr;
 };
 }
 

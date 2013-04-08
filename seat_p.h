@@ -17,32 +17,25 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  ***************************************************************************/
 
-#ifndef SD_JOB_H
-#define SD_JOB_H
+#ifndef SD_SEAT_P_H
+#define SD_SEAT_P_H
 
-#include <QObject>
+#include "dbus/seatinterface.h"
+
+#include "seat.h"
 
 namespace Systemd {
 
-class JobPrivate;
-
-class Job : public QObject
+class SeatPrivate
 {
-    Q_OBJECT
-    Q_DECLARE_PRIVATE(Job)
 
 public:
-    explicit Job(const QString &path, QObject *parent = 0);
-    Job(JobPrivate &job, QObject *parent = 0);
-    virtual ~Job();
+    SeatPrivate(const QString &path, QObject *parent = 0);
+    ~SeatPrivate();
 
-    uint id() const;
-    QString unitId() const;
-    QString type() const;
-    QString state() const;
+    OrgFreedesktopLogin1SeatInterface seatIface;
 
-protected:
-    JobPrivate *d_ptr;
+    bool canGraphical;
 };
 }
 

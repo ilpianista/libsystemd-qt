@@ -17,58 +17,37 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  ***************************************************************************/
 
-#include "job.h"
-#include "job_p.h"
+#include "seat.h"
+#include "seat_p.h"
 #include "ldmanager_p.h"
 
-Systemd::JobPrivate::JobPrivate(const QString &path, QObject *parent) :
-    jobIface(Systemd::LogindPrivate::LD_DBUS_SERVICE, path, QDBusConnection::systemBus())
+Systemd::SeatPrivate::SeatPrivate(const QString &path, QObject *parent) :
+    seatIface(Systemd::LogindPrivate::LD_DBUS_SERVICE, path, QDBusConnection::systemBus())
 {
-    id = jobIface.id();
-    type = jobIface.jobType();
-    state = jobIface.state();
-    unitId = jobIface.unit().id;
+    canGraphical = seatIface.canGraphical();
 }
 
-Systemd::JobPrivate::~JobPrivate()
+Systemd::SeatPrivate::~SeatPrivate()
 {
 }
 
-Systemd::Job::Job(const QString &path, QObject *parent) :
-                  QObject(parent), d_ptr(new JobPrivate(path, this))
+Systemd::Seat::Seat(const QString &path, QObject *parent) :
+                    QObject(parent), d_ptr(new SeatPrivate(path, this))
 {
 }
 
-Systemd::Job::Job(JobPrivate &seat,  QObject *parent) :
-                  QObject(parent), d_ptr(&seat)
+Systemd::Seat::Seat(SeatPrivate &seat,  QObject *parent) :
+                    QObject(parent), d_ptr(&seat)
 {
 }
 
-Systemd::Job::~Job()
+Systemd::Seat::~Seat()
 {
     delete d_ptr;
 }
 
-uint Systemd::Job::id() const
+bool Systemd::Seat::canGraphical() const
 {
-    Q_D(const Job);
-    return d->id;
-}
-
-QString Systemd::Job::type() const
-{
-    Q_D(const Job);
-    return d->type;
-}
-
-QString Systemd::Job::state() const
-{
-    Q_D(const Job);
-    return d->state;
-}
-
-QString Systemd::Job::unitId() const
-{
-    Q_D(const Job);
-    return d->unitId;
+    Q_D(const Seat);
+    return d->canGraphical;
 }

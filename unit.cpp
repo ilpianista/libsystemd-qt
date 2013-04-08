@@ -18,49 +18,78 @@
  ***************************************************************************/
 
 #include "unit.h"
+#include "unit_p.h"
+#include "ldmanager_p.h"
 
-Systemd::Unit::Unit(const QString& id, const QString& description,
-                    const QString& loadState, const QString& activeState,
-                    const QString& subState, const uint jobId) :
-                    m_id(id),
-                    m_description(description),
-                    m_loadState(loadState),
-                    m_activeState(activeState),
-                    m_subState(subState),
-                    m_jobId(jobId)
+Systemd::UnitPrivate::UnitPrivate(const QString &path, QObject *parent) :
+    unitIface(Systemd::LogindPrivate::LD_DBUS_SERVICE, path, QDBusConnection::systemBus())
+{
+    id = unitIface.id();
+    description = unitIface.description();
+    loadState = unitIface.loadState();
+    activeState = unitIface.activeState();
+    subState = unitIface.subState();
+    following = unitIface.following();
+    jobId = unitIface.job().id;
+}
+
+Systemd::UnitPrivate::~UnitPrivate()
+{
+}
+
+Systemd::Unit::Unit(const QString &path, QObject *parent) :
+                    QObject(parent), d_ptr(new UnitPrivate(path, this))
+{
+}
+
+Systemd::Unit::Unit(UnitPrivate &seat,  QObject *parent) :
+                    QObject(parent), d_ptr(&seat)
 {
 }
 
 Systemd::Unit::~Unit()
 {
+    delete d_ptr;
 }
 
-QString Systemd::Unit::activeState()
+QString Systemd::Unit::id() const
 {
-    return m_activeState;
+    Q_D(const Unit);
+    return d->id;
 }
 
-QString Systemd::Unit::description()
+QString Systemd::Unit::description() const
 {
-    return m_description;
+    Q_D(const Unit);
+    return d->description;
 }
 
-QString Systemd::Unit::id()
+QString Systemd::Unit::loadState() const
 {
-    return m_id;
+    Q_D(const Unit);
+    return d->loadState;
 }
 
-uint Systemd::Unit::jobId()
+QString Systemd::Unit::activeState() const
 {
-    return m_jobId;
+    Q_D(const Unit);
+    return d->activeState;
 }
 
-QString Systemd::Unit::loadState()
+QString Systemd::Unit::subState() const
 {
-    return m_loadState;
+    Q_D(const Unit);
+    return d->subState;
 }
 
-QString Systemd::Unit::subState()
+QString Systemd::Unit::following() const
 {
-    return m_subState;
+    Q_D(const Unit);
+    return d->following;
+}
+
+QString Systemd::Unit::jobId() const
+{
+    Q_D(const Unit);
+    return d->jobId;
 }
