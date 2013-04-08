@@ -52,7 +52,6 @@ void Systemd::Job::init()
     qDBusRegisterMetaType<JobDBusUnit>();
 }
 
-
 Systemd::Job::~Job()
 {
     delete d_ptr;

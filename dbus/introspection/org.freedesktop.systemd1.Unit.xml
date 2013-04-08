@@ -62,6 +62,7 @@
   <property name="RequiresMountsFor" type="as" access="read"/>
   <property name="Description" type="s" access="read"/>
   <property name="SourcePath" type="s" access="read"/>
+  <property name="DropInPaths" type="as" access="read"/>
   <property name="Documentation" type="as" access="read"/>
   <property name="LoadState" type="s" access="read"/>
   <property name="ActiveState" type="s" access="read"/>

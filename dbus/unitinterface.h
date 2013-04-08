@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef UNITINTERFACE_H_1365342325
-#define UNITINTERFACE_H_1365342325
+#ifndef UNITINTERFACE_H_1365461047
+#define UNITINTERFACE_H_1365461047
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
@@ -127,6 +127,10 @@ public:
     Q_PROPERTY(QStringList Documentation READ documentation)
     inline QStringList documentation() const
     { return qvariant_cast< QStringList >(property("Documentation")); }
+
+    Q_PROPERTY(QStringList DropInPaths READ dropInPaths)
+    inline QStringList dropInPaths() const
+    { return qvariant_cast< QStringList >(property("DropInPaths")); }
 
     Q_PROPERTY(QString Following READ following)
     inline QString following() const
