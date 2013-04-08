@@ -28,7 +28,7 @@ namespace Systemd {
 
 class LogindPrivate : public Systemd::LDNotifier
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     static const QString LD_DBUS_SERVICE;
@@ -51,8 +51,8 @@ public:
     void suspend(const bool interactive);
 
 protected Q_SLOTS:
-    void onSeatNew(const QString &id, const QDBusObjectPath &path);
-    void onSeatRemoved(const QString &id, const QDBusObjectPath &path);
+    void onSeatNew(const QString &id, const QDBusObjectPath &seat);
+    void onSeatRemoved(const QString &id, const QDBusObjectPath &seat);
 
 private:
     Systemd::Permission stringToPermission(const QString &permission);

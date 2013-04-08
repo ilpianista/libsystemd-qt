@@ -26,9 +26,9 @@
 
 namespace Systemd {
 
-class SystemdPrivate : public QObject
+class SystemdPrivate : public Systemd::SDNotifier
 {
-Q_OBJECT
+    Q_OBJECT
 
 public:
     static const QString SD_DBUS_SERVICE;
@@ -40,18 +40,23 @@ public:
 
     bool disableUnitFiles(const QStringList &files, bool runtime);
     bool enableUnitFiles(const QStringList &files, bool runtime, bool force);
+    QString getJob(const uint id);
     QString getUnit(const QString &name);
     QString getUnitByPID(const uint pid);
-    QList<Systemd::Job*> listJobs();
-    QList<Systemd::Unit*> listUnits();
+    QList<Job*> listJobs();
+    QList<Unit*> listUnits();
     QString loadUnit(const QString &name);
-    bool reloadUnit(const QString &name, const Systemd::Mode mode);
-    bool restartUnit(const QString &name, const Systemd::Mode mode);
-    bool startUnit(const QString &name, const Systemd::Mode mode);
-    bool stopUnit(const QString &name, const Systemd::Mode mode);
+    bool reloadUnit(const QString &name, const Mode mode);
+    bool restartUnit(const QString &name, const Mode mode);
+    bool startUnit(const QString &name, const Mode mode);
+    bool stopUnit(const QString &name, const Mode mode);
+
+protected Q_SLOTS:
+    void onUnitNew(const QString &id, const QDBusObjectPath &unit);
+    void onUnitRemoved(const QString &id, const QDBusObjectPath &unit);
 
 private:
-    QString modeToString(const Systemd::Mode mode);
+    QString modeToString(const Mode mode);
     void init();
 };
 }

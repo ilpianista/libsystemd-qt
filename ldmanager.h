@@ -73,7 +73,7 @@ namespace Systemd {
 
     SDQT_EXPORT void suspend(const bool interactive);
 
-    SDQT_EXPORT LDNotifier* ldnotifier();
+    SDQT_EXPORT LDNotifier *ldnotifier();
 }
 
 #endif

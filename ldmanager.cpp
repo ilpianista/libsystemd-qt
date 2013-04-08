@@ -165,14 +165,14 @@ void Systemd::LogindPrivate::hybridSleep(const bool interactive)
     }
 }
 
-void Systemd::LogindPrivate::onSeatNew(const QString &id, const QDBusObjectPath &path)
+void Systemd::LogindPrivate::onSeatNew(const QString &id, const QDBusObjectPath &seat)
 {
-    emit seatNew(path.path());
+    emit seatNew(seat.path());
 }
 
-void Systemd::LogindPrivate::onSeatRemoved(const QString &id, const QDBusObjectPath &path)
+void Systemd::LogindPrivate::onSeatRemoved(const QString &id, const QDBusObjectPath &seat)
 {
-    emit seatRemoved(path.path());
+    emit seatRemoved(seat.path());
 }
 
 void Systemd::LogindPrivate::powerOff(const bool interactive)

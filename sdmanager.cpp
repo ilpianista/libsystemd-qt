@@ -29,6 +29,11 @@ Systemd::SystemdPrivate::SystemdPrivate() :
     isdface(Systemd::SystemdPrivate::SD_DBUS_SERVICE, Systemd::SystemdPrivate::SD_DBUS_DAEMON_PATH,
             QDBusConnection::systemBus())
 {
+    connect(&isdface, SIGNAL(UnitNew(QString,QDBusObjectPath)), this,
+            SLOT(onUnitNew(QString,QDBusObjectPath)));
+    connect(&isdface, SIGNAL(UnitRemoved(QString,QDBusObjectPath)), this,
+            SLOT(onUnitRemoved(QString,QDBusObjectPath)));
+
     init();
 }
 
@@ -69,6 +74,19 @@ bool Systemd::SystemdPrivate::enableUnitFiles(const QStringList &files, bool run
     }
 
     return true;
+}
+
+QString Systemd::SystemdPrivate::getJob(const uint id)
+{
+    QDBusPendingReply<QDBusObjectPath> reply = isdface.GetJob(id);
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+        return QString();
+    }
+
+    return qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
 }
 
 QString Systemd::SystemdPrivate::getUnit(const QString &name)
@@ -158,6 +176,16 @@ QString Systemd::SystemdPrivate::loadUnit(const QString &name)
     return qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
 }
 
+void Systemd::SystemdPrivate::onUnitNew(const QString &id, const QDBusObjectPath &unit)
+{
+    emit unitNew(unit.path());
+}
+
+void Systemd::SystemdPrivate::onUnitRemoved(const QString &id, const QDBusObjectPath &unit)
+{
+    emit unitRemoved(unit.path());
+}
+
 bool Systemd::SystemdPrivate::reloadUnit(const QString &name, const Systemd::Mode mode)
 {
     QDBusPendingReply<QDBusObjectPath> reply = isdface.ReloadUnit(name, modeToString(mode));
@@ -244,6 +272,11 @@ bool Systemd::enableUnitFiles(const QStringList &files, bool runtime, bool force
     return globalSystemd()->enableUnitFiles(files, runtime, force);
 }
 
+QString Systemd::getJob(const uint id)
+{
+    return globalSystemd()->getJob(id);
+}
+
 QString Systemd::getUnit(const QString &name)
 {
     return globalSystemd()->getUnit(name);
@@ -287,4 +320,9 @@ bool Systemd::startUnit(const QString &name, const Systemd::Mode mode)
 bool Systemd::stopUnit(const QString &name, const Systemd::Mode mode)
 {
     return globalSystemd()->stopUnit(name, mode);
+}
+
+Systemd::SDNotifier* Systemd::sdnotifier()
+{
+    return globalSystemd();
 }
