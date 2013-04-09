@@ -17,44 +17,12 @@
  *
  */
 
-#ifndef SD_UNIT_H
-#define SD_UNIT_H
+#include "qtsystemdplugin.h"
+#include "../unit.h"
 
-#include <QObject>
+#include <QtQml/qqml.h>
 
-namespace Systemd {
-
-class UnitPrivate;
-
-class Unit : public QObject
+void QtSystemdPlugin::registerTypes(const char *uri)
 {
-    Q_OBJECT
-    Q_DECLARE_PRIVATE(Unit)
-
-    Q_PROPERTY(QString id READ id)
-    Q_PROPERTY(QString loadState READ activeState)
-    Q_PROPERTY(QString activeState READ activeState)
-
-public:
-    explicit Unit(const QString &path, QObject *parent = 0);
-    Unit(UnitPrivate &unit, QObject *parent = 0);
-    Unit(QObject *parent = 0);
-    virtual ~Unit();
-
-    QString id() const;
-    QString description() const;
-    QString loadState() const;
-    QString activeState() const;
-    QString subState() const;
-    QString following() const;
-    QString jobId() const;
-
-protected:
-    UnitPrivate *d_ptr;
-
-private:
-    void init();
-};
+    qmlRegisterType<Systemd::Unit>(uri, 1, 0, "Unit");
 }
-
-#endif

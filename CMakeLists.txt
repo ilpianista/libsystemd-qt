@@ -9,6 +9,7 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 find_package(Qt5Core REQUIRED)
 find_package(Qt5DBus REQUIRED)
+find_package(Qt5Declarative REQUIRED)
 find_package(PkgConfig)
 
 set(LIB_SUFFIX "" CACHE STRING "Define suffix of library directory name (32/64)" )
@@ -21,6 +22,7 @@ endif (NOT SYSTEMD_FOUND)
 
 include_directories(${Qt5Core_INCLUDE_DIRS}
                     ${Qt5DBus_INCLUDE_DIRS}
+                    ${Qt5Declarative_INCLUDE_DIRS}
                     ${CMAKE_CURRENT_SOURCE_DIR}/dbus
                     ${CMAKE_CURRENT_BUILD_DIR})
 
@@ -76,6 +78,7 @@ set(DBUS_INTERFACE_SRCS
 add_library(QtSystemd SHARED ${QtSystemd_PART_SRCS} ${DBUS_INTERFACE_SRCS})
 
 target_link_libraries(QtSystemd ${Qt5Core_LIBRARIES} ${Qt5DBus_LIBRARIES})
+
 install(TARGETS QtSystemd DESTINATION lib${LIB_SUFFIX})
 
 install( FILES
@@ -91,4 +94,5 @@ message(STATUS "Writing pkg-config file...")
 configure_file(${CMAKE_SOURCE_DIR}/QtSystemd.pc.cmake ${CMAKE_BINARY_DIR}/QtSystemd.pc @ONLY)
 install(FILES ${CMAKE_BINARY_DIR}/QtSystemd.pc DESTINATION "${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/pkgconfig/")
 
+add_subdirectory(qmlplugin)
 add_subdirectory(tests)
