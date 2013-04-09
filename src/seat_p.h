@@ -17,29 +17,29 @@
  *
  */
 
-#ifndef SD_JOB_P_H
-#define SD_JOB_P_H
+#ifndef SD_SEAT_P_H
+#define SD_SEAT_P_H
 
-#include "dbus/jobinterface.h"
+#include "seatinterface.h"
 
-#include "job.h"
+#include "seat.h"
 
-namespace Systemd {
-
-class JobPrivate
+namespace Systemd
+{
+namespace Logind
+{
+class SeatPrivate
 {
 
 public:
-    JobPrivate(const QString &path, QObject *parent = 0);
-    ~JobPrivate();
+    SeatPrivate(const QString &path, QObject *parent = 0);
+    ~SeatPrivate();
 
-    OrgFreedesktopSystemd1JobInterface jobIface;
+    OrgFreedesktopLogin1SeatInterface seatIface;
 
-    uint id;
-    QString unitId;
-    QString type;
-    QString state;
+    bool canGraphical;
 };
+}
 }
 
 #endif

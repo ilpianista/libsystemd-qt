@@ -20,7 +20,7 @@
 #ifndef SD_MANAGER_P_H
 #define SD_MANAGER_P_H
 
-#include "dbus/managerinterface.h"
+#include "managerinterface.h"
 
 #include "sdmanager.h"
 

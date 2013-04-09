@@ -20,7 +20,7 @@
 #include <QDebug>
 #include <QCoreApplication>
 
-#include "../sdmanager.h"
+#include "../src/sdmanager.h"
 
 class SDManagerTest {
 public:

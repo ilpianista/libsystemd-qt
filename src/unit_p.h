@@ -20,7 +20,7 @@
 #ifndef SD_UNIT_P_H
 #define SD_UNIT_P_H
 
-#include "dbus/unitinterface.h"
+#include "unitinterface.h"
 
 #include "unit.h"
 

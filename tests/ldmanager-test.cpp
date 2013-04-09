@@ -20,7 +20,7 @@
 #include <QDebug>
 #include <QCoreApplication>
 
-#include "../ldmanager.h"
+#include "../src/ldmanager.h"
 
 class LDManagerTest {
 public:
