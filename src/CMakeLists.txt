@@ -68,5 +68,3 @@ set_property(TARGET QtSystemd PROPERTY SOVERSION 0)
 message(STATUS "Writing pkg-config file...")
 configure_file(${CMAKE_SOURCE_DIR}/QtSystemd.pc.cmake ${CMAKE_BINARY_DIR}/QtSystemd.pc @ONLY)
 install(FILES ${CMAKE_BINARY_DIR}/QtSystemd.pc DESTINATION "${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/pkgconfig/")
-
-add_subdirectory(qmlplugin)
