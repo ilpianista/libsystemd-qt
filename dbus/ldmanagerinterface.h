@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef LDMANAGERINTERFACE_H_1365342389
-#define LDMANAGERINTERFACE_H_1365342389
+#ifndef LDMANAGERINTERFACE_H_1365492258
+#define LDMANAGERINTERFACE_H_1365492258
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
@@ -172,16 +172,16 @@ public Q_SLOTS: // METHODS
         return asyncCallWithArgumentList(QLatin1String("CanSuspend"), argumentList);
     }
 
-    inline QDBusPendingReply<QString, QDBusObjectPath, QDBusObjectPath, QDBusUnixFileDescriptor, QString, uint, bool> CreateSession(uint uid, uint leader, const QString &sevice, const QString &type, const QString &seat, uint vtnr, const QString &tty, const QString &display, bool remote, const QString &remote_user, const QString &remote_host, const QStringList &controllers, const QStringList &reset_controllers, bool kill_processes)
+    inline QDBusPendingReply<QString, QDBusObjectPath, QDBusObjectPath, QDBusUnixFileDescriptor, QString, uint, bool> CreateSession(uint uid, uint leader, const QString &sevice, const QString &type, const QString &session_class, const QString &seat, uint vtnr, const QString &tty, const QString &display, bool remote, const QString &remote_user, const QString &remote_host, const QStringList &controllers, const QStringList &reset_controllers, bool kill_processes)
     {
         QList<QVariant> argumentList;
-        argumentList << QVariant::fromValue(uid) << QVariant::fromValue(leader) << QVariant::fromValue(sevice) << QVariant::fromValue(type) << QVariant::fromValue(seat) << QVariant::fromValue(vtnr) << QVariant::fromValue(tty) << QVariant::fromValue(display) << QVariant::fromValue(remote) << QVariant::fromValue(remote_user) << QVariant::fromValue(remote_host) << QVariant::fromValue(controllers) << QVariant::fromValue(reset_controllers) << QVariant::fromValue(kill_processes);
+        argumentList << QVariant::fromValue(uid) << QVariant::fromValue(leader) << QVariant::fromValue(sevice) << QVariant::fromValue(type) << QVariant::fromValue(session_class) << QVariant::fromValue(seat) << QVariant::fromValue(vtnr) << QVariant::fromValue(tty) << QVariant::fromValue(display) << QVariant::fromValue(remote) << QVariant::fromValue(remote_user) << QVariant::fromValue(remote_host) << QVariant::fromValue(controllers) << QVariant::fromValue(reset_controllers) << QVariant::fromValue(kill_processes);
         return asyncCallWithArgumentList(QLatin1String("CreateSession"), argumentList);
     }
-    inline QDBusReply<QString> CreateSession(uint uid, uint leader, const QString &sevice, const QString &type, const QString &seat, uint vtnr, const QString &tty, const QString &display, bool remote, const QString &remote_user, const QString &remote_host, const QStringList &controllers, const QStringList &reset_controllers, bool kill_processes, QDBusObjectPath &path, QDBusObjectPath &runtime_path, QDBusUnixFileDescriptor &fd, QString &seat_, uint &vtnr_, bool &existing)
+    inline QDBusReply<QString> CreateSession(uint uid, uint leader, const QString &sevice, const QString &type, const QString &session_class, const QString &seat, uint vtnr, const QString &tty, const QString &display, bool remote, const QString &remote_user, const QString &remote_host, const QStringList &controllers, const QStringList &reset_controllers, bool kill_processes, QDBusObjectPath &path, QDBusObjectPath &runtime_path, QDBusUnixFileDescriptor &fd, QString &seat_, uint &vtnr_, bool &existing)
     {
         QList<QVariant> argumentList;
-        argumentList << QVariant::fromValue(uid) << QVariant::fromValue(leader) << QVariant::fromValue(sevice) << QVariant::fromValue(type) << QVariant::fromValue(seat) << QVariant::fromValue(vtnr) << QVariant::fromValue(tty) << QVariant::fromValue(display) << QVariant::fromValue(remote) << QVariant::fromValue(remote_user) << QVariant::fromValue(remote_host) << QVariant::fromValue(controllers) << QVariant::fromValue(reset_controllers) << QVariant::fromValue(kill_processes);
+        argumentList << QVariant::fromValue(uid) << QVariant::fromValue(leader) << QVariant::fromValue(sevice) << QVariant::fromValue(type) << QVariant::fromValue(session_class) << QVariant::fromValue(seat) << QVariant::fromValue(vtnr) << QVariant::fromValue(tty) << QVariant::fromValue(display) << QVariant::fromValue(remote) << QVariant::fromValue(remote_user) << QVariant::fromValue(remote_host) << QVariant::fromValue(controllers) << QVariant::fromValue(reset_controllers) << QVariant::fromValue(kill_processes);
         QDBusMessage reply = callWithArgumentList(QDBus::Block, QLatin1String("CreateSession"), argumentList);
         if (reply.type() == QDBusMessage::ReplyMessage && reply.arguments().count() == 7) {
             path = qdbus_cast<QDBusObjectPath>(reply.arguments().at(1));

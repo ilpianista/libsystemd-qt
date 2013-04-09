@@ -37,10 +37,7 @@
       <arg name="leader" type="u" direction="in"/>
       <arg name="sevice" type="s" direction="in"/>
       <arg name="type" type="s" direction="in"/>
-<!--       <arg name="class" type="s" direction="in"> -->
-<!--           <annotation name="org.qtproject.QtDBus.PropertyGetter.In4" value="sessionClass"/> -->
-<!--           <annotation name="org.qtproject.QtDBus.PropertySetter.In4" value="setSessionClass"/> -->
-<!--       </arg> -->
+      <arg name="session_class" type="s" direction="in"/>
       <arg name="seat" type="s" direction="in"/>
       <arg name="vtnr" type="u" direction="in"/>
       <arg name="tty" type="s" direction="in"/>
