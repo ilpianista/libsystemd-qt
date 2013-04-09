@@ -31,9 +31,10 @@ class Unit : public QObject
     Q_OBJECT
     Q_DECLARE_PRIVATE(Unit)
 
-    Q_PROPERTY(QString id READ id)
-    Q_PROPERTY(QString loadState READ activeState)
-    Q_PROPERTY(QString activeState READ activeState)
+    Q_PROPERTY(QString id READ id CONSTANT)
+    Q_PROPERTY(QString type READ type CONSTANT)
+    Q_PROPERTY(QString loadState READ activeState NOTIFY loadStateChanged)
+    Q_PROPERTY(QString activeState READ activeState NOTIFY activeStateChanged)
 
 public:
     explicit Unit(const QString &path, QObject *parent = 0);
@@ -42,12 +43,17 @@ public:
     virtual ~Unit();
 
     QString id() const;
+    QString type() const;
     QString description() const;
     QString loadState() const;
     QString activeState() const;
     QString subState() const;
     QString following() const;
     QString jobId() const;
+
+Q_SIGNALS:
+    void loadStateChanged();
+    void activeStateChanged();
 
 protected:
     UnitPrivate *d_ptr;

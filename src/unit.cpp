@@ -71,6 +71,12 @@ QString Systemd::Unit::id() const
     return d->id;
 }
 
+QString Systemd::Unit::type() const
+{
+    Q_D(const Unit);
+    return d->id.mid(d->id.lastIndexOf(".") + 1);
+}
+
 QString Systemd::Unit::description() const
 {
     Q_D(const Unit);
