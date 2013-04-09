@@ -8,7 +8,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 find_package(Qt5Core REQUIRED)
 find_package(Qt5DBus REQUIRED)
-find_package(Qt5Declarative REQUIRED)
+find_package(Qt5Qml REQUIRED)
 find_package(PkgConfig)
 
 set(LIB_SUFFIX "" CACHE STRING "Define suffix of library directory name (32/64)")

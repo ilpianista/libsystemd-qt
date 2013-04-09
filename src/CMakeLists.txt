@@ -46,6 +46,7 @@ set_property(SOURCE ${INTERFACE_INTROSPECTION_XML_FILES}
 set_source_files_properties(${INTERFACE_INTROSPECTION_XML_FILES}
                             PROPERTIES NO_NAMESPACE TRUE)
 
+# Workaround a bug in qdbusxml2cpp 5.0.1
 find_package(Qt4 COMPONENTS QTDBUS)
 qt4_add_dbus_interfaces(QtSystemd_PART_SRCS ${INTERFACE_INTROSPECTION_XML_FILES})
 
