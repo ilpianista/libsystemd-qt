@@ -273,6 +273,22 @@ const QDBusArgument& operator>>(const QDBusArgument& argument, SessionDBusUser& 
     return argument;
 }
 
+QDBusArgument& operator<<(QDBusArgument& argument, const SocketDBusSocket& socket)
+{
+    argument.beginStructure();
+    argument << socket.type << socket.address;
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument& operator>>(const QDBusArgument& argument, SocketDBusSocket& socket)
+{
+    argument.beginStructure();
+    argument >> socket.type >> socket.address;
+    argument.endStructure();
+    return argument;
+}
+
 QDBusArgument& operator<<(QDBusArgument& argument, const TimerDBusCalendarTimer& calendarTimer)
 {
     argument.beginStructure();

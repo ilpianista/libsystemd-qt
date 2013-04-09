@@ -8,8 +8,8 @@
  * Do not edit! All changes made to it will be lost.
  */
 
-#ifndef SOCKETINTERFACE_H_1365342324
-#define SOCKETINTERFACE_H_1365342324
+#ifndef SOCKETINTERFACE_H_1365491926
+#define SOCKETINTERFACE_H_1365491926
 
 #include <QtCore/QObject>
 #include <QtCore/QByteArray>
@@ -231,6 +231,10 @@ public:
     Q_PROPERTY(qulonglong LimitSTACK READ limitSTACK)
     inline qulonglong limitSTACK() const
     { return qvariant_cast< qulonglong >(property("LimitSTACK")); }
+
+    Q_PROPERTY(SocketDBusSocketList Listen READ listen)
+    inline SocketDBusSocketList listen() const
+    { return qvariant_cast< SocketDBusSocketList >(property("Listen")); }
 
     Q_PROPERTY(int Mark READ mark)
     inline int mark() const

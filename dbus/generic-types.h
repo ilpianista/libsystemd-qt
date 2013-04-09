@@ -231,6 +231,18 @@ const QDBusArgument &operator>>(const QDBusArgument &argument, SessionDBusUser &
 
 typedef struct
 {
+    QString type;
+    QString address;
+} SocketDBusSocket;
+Q_DECLARE_METATYPE(SocketDBusSocket)
+typedef QList<SocketDBusSocket> SocketDBusSocketList;
+Q_DECLARE_METATYPE(SocketDBusSocketList)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const SocketDBusSocket &socket);
+const QDBusArgument &operator>>(const QDBusArgument &argument, SocketDBusSocket &socket);
+
+typedef struct
+{
     QString timerBase;
     QString calendarSpec;
     qlonglong nextElapse;

@@ -133,7 +133,9 @@
   <property name="NConnections" type="u" access="read"/>
   <property name="MessageQueueMaxMessages" type="x" access="read"/>
   <property name="MessageQueueMessageSize" type="x" access="read"/>
-<!--   <property name="Listen" type="a(ss)" access="read"/> -->
+  <property name="Listen" type="a(ss)" access="read">
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="SocketDBusSocketList"/>
+  </property>
   <property name="Result" type="s" access="read"/>
   <property name="SmackLabel" type="s" access="read"/>
   <property name="SmackLabelIPIn" type="s" access="read"/>
