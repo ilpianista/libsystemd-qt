@@ -28,10 +28,6 @@ Rectangle {
         id: systemd
     }
 
-    ListModel {
-        id: listModel
-    }
-
     Component {
         id: unitDelegate
 

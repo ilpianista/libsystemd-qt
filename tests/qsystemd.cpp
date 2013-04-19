@@ -18,11 +18,6 @@
  */
 
 #include <QGuiApplication>
-#include <QQmlEngine>
-#include <QQmlContext>
-#include <QQmlComponent>
-
-#include <QGuiApplication>
 #include <QQuickView>
 
 int main(int argc, char *argv[])

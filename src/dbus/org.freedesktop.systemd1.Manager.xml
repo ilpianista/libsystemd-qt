@@ -264,8 +264,8 @@
   <property name="DefaultControllers" type="as" access="read"/>
   <property name="DefaultStandardOutput" type="s" access="read"/>
   <property name="DefaultStandardError" type="s" access="read"/>
-  <property name="RuntimeWatchdogUSec" type="s" access="readwrite"/>
-  <property name="ShutdownWatchdogUSec" type="s" access="readwrite"/>
+  <property name="RuntimeWatchdogUSec" type="t" access="readwrite"/>
+  <property name="ShutdownWatchdogUSec" type="t" access="readwrite"/>
   <property name="Virtualization" type="s" access="read"/>
  </interface>
 </node>
