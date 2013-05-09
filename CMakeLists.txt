@@ -11,6 +11,8 @@ find_package(Qt5DBus REQUIRED)
 find_package(Qt5Qml REQUIRED)
 find_package(PkgConfig)
 
+set(LIB_SUFFIX "" CACHE STRING "Define suffix of library directory name (32/64)")
+
 # Offer the user the choice of overriding the installation directories
 set(INSTALL_LIB_DIR lib${LIB_SUFFIX} CACHE PATH "Installation directory for libraries")
 set(INSTALL_BIN_DIR bin CACHE PATH "Installation directory for executables")
@@ -32,10 +34,7 @@ foreach(p LIB BIN INCLUDE CMAKE)
   endif()
 endforeach()
 
-
-set(LIB_SUFFIX "" CACHE STRING "Define suffix of library directory name (32/64)")
-
-set(QT5_IMPORTS_DIR "${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/qt/imports" CACHE STRING "Define the Qt5 imports dir path")
+set(QT5_IMPORTS_DIR ${INSTALL_LIB_DIR}/qt/imports CACHE STRING "Define the Qt5 imports dir path")
 
 pkg_check_modules(SYSTEMD "libsystemd-daemon libsystemd-login" REQUIRED)
 
