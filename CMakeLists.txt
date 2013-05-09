@@ -13,7 +13,7 @@ set(LIB_SUFFIX "" CACHE STRING "Define suffix of library directory name (32/64)"
 
 set(QT5_IMPORTS_DIR "${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX}/qt/imports" CACHE STRING "Define the Qt5 imports dir path")
 
-pkg_check_modules(SYSTEMD "systemd" REQUIRED)
+pkg_check_modules(SYSTEMD "libsystemd-daemon libsystemd-login" REQUIRED)
 
 IF(NOT SYSTEMD_FOUND)
     message(FATAL_ERROR "ERROR: Systemd not found")
