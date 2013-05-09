@@ -1,0 +1,17 @@
+# - Config file for the QtSystemd package
+# It defines the following variables
+#  QTSYSTEMD_INCLUDE_DIRS - include directories for QtSystemd
+#  QTSYSTEMD_LIBRARIES    - libraries to link against
+#  QTSYSTEMD_EXECUTABLE   - the bar executable
+
+# Compute paths
+get_filename_component(QTSYSTEMD_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+set(QTSYSTEMD_INCLUDE_DIRS "@CONF_INCLUDE_DIRS@")
+
+# Our library dependencies (contains definitions for IMPORTED targets)
+if(NOT TARGET foo AND NOT QTSYSTEMD_BINARY_DIR)
+  include("${QTSYSTEMD_CMAKE_DIR}/QtSystemdTargets.cmake")
+endif()
+
+# These are IMPORTED targets created by QtSystemdTargets.cmake
+set(QTSYSTEMD_LIBRARIES QtSystemd)
