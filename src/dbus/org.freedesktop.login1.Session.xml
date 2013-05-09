@@ -12,8 +12,8 @@
       <arg name="who" type="s"/>
       <arg name="signal" type="s"/>
     </method>
-    <signal name="Lock"/>
-    <signal name="Unlock"/>
+    <!-- <signal name="Lock"/> -->
+    <!-- <signal name="Unlock"/> -->
     <property name="Id" type="s" access="read"/>
     <property name="User" type="(uo)" access="read">
       <annotation name="org.qtproject.QtDBus.QtTypeName" value="SessionDBusUser"/>
