@@ -11,20 +11,22 @@ find_package(Qt5DBus REQUIRED)
 find_package(Qt5Qml REQUIRED)
 find_package(PkgConfig)
 
-set(LIB_SUFFIX "" CACHE STRING "Define suffix of library directory name (32/64)")
+set(LIB_SUFFIX "" CACHE STRING
+    "Define suffix of library directory name (32/64)")
 
 # Offer the user the choice of overriding the installation directories
-set(INSTALL_LIB_DIR lib${LIB_SUFFIX} CACHE PATH "Installation directory for libraries")
+set(INSTALL_LIB_DIR lib${LIB_SUFFIX} CACHE PATH
+    "Installation directory for libraries")
 set(INSTALL_BIN_DIR bin CACHE PATH "Installation directory for executables")
 set(INSTALL_INCLUDE_DIR include CACHE PATH
-  "Installation directory for header files")
+    "Installation directory for header files")
 if(WIN32 AND NOT CYGWIN)
   set(DEF_INSTALL_CMAKE_DIR CMake)
 else()
-  set(DEF_INSTALL_CMAKE_DIR lib/CMake/QtSystemd)
+  set(DEF_INSTALL_CMAKE_DIR lib/cmake/QtSystemd)
 endif()
 set(INSTALL_CMAKE_DIR ${DEF_INSTALL_CMAKE_DIR} CACHE PATH
-  "Installation directory for CMake files")
+    "Installation directory for CMake files")
 
 # Make relative paths absolute (needed later on)
 foreach(p LIB BIN INCLUDE CMAKE)
@@ -34,7 +36,8 @@ foreach(p LIB BIN INCLUDE CMAKE)
   endif()
 endforeach()
 
-set(QT5_IMPORTS_DIR ${INSTALL_LIB_DIR}/qt/imports CACHE STRING "Define the Qt5 imports dir path")
+set(QT5_IMPORTS_DIR ${INSTALL_LIB_DIR}/qt/imports CACHE STRING
+    "Define the Qt5 imports dir path")
 
 pkg_check_modules(SYSTEMD "libsystemd-daemon libsystemd-login" REQUIRED)
 
