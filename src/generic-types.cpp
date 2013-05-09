@@ -35,6 +35,22 @@ const QDBusArgument& operator>>(const QDBusArgument& argument, DBusCGroupAttrs& 
     return argument;
 }
 
+QDBusArgument& operator<<(QDBusArgument& argument, const DBusEnvironmentFile& environmentFile)
+{
+    argument.beginStructure();
+    argument << environmentFile.file << environmentFile.dash;
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument& operator>>(const QDBusArgument& argument, DBusEnvironmentFile& environmentFile)
+{
+    argument.beginStructure();
+    argument >> environmentFile.file >> environmentFile.dash;
+    argument.endStructure();
+    return argument;
+}
+
 QDBusArgument& operator<<(QDBusArgument& argument, const DBusExecCommand& execCommand)
 {
     argument.beginStructure();

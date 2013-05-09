@@ -35,7 +35,7 @@
     <method name="CreateSession">
       <arg name="uid" type="u" direction="in"/>
       <arg name="leader" type="u" direction="in"/>
-      <arg name="sevice" type="s" direction="in"/>
+      <arg name="service" type="s" direction="in"/>
       <arg name="type" type="s" direction="in"/>
       <arg name="session_class" type="s" direction="in"/>
       <arg name="seat" type="s" direction="in"/>

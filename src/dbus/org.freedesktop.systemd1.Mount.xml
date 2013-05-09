@@ -17,6 +17,9 @@
       <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommandList"/>
   </property>
   <property name="Environment" type="as" access="read"/>
+  <property name="EnvironmentFiles" type="a(sb)" access="read">
+      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusEnvironmentFileList"/>
+  </property>
   <property name="UMask" type="u" access="read"/>
   <property name="LimitCPU" type="t" access="read"/>
   <property name="LimitFSIZE" type="t" access="read"/>
@@ -68,13 +71,11 @@
   <property name="InaccessibleDirectories" type="as" access="read"/>
   <property name="MountFlags" type="t" access="read"/>
   <property name="PrivateTmp" type="b" access="read"/>
+  <property name="PrivateNetwork" type="b" access="read"/>
   <property name="SameProcessGroup" type="b" access="read"/>
-  <property name="KillMode" type="s" access="read"/>
-  <property name="KillSignal" type="i" access="read"/>
   <property name="UtmpIdentifier" type="s" access="read"/>
   <property name="ControlGroupModify" type="b" access="read"/>
   <property name="ControlGroupPersistent" type="b" access="read"/>
-  <property name="PrivateNetwork" type="b" access="read"/>
   <property name="IgnoreSIGPIPE" type="b" access="read"/>
   <property name="NoNewPrivileges" type="b" access="read"/>
   <property name="SystemCallFilter" type="au" access="read">

@@ -42,6 +42,18 @@ const QDBusArgument &operator>>(const QDBusArgument &argument, DBusCGroupAttrs &
 
 typedef struct
 {
+    QString file;
+    bool dash;
+} DBusEnvironmentFile;
+Q_DECLARE_METATYPE(DBusEnvironmentFile)
+typedef QList<DBusEnvironmentFile> DBusEnvironmentFileList;
+Q_DECLARE_METATYPE(DBusEnvironmentFileList)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const DBusEnvironmentFile &environmentFile);
+const QDBusArgument &operator>>(const QDBusArgument &argument, DBusEnvironmentFile &environmentFile);
+
+typedef struct
+{
     QString path;
     QList<QString> argv;
     bool ignore;
