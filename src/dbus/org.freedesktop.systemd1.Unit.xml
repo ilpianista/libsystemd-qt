@@ -35,6 +35,12 @@
    <arg name="signal" type="i" direction="in"/>
   </method>
   <method name="ResetFailed"/>
+  <method name="SetProperties">
+   <arg name="runtime" type="b" direction="in"/>
+   <arg name="properties" type="a(sv)" direction="in">
+    <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="DBusUnitFilePropertyList"/>
+   </arg>
+  </method>
   <property name="Id" type="s" access="read"/>
   <property name="Names" type="as" access="read"/>
   <property name="Following" type="s" access="read"/>
@@ -82,7 +88,7 @@
   <property name="CanReload" type="b" access="read"/>
   <property name="CanIsolate" type="b" access="read"/>
   <property name="Job" type="(uo)" access="read">
-      <annotation name="org.qtproject.QtDBus.QtTypeName" value="UnitDBusJob"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="UnitDBusJob"/>
   </property>
   <property name="StopWhenUnneeded" type="b" access="read"/>
   <property name="RefuseManualStart" type="b" access="read"/>
@@ -97,8 +103,12 @@
   <property name="ConditionTimestamp" type="t" access="read"/>
   <property name="ConditionTimestampMonotonic" type="t" access="read"/>
   <property name="ConditionResult" type="b" access="read"/>
-  <property name="LoadError" type="(ss)" access="read">
-      <annotation name="org.qtproject.QtDBus.QtTypeName" value="UnitDBusLoadError"/>
+  <property name="Conditions" type="a(sbbsi)" access="read">
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="UnitDBusConditionList"/>
   </property>
+  <property name="LoadError" type="(ss)" access="read">
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="UnitDBusLoadError"/>
+  </property>
+  <property name="Transient" type="b" access="read"/>
  </interface>
 </node>

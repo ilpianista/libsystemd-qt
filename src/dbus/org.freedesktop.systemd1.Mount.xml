@@ -7,18 +7,20 @@
   <property name="Options" type="s" access="read"/>
   <property name="Type" type="s" access="read"/>
   <property name="TimeoutUSec" type="t" access="read"/>
+  <property name="Slice" type="s" access="read"/>
+  <property name="ControlGroup" type="s" access="read"/>
   <property name="ExecMount" type="a(sasbttuii)" access="read">
-      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommandList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommandList"/>
   </property>
   <property name="ExecUnmount" type="a(sasbttuii)" access="read">
-      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommandList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommandList"/>
   </property>
   <property name="ExecRemount" type="a(sasbttuii)" access="read">
-      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommandList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommandList"/>
   </property>
   <property name="Environment" type="as" access="read"/>
   <property name="EnvironmentFiles" type="a(sb)" access="read">
-      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusEnvironmentFileList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusEnvironmentFileList"/>
   </property>
   <property name="UMask" type="u" access="read"/>
   <property name="LimitCPU" type="t" access="read"/>
@@ -74,42 +76,34 @@
   <property name="PrivateNetwork" type="b" access="read"/>
   <property name="SameProcessGroup" type="b" access="read"/>
   <property name="UtmpIdentifier" type="s" access="read"/>
-  <property name="ControlGroupModify" type="b" access="read"/>
-  <property name="ControlGroupPersistent" type="b" access="read"/>
   <property name="IgnoreSIGPIPE" type="b" access="read"/>
   <property name="NoNewPrivileges" type="b" access="read"/>
   <property name="SystemCallFilter" type="au" access="read">
-      <annotation name="org.qtproject.QtDBus.QtTypeName" value="UIntList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="UIntList"/>
   </property>
   <property name="KillMode" type="s" access="read"/>
   <property name="KillSignal" type="i" access="read"/>
   <property name="SendSIGKILL" type="b" access="read"/>
-  <property name="DefaultControlGroup" type="s" access="read"/>
-  <property name="ControlGroups" type="as" access="read"/>
-  <property name="ControlGroupAttributes" type="a(sss)" access="read">
-      <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusCGroupAttrsList"/>
+  <property name="CPUAccounting" type="b" access="read"/>
+  <property name="CPUShares" type="t" access="read"/>
+  <property name="BlockIOAccounting" type="b" access="read"/>
+  <property name="BlockIOWeight" type="t" access="read"/>
+  <property name="BlockIODeviceWeight" type="a(st)" access="read">
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupBlockIODeviceWeightList"/>
   </property>
-  <method name="SetControlGroup">
-   <arg name="group" type="s" direction="in"/>
-   <arg name="mode" type="s" direction="in"/>
-  </method>
-  <method name="UnsetControlGroup">
-   <arg name="group" type="s" direction="in"/>
-   <arg name="mode" type="s" direction="in"/>
-  </method>
-  <method name="GetControlGroupAttribute">
-   <arg name="attribute" type="s" direction="in"/>
-   <arg name="values" type="as" direction="out"/>
-  </method>
-  <method name="SetControlGroupAttribute">
-   <arg name="attribute" type="s" direction="in"/>
-   <arg name="values" type="as" direction="in"/>
-   <arg name="mode" type="s" direction="in"/>
-  </method>
-  <method name="UnsetControlGroupAttribute">
-   <arg name="attribute" type="s" direction="in"/>
-   <arg name="mode" type="s" direction="in"/>
-  </method>
+  <property name="BlockIOReadBandwidth=" type="a(st)" access="read">
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupBlockIODeviceWeightList"/>
+  </property>
+  <property name="BlockIOWriteBandwidth=" type="a(st)" access="read">
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupBlockIODeviceWeightList"/>
+  </property>
+  <property name="MemoryAccounting" type="b" access="read"/>
+  <property name="MemoryLimit" type="t" access="read"/>
+  <property name="MemorySoftLimit" type="t" access="read"/>
+  <property name="DevicePolicy" type="s" access="read"/>
+  <property name="DeviceAllow" type="a(ss)" access="read">
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupDeviceAllowList"/>
+  </property>
   <property name="ControlPID" type="u" access="read"/>
   <property name="DirectoryMode" type="u" access="read"/>
   <property name="Result" type="s" access="read"/>

@@ -100,12 +100,12 @@
   <method name="ResetFailed"/>
   <method name="ListUnits">
    <arg name="units" type="a(ssssssouso)" direction="out">
-       <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitList"/>
    </arg>
   </method>
   <method name="ListJobs">
    <arg name="jobs" type="a(usssoo)" direction="out">
-       <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusJobList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusJobList"/>
    </arg>
   </method>
   <method name="Subscribe"/>
@@ -144,7 +144,7 @@
   </method>
   <method name="ListUnitFiles">
    <arg name="files" type="a(ss)" direction="out">
-       <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileListList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileListList"/>
    </arg>
   </method>
   <method name="GetUnitFileState">
@@ -157,14 +157,14 @@
    <arg name="force" type="b" direction="in"/>
    <arg name="carries_install_info" type="b" direction="out"/>
    <arg name="changes" type="a(sss)" direction="out">
-       <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
    </arg>
   </method>
   <method name="DisableUnitFiles">
    <arg name="files" type="as" direction="in"/>
    <arg name="runtime" type="b" direction="in"/>
    <arg name="changes" type="a(sss)" direction="out">
-       <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
    </arg>
   </method>
   <method name="ReenableUnitFiles">
@@ -173,7 +173,7 @@
    <arg name="force" type="b" direction="in"/>
    <arg name="carries_install_info" type="b" direction="out"/>
    <arg name="changes" type="a(sss)" direction="out">
-       <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
    </arg>
   </method>
   <method name="LinkUnitFiles">
@@ -181,7 +181,7 @@
    <arg name="runtime" type="b" direction="in"/>
    <arg name="force" type="b" direction="in"/>
    <arg name="changes" type="a(sss)" direction="out">
-       <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
    </arg>
   </method>
   <method name="PresetUnitFiles">
@@ -190,7 +190,7 @@
    <arg name="force" type="b" direction="in"/>
    <arg name="carries_install_info" type="b" direction="out"/>
    <arg name="changes" type="a(sss)" direction="out">
-       <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
    </arg>
   </method>
   <method name="MaskUnitFiles">
@@ -198,15 +198,42 @@
    <arg name="runtime" type="b" direction="in"/>
    <arg name="force" type="b" direction="in"/>
    <arg name="changes" type="a(sss)" direction="out">
-       <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
    </arg>
   </method>
   <method name="UnmaskUnitFiles">
    <arg name="files" type="as" direction="in"/>
    <arg name="runtime" type="b" direction="in"/>
    <arg name="changes" type="a(sss)" direction="out">
-       <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
    </arg>
+  </method>
+  <method name="SetDefaultTarget">
+   <arg name="files" type="as" direction="in"/>
+   <arg name="changes" type="a(sss)" direction="out">
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+   </arg>
+  </method>
+  <method name="GetDefaultTarget">
+   <arg name="name" type="s" direction="out"/>
+  </method>
+  <method name="SetUnitProperties">
+   <arg name="name" type="s" direction="in"/>
+   <arg name="runtime" type="b" direction="in"/>
+   <arg name="properties" type="a(sv)" direction="in">
+    <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="DBusUnitFilePropertyList"/>
+   </arg>
+  </method>
+  <method name="StartTransientUnit">
+   <arg name="name" type="s" direction="in"/>
+   <arg name="mode" type="s" direction="in"/>
+   <arg name="properties" type="a(sv)" direction="in">
+    <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="DBusUnitFilePropertyList"/>
+   </arg>
+   <arg name="aux" type="a(sa(sv))" direction="in">
+    <annotation name="org.qtproject.QtDBus.QtTypeName.In3" value="ManagerDBusAuxList"/>
+   </arg>
+   <arg name="job" type="o" direction="out"/>
   </method>
   <signal name="UnitNew">
    <arg name="id" type="s"/>
@@ -234,7 +261,9 @@
    <arg name="userspace" type="t"/>
    <arg name="total" type="t"/>
   </signal> <signal name="UnitFilesChanged"/>
-  <property name="Version" type="s" access="read"/>
+  <signal name="Reloading">
+   <arg name="active" type="b"/>
+  </signal> <property name="Version" type="s" access="read"/>
   <property name="Features" type="s" access="read"/>
   <property name="Tainted" type="s" access="read"/>
   <property name="FirmwareTimestamp" type="t" access="read"/>
@@ -249,6 +278,14 @@
   <property name="UserspaceTimestampMonotonic" type="t" access="read"/>
   <property name="FinishTimestamp" type="t" access="read"/>
   <property name="FinishTimestampMonotonic" type="t" access="read"/>
+  <property name="GeneratorsStartTimestamp" type="t" access="read"/>
+  <property name="GeneratorsStartTimestampMonotonic" type="t" access="read"/>
+  <property name="GeneratorsFinishTimestamp" type="t" access="read"/>
+  <property name="GeneratorsFinishTimestampMonotonic" type="t" access="read"/>
+  <property name="UnitsLoadStartTimestamp" type="t" access="read"/>
+  <property name="UnitsLoadStartTimestampMonotonic" type="t" access="read"/>
+  <property name="UnitsLoadFinishTimestamp" type="t" access="read"/>
+  <property name="UnitsLoadFinishTimestampMonotonic" type="t" access="read"/>
   <property name="LogLevel" type="s" access="readwrite"/>
   <property name="LogTarget" type="s" access="readwrite"/>
   <property name="NNames" type="u" access="read"/>
@@ -260,7 +297,6 @@
   <property name="ConfirmSpawn" type="b" access="read"/>
   <property name="ShowStatus" type="b" access="read"/>
   <property name="UnitPath" type="as" access="read"/>
-  <property name="ControlGroupHierarchy" type="s" access="read"/>
   <property name="DefaultControllers" type="as" access="read"/>
   <property name="DefaultStandardOutput" type="s" access="read"/>
   <property name="DefaultStandardError" type="s" access="read"/>
