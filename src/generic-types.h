@@ -146,6 +146,19 @@ const QDBusArgument &operator>>(const QDBusArgument &argument, LoginDBusInhibito
 
 typedef struct
 {
+    QString name;
+    QVariant value;
+} LoginDBusScopeProperty;
+Q_DECLARE_METATYPE(LoginDBusScopeProperty)
+typedef QList<LoginDBusScopeProperty> LoginDBusScopePropertyList;
+Q_DECLARE_METATYPE(LoginDBusScopePropertyList)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const LoginDBusScopeProperty &scopeProperty);
+const QDBusArgument &operator>>(const QDBusArgument &argument, LoginDBusScopeProperty &scopeProperty);
+
+
+typedef struct
+{
     QString id;
     QDBusObjectPath path;
 } LoginDBusSeat;

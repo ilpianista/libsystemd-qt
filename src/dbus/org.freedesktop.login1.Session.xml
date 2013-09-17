@@ -35,15 +35,9 @@
     <property name="Leader" type="u" access="read"/>
     <property name="Audit" type="u" access="read"/>
     <property name="Type" type="s" access="read"/>
-    <property name="Class" type="s" access="read">
-      <annotation name="org.qtproject.QtDBus.PropertyGetter" value="sessionClass"/>
-      <annotation name="org.qtproject.QtDBus.PropertySetter" value="setSessionClass"/>
-    </property>
+    <!-- <property name="Class" type="s" access="read"/> -->
     <property name="Active" type="b" access="read"/>
     <property name="State" type="s" access="read"/>
-    <property name="Controllers" type="as" access="read"/>
-    <property name="ResetControllers" type="as" access="read"/>
-    <property name="KillProcesses" type="b" access="read"/>
     <property name="IdleHint" type="b" access="read"/>
     <property name="IdleSinceHint" type="t" access="read"/>
     <property name="IdleSinceHintMonotonic" type="t" access="read"/>

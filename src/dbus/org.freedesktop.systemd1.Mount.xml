@@ -84,6 +84,7 @@
   <property name="KillMode" type="s" access="read"/>
   <property name="KillSignal" type="i" access="read"/>
   <property name="SendSIGKILL" type="b" access="read"/>
+  <property name="SendSIGHUP" type="b" access="read"/>
   <property name="CPUAccounting" type="b" access="read"/>
   <property name="CPUShares" type="t" access="read"/>
   <property name="BlockIOAccounting" type="b" access="read"/>

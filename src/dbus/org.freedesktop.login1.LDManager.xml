@@ -13,6 +13,10 @@
       <arg name="uid" type="u" direction="in"/>
       <arg name="user" type="o" direction="out"/>
     </method>
+    <method name="GetUserByPID">
+      <arg name="pid" type="u" direction="in"/>
+      <arg name="user" type="o" direction="out"/>
+    </method>
     <method name="GetSeat">
       <arg name="id" type="s" direction="in"/>
       <arg name="seat" type="o" direction="out"/>
@@ -37,7 +41,7 @@
       <arg name="leader" type="u" direction="in"/>
       <arg name="service" type="s" direction="in"/>
       <arg name="type" type="s" direction="in"/>
-      <arg name="session_class" type="s" direction="in"/>
+      <!-- <arg name="class" type="s" direction="in"/> -->
       <arg name="seat" type="s" direction="in"/>
       <arg name="vtnr" type="u" direction="in"/>
       <arg name="tty" type="s" direction="in"/>
@@ -45,9 +49,9 @@
       <arg name="remote" type="b" direction="in"/>
       <arg name="remote_user" type="s" direction="in"/>
       <arg name="remote_host" type="s" direction="in"/>
-      <arg name="controllers" type="as" direction="in"/>
-      <arg name="reset_controllers" type="as" direction="in"/>
-      <arg name="kill_processes" type="b" direction="in"/>
+      <arg name="scope_properties" type="a(sv)" direction="in">
+          <annotation name="org.qtproject.QtDBus.QtTypeName.In11" value="LoginDBusScopePropertyList"/>
+      </arg>
       <arg name="id" type="s" direction="out"/>
       <arg name="path" type="o" direction="out"/>
       <arg name="runtime_path" type="o" direction="out"/>
@@ -177,9 +181,6 @@
     <signal name="PrepareForSleep">
       <arg name="active" type="b"/>
     </signal>
-    <property name="ControlGroupHierarchy" type="s" access="read"/>
-    <property name="Controllers" type="as" access="read"/>
-    <property name="ResetControllers" type="as" access="read"/>
     <property name="NAutoVTs" type="u" access="read"/>
     <property name="KillOnlyUsers" type="as" access="read"/>
     <property name="KillExcludeUsers" type="as" access="read"/>

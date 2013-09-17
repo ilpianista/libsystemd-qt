@@ -169,6 +169,22 @@ const QDBusArgument& operator>>(const QDBusArgument& argument, LoginDBusInhibito
     return argument;
 }
 
+QDBusArgument& operator<<(QDBusArgument& argument, const LoginDBusScopeProperty &scopeProperty)
+{
+    argument.beginStructure();
+    argument << scopeProperty.name << scopeProperty.value.toString();
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument& operator>>(const QDBusArgument& argument, LoginDBusScopeProperty &scopeProperty)
+{
+    argument.beginStructure();
+    argument >> scopeProperty.name >> scopeProperty.value;
+    argument.endStructure();
+    return argument;
+}
+
 QDBusArgument& operator<<(QDBusArgument& argument, const LoginDBusSeat& seat)
 {
     argument.beginStructure();
