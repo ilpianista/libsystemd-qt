@@ -6,9 +6,43 @@ set(CMAKE_AUTOMOC ON)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-find_package(Qt5Core REQUIRED)
-find_package(Qt5DBus REQUIRED)
-find_package(Qt5Qml REQUIRED)
+include(CMakeDependentOption)
+
+option(BUILD_WITH_QT4 "Build libsystemd-qt with Qt4 no matter if Qt5 was found" OFF)
+
+if( NOT BUILD_WITH_QT4 )
+    find_package(Qt5Core QUIET)
+    if( Qt5Core_DIR )
+        message(STATUS "Found Qt5! Be aware that Qt5-support is still experimental and not officially supported!")
+
+        macro(qt_wrap_cpp)
+            qt5_wrap_cpp(${ARGN})
+        endmacro()
+        
+        find_package(Qt5DBus REQUIRED)
+        macro(qt_add_dbus_interfaces)
+            qt5_add_dbus_interfaces(${ARGN})
+        endmacro()
+    endif()
+endif()
+
+if( NOT Qt5Core_DIR )
+    message(STATUS "Could not find Qt5, searching for Qt4 instead...")
+    find_package( Qt4 COMPONENTS QtCore QtDBus QtDeclarative REQUIRED )
+    include( ${QT_USE_FILE} )
+
+    macro(qt5_use_modules)
+    endmacro()
+
+    macro(qt_wrap_cpp)
+        qt4_wrap_cpp(${ARGN})
+    endmacro()
+
+    macro(qt_add_dbus_interfaces)
+        qt4_add_dbus_interfaces(${ARGN})
+    endmacro()
+endif()
+
 find_package(PkgConfig)
 
 set(LIB_SUFFIX "" CACHE STRING
@@ -45,8 +79,8 @@ IF(NOT SYSTEMD_FOUND)
     message(FATAL_ERROR "ERROR: Systemd not found")
 ENDIF(NOT SYSTEMD_FOUND)
 
-option(BUILD_QTSYSTEMD_QMLPLUGIN "Build Qml plugin" ON)
-option(BUILD_QTSYSTEMD_TESTS "Build Tests" ON)
+cmake_dependent_option(BUILD_QTSYSTEMD_QMLPLUGIN "Build Qml plugin" ON "Qt5Core_DIR" OFF)
+cmake_dependent_option(BUILD_QTSYSTEMD_TESTS "Build Tests" ON "Qt5Core_DIR" OFF)
 
 add_subdirectory(src)
 if (BUILD_QTSYSTEMD_QMLPLUGIN)
