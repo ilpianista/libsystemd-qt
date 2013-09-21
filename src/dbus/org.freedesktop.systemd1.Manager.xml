@@ -99,14 +99,16 @@
   <method name="ClearJobs"/>
   <method name="ResetFailed"/>
   <method name="ListUnits">
-   <arg name="units" type="a(ssssssouso)" direction="out">
     <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitList"/>
-   </arg>
+    <arg name="units" type="a(ssssssouso)" direction="out">
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitList"/>
+     </arg>
   </method>
   <method name="ListJobs">
-   <arg name="jobs" type="a(usssoo)" direction="out">
     <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusJobList"/>
-   </arg>
+    <arg name="jobs" type="a(usssoo)" direction="out">
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusJobList"/>
+     </arg>
   </method>
   <method name="Subscribe"/>
   <method name="Unsubscribe"/>
@@ -143,6 +145,7 @@
    <arg name="set" type="as" direction="in"/>
   </method>
   <method name="ListUnitFiles">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileListList"/>
    <arg name="files" type="a(ss)" direction="out">
     <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileListList"/>
    </arg>
@@ -152,6 +155,7 @@
    <arg name="state" type="s" direction="out"/>
   </method>
   <method name="EnableUnitFiles">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
    <arg name="files" type="as" direction="in"/>
    <arg name="runtime" type="b" direction="in"/>
    <arg name="force" type="b" direction="in"/>
@@ -161,6 +165,7 @@
    </arg>
   </method>
   <method name="DisableUnitFiles">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
    <arg name="files" type="as" direction="in"/>
    <arg name="runtime" type="b" direction="in"/>
    <arg name="changes" type="a(sss)" direction="out">
@@ -168,6 +173,7 @@
    </arg>
   </method>
   <method name="ReenableUnitFiles">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
    <arg name="files" type="as" direction="in"/>
    <arg name="runtime" type="b" direction="in"/>
    <arg name="force" type="b" direction="in"/>
@@ -177,6 +183,7 @@
    </arg>
   </method>
   <method name="LinkUnitFiles">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
    <arg name="files" type="as" direction="in"/>
    <arg name="runtime" type="b" direction="in"/>
    <arg name="force" type="b" direction="in"/>
@@ -185,6 +192,7 @@
    </arg>
   </method>
   <method name="PresetUnitFiles">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
    <arg name="files" type="as" direction="in"/>
    <arg name="runtime" type="b" direction="in"/>
    <arg name="force" type="b" direction="in"/>
@@ -194,6 +202,7 @@
    </arg>
   </method>
   <method name="MaskUnitFiles">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
    <arg name="files" type="as" direction="in"/>
    <arg name="runtime" type="b" direction="in"/>
    <arg name="force" type="b" direction="in"/>
@@ -202,6 +211,7 @@
    </arg>
   </method>
   <method name="UnmaskUnitFiles">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
    <arg name="files" type="as" direction="in"/>
    <arg name="runtime" type="b" direction="in"/>
    <arg name="changes" type="a(sss)" direction="out">
@@ -209,6 +219,7 @@
    </arg>
   </method>
   <method name="SetDefaultTarget">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
    <arg name="files" type="as" direction="in"/>
    <arg name="changes" type="a(sss)" direction="out">
     <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
@@ -218,6 +229,7 @@
    <arg name="name" type="s" direction="out"/>
   </method>
   <method name="SetUnitProperties">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="DBusUnitFilePropertyList"/>
    <arg name="name" type="s" direction="in"/>
    <arg name="runtime" type="b" direction="in"/>
    <arg name="properties" type="a(sv)" direction="in">
@@ -225,6 +237,8 @@
    </arg>
   </method>
   <method name="StartTransientUnit">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="DBusUnitFilePropertyList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName.In3" value="ManagerDBusAuxList"/>
    <arg name="name" type="s" direction="in"/>
    <arg name="mode" type="s" direction="in"/>
    <arg name="properties" type="a(sv)" direction="in">

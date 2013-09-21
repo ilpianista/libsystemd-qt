@@ -36,6 +36,7 @@
   </method>
   <method name="ResetFailed"/>
   <method name="SetProperties">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="DBusUnitFilePropertyList"/>
    <arg name="runtime" type="b" direction="in"/>
    <arg name="properties" type="a(sv)" direction="in">
     <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="DBusUnitFilePropertyList"/>

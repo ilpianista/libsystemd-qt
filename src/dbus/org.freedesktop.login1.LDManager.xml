@@ -22,21 +22,25 @@
       <arg name="seat" type="o" direction="out"/>
     </method>
     <method name="ListSessions">
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="LoginDBusSessionList"/>
       <arg name="sessions" type="a(susso)" direction="out">
           <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="LoginDBusSessionList"/>
       </arg>
     </method>
     <method name="ListUsers">
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="LoginDBusUserList"/>
       <arg name="users" type="a(uso)" direction="out">
           <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="LoginDBusUserList"/>
       </arg>
     </method>
     <method name="ListSeats">
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="LoginDBusSeatList"/>
       <arg name="seats" type="a(so)" direction="out">
           <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="LoginDBusSeatList"/>
       </arg>
     </method>
     <method name="CreateSession">
+      <annotation name="org.qtproject.QtDBus.QtTypeName.In11" value="LoginDBusScopePropertyList"/>
       <arg name="uid" type="u" direction="in"/>
       <arg name="leader" type="u" direction="in"/>
       <arg name="service" type="s" direction="in"/>
@@ -147,6 +151,7 @@
       <arg name="fd" type="h" direction="out"/>
     </method>
     <method name="ListInhibitors">
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="LoginDBusInhibitorList"/>
       <arg name="inhibitors" type="a(ssssuu)" direction="out">
           <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="LoginDBusInhibitorList"/>
       </arg>
