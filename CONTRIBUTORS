@@ -1,0 +1,11 @@
+This list contains list of contributors to the sddm. Names are sorted by number
+of commits at time of this writing. Commit data has been generated using:
+
+git shortlog -s -e -n
+
+Commit counts have ben removed, since they change pretty frequently.
+
+Andrea Scarpino <me@andreascarpino.it>
+Dario Freddi <dario.freddi@ispirata.com>
+Tom Gundersen <teg@jklm.no>
+Uwe L. Korn <uwelk@xhochy.com>
