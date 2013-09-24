@@ -1,5 +1,5 @@
 set_source_files_properties(${INTERFACE_INTROSPECTION_XML_FILES}
-                            PROPERTIES NO_NAMESPACE TRUE)
+                               PROPERTIES NO_NAMESPACE TRUE)
 
 set(INTERFACE_INTROSPECTION_XML_FILES
     introspection/org.freedesktop.hostname1.xml
@@ -21,10 +21,9 @@ set(INTERFACE_INTROSPECTION_XML_FILES
     introspection/org.freedesktop.systemd1.Timer.xml
     introspection/org.freedesktop.systemd1.Unit.xml
     introspection/org.freedesktop.timedate1.xml
-    )
+)
 
-find_package(Qt4 COMPONENTS QTDBUS)
 # this one conflicts with systemd1.Manager, so set the name manually
-qt4_add_dbus_interface(QtSystemd_PART_SRCS introspection/org.freedesktop.login1.Manager.xml
+qt_add_dbus_interfaces(QtSystemd_PART_SRCS introspection/org.freedesktop.login1.Manager.xml
                        ldmanagerinterface)
-qt4_add_dbus_interfaces(QtSystemd_PART_SRCS ${INTERFACE_INTROSPECTION_XML_FILES})
+qt_add_dbus_interfaces(QtSystemd_PART_SRCS ${INTERFACE_INTROSPECTION_XML_FILES})

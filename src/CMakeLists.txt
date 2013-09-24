@@ -38,15 +38,14 @@ set(INTERFACE_INTROSPECTION_XML_FILES
     dbus/org.freedesktop.systemd1.Timer.xml
     dbus/org.freedesktop.systemd1.Unit.xml
     dbus/org.freedesktop.timedate1.xml
-    )
+)
 
 set_property(SOURCE ${INTERFACE_INTROSPECTION_XML_FILES}
-             PROPERTY INCLUDE generic-types.h)
+              PROPERTY INCLUDE generic-types.h)
 
 set_source_files_properties(${INTERFACE_INTROSPECTION_XML_FILES}
-                            PROPERTIES NO_NAMESPACE TRUE)
+                               PROPERTIES NO_NAMESPACE TRUE)
 
-# Does not work with qdbusxml2cpp 5.0.1
 qt_add_dbus_interfaces(QtSystemd_PART_SRCS ${INTERFACE_INTROSPECTION_XML_FILES})
 
 add_library(QtSystemd SHARED ${QtSystemd_PART_SRCS})

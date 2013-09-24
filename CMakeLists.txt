@@ -18,7 +18,7 @@ if( NOT BUILD_WITH_QT4 )
         macro(qt_wrap_cpp)
             qt5_wrap_cpp(${ARGN})
         endmacro()
-        
+
         find_package(Qt5DBus REQUIRED)
         macro(qt_add_dbus_interfaces)
             qt5_add_dbus_interfaces(${ARGN})

@@ -20,9 +20,9 @@
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
-#include "../src/unit.h"
-
 #include <QtQml/QQmlListProperty>
+
+#include "../src/unit.h"
 
 using namespace Systemd;
 
