@@ -57,7 +57,7 @@ set_property(TARGET QtSystemd PROPERTY VERSION ${VERSION})
 set_property(TARGET QtSystemd PROPERTY SOVERSION 0)
 
 set_target_properties(QtSystemd PROPERTIES
-  PUBLIC_HEADER ${QtSystemd_HEADERS})
+  PUBLIC_HEADER "${QtSystemd_HEADERS}")
 
 install(TARGETS QtSystemd
   # IMPORTANT: Add the QtSystemd library to the "export-set"
