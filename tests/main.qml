@@ -19,32 +19,78 @@
 
 import QtQuick 2.0
 import QtQuick.Controls 1.0
+import QtQuick.Layouts 1.0
+
 import org.qtsystemd 1.0
 
-Rectangle {
-    width: 300
-    height: 400
+GridLayout {
+    id: layout
+    rows: 2
+    width: 600
+    height: 300
+    columns: 4
 
-    System {
-        id: systemd
+    Text {
+        Layout.row: 1
+        Layout.column: 1
+        Layout.columnSpan: 4
+        Layout.fillWidth: true
+
+        text: "Select a service to change its status."
     }
 
     TableView {
-        anchors.fill: parent
-        sortIndicatorVisible: true
+        Layout.row: 2
+        Layout.rowSpan: 2
+        Layout.column: 1
+        Layout.fillHeight: true
+        Layout.preferredWidth: 300
 
-        TableViewColumn { role: "id"; title: "Service"; width: 200
-            delegate: Text {
-                text: styleData.value.slice(0, -8) // Hide the .service part from the name
-            }
+        System {
+            id: systemd
         }
 
-        TableViewColumn { role: "activeState"; title: "Status"; width: 40
+        TableViewColumn { role: "activeState"; title: "On"; width: 30
             delegate: CheckBox {
+                x: 8 //ugly workaround to center the checkbox
                 checked: if ( styleData.value == "active" ) true; else false
             }
         }
 
+        TableViewColumn { role: "description"; title: "Service"; width: 250 }
+
         model: systemd.services
+    }
+
+    Text {
+        Layout.row: 2
+        Layout.column: 2
+        Layout.fillWidth: true
+
+        text: "unit file name goes here"
+    }
+
+    Button {
+        Layout.row: 2
+        Layout.column: 3
+
+        text: "Start/Stop"
+    }
+
+    Button {
+        Layout.row: 2
+        Layout.column: 4
+
+        text: "Enable/Disable"
+    }
+
+    TextArea {
+        Layout.row: 3
+        Layout.column: 2
+        Layout.columnSpan: 3
+        Layout.fillHeight: true
+        Layout.fillWidth: true
+
+        text: "journal log goes here"
     }
 }
