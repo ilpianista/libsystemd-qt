@@ -33,8 +33,10 @@ class Unit : public QObject
 
     Q_PROPERTY(QString id READ id CONSTANT)
     Q_PROPERTY(QString type READ type CONSTANT)
+    Q_PROPERTY(QString description READ description CONSTANT)
     Q_PROPERTY(QString loadState READ loadState NOTIFY loadStateChanged)
     Q_PROPERTY(QString activeState READ activeState NOTIFY activeStateChanged)
+    Q_PROPERTY(QString jobId READ jobId NOTIFY jobIdChanged)
 
 public:
     explicit Unit(const QString &path, QObject *parent = 0);
@@ -54,6 +56,7 @@ public:
 Q_SIGNALS:
     void loadStateChanged();
     void activeStateChanged();
+    void jobIdChanged();
 
 protected:
     UnitPrivate *d_ptr;
