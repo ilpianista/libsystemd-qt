@@ -18,43 +18,33 @@
  ***************************************************************************/
 
 import QtQuick 2.0
+import QtQuick.Controls 1.0
 import org.qtsystemd 1.0
 
 Rectangle {
-    width: 250
+    width: 300
     height: 400
 
     System {
         id: systemd
     }
 
-    Component {
-        id: unitDelegate
+    TableView {
+        anchors.fill: parent
+        sortIndicatorVisible: true
 
-        Row {
-            spacing: 10
-            Text { text: id }
-            Loader { sourceComponent: columnSeparator; height: parent.height }
-            Text { text: type }
-            Loader { sourceComponent: columnSeparator; height: parent.height }
-            Text { text: loadState }
-            Loader { sourceComponent: columnSeparator; height: parent.height }
-            Text { text: activeState }
-
-            Component {
-                id: columnSeparator
-                Rectangle {
-                    width: 1
-                    color: "black"
-                    opacity: 0.3
-                }
+        TableViewColumn { role: "id"; title: "Service"; width: 200
+            delegate: Text {
+                text: styleData.value.slice(0, -8) // Hide the .service part from the name
             }
         }
-    }
 
-    ListView {
-        anchors.fill: parent
-        model: systemd.units
-        delegate: unitDelegate
+        TableViewColumn { role: "activeState"; title: "Status"; width: 40
+            delegate: CheckBox {
+                checked: if ( styleData.value == "active" ) true; else false
+            }
+        }
+
+        model: systemd.services
     }
 }
