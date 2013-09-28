@@ -31,15 +31,19 @@ class System : public QObject
     Q_OBJECT
 
     Q_PROPERTY(QQmlListProperty<Systemd::Unit> units READ units CONSTANT)
+    Q_PROPERTY(QQmlListProperty<Systemd::Unit> services READ services CONSTANT)
 
 public:
     System(QObject *parent = 0);
 
     int unitsCount() const;
+    int servicesCount() const;
     QQmlListProperty<Unit> units();
+    QQmlListProperty<Unit> services();
 
 private:
     QList<Unit *> m_units;
+    QList<Unit *> m_services;
 };
 
 #endif //SYSTEM_H

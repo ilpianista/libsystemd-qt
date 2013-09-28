@@ -25,11 +25,6 @@ System::System(QObject* parent): QObject(parent)
 {
 }
 
-int System::unitsCount() const
-{
-    return m_units.size();
-}
-
 Unit *unitAt(QQmlListProperty<Unit> *property, int index)
 {
     return static_cast<QList<Unit*> *>(property->data)->at(index);
@@ -40,9 +35,30 @@ int unitsSize(QQmlListProperty<Unit> *property)
     return static_cast< QList<Unit *> *>(property->data)->size();
 }
 
+int System::unitsCount() const
+{
+    return m_units.size();
+}
+
+int System::servicesCount() const
+{
+    return m_services.size();
+}
+
 QQmlListProperty<Unit> System::units()
 {
     m_units = Systemd::listUnits();
 
     return QQmlListProperty<Unit>(this, &m_units, &unitsSize, &unitAt);
+}
+
+QQmlListProperty<Unit> System::services()
+{
+    Q_FOREACH (Unit* unit, Systemd::listUnits()) {
+        if (unit->type() == "service") {
+            m_services << unit;
+        }
+    }
+
+    return QQmlListProperty<Unit>(this, &m_services, &unitsSize, &unitAt);
 }
