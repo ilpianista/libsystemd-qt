@@ -33,7 +33,7 @@ class Unit : public QObject
 
     Q_PROPERTY(QString id READ id CONSTANT)
     Q_PROPERTY(QString type READ type CONSTANT)
-    Q_PROPERTY(QString loadState READ activeState NOTIFY loadStateChanged)
+    Q_PROPERTY(QString loadState READ loadState NOTIFY loadStateChanged)
     Q_PROPERTY(QString activeState READ activeState NOTIFY activeStateChanged)
 
 public:
