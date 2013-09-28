@@ -8,12 +8,12 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 include(CMakeDependentOption)
 
-option(BUILD_WITH_QT4 "Build libsystemd-qt with Qt4 no matter if Qt5 was found" OFF)
+option(BUILD_WITH_QT4 "Build with Qt4 no matter if Qt5 is found" OFF)
 
 if( NOT BUILD_WITH_QT4 )
     find_package(Qt5Core QUIET)
     if( Qt5Core_DIR )
-        message(STATUS "Found Qt5! Be aware that Qt5-support is still experimental and not officially supported!")
+        message(STATUS "Found Qt5!")
 
         macro(qt_wrap_cpp)
             qt5_wrap_cpp(${ARGN})
@@ -28,6 +28,7 @@ endif()
 
 if( NOT Qt5Core_DIR )
     message(STATUS "Could not find Qt5, searching for Qt4 instead...")
+    message(STATUS "Be aware that Qt4 support is not officially supported!")
     find_package( Qt4 COMPONENTS QtCore QtDBus QtDeclarative REQUIRED )
     include( ${QT_USE_FILE} )
 
