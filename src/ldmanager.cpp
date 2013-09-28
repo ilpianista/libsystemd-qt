@@ -29,6 +29,11 @@ Systemd::Logind::LogindPrivate::LogindPrivate() :
     ildface(Systemd::Logind::LogindPrivate::LD_DBUS_SERVICE,
             Systemd::Logind::LogindPrivate::LD_DBUS_DAEMON_PATH, QDBusConnection::systemBus())
 {
+    connect(&ildface, SIGNAL(PrepareForShutdown(bool)),
+            this, SLOT(onPrepareForShutdown(bool)));
+    connect(&ildface, SIGNAL(PrepareForSleep(bool)),
+            this, SLOT(onPrepareForSleep(bool)));
+
     connect(&ildface, SIGNAL(SeatNew(QString,QDBusObjectPath)), this,
             SLOT(onSeatNew(QString,QDBusObjectPath)));
     connect(&ildface, SIGNAL(SeatRemoved(QString,QDBusObjectPath)), this,
@@ -203,6 +208,16 @@ void Systemd::Logind::LogindPrivate::suspend(const bool interactive)
     if (reply.isError()) {
         qDebug() << reply.error().message();
     }
+}
+
+void Systemd::Logind::LogindPrivate::onPrepareForShutdown(bool active)
+{
+    emit Logind::Notifier::prepareForShutdown(active);
+}
+
+void Systemd::Logind::LogindPrivate::onPrepareForSleep(bool active)
+{
+    emit Logind::Notifier::prepareForSleep(active);
 }
 
 Systemd::Logind::Permission Systemd::Logind::LogindPrivate::stringToPermission(const QString &permission)
