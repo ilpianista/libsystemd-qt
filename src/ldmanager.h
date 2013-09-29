@@ -49,6 +49,8 @@ namespace Logind
         Q_OBJECT
 
     Q_SIGNALS:
+        void prepareForSleep(bool active);
+        void prepareForShutdown(bool active);
         void seatNew(const QString &seatPath);
         void seatRemoved(const QString &seatPath);
     };

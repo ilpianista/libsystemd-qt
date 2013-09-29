@@ -53,6 +53,8 @@ public:
     void suspend(const bool interactive);
 
 protected Q_SLOTS:
+    void onPrepareForShutdown(bool active);
+    void onPrepareForSleep(bool active);
     void onSeatNew(const QString &id, const QDBusObjectPath &seat);
     void onSeatRemoved(const QString &id, const QDBusObjectPath &seat);
 
