@@ -29,7 +29,7 @@ endif()
 if( NOT Qt5Core_DIR )
     message(STATUS "Could not find Qt5, searching for Qt4 instead...")
     message(STATUS "Be aware that Qt4 support is not officially supported!")
-    find_package( Qt4 COMPONENTS QtCore QtDBus QtDeclarative REQUIRED )
+    find_package( Qt4 COMPONENTS QtCore QtDBus REQUIRED )
     include( ${QT_USE_FILE} )
 
     macro(qt5_use_modules)
@@ -52,7 +52,6 @@ set(LIB_SUFFIX "" CACHE STRING
 # Offer the user the choice of overriding the installation directories
 set(INSTALL_LIB_DIR lib${LIB_SUFFIX} CACHE PATH
     "Installation directory for libraries")
-set(INSTALL_BIN_DIR bin CACHE PATH "Installation directory for executables")
 set(INSTALL_INCLUDE_DIR include CACHE PATH
     "Installation directory for header files")
 if(WIN32 AND NOT CYGWIN)
@@ -64,15 +63,12 @@ set(INSTALL_CMAKE_DIR ${DEF_INSTALL_CMAKE_DIR} CACHE PATH
     "Installation directory for CMake files")
 
 # Make relative paths absolute (needed later on)
-foreach(p LIB BIN INCLUDE CMAKE)
+foreach(p LIB INCLUDE CMAKE)
   set(var INSTALL_${p}_DIR)
   if(NOT IS_ABSOLUTE "${${var}}")
     set(${var} "${CMAKE_INSTALL_PREFIX}/${${var}}")
   endif()
 endforeach()
-
-set(QT5_IMPORTS_DIR ${INSTALL_LIB_DIR}/qt/imports CACHE STRING
-    "Define the Qt5 imports dir path")
 
 pkg_check_modules(SYSTEMD "libsystemd-daemon libsystemd-login" REQUIRED)
 
@@ -80,13 +76,9 @@ IF(NOT SYSTEMD_FOUND)
     message(FATAL_ERROR "ERROR: Systemd not found")
 ENDIF(NOT SYSTEMD_FOUND)
 
-cmake_dependent_option(BUILD_QTSYSTEMD_QMLPLUGIN "Build Qml plugin" ON "Qt5Core_DIR" OFF)
 cmake_dependent_option(BUILD_QTSYSTEMD_TESTS "Build Tests" ON "Qt5Core_DIR" OFF)
 
 add_subdirectory(src)
-if (BUILD_QTSYSTEMD_QMLPLUGIN)
-    add_subdirectory(qmlplugin)
-endif (BUILD_QTSYSTEMD_QMLPLUGIN)
 if (BUILD_QTSYSTEMD_TESTS)
     add_subdirectory(tests)
 endif (BUILD_QTSYSTEMD_TESTS)
