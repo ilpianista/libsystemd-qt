@@ -48,7 +48,7 @@ void Systemd::SystemdPrivate::init()
     qDBusRegisterMetaType<UnitDBusJob>();
 }
 
-bool Systemd::SystemdPrivate::disableUnitFiles(const QStringList &files, bool runtime)
+bool Systemd::SystemdPrivate::disableUnitFiles(const QStringList &files, const bool runtime)
 {
     qDBusRegisterMetaType<DBusUnitFileChange>();
     qDBusRegisterMetaType<DBusUnitFileChangeList>();
@@ -63,7 +63,7 @@ bool Systemd::SystemdPrivate::disableUnitFiles(const QStringList &files, bool ru
     return true;
 }
 
-bool Systemd::SystemdPrivate::enableUnitFiles(const QStringList &files, bool runtime, bool force)
+bool Systemd::SystemdPrivate::enableUnitFiles(const QStringList &files, const bool runtime, const bool force)
 {
     qDBusRegisterMetaType<DBusUnitFileChange>();
     qDBusRegisterMetaType<DBusUnitFileChangeList>();
@@ -269,12 +269,12 @@ QString Systemd::SystemdPrivate::modeToString(const Systemd::Mode mode)
     }
 }
 
-bool Systemd::disableUnitFiles(const QStringList &files, bool runtime)
+bool Systemd::disableUnitFiles(const QStringList &files, const bool runtime)
 {
     return globalSystemd()->disableUnitFiles(files, runtime);
 }
 
-bool Systemd::enableUnitFiles(const QStringList &files, bool runtime, bool force)
+bool Systemd::enableUnitFiles(const QStringList &files, const bool runtime, const bool force)
 {
     return globalSystemd()->enableUnitFiles(files, runtime, force);
 }

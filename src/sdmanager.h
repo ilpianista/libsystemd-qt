@@ -59,12 +59,12 @@ namespace Systemd
     /*
      * Disable a unit in the system. Return false if something goes wrong.
      */
-    SDQT_EXPORT bool disableUnitFiles(const QStringList &files, bool runtime);
+    SDQT_EXPORT bool disableUnitFiles(const QStringList &files, const bool runtime);
 
     /*
      * Enable a unit in the system. Return false if something goes wrong.
      */
-    SDQT_EXPORT bool enableUnitFiles(const QStringList &files, bool runtime, bool force);
+    SDQT_EXPORT bool enableUnitFiles(const QStringList &files, const bool runtime, const bool force);
 
     SDQT_EXPORT QString getJob(const uint id);
 
