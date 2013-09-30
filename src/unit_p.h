@@ -42,6 +42,7 @@ public:
     QString subState;
     QString following;
     QString jobId;
+    QString unitFileState;
 };
 }
 

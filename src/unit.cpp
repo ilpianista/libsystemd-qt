@@ -31,6 +31,7 @@ Systemd::UnitPrivate::UnitPrivate(const QString &path, QObject *parent) :
     subState = unitIface.subState();
     following = unitIface.following();
     jobId = unitIface.job().id;
+    unitFileState = unitIface.unitFileState();
 }
 
 Systemd::UnitPrivate::~UnitPrivate()
@@ -111,4 +112,10 @@ QString Systemd::Unit::jobId() const
 {
     Q_D(const Unit);
     return d->jobId;
+}
+
+QString Systemd::Unit::unitFileState() const
+{
+    Q_D(const Unit);
+    return d->unitFileState;
 }

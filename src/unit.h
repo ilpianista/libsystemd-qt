@@ -37,6 +37,7 @@ class Unit : public QObject
     Q_PROPERTY(QString loadState READ loadState NOTIFY loadStateChanged)
     Q_PROPERTY(QString activeState READ activeState NOTIFY activeStateChanged)
     Q_PROPERTY(QString jobId READ jobId NOTIFY jobIdChanged)
+    Q_PROPERTY(QString unitFileState READ unitFileState NOTIFY unitFileStateChanged)
 
 public:
     explicit Unit(const QString &path, QObject *parent = 0);
@@ -52,11 +53,13 @@ public:
     QString subState() const;
     QString following() const;
     QString jobId() const;
+    QString unitFileState() const;
 
 Q_SIGNALS:
     void loadStateChanged();
     void activeStateChanged();
     void jobIdChanged();
+    void unitFileStateChanged();
 
 protected:
     UnitPrivate *d_ptr;
