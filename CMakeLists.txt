@@ -52,7 +52,7 @@ set(LIB_SUFFIX "" CACHE STRING
 # Offer the user the choice of overriding the installation directories
 set(INSTALL_LIB_DIR lib${LIB_SUFFIX} CACHE PATH
     "Installation directory for libraries")
-set(INSTALL_INCLUDE_DIR include CACHE PATH
+set(INSTALL_INCLUDE_DIR include/QtSystemd CACHE PATH
     "Installation directory for header files")
 if(WIN32 AND NOT CYGWIN)
   set(DEF_INSTALL_CMAKE_DIR CMake)
@@ -83,36 +83,22 @@ if (BUILD_QTSYSTEMD_TESTS)
     add_subdirectory(tests)
 endif (BUILD_QTSYSTEMD_TESTS)
 
-# CMake Config Logic
-# Add all targets to the build-tree export set
-export(TARGETS QtSystemd
-  FILE "${PROJECT_BINARY_DIR}/QtSystemdTargets.cmake")
+# create a Config.cmake and a ConfigVersion.cmake file and install them
+set(CMAKECONFIG_INSTALL_DIR "${INSTALL_LIB_DIR}/cmake/QtSystemd")
 
-# Export the package for use from the build-tree
-# (this registers the build-tree with a global CMake-registry)
-export(PACKAGE QtSystemd)
+include(CMakePackageConfigHelpers)
 
-# Create the QtSystemdConfig.cmake and QtSystemdConfigVersion files
-file(RELATIVE_PATH REL_INCLUDE_DIR "${INSTALL_CMAKE_DIR}"
-   "${INSTALL_INCLUDE_DIR}")
-# ... for the build tree
-set(CONF_INCLUDE_DIRS "${PROJECT_SOURCE_DIR}" "${PROJECT_BINARY_DIR}")
-configure_file(QtSystemdConfig.cmake.in
-  "${PROJECT_BINARY_DIR}/QtSystemdConfig.cmake" @ONLY)
-# ... for the install tree
-set(CONF_INCLUDE_DIRS "\${QTSYSTEMD_CMAKE_DIR}/${REL_INCLUDE_DIR}")
-configure_file(QtSystemdConfig.cmake.in
-  "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/QtSystemdConfig.cmake" @ONLY)
-# ... for both
-configure_file(QtSystemdConfigVersion.cmake.in
-  "${PROJECT_BINARY_DIR}/QtSystemdConfigVersion.cmake" @ONLY)
+configure_package_config_file(
+  "${CMAKE_CURRENT_SOURCE_DIR}/QtSystemdConfig.cmake.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/QtSystemdConfig.cmake"
+  INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
+  PATH_VARS CMAKE_INSTALL_PREFIX
+)
 
-# Install the QtSystemdConfig.cmake and QtSystemdConfigVersion.cmake
 install(FILES
-  "${PROJECT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/QtSystemdConfig.cmake"
-  "${PROJECT_BINARY_DIR}/QtSystemdConfigVersion.cmake"
-  DESTINATION "${INSTALL_CMAKE_DIR}" COMPONENT dev)
+  "${CMAKE_CURRENT_BINARY_DIR}/QtSystemdConfig.cmake"
+  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+  COMPONENT Devel
+)
 
-# Install the export set for use with the install-tree
-install(EXPORT QtSystemdTargets DESTINATION
-  "${INSTALL_CMAKE_DIR}" COMPONENT dev)
+install(EXPORT QtSystemdTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE QtSystemdTargets.cmake)
