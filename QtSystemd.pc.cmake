@@ -1,7 +1,7 @@
 prefix=@CMAKE_INSTALL_PREFIX@
 exec_prefix=${prefix}
 libdir=@CMAKE_INSTALL_PREFIX@/lib@LIB_SUFFIX@
-includedir=${prefix}/include
+includedir=${prefix}/include/QtSystemd
 
 Name: QtSystemd
 Description: Convenience Qt library for Systemd
