@@ -145,9 +145,9 @@
    <arg name="set" type="as" direction="in"/>
   </method>
   <method name="ListUnitFiles">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileListList"/>
+     <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitFileList"/>
    <arg name="files" type="a(ss)" direction="out">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileListList"/>
+     <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitFileList"/>
    </arg>
   </method>
   <method name="GetUnitFileState">

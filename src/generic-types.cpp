@@ -103,18 +103,18 @@ const QDBusArgument& operator>>(const QDBusArgument& argument, DBusUnitFileChang
     return argument;
 }
 
-QDBusArgument& operator<<(QDBusArgument& argument, const DBusUnitFileList& unitFileList)
+QDBusArgument& operator<<(QDBusArgument& argument, const ManagerDBusUnitFile& unitFile)
 {
     argument.beginStructure();
-    argument << unitFileList.path << unitFileList.state;
+    argument << unitFile.path << unitFile.state;
     argument.endStructure();
     return argument;
 }
 
-const QDBusArgument& operator>>(const QDBusArgument& argument, DBusUnitFileList& unitFileList)
+const QDBusArgument& operator>>(const QDBusArgument& argument, ManagerDBusUnitFile& unitFile)
 {
     argument.beginStructure();
-    argument >> unitFileList.path >> unitFileList.state;
+    argument >> unitFile.path >> unitFile.state;
     argument.endStructure();
     return argument;
 }

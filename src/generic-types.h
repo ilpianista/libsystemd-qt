@@ -98,13 +98,12 @@ typedef struct
 {
     QString path;
     QString state;
-} DBusUnitFileList;
-Q_DECLARE_METATYPE(DBusUnitFileList)
-typedef QList<DBusUnitFileList> DBusUnitFileListList;
-Q_DECLARE_METATYPE(DBusUnitFileListList);
+} ManagerDBusUnitFile;
+Q_DECLARE_METATYPE(ManagerDBusUnitFile)
+typedef QList<ManagerDBusUnitFile> ManagerDBusUnitFileList;
 
-QDBusArgument &operator<<(QDBusArgument &argument, const DBusUnitFileList &unitFileList);
-const QDBusArgument &operator>>(const QDBusArgument &argument, DBusUnitFileList &unitFileList);
+QDBusArgument &operator<<(QDBusArgument &argument, const ManagerDBusUnitFile &unitFile);
+const QDBusArgument &operator>>(const QDBusArgument &argument, ManagerDBusUnitFile &unitFile);
 
 typedef struct
 {
