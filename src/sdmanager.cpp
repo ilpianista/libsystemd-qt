@@ -165,7 +165,7 @@ QList<Systemd::Unit*> Systemd::SystemdPrivate::listUnits()
     return loaded;
 }
 
-QList<Systemd::Unit*> Systemd::SystemdPrivate::listUnitFiles()
+QStringList Systemd::SystemdPrivate::listUnitFiles()
 {
     qDBusRegisterMetaType<ManagerDBusUnitFile>();
     qDBusRegisterMetaType<ManagerDBusUnitFileList>();
@@ -174,15 +174,15 @@ QList<Systemd::Unit*> Systemd::SystemdPrivate::listUnitFiles()
 
     if (reply.isError()) {
         qDebug() << reply.error().message();
-        return QList<Systemd::Unit*>();
+        return QStringList();
     }
 
-    QList<Systemd::Unit*> unitFiles;
+    QStringList unitFiles;
     const QDBusMessage message = reply.reply();
     if (message.type() == QDBusMessage::ReplyMessage) {
         const ManagerDBusUnitFileList files = qdbus_cast<ManagerDBusUnitFileList>(message.arguments().first());
         Q_FOREACH(const ManagerDBusUnitFile file, files) {
-            unitFiles.append(new Systemd::Unit(file.path, this));
+            unitFiles.append(file.path);
         }
     }
 
@@ -328,7 +328,7 @@ QList<Systemd::Unit*> Systemd::listUnits()
     return globalSystemd()->listUnits();
 }
 
-QList<Systemd::Unit*> Systemd::listUnitFiles()
+QStringList Systemd::listUnitFiles()
 {
     return globalSystemd()->listUnitFiles();
 }
