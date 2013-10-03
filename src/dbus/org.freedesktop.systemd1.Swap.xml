@@ -42,7 +42,7 @@
   <property name="CPUSchedulingPolicy" type="i" access="read"/>
   <property name="CPUSchedulingPriority" type="i" access="read"/>
   <property name="CPUAffinity" type="ay" access="read"/>
-  <property name="TimerSlackNS" type="t" access="read"/>
+  <property name="TimerSlackNSec" type="t" access="read"/>
   <property name="CPUSchedulingResetOnFork" type="b" access="read"/>
   <property name="NonBlocking" type="b" access="read"/>
   <property name="StandardInput" type="s" access="read"/>
@@ -95,7 +95,6 @@
   </property>
   <property name="MemoryAccounting" type="b" access="read"/>
   <property name="MemoryLimit" type="t" access="read"/>
-  <property name="MemorySoftLimit" type="t" access="read"/>
   <property name="DevicePolicy" type="s" access="read"/>
   <property name="DeviceAllow" type="a(ss)" access="read">
    <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupDeviceAllowList"/>

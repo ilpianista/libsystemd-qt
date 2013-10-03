@@ -11,8 +11,8 @@
     <property name="Timestamp" type="t" access="read"/>
     <property name="TimestampMonotonic" type="t" access="read"/>
     <property name="RuntimePath" type="s" access="read"/>
-    <property name="DefaultControlGroup" type="s" access="read"/>
     <property name="Service" type="s" access="read"/>
+    <property name="Slice" type="s" access="read"/>
     <property name="Display" type="(so)" access="read">
       <annotation name="org.qtproject.QtDBus.QtTypeName" value="UserDBusSession"/>
     </property>
