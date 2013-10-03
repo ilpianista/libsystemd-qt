@@ -79,6 +79,11 @@ namespace Systemd
      */
     SDQT_EXPORT QList<Unit*> listUnits();
 
+    /*
+     * Lists the name of all unit files on disk.
+     */
+    SDQT_EXPORT QList<Unit*> listUnitFiles();
+
     SDQT_EXPORT QString loadUnit(const QString &name);
 
     SDQT_EXPORT bool reloadUnit(const QString &name, const Mode mode);

@@ -45,6 +45,7 @@ public:
     QString getUnitByPID(const uint pid);
     QList<Job*> listJobs();
     QList<Unit*> listUnits();
+    QList<Unit*> listUnitFiles();
     QString loadUnit(const QString &name);
     bool reloadUnit(const QString &name, const Mode mode);
     bool restartUnit(const QString &name, const Mode mode);

@@ -72,6 +72,13 @@ public:
         }
     }
 
+    static void listUnitFiles()
+    {
+        Q_FOREACH(Systemd::Unit *u, Systemd::listUnitFiles()) {
+            qDebug() << u->id();
+        }
+    }
+
     static void loadUnit()
     {
         qDebug() << Systemd::loadUnit("mysqld.service");
@@ -117,6 +124,8 @@ int main(int argc, char* argv[])
     SDManagerTest::listJobs();
 
     SDManagerTest::listUnits();
+
+    SDManagerTest::listUnitFiles();
 
 //     SDManagerTest::loadUnit();
 

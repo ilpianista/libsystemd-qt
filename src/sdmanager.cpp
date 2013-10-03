@@ -165,6 +165,30 @@ QList<Systemd::Unit*> Systemd::SystemdPrivate::listUnits()
     return loaded;
 }
 
+QList<Systemd::Unit*> Systemd::SystemdPrivate::listUnitFiles()
+{
+    qDBusRegisterMetaType<ManagerDBusUnitFile>();
+    qDBusRegisterMetaType<ManagerDBusUnitFileList>();
+    QDBusPendingReply<ManagerDBusUnitFileList> reply = isdface.ListUnitFiles();
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+        return QList<Systemd::Unit*>();
+    }
+
+    QList<Systemd::Unit*> unitFiles;
+    const QDBusMessage message = reply.reply();
+    if (message.type() == QDBusMessage::ReplyMessage) {
+        const ManagerDBusUnitFileList files = qdbus_cast<ManagerDBusUnitFileList>(message.arguments().first());
+        Q_FOREACH(const ManagerDBusUnitFile file, files) {
+            unitFiles.append(new Systemd::Unit(file.path, this));
+        }
+    }
+
+    return unitFiles;
+}
+
 QString Systemd::SystemdPrivate::loadUnit(const QString &name)
 {
     QDBusPendingReply<QDBusObjectPath> reply = isdface.LoadUnit(name);
@@ -302,6 +326,11 @@ QList<Systemd::Job*> Systemd::listJobs()
 QList<Systemd::Unit*> Systemd::listUnits()
 {
     return globalSystemd()->listUnits();
+}
+
+QList<Systemd::Unit*> Systemd::listUnitFiles()
+{
+    return globalSystemd()->listUnitFiles();
 }
 
 QString Systemd::loadUnit(const QString &name)
