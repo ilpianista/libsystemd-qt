@@ -84,7 +84,7 @@ namespace Systemd
      */
     SDQT_EXPORT QStringList listUnitFiles();
 
-    SDQT_EXPORT QString loadUnit(const QString &name);
+    SDQT_EXPORT Unit* loadUnit(const QString &name);
 
     SDQT_EXPORT bool reloadUnit(const QString &name, const Mode mode);
 

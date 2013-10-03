@@ -46,7 +46,7 @@ public:
     QList<Job*> listJobs();
     QList<Unit*> listUnits();
     QStringList listUnitFiles();
-    QString loadUnit(const QString &name);
+    Unit* loadUnit(const QString &name);
     bool reloadUnit(const QString &name, const Mode mode);
     bool restartUnit(const QString &name, const Mode mode);
     bool startUnit(const QString &name, const Mode mode);

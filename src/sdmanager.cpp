@@ -189,17 +189,17 @@ QStringList Systemd::SystemdPrivate::listUnitFiles()
     return unitFiles;
 }
 
-QString Systemd::SystemdPrivate::loadUnit(const QString &name)
+Systemd::Unit* Systemd::SystemdPrivate::loadUnit(const QString &name)
 {
     QDBusPendingReply<QDBusObjectPath> reply = isdface.LoadUnit(name);
     reply.waitForFinished();
 
     if (reply.isError()) {
         qDebug() << reply.error().message();
-        return QString();
+        return NULL;
     }
 
-    return qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
+    return new Systemd::Unit(qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path());
 }
 
 void Systemd::SystemdPrivate::onUnitNew(const QString &id, const QDBusObjectPath &unit)
@@ -333,7 +333,7 @@ QStringList Systemd::listUnitFiles()
     return globalSystemd()->listUnitFiles();
 }
 
-QString Systemd::loadUnit(const QString &name)
+Systemd::Unit* Systemd::loadUnit(const QString &name)
 {
     return globalSystemd()->loadUnit(name);
 }
