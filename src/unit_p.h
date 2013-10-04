@@ -30,8 +30,8 @@ class UnitPrivate
 {
 
 public:
-    UnitPrivate(const QString &path, QObject *parent = 0);
-    ~UnitPrivate();
+    explicit UnitPrivate(const QString &path);
+    virtual ~UnitPrivate();
 
     OrgFreedesktopSystemd1UnitInterface unitIface;
 
@@ -68,7 +68,7 @@ public:
     qulonglong inactiveEnterTimestampMonotonic;
     qulonglong inactiveExitTimestamp;
     qulonglong inactiveExitTimestampMonotonic;
-    QString job;
+    uint job;
     qulonglong jobTimeoutUSec;
     QString loadState;
     QStringList names;

@@ -40,13 +40,13 @@ public:
 
     bool disableUnitFiles(const QStringList &files, const bool runtime);
     bool enableUnitFiles(const QStringList &files, const bool runtime, const bool force);
-    QString getJob(const uint id);
-    QString getUnit(const QString &name);
-    QString getUnitByPID(const uint pid);
-    QList<Job*> listJobs();
-    QList<Unit*> listUnits();
+    Job::Ptr getJob(const uint id);
+    Unit::Ptr getUnit(const QString &name);
+    Unit::Ptr getUnitByPID(const uint pid);
+    QList<Job::Ptr> listJobs();
+    QList<Unit::Ptr> listUnits();
     QStringList listUnitFiles();
-    Unit* loadUnit(const QString &name);
+    Unit::Ptr loadUnit(const QString &name);
     bool reloadUnit(const QString &name, const Mode mode);
     bool restartUnit(const QString &name, const Mode mode);
     bool startUnit(const QString &name, const Mode mode);

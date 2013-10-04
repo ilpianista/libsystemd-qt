@@ -70,7 +70,7 @@ public:
     {
         qDebug();
 
-        Q_FOREACH(Systemd::Job *job, Systemd::listJobs()) {
+        Q_FOREACH(const Systemd::Job::Ptr job, Systemd::listJobs()) {
             qDebug() << job->id();
         }
     }
@@ -79,7 +79,7 @@ public:
     {
         qDebug();
 
-        Q_FOREACH(Systemd::Unit *unit, Systemd::listUnits()) {
+        Q_FOREACH(const Systemd::Unit::Ptr unit, Systemd::listUnits()) {
             qDebug() << unit->id();
         }
     }

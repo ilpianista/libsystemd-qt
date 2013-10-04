@@ -66,25 +66,25 @@ namespace Systemd
      */
     SDQT_EXPORT bool enableUnitFiles(const QStringList &files, const bool runtime, const bool force);
 
-    SDQT_EXPORT QString getJob(const uint id);
+    SDQT_EXPORT Job::Ptr getJob(const uint id);
 
-    SDQT_EXPORT QString getUnit(const QString &name);
+    SDQT_EXPORT Unit::Ptr getUnit(const QString &name);
 
-    SDQT_EXPORT QString getUnitByPID(const uint pid);
+    SDQT_EXPORT Unit::Ptr getUnitByPID(const uint pid);
 
-    SDQT_EXPORT QList<Job*> listJobs();
+    SDQT_EXPORT QList<Job::Ptr> listJobs();
 
     /*
      * Lists the name of all units loaded.
      */
-    SDQT_EXPORT QList<Unit*> listUnits();
+    SDQT_EXPORT QList<Unit::Ptr> listUnits();
 
     /*
      * Lists the name of all unit files on disk.
      */
     SDQT_EXPORT QStringList listUnitFiles();
 
-    SDQT_EXPORT Unit* loadUnit(const QString &name);
+    SDQT_EXPORT Unit::Ptr loadUnit(const QString &name);
 
     SDQT_EXPORT bool reloadUnit(const QString &name, const Mode mode);
 

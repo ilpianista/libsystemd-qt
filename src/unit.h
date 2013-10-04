@@ -21,6 +21,7 @@
 #define SD_UNIT_H
 
 #include <QStringList>
+#include <QSharedPointer>
 
 namespace Systemd {
 
@@ -29,7 +30,6 @@ class UnitPrivate;
 class Unit : public QObject
 {
     Q_OBJECT
-    Q_DECLARE_PRIVATE(Unit)
 
     Q_PROPERTY(qulonglong activeEnterTimestamp READ activeEnterTimestamp)
     Q_PROPERTY(qulonglong activeEnterTimestampMonotonic READ activeEnterTimestampMonotonic)
@@ -64,7 +64,7 @@ class Unit : public QObject
     Q_PROPERTY(qulonglong inactiveEnterTimestampMonotonic READ inactiveEnterTimestampMonotonic)
     Q_PROPERTY(qulonglong inactiveExitTimestamp READ inactiveExitTimestamp)
     Q_PROPERTY(qulonglong inactiveExitTimestampMonotonic READ inactiveExitTimestampMonotonic)
-    Q_PROPERTY(QString job READ job)
+    Q_PROPERTY(uint job READ job)
     Q_PROPERTY(qulonglong jobTimeoutUSec READ jobTimeoutUSec)
     Q_PROPERTY(QString loadState READ loadState NOTIFY loadStateChanged)
     Q_PROPERTY(QStringList names READ names)
@@ -94,9 +94,10 @@ class Unit : public QObject
     Q_PROPERTY(QStringList wants READ wants)
 
 public:
+    typedef QSharedPointer<Unit> Ptr;
+
     explicit Unit(const QString &path, QObject *parent = 0);
-    Unit(UnitPrivate &unit, QObject *parent = 0);
-    Unit(QObject *parent = 0);
+    explicit Unit(UnitPrivate &unit, QObject *parent = 0);
     virtual ~Unit();
 
     qulonglong activeEnterTimestamp() const;
@@ -132,7 +133,7 @@ public:
     qulonglong inactiveEnterTimestampMonotonic() const;
     qulonglong inactiveExitTimestamp() const;
     qulonglong inactiveExitTimestampMonotonic() const;
-    QString job() const;
+    uint job() const;
     qulonglong jobTimeoutUSec() const;
     QString loadState() const;
     QStringList names() const;
@@ -173,6 +174,8 @@ protected:
 
 private:
     void init();
+
+    Q_DECLARE_PRIVATE(Unit)
 };
 }
 

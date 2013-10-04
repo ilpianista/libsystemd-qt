@@ -21,7 +21,7 @@
 #include "unit_p.h"
 #include "sdmanager_p.h"
 
-Systemd::UnitPrivate::UnitPrivate(const QString &path, QObject *parent) :
+Systemd::UnitPrivate::UnitPrivate(const QString &path) :
     unitIface(Systemd::SystemdPrivate::SD_DBUS_SERVICE, path, QDBusConnection::systemBus())
 {
     activeEnterTimestamp = unitIface.activeEnterTimestamp();
@@ -58,7 +58,7 @@ Systemd::UnitPrivate::UnitPrivate(const QString &path, QObject *parent) :
     inactiveEnterTimestampMonotonic = unitIface.inactiveEnterTimestampMonotonic();
     inactiveExitTimestamp = unitIface.inactiveExitTimestamp();
     inactiveExitTimestampMonotonic = unitIface.inactiveExitTimestampMonotonic();
-    job = unitIface.job().path.path();
+    job = unitIface.job().id.toUInt();
     jobTimeoutUSec = unitIface.jobTimeoutUSec();
     //loadError = unitIface.loadError();
     loadState = unitIface.loadState();
@@ -94,18 +94,13 @@ Systemd::UnitPrivate::~UnitPrivate()
 }
 
 Systemd::Unit::Unit(const QString &path, QObject *parent) :
-                    QObject(parent), d_ptr(new UnitPrivate(path, this))
+                    QObject(parent), d_ptr(new UnitPrivate(path))
 {
     init();
 }
 
 Systemd::Unit::Unit(UnitPrivate &unit, QObject *parent) :
                     QObject(parent), d_ptr(&unit)
-{
-    init();
-}
-
-Systemd::Unit::Unit(QObject *parent) : QObject(parent)
 {
     init();
 }
@@ -319,7 +314,7 @@ qulonglong Systemd::Unit::inactiveExitTimestampMonotonic() const
     return d->inactiveExitTimestampMonotonic;
 }
 
-QString Systemd::Unit::job() const
+uint Systemd::Unit::job() const
 {
     Q_D(const Unit);
     return d->job;

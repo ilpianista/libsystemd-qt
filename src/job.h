@@ -20,7 +20,7 @@
 #ifndef SD_JOB_H
 #define SD_JOB_H
 
-#include <QObject>
+#include <QSharedPointer>
 
 namespace Systemd {
 
@@ -29,7 +29,6 @@ class JobPrivate;
 class Job : public QObject
 {
     Q_OBJECT
-    Q_DECLARE_PRIVATE(Job)
 
     Q_PROPERTY(uint id READ id CONSTANT)
     Q_PROPERTY(QString jobType READ jobType)
@@ -37,8 +36,10 @@ class Job : public QObject
     Q_PROPERTY(QString unit READ unit)
 
 public:
+    typedef QSharedPointer<Job> Ptr;
+
     explicit Job(const QString &path, QObject *parent = 0);
-    Job(JobPrivate &job, QObject *parent = 0);
+    explicit Job(JobPrivate &job, QObject *parent = 0);
     virtual ~Job();
 
     uint id() const;
@@ -51,6 +52,8 @@ protected:
 
 private:
     void init();
+
+    Q_DECLARE_PRIVATE(Job)
 };
 }
 

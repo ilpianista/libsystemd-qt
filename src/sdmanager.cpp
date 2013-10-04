@@ -78,47 +78,61 @@ bool Systemd::SystemdPrivate::enableUnitFiles(const QStringList &files, const bo
     return true;
 }
 
-QString Systemd::SystemdPrivate::getJob(const uint id)
+Systemd::Job::Ptr Systemd::SystemdPrivate::getJob(const uint id)
 {
+    Systemd::Job::Ptr job;
+
     QDBusPendingReply<QDBusObjectPath> reply = isdface.GetJob(id);
     reply.waitForFinished();
 
     if (reply.isError()) {
         qDebug() << reply.error().message();
-        return QString();
+    } else {
+        QString jobPath = qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
+        job = Systemd::Job::Ptr(new Systemd::Job(jobPath, this));
     }
 
-    return qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
+    return job;
 }
 
-QString Systemd::SystemdPrivate::getUnit(const QString &name)
+Systemd::Unit::Ptr Systemd::SystemdPrivate::getUnit(const QString &name)
 {
+    Systemd::Unit::Ptr unit;
+
     QDBusPendingReply<QDBusObjectPath> reply = isdface.GetUnit(name);
     reply.waitForFinished();
 
     if (reply.isError()) {
         qDebug() << reply.error().message();
-        return QString();
+    } else {
+        QString unitPath = qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
+        unit = Systemd::Unit::Ptr(new Systemd::Unit(unitPath, this));
     }
 
-    return qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
+    return unit;
 }
 
-QString Systemd::SystemdPrivate::getUnitByPID(const uint pid)
+Systemd::Unit::Ptr Systemd::SystemdPrivate::getUnitByPID(const uint pid)
 {
+    Systemd::Unit::Ptr unit;
+
     QDBusPendingReply<QDBusObjectPath> reply = isdface.GetUnitByPID(pid);
     reply.waitForFinished();
 
     if (reply.isError()) {
         qDebug() << reply.error().message();
-        return QString();
+    } else {
+        QString unitPath = qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
+        unit = Systemd::Unit::Ptr(new Systemd::Unit(unitPath, this));
     }
 
-    return qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
+    return unit;
 }
 
-QList<Systemd::Job*> Systemd::SystemdPrivate::listJobs()
+QList<Systemd::Job::Ptr> Systemd::SystemdPrivate::listJobs()
 {
+    QList<Systemd::Job::Ptr> jobs;
+
     qDBusRegisterMetaType<ManagerDBusJob>();
     qDBusRegisterMetaType<ManagerDBusJobList>();
     QDBusPendingReply<ManagerDBusJobList> reply = isdface.ListJobs();
@@ -126,23 +140,23 @@ QList<Systemd::Job*> Systemd::SystemdPrivate::listJobs()
 
     if (reply.isError()) {
         qDebug() << reply.error().message();
-        return QList<Systemd::Job*>();
-    }
-
-    QList<Systemd::Job*> queued;
-    const QDBusMessage message = reply.reply();
-    if (message.type() == QDBusMessage::ReplyMessage) {
-        const ManagerDBusJobList jobs = qdbus_cast<ManagerDBusJobList>(message.arguments().first());
-        Q_FOREACH(const ManagerDBusJob job, jobs) {
-            queued.append(new Systemd::Job(job.path.path()));
+    } else {
+        const QDBusMessage message = reply.reply();
+        if (message.type() == QDBusMessage::ReplyMessage) {
+            const ManagerDBusJobList queued = qdbus_cast<ManagerDBusJobList>(message.arguments().first());
+            Q_FOREACH(const ManagerDBusJob job, queued) {
+                jobs.append(Systemd::Job::Ptr(new Systemd::Job(job.path.path())));
+            }
         }
     }
 
-    return queued;
+    return jobs;
 }
 
-QList<Systemd::Unit*> Systemd::SystemdPrivate::listUnits()
+QList<Systemd::Unit::Ptr> Systemd::SystemdPrivate::listUnits()
 {
+    QList<Systemd::Unit::Ptr> units;
+
     qDBusRegisterMetaType<ManagerDBusUnit>();
     qDBusRegisterMetaType<ManagerDBusUnitList>();
     QDBusPendingReply<ManagerDBusUnitList> reply = isdface.ListUnits();
@@ -150,23 +164,23 @@ QList<Systemd::Unit*> Systemd::SystemdPrivate::listUnits()
 
     if (reply.isError()) {
         qDebug() << reply.error().message();
-        return QList<Systemd::Unit*>();
-    }
-
-    QList<Systemd::Unit*> loaded;
-    const QDBusMessage message = reply.reply();
-    if (message.type() == QDBusMessage::ReplyMessage) {
-        const ManagerDBusUnitList units = qdbus_cast<ManagerDBusUnitList>(message.arguments().first());
-        Q_FOREACH(const ManagerDBusUnit unit, units) {
-            loaded.append(new Systemd::Unit(unit.path.path(), this));
+    } else {
+        const QDBusMessage message = reply.reply();
+        if (message.type() == QDBusMessage::ReplyMessage) {
+            const ManagerDBusUnitList loaded = qdbus_cast<ManagerDBusUnitList>(message.arguments().first());
+            Q_FOREACH(const ManagerDBusUnit unit, loaded) {
+                units.append(Systemd::Unit::Ptr(new Systemd::Unit(unit.path.path())));
+            }
         }
     }
 
-    return loaded;
+    return units;
 }
 
 QStringList Systemd::SystemdPrivate::listUnitFiles()
 {
+    QStringList unitFiles;
+
     qDBusRegisterMetaType<ManagerDBusUnitFile>();
     qDBusRegisterMetaType<ManagerDBusUnitFileList>();
     QDBusPendingReply<ManagerDBusUnitFileList> reply = isdface.ListUnitFiles();
@@ -174,32 +188,34 @@ QStringList Systemd::SystemdPrivate::listUnitFiles()
 
     if (reply.isError()) {
         qDebug() << reply.error().message();
-        return QStringList();
-    }
-
-    QStringList unitFiles;
-    const QDBusMessage message = reply.reply();
-    if (message.type() == QDBusMessage::ReplyMessage) {
-        const ManagerDBusUnitFileList files = qdbus_cast<ManagerDBusUnitFileList>(message.arguments().first());
-        Q_FOREACH(const ManagerDBusUnitFile file, files) {
-            unitFiles.append(file.path);
+    } else {
+        const QDBusMessage message = reply.reply();
+        if (message.type() == QDBusMessage::ReplyMessage) {
+            const ManagerDBusUnitFileList files = qdbus_cast<ManagerDBusUnitFileList>(message.arguments().first());
+            Q_FOREACH(const ManagerDBusUnitFile file, files) {
+                unitFiles.append(file.path);
+            }
         }
     }
 
     return unitFiles;
 }
 
-Systemd::Unit* Systemd::SystemdPrivate::loadUnit(const QString &name)
+Systemd::Unit::Ptr Systemd::SystemdPrivate::loadUnit(const QString &name)
 {
+    Systemd::Unit::Ptr unit;
+
     QDBusPendingReply<QDBusObjectPath> reply = isdface.LoadUnit(name);
     reply.waitForFinished();
 
     if (reply.isError()) {
         qDebug() << reply.error().message();
-        return NULL;
+    } else {
+        QString unitPath = qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
+        unit = Systemd::Unit::Ptr(new Systemd::Unit(unitPath, this));
     }
 
-    return new Systemd::Unit(qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path());
+    return unit;
 }
 
 void Systemd::SystemdPrivate::onUnitNew(const QString &id, const QDBusObjectPath &unit)
@@ -303,27 +319,27 @@ bool Systemd::enableUnitFiles(const QStringList &files, const bool runtime, cons
     return globalSystemd()->enableUnitFiles(files, runtime, force);
 }
 
-QString Systemd::getJob(const uint id)
+Systemd::Job::Ptr Systemd::getJob(const uint id)
 {
     return globalSystemd()->getJob(id);
 }
 
-QString Systemd::getUnit(const QString &name)
+Systemd::Unit::Ptr Systemd::getUnit(const QString &name)
 {
     return globalSystemd()->getUnit(name);
 }
 
-QString Systemd::getUnitByPID(const uint pid)
+Systemd::Unit::Ptr Systemd::getUnitByPID(const uint pid)
 {
     return globalSystemd()->getUnitByPID(pid);
 }
 
-QList<Systemd::Job*> Systemd::listJobs()
+QList<Systemd::Job::Ptr> Systemd::listJobs()
 {
     return globalSystemd()->listJobs();
 }
 
-QList<Systemd::Unit*> Systemd::listUnits()
+QList<Systemd::Unit::Ptr> Systemd::listUnits()
 {
     return globalSystemd()->listUnits();
 }
@@ -333,7 +349,7 @@ QStringList Systemd::listUnitFiles()
     return globalSystemd()->listUnitFiles();
 }
 
-Systemd::Unit* Systemd::loadUnit(const QString &name)
+Systemd::Unit::Ptr Systemd::loadUnit(const QString &name)
 {
     return globalSystemd()->loadUnit(name);
 }

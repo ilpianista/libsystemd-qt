@@ -30,8 +30,8 @@ class JobPrivate
 {
 
 public:
-    JobPrivate(const QString &path, QObject *parent = 0);
-    ~JobPrivate();
+    explicit JobPrivate(const QString &path);
+    virtual ~JobPrivate();
 
     OrgFreedesktopSystemd1JobInterface jobIface;
 
