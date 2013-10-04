@@ -21,7 +21,7 @@
 #include "seat_p.h"
 #include "ldmanager_p.h"
 
-Systemd::Logind::SeatPrivate::SeatPrivate(const QString &path, QObject *parent) :
+Systemd::Logind::SeatPrivate::SeatPrivate(const QString &path) :
     seatIface(Systemd::Logind::LogindPrivate::LD_DBUS_SERVICE, path, QDBusConnection::systemBus())
 {
     activeSession = seatIface.activeSession();
@@ -42,7 +42,7 @@ Systemd::Logind::SeatPrivate::~SeatPrivate()
 }
 
 Systemd::Logind::Seat::Seat(const QString &path, QObject *parent) :
-                    QObject(parent), d_ptr(new SeatPrivate(path, this))
+                    QObject(parent), d_ptr(new SeatPrivate(path))
 {
 }
 

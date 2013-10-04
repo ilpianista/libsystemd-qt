@@ -23,11 +23,13 @@
 #include <QStringList>
 #include <QSharedPointer>
 
+#include "QtSystemd-export.h"
+
 namespace Systemd {
 
 class UnitPrivate;
 
-class Unit : public QObject
+class SDQT_EXPORT Unit : public QObject
 {
     Q_OBJECT
 

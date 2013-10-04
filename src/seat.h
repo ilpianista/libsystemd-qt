@@ -47,7 +47,7 @@ class SDQT_EXPORT Seat : public QObject
 
 public:
     explicit Seat(const QString &path, QObject *parent = 0);
-    Seat(SeatPrivate &seat, QObject *parent = 0);
+    explicit Seat(SeatPrivate &seat, QObject *parent = 0);
     virtual ~Seat();
 
     QString activeSession() const;

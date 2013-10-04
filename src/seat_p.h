@@ -32,8 +32,8 @@ class SeatPrivate
 {
 
 public:
-    SeatPrivate(const QString &path, QObject *parent = 0);
-    ~SeatPrivate();
+    explicit SeatPrivate(const QString &path);
+    virtual ~SeatPrivate();
 
     OrgFreedesktopLogin1SeatInterface seatIface;
 

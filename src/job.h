@@ -22,11 +22,13 @@
 
 #include <QSharedPointer>
 
+#include "QtSystemd-export.h"
+
 namespace Systemd {
 
 class JobPrivate;
 
-class Job : public QObject
+class SDQT_EXPORT Job : public QObject
 {
     Q_OBJECT
 

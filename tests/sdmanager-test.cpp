@@ -24,14 +24,8 @@
 
 class SDManagerTest {
 public:
-    SDManagerTest()
-    {
-    }
-
     static void disableUnitFiles()
     {
-        qDebug();
-
         QStringList f;
         f << QLatin1String("upower.service");
 
@@ -42,8 +36,6 @@ public:
 
     static void enableUnitFiles()
     {
-        qDebug();
-
         QStringList f;
         f << QLatin1String("mysqld.service");
 
@@ -54,22 +46,16 @@ public:
 
     static void getUnit()
     {
-        qDebug();
-
-        qDebug() << Systemd::getUnit("mysqld.service");
+        qDebug() << Systemd::getUnit("mysqld.service")->id();
     }
 
     static void getUnitByPID()
     {
-        qDebug();
-
-        qDebug() << Systemd::getUnitByPID(31493);
+        qDebug() << Systemd::getUnitByPID(31493)->id();
     }
 
     static void listJobs()
     {
-        qDebug();
-
         Q_FOREACH(const Systemd::Job::Ptr job, Systemd::listJobs()) {
             qDebug() << job->id();
         }
@@ -77,8 +63,6 @@ public:
 
     static void listUnits()
     {
-        qDebug();
-
         Q_FOREACH(const Systemd::Unit::Ptr unit, Systemd::listUnits()) {
             qDebug() << unit->id();
         }
@@ -86,8 +70,6 @@ public:
 
     static void listUnitFiles()
     {
-        qDebug();
-
         Q_FOREACH(const QString unit, Systemd::listUnitFiles()) {
             qDebug() << unit;
         }
@@ -95,41 +77,27 @@ public:
 
     static void loadUnit()
     {
-        qDebug();
-
-        qDebug() << Systemd::loadUnit("mysqld.service");
+        qDebug() << Systemd::loadUnit("mysqld.service")->loadState();
     }
 
     static void reloadUnit()
     {
-        qDebug();
-
-        bool ret = Systemd::reloadUnit(QLatin1String("mysqld.service"), Systemd::Replace);
-        qDebug() << ret;
+        qDebug() << Systemd::reloadUnit(QLatin1String("mysqld.service"), Systemd::Replace);
     }
 
     static void restartUnit()
     {
-        qDebug();
-
-        bool ret = Systemd::restartUnit(QLatin1String("mysqld.service"), Systemd::Replace);
-        qDebug() << ret;
+        qDebug() << Systemd::restartUnit(QLatin1String("mysqld.service"), Systemd::Replace);
     }
 
     static void startUnit()
     {
-        qDebug();
-
-        bool ret = Systemd::startUnit(QLatin1String("mysqld.service"), Systemd::Replace);
-        qDebug() << ret;
+        qDebug() << Systemd::startUnit(QLatin1String("mysqld.service"), Systemd::Replace);
     }
 
     static void stopUnit()
     {
-        qDebug();
-
-        bool ret = Systemd::stopUnit(QLatin1String("mysqld.service"), Systemd::Replace);
-        qDebug() << ret;
+        qDebug() << Systemd::stopUnit(QLatin1String("mysqld.service"), Systemd::Replace);
     }
 };
 
