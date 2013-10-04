@@ -32,7 +32,6 @@ class Unit : public QObject
     Q_DECLARE_PRIVATE(Unit)
 
     Q_PROPERTY(QString id READ id CONSTANT)
-    Q_PROPERTY(QString type READ type CONSTANT)
     Q_PROPERTY(QString description READ description CONSTANT)
     Q_PROPERTY(QString loadState READ loadState NOTIFY loadStateChanged)
     Q_PROPERTY(QString activeState READ activeState NOTIFY activeStateChanged)
@@ -46,7 +45,6 @@ public:
     virtual ~Unit();
 
     QString id() const;
-    QString type() const;
     QString description() const;
     QString loadState() const;
     QString activeState() const;
