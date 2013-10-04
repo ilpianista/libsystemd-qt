@@ -24,14 +24,69 @@
 Systemd::UnitPrivate::UnitPrivate(const QString &path, QObject *parent) :
     unitIface(Systemd::SystemdPrivate::SD_DBUS_SERVICE, path, QDBusConnection::systemBus())
 {
-    id = unitIface.id();
-    description = unitIface.description();
-    loadState = unitIface.loadState();
+    activeEnterTimestamp = unitIface.activeEnterTimestamp();
+    activeEnterTimestampMonotonic = unitIface.activeEnterTimestampMonotonic();
+    activeExitTimestamp = unitIface.activeExitTimestamp();
+    activeExitTimestampMonotonic = unitIface.activeExitTimestampMonotonic();
     activeState = unitIface.activeState();
-    subState = unitIface.subState();
+    after = unitIface.after();
+    allowIsolate = unitIface.allowIsolate();
+    before = unitIface.before();
+    bindsTo = unitIface.bindsTo();
+    boundBy = unitIface.boundBy();
+    canIsolate = unitIface.canIsolate();
+    canReload = unitIface.canReload();
+    canStart = unitIface.canStart();
+    canStop = unitIface.canStop();
+    conditionResult = unitIface.conditionResult();
+    //conditions = unitIface.conditions();
+    conditionTimestamp = unitIface.conditionTimestamp();
+    conditionTimestampMonotonic = unitIface.conditionTimestampMonotonic();
+    conflictedBy = unitIface.conflictedBy();
+    conflicts = unitIface.conflicts();
+    consistsOf = unitIface.consistsOf();
+    defaultDependencies = unitIface.defaultDependencies();
+    description = unitIface.description();
+    documentation = unitIface.documentation();
+    dropInPaths = unitIface.dropInPaths();
     following = unitIface.following();
-    jobId = unitIface.job().id;
+    fragmentPath = unitIface.fragmentPath();
+    id = unitIface.id();
+    ignoreOnIsolate = unitIface.ignoreOnIsolate();
+    ignoreOnSnapshot = unitIface.ignoreOnSnapshot();
+    inactiveEnterTimestamp = unitIface.inactiveEnterTimestamp();
+    inactiveEnterTimestampMonotonic = unitIface.inactiveEnterTimestampMonotonic();
+    inactiveExitTimestamp = unitIface.inactiveExitTimestamp();
+    inactiveExitTimestampMonotonic = unitIface.inactiveExitTimestampMonotonic();
+    job = unitIface.job().path.path();
+    jobTimeoutUSec = unitIface.jobTimeoutUSec();
+    //loadError = unitIface.loadError();
+    loadState = unitIface.loadState();
+    names = unitIface.names();
+    needDaemonReload = unitIface.needDaemonReload();
+    onFailure = unitIface.onFailure();
+    onFailureIsolate = unitIface.onFailureIsolate();
+    partOf = unitIface.partOf();
+    propagatesReloadTo = unitIface.propagatesReloadTo();
+    refuseManualStart = unitIface.refuseManualStart();
+    refuseManualStop = unitIface.refuseManualStop();
+    reloadPropagatedFrom = unitIface.reloadPropagatedFrom();
+    requiredBy = unitIface.requiredBy();
+    requiredByOverridable = unitIface.requiredByOverridable();
+    requires = unitIface.requires();
+    requiresMountsFor = unitIface.requiresMountsFor();
+    requiresOverridable = unitIface.requiresOverridable();
+    requisite = unitIface.requisite();
+    requisiteOverridable = unitIface.requisiteOverridable();
+    sourcePath = unitIface.sourcePath();
+    stopWhenUnneeded = unitIface.stopWhenUnneeded();
+    subState = unitIface.subState();
+    transient = unitIface.transient();
+    triggeredBy = unitIface.triggeredBy();
+    triggers = unitIface.triggers();
     unitFileState = unitIface.unitFileState();
+    wantedBy = unitIface.wantedBy();
+    wants = unitIface.wants();
 }
 
 Systemd::UnitPrivate::~UnitPrivate()
@@ -66,22 +121,28 @@ Systemd::Unit::~Unit()
     delete d_ptr;
 }
 
-QString Systemd::Unit::id() const
+qulonglong Systemd::Unit::activeEnterTimestamp() const
 {
     Q_D(const Unit);
-    return d->id;
+    return d->activeEnterTimestamp;
 }
 
-QString Systemd::Unit::description() const
+qulonglong Systemd::Unit::activeEnterTimestampMonotonic() const
 {
     Q_D(const Unit);
-    return d->description;
+    return d->activeEnterTimestampMonotonic;
 }
 
-QString Systemd::Unit::loadState() const
+qulonglong Systemd::Unit::activeExitTimestamp() const
 {
     Q_D(const Unit);
-    return d->loadState;
+    return d->activeExitTimestamp;
+}
+
+qulonglong Systemd::Unit::activeExitTimestampMonotonic() const
+{
+    Q_D(const Unit);
+    return d->activeExitTimestampMonotonic;
 }
 
 QString Systemd::Unit::activeState() const
@@ -90,10 +151,118 @@ QString Systemd::Unit::activeState() const
     return d->activeState;
 }
 
-QString Systemd::Unit::subState() const
+QStringList Systemd::Unit::after() const
 {
     Q_D(const Unit);
-    return d->subState;
+    return d->after;
+}
+
+bool Systemd::Unit::allowIsolate() const
+{
+    Q_D(const Unit);
+    return d->allowIsolate;
+}
+
+QStringList Systemd::Unit::before() const
+{
+    Q_D(const Unit);
+    return d->before;
+}
+
+QStringList Systemd::Unit::bindsTo() const
+{
+    Q_D(const Unit);
+    return d->bindsTo;
+}
+
+QStringList Systemd::Unit::boundBy() const
+{
+    Q_D(const Unit);
+    return d->boundBy;
+}
+
+bool Systemd::Unit::canIsolate() const
+{
+    Q_D(const Unit);
+    return d->canIsolate;
+}
+
+bool Systemd::Unit::canReload() const
+{
+    Q_D(const Unit);
+    return d->canReload;
+}
+
+bool Systemd::Unit::canStart() const
+{
+    Q_D(const Unit);
+    return d->canStart;
+}
+
+bool Systemd::Unit::canStop() const
+{
+    Q_D(const Unit);
+    return d->canStop;
+}
+
+bool Systemd::Unit::conditionResult() const
+{
+    Q_D(const Unit);
+    return d->conditionResult;
+}
+
+qulonglong Systemd::Unit::conditionTimestamp() const
+{
+    Q_D(const Unit);
+    return d->conditionTimestamp;
+}
+
+qulonglong Systemd::Unit::conditionTimestampMonotonic() const
+{
+    Q_D(const Unit);
+    return d->conditionTimestampMonotonic;
+}
+
+QStringList Systemd::Unit::conflictedBy() const
+{
+    Q_D(const Unit);
+    return d->conflictedBy;
+}
+
+QStringList Systemd::Unit::conflicts() const
+{
+    Q_D(const Unit);
+    return d->conflicts;
+}
+
+QStringList Systemd::Unit::consistsOf() const
+{
+    Q_D(const Unit);
+    return d->consistsOf;
+}
+
+bool Systemd::Unit::defaultDependencies() const
+{
+    Q_D(const Unit);
+    return d->defaultDependencies;
+}
+
+QString Systemd::Unit::description() const
+{
+    Q_D(const Unit);
+    return d->description;
+}
+
+QStringList Systemd::Unit::documentation() const
+{
+    Q_D(const Unit);
+    return d->documentation;
+}
+
+QStringList Systemd::Unit::dropInPaths() const
+{
+    Q_D(const Unit);
+    return d->dropInPaths;
 }
 
 QString Systemd::Unit::following() const
@@ -102,14 +271,218 @@ QString Systemd::Unit::following() const
     return d->following;
 }
 
-QString Systemd::Unit::jobId() const
+QString Systemd::Unit::fragmentPath() const
 {
     Q_D(const Unit);
-    return d->jobId;
+    return d->fragmentPath;
+}
+
+QString Systemd::Unit::id() const
+{
+    Q_D(const Unit);
+    return d->id;
+}
+
+bool Systemd::Unit::ignoreOnIsolate() const
+{
+    Q_D(const Unit);
+    return d->ignoreOnIsolate;
+}
+
+bool Systemd::Unit::ignoreOnSnapshot() const
+{
+    Q_D(const Unit);
+    return d->ignoreOnSnapshot;
+}
+
+qulonglong Systemd::Unit::inactiveEnterTimestamp() const
+{
+    Q_D(const Unit);
+    return d->inactiveEnterTimestamp;
+}
+
+qulonglong Systemd::Unit::inactiveEnterTimestampMonotonic() const
+{
+    Q_D(const Unit);
+    return d->inactiveEnterTimestampMonotonic;
+}
+
+qulonglong Systemd::Unit::inactiveExitTimestamp() const
+{
+    Q_D(const Unit);
+    return d->inactiveExitTimestamp;
+}
+
+qulonglong Systemd::Unit::inactiveExitTimestampMonotonic() const
+{
+    Q_D(const Unit);
+    return d->inactiveExitTimestampMonotonic;
+}
+
+QString Systemd::Unit::job() const
+{
+    Q_D(const Unit);
+    return d->job;
+}
+
+qulonglong Systemd::Unit::jobTimeoutUSec() const
+{
+    Q_D(const Unit);
+    return d->jobTimeoutUSec;
+}
+
+QString Systemd::Unit::loadState() const
+{
+    Q_D(const Unit);
+    return d->loadState;
+}
+
+QStringList Systemd::Unit::names() const
+{
+    Q_D(const Unit);
+    return d->names;
+}
+
+bool Systemd::Unit::needDaemonReload() const
+{
+    Q_D(const Unit);
+    return d->needDaemonReload;
+}
+
+QStringList Systemd::Unit::onFailure() const
+{
+    Q_D(const Unit);
+    return d->onFailure;
+}
+
+bool Systemd::Unit::onFailureIsolate() const
+{
+    Q_D(const Unit);
+    return d->onFailureIsolate;
+}
+
+QStringList Systemd::Unit::partOf() const
+{
+    Q_D(const Unit);
+    return d->partOf;
+}
+
+QStringList Systemd::Unit::propagatesReloadTo() const
+{
+    Q_D(const Unit);
+    return d->propagatesReloadTo;
+}
+
+bool Systemd::Unit::refuseManualStart() const
+{
+    Q_D(const Unit);
+    return d->refuseManualStart;
+}
+
+bool Systemd::Unit::refuseManualStop() const
+{
+    Q_D(const Unit);
+    return d->refuseManualStop;
+}
+
+QStringList Systemd::Unit::reloadPropagatedFrom() const
+{
+    Q_D(const Unit);
+    return d->reloadPropagatedFrom;
+}
+
+QStringList Systemd::Unit::requiredBy() const
+{
+    Q_D(const Unit);
+    return d->requiredBy;
+}
+
+QStringList Systemd::Unit::requiredByOverridable() const
+{
+    Q_D(const Unit);
+    return d->requiredByOverridable;
+}
+
+QStringList Systemd::Unit::requires() const
+{
+    Q_D(const Unit);
+    return d->requires;
+}
+
+QStringList Systemd::Unit::requiresMountsFor() const
+{
+    Q_D(const Unit);
+    return d->requiresMountsFor;
+}
+
+QStringList Systemd::Unit::requiresOverridable() const
+{
+    Q_D(const Unit);
+    return d->requiredByOverridable;
+}
+
+QStringList Systemd::Unit::requisite() const
+{
+    Q_D(const Unit);
+    return d->requisite;
+}
+
+QStringList Systemd::Unit::requisiteOverridable() const
+{
+    Q_D(const Unit);
+    return d->requisiteOverridable;
+}
+
+QString Systemd::Unit::sourcePath() const
+{
+    Q_D(const Unit);
+    return d->sourcePath;
+}
+
+bool Systemd::Unit::stopWhenUnneeded() const
+{
+    Q_D(const Unit);
+    return d->stopWhenUnneeded;
+}
+
+QString Systemd::Unit::subState() const
+{
+    Q_D(const Unit);
+    return d->subState;
+}
+
+bool Systemd::Unit::transient() const
+{
+    Q_D(const Unit);
+    return d->transient;
+}
+
+QStringList Systemd::Unit::triggeredBy() const
+{
+    Q_D(const Unit);
+    return d->triggeredBy;
+}
+
+QStringList Systemd::Unit::triggers() const
+{
+    Q_D(const Unit);
+    return d->triggers;
 }
 
 QString Systemd::Unit::unitFileState() const
 {
     Q_D(const Unit);
     return d->unitFileState;
+}
+
+QStringList Systemd::Unit::wantedBy() const
+{
+    Q_D(const Unit);
+    return d->wantedBy;
+}
+
+QStringList Systemd::Unit::wants() const
+{
+    Q_D(const Unit);
+    return d->wants;
 }

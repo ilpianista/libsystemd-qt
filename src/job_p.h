@@ -36,9 +36,9 @@ public:
     OrgFreedesktopSystemd1JobInterface jobIface;
 
     uint id;
-    QString unitId;
-    QString type;
+    QString jobType;
     QString state;
+    QString unit;
 };
 }
 

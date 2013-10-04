@@ -31,15 +31,20 @@ class Job : public QObject
     Q_OBJECT
     Q_DECLARE_PRIVATE(Job)
 
+    Q_PROPERTY(uint id READ id CONSTANT)
+    Q_PROPERTY(QString jobType READ jobType)
+    Q_PROPERTY(QString state READ state)
+    Q_PROPERTY(QString unit READ unit)
+
 public:
     explicit Job(const QString &path, QObject *parent = 0);
     Job(JobPrivate &job, QObject *parent = 0);
     virtual ~Job();
 
     uint id() const;
-    QString unitId() const;
-    QString type() const;
+    QString jobType() const;
     QString state() const;
+    QString unit() const;
 
 protected:
     JobPrivate *d_ptr;

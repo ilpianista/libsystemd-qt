@@ -25,9 +25,9 @@ Systemd::JobPrivate::JobPrivate(const QString &path, QObject *parent) :
     jobIface(Systemd::SystemdPrivate::SD_DBUS_SERVICE, path, QDBusConnection::systemBus())
 {
     id = jobIface.id();
-    type = jobIface.jobType();
+    jobType = jobIface.jobType();
     state = jobIface.state();
-    unitId = jobIface.unit().id;
+    unit = jobIface.unit().path.path();
 }
 
 Systemd::JobPrivate::~JobPrivate()
@@ -63,10 +63,10 @@ uint Systemd::Job::id() const
     return d->id;
 }
 
-QString Systemd::Job::type() const
+QString Systemd::Job::jobType() const
 {
     Q_D(const Job);
-    return d->type;
+    return d->jobType;
 }
 
 QString Systemd::Job::state() const
@@ -75,8 +75,8 @@ QString Systemd::Job::state() const
     return d->state;
 }
 
-QString Systemd::Job::unitId() const
+QString Systemd::Job::unit() const
 {
     Q_D(const Job);
-    return d->unitId;
+    return d->unit;
 }
