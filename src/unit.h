@@ -98,6 +98,7 @@ public:
 
     explicit Unit(const QString &path, QObject *parent = 0);
     explicit Unit(UnitPrivate &unit, QObject *parent = 0);
+    explicit Unit(QObject *parent = 0);
     virtual ~Unit();
 
     qulonglong activeEnterTimestamp() const;

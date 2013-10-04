@@ -105,6 +105,11 @@ Systemd::Unit::Unit(UnitPrivate &unit, QObject *parent) :
     init();
 }
 
+Systemd::Unit::Unit(QObject *parent) : QObject(parent)
+{
+    init();
+}
+
 void Systemd::Unit::init()
 {
     Q_D(Unit);
