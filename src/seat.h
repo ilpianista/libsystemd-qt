@@ -35,12 +35,30 @@ class SDQT_EXPORT Seat : public QObject
     Q_OBJECT
     Q_DECLARE_PRIVATE(Seat)
 
+    Q_PROPERTY(QString activeSession READ activeSession)
+    Q_PROPERTY(bool canGraphical READ canGraphical)
+    Q_PROPERTY(bool canMultiSession READ canMultiSession)
+    Q_PROPERTY(bool canTTY READ canTTY)
+    Q_PROPERTY(QString id READ id)
+    Q_PROPERTY(bool idleHint READ idleHint)
+    Q_PROPERTY(qulonglong idleSinceHint READ idleSinceHint)
+    Q_PROPERTY(qulonglong idleSinceHintMonotonic READ idleSinceHintMonotonic)
+    Q_PROPERTY(QStringList sessions READ sessions)
+
 public:
     explicit Seat(const QString &path, QObject *parent = 0);
     Seat(SeatPrivate &seat, QObject *parent = 0);
     virtual ~Seat();
 
+    QString activeSession() const;
     bool canGraphical() const;
+    bool canMultiSession() const;
+    bool canTTY() const;
+    QString id() const;
+    bool idleHint() const;
+    qulonglong idleSinceHint() const;
+    qulonglong idleSinceHintMonotonic() const;
+    QStringList sessions() const;
 
 protected:
     SeatPrivate *d_ptr;

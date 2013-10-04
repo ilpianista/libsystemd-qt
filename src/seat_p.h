@@ -37,7 +37,15 @@ public:
 
     OrgFreedesktopLogin1SeatInterface seatIface;
 
+    QString activeSession;
     bool canGraphical;
+    bool canMultiSession;
+    bool canTTY;
+    QString id;
+    bool idleHint;
+    qulonglong idleSinceHint;
+    qulonglong idleSinceHintMonotonic;
+    QStringList sessions;
 };
 }
 }

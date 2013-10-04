@@ -24,7 +24,17 @@
 Systemd::Logind::SeatPrivate::SeatPrivate(const QString &path, QObject *parent) :
     seatIface(Systemd::Logind::LogindPrivate::LD_DBUS_SERVICE, path, QDBusConnection::systemBus())
 {
+    activeSession = seatIface.activeSession();
     canGraphical = seatIface.canGraphical();
+    canMultiSession = seatIface.canMultiSession();
+    canTTY = seatIface.canTTY();
+    id = seatIface.id();
+    idleHint = seatIface.idleHint();
+    idleSinceHint = seatIface.idleSinceHint();
+    idleSinceHintMonotonic = seatIface.idleSinceHintMonotonic();
+    Q_FOREACH(const SeatDBusSession &seatSession, seatIface.sessions()) {
+        sessions << seatSession.path.path();
+    }
 }
 
 Systemd::Logind::SeatPrivate::~SeatPrivate()
@@ -46,8 +56,56 @@ Systemd::Logind::Seat::~Seat()
     delete d_ptr;
 }
 
+QString Systemd::Logind::Seat::activeSession() const
+{
+    Q_D(const Seat);
+    return d->activeSession;
+}
+
 bool Systemd::Logind::Seat::canGraphical() const
 {
     Q_D(const Seat);
     return d->canGraphical;
+}
+
+bool Systemd::Logind::Seat::canMultiSession() const
+{
+    Q_D(const Seat);
+    return d->canMultiSession;
+}
+
+bool Systemd::Logind::Seat::canTTY() const
+{
+    Q_D(const Seat);
+    return d->canTTY;
+}
+
+QString Systemd::Logind::Seat::id() const
+{
+    Q_D(const Seat);
+    return d->id;
+}
+
+bool Systemd::Logind::Seat::idleHint() const
+{
+    Q_D(const Seat);
+    return d->idleHint;
+}
+
+qulonglong Systemd::Logind::Seat::idleSinceHint() const
+{
+    Q_D(const Seat);
+    return d->idleSinceHint;
+}
+
+qulonglong Systemd::Logind::Seat::idleSinceHintMonotonic() const
+{
+    Q_D(const Seat);
+    return d->idleSinceHintMonotonic;
+}
+
+QStringList Systemd::Logind::Seat::sessions() const
+{
+    Q_D(const Seat);
+    return d->sessions;
 }
