@@ -89,7 +89,7 @@ Systemd::Job::Ptr Systemd::SystemdPrivate::getJob(const uint id)
         qDebug() << reply.error().message();
     } else {
         QString jobPath = qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
-        job = Systemd::Job::Ptr(new Systemd::Job(jobPath, this));
+        job = Systemd::Job::Ptr(new Systemd::Job(jobPath, this), &QObject::deleteLater);
     }
 
     return job;
@@ -106,7 +106,7 @@ Systemd::Unit::Ptr Systemd::SystemdPrivate::getUnit(const QString &name)
         qDebug() << reply.error().message();
     } else {
         QString unitPath = qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
-        unit = Systemd::Unit::Ptr(new Systemd::Unit(unitPath, this));
+        unit = Systemd::Unit::Ptr(new Systemd::Unit(unitPath, this), &QObject::deleteLater);
     }
 
     return unit;
@@ -123,7 +123,7 @@ Systemd::Unit::Ptr Systemd::SystemdPrivate::getUnitByPID(const uint pid)
         qDebug() << reply.error().message();
     } else {
         QString unitPath = qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
-        unit = Systemd::Unit::Ptr(new Systemd::Unit(unitPath, this));
+        unit = Systemd::Unit::Ptr(new Systemd::Unit(unitPath, this), &QObject::deleteLater);
     }
 
     return unit;
@@ -145,7 +145,7 @@ QList<Systemd::Job::Ptr> Systemd::SystemdPrivate::listJobs()
         if (message.type() == QDBusMessage::ReplyMessage) {
             const ManagerDBusJobList queued = qdbus_cast<ManagerDBusJobList>(message.arguments().first());
             Q_FOREACH(const ManagerDBusJob job, queued) {
-                jobs.append(Systemd::Job::Ptr(new Systemd::Job(job.path.path())));
+                jobs.append(Systemd::Job::Ptr(new Systemd::Job(job.path.path()), &QObject::deleteLater));
             }
         }
     }
@@ -169,7 +169,7 @@ QList<Systemd::Unit::Ptr> Systemd::SystemdPrivate::listUnits()
         if (message.type() == QDBusMessage::ReplyMessage) {
             const ManagerDBusUnitList loaded = qdbus_cast<ManagerDBusUnitList>(message.arguments().first());
             Q_FOREACH(const ManagerDBusUnit unit, loaded) {
-                units.append(Systemd::Unit::Ptr(new Systemd::Unit(unit.path.path())));
+                units.append(Systemd::Unit::Ptr(new Systemd::Unit(unit.path.path()), &QObject::deleteLater));
             }
         }
     }
@@ -212,7 +212,7 @@ Systemd::Unit::Ptr Systemd::SystemdPrivate::loadUnit(const QString &name)
         qDebug() << reply.error().message();
     } else {
         QString unitPath = qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
-        unit = Systemd::Unit::Ptr(new Systemd::Unit(unitPath, this));
+        unit = Systemd::Unit::Ptr(new Systemd::Unit(unitPath, this), &QObject::deleteLater);
     }
 
     return unit;
