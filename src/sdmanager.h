@@ -44,6 +44,12 @@ namespace Systemd
         IgnoreRequirements
     };
 
+    enum Who {
+        Main,
+        Control,
+        All
+    };
+
     class SDQT_EXPORT Notifier : public QObject
     {
         Q_OBJECT
@@ -86,6 +92,11 @@ namespace Systemd
      * refer to an existing process of the system.
      */
     SDQT_EXPORT Unit::Ptr getUnitByPID(const uint pid);
+
+    /*
+     * May be used to kill (i.e. send a signal to) all processes of a unit.
+     */
+    SDQT_EXPORT void killUnit(const QString &name, const Systemd::Who who, const int signal);
 
     /*
      * Returns an array with all currently queued jobs.

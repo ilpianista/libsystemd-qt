@@ -43,6 +43,7 @@ public:
     Job::Ptr getJob(const uint id);
     Unit::Ptr getUnit(const QString &name);
     Unit::Ptr getUnitByPID(const uint pid);
+    void killUnit(const QString &name, const Who who, const int signal);
     QList<Job::Ptr> listJobs();
     QList<Unit::Ptr> listUnits();
     QStringList listUnitFiles();
@@ -59,6 +60,7 @@ protected Q_SLOTS:
 
 private:
     QString modeToString(const Mode mode);
+    QString whoToString(const Who mode);
     void init();
 };
 }

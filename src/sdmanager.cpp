@@ -27,7 +27,7 @@ const QString SystemdPrivate::SD_DBUS_DAEMON_PATH(QString::fromLatin1("/org/free
 
 Q_GLOBAL_STATIC(Systemd::SystemdPrivate, globalSystemd)
 
-Systemd::SystemdPrivate::SystemdPrivate() :
+SystemdPrivate::SystemdPrivate() :
     isdface(SystemdPrivate::SD_DBUS_SERVICE, SystemdPrivate::SD_DBUS_DAEMON_PATH,
             QDBusConnection::systemBus())
 {
@@ -41,16 +41,16 @@ Systemd::SystemdPrivate::SystemdPrivate() :
     init();
 }
 
-Systemd::SystemdPrivate::~SystemdPrivate()
+SystemdPrivate::~SystemdPrivate()
 {
 }
 
-void Systemd::SystemdPrivate::init()
+void SystemdPrivate::init()
 {
     qDBusRegisterMetaType<UnitDBusJob>();
 }
 
-bool Systemd::SystemdPrivate::disableUnitFiles(const QStringList &files, const bool runtime)
+bool SystemdPrivate::disableUnitFiles(const QStringList &files, const bool runtime)
 {
     qDBusRegisterMetaType<DBusUnitFileChange>();
     qDBusRegisterMetaType<DBusUnitFileChangeList>();
@@ -65,7 +65,7 @@ bool Systemd::SystemdPrivate::disableUnitFiles(const QStringList &files, const b
     return true;
 }
 
-bool Systemd::SystemdPrivate::enableUnitFiles(const QStringList &files, const bool runtime, const bool force)
+bool SystemdPrivate::enableUnitFiles(const QStringList &files, const bool runtime, const bool force)
 {
     qDBusRegisterMetaType<DBusUnitFileChange>();
     qDBusRegisterMetaType<DBusUnitFileChangeList>();
@@ -80,7 +80,7 @@ bool Systemd::SystemdPrivate::enableUnitFiles(const QStringList &files, const bo
     return true;
 }
 
-Job::Ptr Systemd::SystemdPrivate::getJob(const uint id)
+Job::Ptr SystemdPrivate::getJob(const uint id)
 {
     Job::Ptr job;
 
@@ -97,7 +97,7 @@ Job::Ptr Systemd::SystemdPrivate::getJob(const uint id)
     return job;
 }
 
-Unit::Ptr Systemd::SystemdPrivate::getUnit(const QString &name)
+Unit::Ptr SystemdPrivate::getUnit(const QString &name)
 {
     Unit::Ptr unit;
 
@@ -114,7 +114,7 @@ Unit::Ptr Systemd::SystemdPrivate::getUnit(const QString &name)
     return unit;
 }
 
-Unit::Ptr Systemd::SystemdPrivate::getUnitByPID(const uint pid)
+Unit::Ptr SystemdPrivate::getUnitByPID(const uint pid)
 {
     Unit::Ptr unit;
 
@@ -131,7 +131,17 @@ Unit::Ptr Systemd::SystemdPrivate::getUnitByPID(const uint pid)
     return unit;
 }
 
-QList<Job::Ptr> Systemd::SystemdPrivate::listJobs()
+void SystemdPrivate::killUnit(const QString& name, const Who who, const int signal)
+{
+    QDBusPendingReply<void> reply = isdface.KillUnit(name, whoToString(who), signal);
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+    }
+}
+
+QList<Job::Ptr> SystemdPrivate::listJobs()
 {
     QList<Job::Ptr> jobs;
 
@@ -155,7 +165,7 @@ QList<Job::Ptr> Systemd::SystemdPrivate::listJobs()
     return jobs;
 }
 
-QList<Unit::Ptr> Systemd::SystemdPrivate::listUnits()
+QList<Unit::Ptr> SystemdPrivate::listUnits()
 {
     QList<Unit::Ptr> units;
 
@@ -179,7 +189,7 @@ QList<Unit::Ptr> Systemd::SystemdPrivate::listUnits()
     return units;
 }
 
-QStringList Systemd::SystemdPrivate::listUnitFiles()
+QStringList SystemdPrivate::listUnitFiles()
 {
     QStringList unitFiles;
 
@@ -203,7 +213,7 @@ QStringList Systemd::SystemdPrivate::listUnitFiles()
     return unitFiles;
 }
 
-Unit::Ptr Systemd::SystemdPrivate::loadUnit(const QString &name)
+Unit::Ptr SystemdPrivate::loadUnit(const QString &name)
 {
     Unit::Ptr unit;
 
@@ -220,22 +230,22 @@ Unit::Ptr Systemd::SystemdPrivate::loadUnit(const QString &name)
     return unit;
 }
 
-void Systemd::SystemdPrivate::onUnitNew(const QString &id, const QDBusObjectPath &unit)
+void SystemdPrivate::onUnitNew(const QString &id, const QDBusObjectPath &unit)
 {
     emit Notifier::unitNew(unit.path());
 }
 
-void Systemd::SystemdPrivate::onUnitRemoved(const QString &id, const QDBusObjectPath &unit)
+void SystemdPrivate::onUnitRemoved(const QString &id, const QDBusObjectPath &unit)
 {
     emit Notifier::unitRemoved(unit.path());
 }
 
-void Systemd::SystemdPrivate::onUnitFilesChanged()
+void SystemdPrivate::onUnitFilesChanged()
 {
     emit Notifier::unitFilesChanged();
 }
 
-Job::Ptr Systemd::SystemdPrivate::reloadUnit(const QString &name, const Systemd::Mode mode)
+Job::Ptr SystemdPrivate::reloadUnit(const QString &name, const Systemd::Mode mode)
 {
     Job::Ptr job;
 
@@ -252,7 +262,7 @@ Job::Ptr Systemd::SystemdPrivate::reloadUnit(const QString &name, const Systemd:
     return job;
 }
 
-Job::Ptr Systemd::SystemdPrivate::restartUnit(const QString &name, const Systemd::Mode mode)
+Job::Ptr SystemdPrivate::restartUnit(const QString &name, const Systemd::Mode mode)
 {
     Job::Ptr job;
 
@@ -269,7 +279,7 @@ Job::Ptr Systemd::SystemdPrivate::restartUnit(const QString &name, const Systemd
     return job;
 }
 
-Job::Ptr Systemd::SystemdPrivate::startUnit(const QString &name, const Systemd::Mode mode)
+Job::Ptr SystemdPrivate::startUnit(const QString &name, const Systemd::Mode mode)
 {
     Job::Ptr job;
 
@@ -286,7 +296,7 @@ Job::Ptr Systemd::SystemdPrivate::startUnit(const QString &name, const Systemd::
     return job;
 }
 
-Job::Ptr Systemd::SystemdPrivate::stopUnit(const QString &name, const Systemd::Mode mode)
+Job::Ptr SystemdPrivate::stopUnit(const QString &name, const Systemd::Mode mode)
 {
     Job::Ptr job;
 
@@ -303,14 +313,24 @@ Job::Ptr Systemd::SystemdPrivate::stopUnit(const QString &name, const Systemd::M
     return job;
 }
 
-QString Systemd::SystemdPrivate::modeToString(const Systemd::Mode mode)
+QString SystemdPrivate::modeToString(const Systemd::Mode mode)
 {
     switch(mode) {
-        case Fail: return "fail";
-        case IgnoreDependencies: return "ignore-dependencies";
-        case IgnoreRequirements: return "ignore-requirements";
-        case Isolate: return "isolate";
-        case Replace: return "replace";
+        case Systemd::Fail: return "fail";
+        case Systemd::IgnoreDependencies: return "ignore-dependencies";
+        case Systemd::IgnoreRequirements: return "ignore-requirements";
+        case Systemd::Isolate: return "isolate";
+        case Systemd::Replace: return "replace";
+        default: return QString();
+    }
+}
+
+QString SystemdPrivate::whoToString(const Systemd::Who who)
+{
+    switch(who) {
+        case Systemd::All: return "all";
+        case Systemd::Control: return "control";
+        case Systemd::Main: return "main";
         default: return QString();
     }
 }
@@ -338,6 +358,11 @@ Unit::Ptr Systemd::getUnit(const QString &name)
 Unit::Ptr Systemd::getUnitByPID(const uint pid)
 {
     return globalSystemd()->getUnitByPID(pid);
+}
+
+void Systemd::killUnit(const QString& name, const Systemd::Who who, const int signal)
+{
+    return globalSystemd()->killUnit(name, who, signal);
 }
 
 QList<Job::Ptr> Systemd::listJobs()
