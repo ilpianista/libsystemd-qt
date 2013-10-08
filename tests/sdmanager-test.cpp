@@ -22,6 +22,8 @@
 
 #include "../src/sdmanager.h"
 
+using namespace Systemd;
+
 class SDManagerTest {
 public:
     static void disableUnitFiles()
@@ -56,21 +58,21 @@ public:
 
     static void listJobs()
     {
-        Q_FOREACH(const Systemd::Job::Ptr job, Systemd::listJobs()) {
+        Q_FOREACH(const Job::Ptr &job, Systemd::listJobs()) {
             qDebug() << job->id();
         }
     }
 
     static void listUnits()
     {
-        Q_FOREACH(const Systemd::Unit::Ptr unit, Systemd::listUnits()) {
+        Q_FOREACH(const Unit::Ptr &unit, Systemd::listUnits()) {
             qDebug() << unit->id();
         }
     }
 
     static void listUnitFiles()
     {
-        Q_FOREACH(const QString unit, Systemd::listUnitFiles()) {
+        Q_FOREACH(const QString &unit, Systemd::listUnitFiles()) {
             qDebug() << unit;
         }
     }

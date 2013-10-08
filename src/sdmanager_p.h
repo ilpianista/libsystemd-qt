@@ -47,10 +47,10 @@ public:
     QList<Unit::Ptr> listUnits();
     QStringList listUnitFiles();
     Unit::Ptr loadUnit(const QString &name);
-    bool reloadUnit(const QString &name, const Mode mode);
-    bool restartUnit(const QString &name, const Mode mode);
-    bool startUnit(const QString &name, const Mode mode);
-    bool stopUnit(const QString &name, const Mode mode);
+    Job::Ptr reloadUnit(const QString &name, const Mode mode);
+    Job::Ptr restartUnit(const QString &name, const Mode mode);
+    Job::Ptr startUnit(const QString &name, const Mode mode);
+    Job::Ptr stopUnit(const QString &name, const Mode mode);
 
 protected Q_SLOTS:
     void onUnitNew(const QString &id, const QDBusObjectPath &unit);

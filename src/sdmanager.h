@@ -57,48 +57,86 @@ namespace Systemd
     // See http://www.freedesktop.org/wiki/Software/systemd/dbus for more info.
 
     /*
-     * Disable a unit in the system. Return false if something goes wrong.
+     * Disables one or more units in the system, i.e. removes all symlinks to
+     * them in /etc and /run.
      */
     SDQT_EXPORT bool disableUnitFiles(const QStringList &files, const bool runtime);
 
     /*
-     * Enable a unit in the system. Return false if something goes wrong.
+     * May be used to enable one or more units in the system (by creating
+     * symlinks to them in /etc or /run).
      */
     SDQT_EXPORT bool enableUnitFiles(const QStringList &files, const bool runtime, const bool force);
 
+    /*
+     * Returns the job object path for a specific job, identified by its id.
+     */
     SDQT_EXPORT Job::Ptr getJob(const uint id);
 
+    /*
+     * May be used to get the unit object path for a unit name. It takes the
+     * unit name and returns the object path. If a unit has not been loaded
+     * yet by this name this call will fail.
+     */
     SDQT_EXPORT Unit::Ptr getUnit(const QString &name);
 
+    /*
+     * May be used to get the unit object path of the unit a process ID
+     * belongs to. Takes a Unix PID and returns the object path. The PID must
+     * refer to an existing process of the system.
+     */
     SDQT_EXPORT Unit::Ptr getUnitByPID(const uint pid);
 
+    /*
+     * Returns an array with all currently queued jobs.
+     */
     SDQT_EXPORT QList<Job::Ptr> listJobs();
 
     /*
-     * Lists the name of all units loaded.
+     * Returns an array with all currently loaded units. Note that units may
+     * be known by multiple names at the same name, and hence there might be
+     * more unit names loaded than actual units behind them.
      */
     SDQT_EXPORT QList<Unit::Ptr> listUnits();
 
     /*
-     * Lists the name of all unit files on disk.
+     * Returns an array of unit names. Note that listUnit() returns a list of
+     * units currently loaded into memory, while listUnitFiles() returns a
+     * list of unit files that could be found on disk.
      */
     SDQT_EXPORT QStringList listUnitFiles();
 
+    /*
+     * Is similar to getUnit() but will load the unit from disk if possible.
+     */
     SDQT_EXPORT Unit::Ptr loadUnit(const QString &name);
 
-    SDQT_EXPORT bool reloadUnit(const QString &name, const Mode mode);
-
-    SDQT_EXPORT bool restartUnit(const QString &name, const Mode mode);
+    /*
+     * May be used to reload a unit, and takes similar arguments as
+     * startUnit(). Reloading is done only if the unit is already running and
+     * fails otherwise.
+     */
+    SDQT_EXPORT Job::Ptr reloadUnit(const QString &name, const Mode mode);
 
     /*
-     * Start a unit. Return false if something goes wrong.
+     * Is similar to reloadUnit() but will restart the unit. If a service is
+     * restarted that isn't running it will be started, unless the "Try"
+     * flavor is used in which case a service that isn't running is not
+     * affected by the restart.
      */
-    SDQT_EXPORT bool startUnit(const QString &name, const Mode mode);
+    SDQT_EXPORT Job::Ptr restartUnit(const QString &name, const Mode mode);
 
     /*
-     * Stop a unit. Return false if something goes wrong.
+     * Enqeues a start job, and possibly depending jobs. Takes the unit to
+     * activate, plus a mode string.
      */
-    SDQT_EXPORT bool stopUnit(const QString &name, const Mode mode);
+    SDQT_EXPORT Job::Ptr startUnit(const QString &name, const Mode mode);
+
+    /*
+     * Is similar to startUnit() but stops the specified unit rather than
+     * starting it. Note that "isolate" mode is invalid for this call.
+     */
+    SDQT_EXPORT Job::Ptr stopUnit(const QString &name, const Mode mode);
 
     SDQT_EXPORT Notifier *notifier();
 }
