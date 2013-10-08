@@ -94,6 +94,11 @@ namespace Systemd
     SDQT_EXPORT Unit::Ptr getUnitByPID(const uint pid);
 
     /*
+     * Returns the current enablement status of specific unit file.
+     */
+    SDQT_EXPORT QString getUnitFileState(const QString &file);
+
+    /*
      * May be used to kill (i.e. send a signal to) all processes of a unit.
      */
     SDQT_EXPORT void killUnit(const QString &name, const Systemd::Who who, const int signal);

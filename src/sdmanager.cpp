@@ -131,6 +131,18 @@ Unit::Ptr SystemdPrivate::getUnitByPID(const uint pid)
     return unit;
 }
 
+QString SystemdPrivate::getUnitFileState(const QString& file)
+{
+    QDBusPendingReply<QString> reply = isdface.GetUnitFileState(file);
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+    }
+
+    return qdbus_cast<QString>(reply.reply().arguments().first());
+}
+
 void SystemdPrivate::killUnit(const QString& name, const Who who, const int signal)
 {
     QDBusPendingReply<void> reply = isdface.KillUnit(name, whoToString(who), signal);
@@ -358,6 +370,11 @@ Unit::Ptr Systemd::getUnit(const QString &name)
 Unit::Ptr Systemd::getUnitByPID(const uint pid)
 {
     return globalSystemd()->getUnitByPID(pid);
+}
+
+QString getUnitFileState(const QString& file)
+{
+    return globalSystemd()->getUnitFileState(file);
 }
 
 void Systemd::killUnit(const QString& name, const Systemd::Who who, const int signal)

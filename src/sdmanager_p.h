@@ -43,6 +43,7 @@ public:
     Job::Ptr getJob(const uint id);
     Unit::Ptr getUnit(const QString &name);
     Unit::Ptr getUnitByPID(const uint pid);
+    QString getUnitFileState(const QString &file);
     void killUnit(const QString &name, const Who who, const int signal);
     QList<Job::Ptr> listJobs();
     QList<Unit::Ptr> listUnits();
