@@ -31,11 +31,7 @@ class JobPrivate;
 class SDQT_EXPORT Job : public QObject
 {
     Q_OBJECT
-
-    Q_PROPERTY(uint id READ id CONSTANT)
-    Q_PROPERTY(QString jobType READ jobType)
-    Q_PROPERTY(QString state READ state)
-    Q_PROPERTY(QString unit READ unit)
+    Q_DECLARE_PRIVATE(Job)
 
 public:
     typedef QSharedPointer<Job> Ptr;
@@ -54,8 +50,6 @@ protected:
 
 private:
     void init();
-
-    Q_DECLARE_PRIVATE(Job)
 };
 }
 

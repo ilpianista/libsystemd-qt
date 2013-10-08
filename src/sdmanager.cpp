@@ -89,7 +89,7 @@ Systemd::Job::Ptr Systemd::SystemdPrivate::getJob(const uint id)
         qDebug() << reply.error().message();
     } else {
         QString jobPath = qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
-        job = Systemd::Job::Ptr(new Systemd::Job(jobPath, this), &QObject::deleteLater);
+        job = Systemd::Job::Ptr(new Systemd::Job(jobPath), &QObject::deleteLater);
     }
 
     return job;
@@ -106,7 +106,7 @@ Systemd::Unit::Ptr Systemd::SystemdPrivate::getUnit(const QString &name)
         qDebug() << reply.error().message();
     } else {
         QString unitPath = qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
-        unit = Systemd::Unit::Ptr(new Systemd::Unit(unitPath, this), &QObject::deleteLater);
+        unit = Systemd::Unit::Ptr(new Systemd::Unit(unitPath), &QObject::deleteLater);
     }
 
     return unit;
@@ -123,7 +123,7 @@ Systemd::Unit::Ptr Systemd::SystemdPrivate::getUnitByPID(const uint pid)
         qDebug() << reply.error().message();
     } else {
         QString unitPath = qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
-        unit = Systemd::Unit::Ptr(new Systemd::Unit(unitPath, this), &QObject::deleteLater);
+        unit = Systemd::Unit::Ptr(new Systemd::Unit(unitPath), &QObject::deleteLater);
     }
 
     return unit;
@@ -212,7 +212,7 @@ Systemd::Unit::Ptr Systemd::SystemdPrivate::loadUnit(const QString &name)
         qDebug() << reply.error().message();
     } else {
         QString unitPath = qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
-        unit = Systemd::Unit::Ptr(new Systemd::Unit(unitPath, this), &QObject::deleteLater);
+        unit = Systemd::Unit::Ptr(new Systemd::Unit(unitPath), &QObject::deleteLater);
     }
 
     return unit;
