@@ -44,6 +44,15 @@ namespace Systemd
         IgnoreRequirements
     };
 
+    enum Result {
+        Done,
+        Canceled,
+        Timeout,
+        Failed,
+        Dependency,
+        Skipped
+    };
+
     enum Who {
         Main,
         Control,
@@ -55,8 +64,30 @@ namespace Systemd
         Q_OBJECT
 
     Q_SIGNALS:
+        /*
+         * Sent out each time a new job is queued.
+         */
+        void jobNew(const QString &jobPath, const QString &unit);
+
+        /*
+         * Sent out each time a new job is dequeued.
+         */
+        void jobRemoved(const QString &jobPath, const QString &unit, const Systemd::Result result);
+
+        /*
+         * Sent out each time a new unit is loaded.
+         */
         void unitNew(const QString &unitPath);
+
+        /*
+         * Sent out each time a new unit is unloaded.
+         */
         void unitRemoved(const QString &unitPath);
+
+        /*
+         * Sent out each time the list of enabled or masked unit files on disk
+         * have changed.
+         */
         void unitFilesChanged();
     };
 

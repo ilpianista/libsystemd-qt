@@ -55,6 +55,8 @@ public:
     Job::Ptr stopUnit(const QString &name, const Mode mode);
 
 protected Q_SLOTS:
+    void onJobNew(const uint id, const QDBusObjectPath &job, const QString &unit);
+    void onJobRemoved(const uint id, const QDBusObjectPath &job, const QString &unit, const Result result);
     void onUnitNew(const QString &id, const QDBusObjectPath &unit);
     void onUnitRemoved(const QString &id, const QDBusObjectPath &unit);
     void onUnitFilesChanged();
@@ -62,6 +64,7 @@ protected Q_SLOTS:
 private:
     QString modeToString(const Mode mode);
     QString whoToString(const Who mode);
+    Result stringToResult(const QString &result);
     void init();
 };
 }

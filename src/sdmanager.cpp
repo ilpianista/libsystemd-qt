@@ -31,6 +31,10 @@ SystemdPrivate::SystemdPrivate() :
     isdface(SystemdPrivate::SD_DBUS_SERVICE, SystemdPrivate::SD_DBUS_DAEMON_PATH,
             QDBusConnection::systemBus())
 {
+    connect(&isdface, SIGNAL(JobNew(uint,QDBusObjectPath,QString)), this,
+            SLOT(onJobNew(uint,QDBusObjectPath,QString)));
+    connect(&isdface, SIGNAL(JobRemoved(uint,QDBusObjectPath,QString,QString)), this,
+            SLOT(onJobRemoved(uint,QDBusObjectPath,QString,stringToResult(QString))));
     connect(&isdface, SIGNAL(UnitNew(QString,QDBusObjectPath)), this,
             SLOT(onUnitNew(QString,QDBusObjectPath)));
     connect(&isdface, SIGNAL(UnitRemoved(QString,QDBusObjectPath)), this,
@@ -242,6 +246,16 @@ Unit::Ptr SystemdPrivate::loadUnit(const QString &name)
     return unit;
 }
 
+void SystemdPrivate::onJobNew(const uint id, const QDBusObjectPath &job, const QString &unit)
+{
+    emit Notifier::jobNew(job.path(), unit);
+}
+
+void SystemdPrivate::onJobRemoved(const uint id, const QDBusObjectPath &job, const QString &unit, const Systemd::Result result)
+{
+    emit Notifier::jobRemoved(job.path(), unit, result);
+}
+
 void SystemdPrivate::onUnitNew(const QString &id, const QDBusObjectPath &unit)
 {
     emit Notifier::unitNew(unit.path());
@@ -344,6 +358,23 @@ QString SystemdPrivate::whoToString(const Systemd::Who who)
         case Systemd::Control: return "control";
         case Systemd::Main: return "main";
         default: return QString();
+    }
+}
+
+Systemd::Result SystemdPrivate::stringToResult(const QString &result)
+{
+    if ( result == "canceled" ) {
+        return Systemd::Canceled;
+    } else if ( result == "dependency" ) {
+        return Systemd::Dependency;
+    } else if ( result == "failed" ) {
+        return Systemd::Failed;
+    } else if ( result == "skipped" ) {
+        return Systemd::Skipped;
+    } else if ( result == "timeout" ) {
+        return Systemd::Timeout;
+    } else { // "done"
+        return Systemd::Done;
     }
 }
 
