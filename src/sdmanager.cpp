@@ -34,7 +34,7 @@ SystemdPrivate::SystemdPrivate() :
     connect(&isdface, SIGNAL(JobNew(uint,QDBusObjectPath,QString)), this,
             SLOT(onJobNew(uint,QDBusObjectPath,QString)));
     connect(&isdface, SIGNAL(JobRemoved(uint,QDBusObjectPath,QString,QString)), this,
-            SLOT(onJobRemoved(uint,QDBusObjectPath,QString,stringToResult(QString))));
+            SLOT(onJobRemoved(uint,QDBusObjectPath,QString,QString)));
     connect(&isdface, SIGNAL(UnitNew(QString,QDBusObjectPath)), this,
             SLOT(onUnitNew(QString,QDBusObjectPath)));
     connect(&isdface, SIGNAL(UnitRemoved(QString,QDBusObjectPath)), this,
@@ -251,9 +251,9 @@ void SystemdPrivate::onJobNew(const uint id, const QDBusObjectPath &job, const Q
     emit Notifier::jobNew(job.path(), unit);
 }
 
-void SystemdPrivate::onJobRemoved(const uint id, const QDBusObjectPath &job, const QString &unit, const Systemd::Result result)
+void SystemdPrivate::onJobRemoved(const uint id, const QDBusObjectPath &job, const QString &unit, const QString &result)
 {
-    emit Notifier::jobRemoved(job.path(), unit, result);
+    emit Notifier::jobRemoved(job.path(), unit, stringToResult(result));
 }
 
 void SystemdPrivate::onUnitNew(const QString &id, const QDBusObjectPath &unit)

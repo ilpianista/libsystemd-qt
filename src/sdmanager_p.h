@@ -56,7 +56,7 @@ public:
 
 protected Q_SLOTS:
     void onJobNew(const uint id, const QDBusObjectPath &job, const QString &unit);
-    void onJobRemoved(const uint id, const QDBusObjectPath &job, const QString &unit, const Result result);
+    void onJobRemoved(const uint id, const QDBusObjectPath &job, const QString &unit, const QString &result);
     void onUnitNew(const QString &id, const QDBusObjectPath &unit);
     void onUnitRemoved(const QString &id, const QDBusObjectPath &unit);
     void onUnitFilesChanged();
