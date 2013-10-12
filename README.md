@@ -13,7 +13,8 @@ It requires cmake >= 2.8.8 and Qt 5.x
     # make install
 
 ##Packages
-[PKGBUILD](https://aur.archlinux.org/packages/libsystemd-qt-git/) for Arch Linux
+* [PKGBUILD](https://aur.archlinux.org/packages/libsystemd-qt-git/) for Arch Linux
+* [EBUILD](https://github.com/gentoo/qt/tree/master/dev-libs/libsystemd-qt) for Gentoo Linux in the Qt Overlay
 
 ##License
 LGPL
