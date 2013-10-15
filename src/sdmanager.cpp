@@ -22,8 +22,8 @@
 
 using namespace Systemd;
 
-const QString SystemdPrivate::SD_DBUS_SERVICE(QString::fromLatin1("org.freedesktop.systemd1"));
-const QString SystemdPrivate::SD_DBUS_DAEMON_PATH(QString::fromLatin1("/org/freedesktop/systemd1"));
+const QString SystemdPrivate::SD_DBUS_SERVICE(QLatin1String("org.freedesktop.systemd1"));
+const QString SystemdPrivate::SD_DBUS_DAEMON_PATH(QLatin1String("/org/freedesktop/systemd1"));
 
 Q_GLOBAL_STATIC(Systemd::SystemdPrivate, globalSystemd)
 
