@@ -54,7 +54,7 @@ void SystemdPrivate::init()
     qDBusRegisterMetaType<UnitDBusJob>();
 }
 
-bool SystemdPrivate::disableUnitFiles(const QStringList &files, const bool runtime)
+void SystemdPrivate::disableUnitFiles(const QStringList &files, const bool runtime)
 {
     qDBusRegisterMetaType<DBusUnitFileChange>();
     qDBusRegisterMetaType<DBusUnitFileChangeList>();
@@ -63,13 +63,10 @@ bool SystemdPrivate::disableUnitFiles(const QStringList &files, const bool runti
 
     if (reply.isError()) {
         qDebug() << reply.error().message();
-        return false;
     }
-
-    return true;
 }
 
-bool SystemdPrivate::enableUnitFiles(const QStringList &files, const bool runtime, const bool force)
+void SystemdPrivate::enableUnitFiles(const QStringList &files, const bool runtime, const bool force)
 {
     qDBusRegisterMetaType<DBusUnitFileChange>();
     qDBusRegisterMetaType<DBusUnitFileChangeList>();
@@ -78,10 +75,7 @@ bool SystemdPrivate::enableUnitFiles(const QStringList &files, const bool runtim
 
     if (reply.isError()) {
         qDebug() << reply.error().message();
-        return false;
     }
-
-    return true;
 }
 
 Job::Ptr SystemdPrivate::getJob(const uint id)
@@ -378,14 +372,14 @@ Systemd::Result SystemdPrivate::stringToResult(const QString &result)
     }
 }
 
-bool Systemd::disableUnitFiles(const QStringList &files, const bool runtime)
+void Systemd::disableUnitFiles(const QStringList &files, const bool runtime)
 {
-    return globalSystemd()->disableUnitFiles(files, runtime);
+    globalSystemd()->disableUnitFiles(files, runtime);
 }
 
-bool Systemd::enableUnitFiles(const QStringList &files, const bool runtime, const bool force)
+void Systemd::enableUnitFiles(const QStringList &files, const bool runtime, const bool force)
 {
-    return globalSystemd()->enableUnitFiles(files, runtime, force);
+    globalSystemd()->enableUnitFiles(files, runtime, force);
 }
 
 Job::Ptr Systemd::getJob(const uint id)

@@ -38,8 +38,8 @@ public:
     ~SystemdPrivate();
     OrgFreedesktopSystemd1ManagerInterface isdface;
 
-    bool disableUnitFiles(const QStringList &files, const bool runtime);
-    bool enableUnitFiles(const QStringList &files, const bool runtime, const bool force);
+    void disableUnitFiles(const QStringList &files, const bool runtime);
+    void enableUnitFiles(const QStringList &files, const bool runtime, const bool force);
     Job::Ptr getJob(const uint id);
     Unit::Ptr getUnit(const QString &name);
     Unit::Ptr getUnitByPID(const uint pid);

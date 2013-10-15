@@ -97,13 +97,13 @@ namespace Systemd
      * Disables one or more units in the system, i.e. removes all symlinks to
      * them in /etc and /run.
      */
-    SDQT_EXPORT bool disableUnitFiles(const QStringList &files, const bool runtime);
+    SDQT_EXPORT void disableUnitFiles(const QStringList &files, const bool runtime);
 
     /*
      * May be used to enable one or more units in the system (by creating
      * symlinks to them in /etc or /run).
      */
-    SDQT_EXPORT bool enableUnitFiles(const QStringList &files, const bool runtime, const bool force);
+    SDQT_EXPORT void enableUnitFiles(const QStringList &files, const bool runtime, const bool force);
 
     /*
      * Returns the job object path for a specific job, identified by its id.

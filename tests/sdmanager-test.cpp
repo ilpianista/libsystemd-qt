@@ -32,8 +32,7 @@ public:
         f << QLatin1String("upower.service");
 
         qDebug() << f;
-        bool ret = Systemd::disableUnitFiles(f, false);;
-        qDebug() << ret;
+        Systemd::disableUnitFiles(f, false);;
     }
 
     static void enableUnitFiles()
@@ -42,8 +41,7 @@ public:
         f << QLatin1String("mysqld.service");
 
         qDebug() << f;
-        bool ret = Systemd::enableUnitFiles(f, false, false);
-        qDebug() << ret;
+        Systemd::enableUnitFiles(f, false, false);
     }
 
     static void getUnit()
