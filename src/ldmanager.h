@@ -49,8 +49,8 @@ namespace Logind
         Q_OBJECT
 
     Q_SIGNALS:
-        void prepareForSleep(bool active);
-        void prepareForShutdown(bool active);
+        void prepareForSleep(const bool active);
+        void prepareForShutdown(const bool active);
         void seatNew(const QString &seatPath);
         void seatRemoved(const QString &seatPath);
     };
@@ -69,7 +69,7 @@ namespace Logind
 
     SDQT_EXPORT void hybridSleep(const bool interactive);
 
-    SDQT_EXPORT QList<Seat*> listSeats();
+    SDQT_EXPORT QList<Seat *> listSeats();
 
     SDQT_EXPORT void powerOff(const bool interactive);
 
@@ -77,7 +77,7 @@ namespace Logind
 
     SDQT_EXPORT void suspend(const bool interactive);
 
-    SDQT_EXPORT Notifier *notifier();
+    SDQT_EXPORT Notifier* notifier();
 }
 }
 

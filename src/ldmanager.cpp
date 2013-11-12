@@ -50,7 +50,7 @@ void Systemd::Logind::LogindPrivate::init()
 {
 }
 
-QList<Systemd::Logind::Seat*> Systemd::Logind::LogindPrivate::listSeats()
+QList<Systemd::Logind::Seat *> Systemd::Logind::LogindPrivate::listSeats()
 {
     qDBusRegisterMetaType<LoginDBusSeat>;
     qDBusRegisterMetaType<LoginDBusSeatList>;
@@ -62,7 +62,7 @@ QList<Systemd::Logind::Seat*> Systemd::Logind::LogindPrivate::listSeats()
         return QList<Systemd::Logind::Seat*>();
     }
 
-    QList<Systemd::Logind::Seat*> seatLists;
+    QList<Systemd::Logind::Seat *> seatLists;
     const QDBusMessage message = reply.reply();
     if (message.type() == QDBusMessage::ReplyMessage) {
         const LoginDBusSeatList seats = qdbus_cast<LoginDBusSeatList>(message.arguments().first());
@@ -210,12 +210,12 @@ void Systemd::Logind::LogindPrivate::suspend(const bool interactive)
     }
 }
 
-void Systemd::Logind::LogindPrivate::onPrepareForShutdown(bool active)
+void Systemd::Logind::LogindPrivate::onPrepareForShutdown(const bool active)
 {
     emit Logind::Notifier::prepareForShutdown(active);
 }
 
-void Systemd::Logind::LogindPrivate::onPrepareForSleep(bool active)
+void Systemd::Logind::LogindPrivate::onPrepareForSleep(const bool active)
 {
     emit Logind::Notifier::prepareForSleep(active);
 }
@@ -270,7 +270,7 @@ void Systemd::Logind::hybridSleep(const bool interactive)
     globalLogind()->hybridSleep(interactive);
 }
 
-QList<Systemd::Logind::Seat*> Systemd::Logind::listSeats()
+QList<Systemd::Logind::Seat *> Systemd::Logind::listSeats()
 {
     return globalLogind()->listSeats();
 }
@@ -290,7 +290,7 @@ void Systemd::Logind::suspend(const bool interactive)
     globalLogind()->suspend(interactive);
 }
 
-Systemd::Logind::Notifier *Systemd::Logind::notifier()
+Systemd::Logind::Notifier* Systemd::Logind::notifier()
 {
     return globalLogind();
 }

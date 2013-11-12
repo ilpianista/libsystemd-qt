@@ -447,7 +447,7 @@ Job::Ptr Systemd::stopUnit(const QString &name, const Systemd::Mode mode)
     return globalSystemd()->stopUnit(name, mode);
 }
 
-Notifier *Systemd::notifier()
+Notifier* Systemd::notifier()
 {
     return globalSystemd();
 }

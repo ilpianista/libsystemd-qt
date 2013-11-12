@@ -185,7 +185,7 @@ namespace Systemd
      */
     SDQT_EXPORT Job::Ptr stopUnit(const QString &name, const Mode mode);
 
-    SDQT_EXPORT Notifier *notifier();
+    SDQT_EXPORT Notifier* notifier();
 }
 
 #endif
