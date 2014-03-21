@@ -53,6 +53,7 @@ public:
     Job::Ptr restartUnit(const QString &name, const Mode mode);
     Job::Ptr startUnit(const QString &name, const Mode mode);
     Job::Ptr stopUnit(const QString &name, const Mode mode);
+    void resetFailedUnit(const QString &name);
 
 protected Q_SLOTS:
     void onJobNew(const uint id, const QDBusObjectPath &job, const QString &unit);
