@@ -333,6 +333,15 @@ Job::Ptr SystemdPrivate::stopUnit(const QString &name, const Systemd::Mode mode)
     return job;
 }
 
+void SystemdPrivate::resetFailedUnit(const QString& name)
+{
+    QDBusPendingReply<QDBusObjectPath> reply = isdface.ResetFailedUnit(name);
+    reply.waitForFinished();
+
+    if (reply.isError())
+        qDebug() << reply.error().message();
+}
+
 QString SystemdPrivate::modeToString(const Systemd::Mode mode)
 {
     switch(mode) {
@@ -445,6 +454,11 @@ Job::Ptr Systemd::startUnit(const QString &name, const Systemd::Mode mode)
 Job::Ptr Systemd::stopUnit(const QString &name, const Systemd::Mode mode)
 {
     return globalSystemd()->stopUnit(name, mode);
+}
+
+void Systemd::resetFailedUnit(const QString &name)
+{
+    return globalSystemd()->resetFailedUnit(name);
 }
 
 Notifier* Systemd::notifier()

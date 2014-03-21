@@ -185,6 +185,8 @@ namespace Systemd
      */
     SDQT_EXPORT Job::Ptr stopUnit(const QString &name, const Mode mode);
 
+    SDQT_EXPORT void resetFailedUnit(const QString &name);
+
     SDQT_EXPORT Notifier* notifier();
 }
 
