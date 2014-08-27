@@ -1,9 +1,11 @@
 libsystemd-qt
 =============
 
-Qt-only wrapper for Systemd API
+Qt-only wrapper for [Systemd D-Bus API](http://www.freedesktop.org/wiki/Software/systemd/dbus/).
 
-[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=andreascarpino&url=https://github.com/andreascarpino/libsystemd-qt&title=libsystemd-qt&language=&tags=github&category=software)
+Also supports [logind D-Bus interface](http://www.freedesktop.org/wiki/Software/systemd/logind/).
+
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=andreascarpino&url=https://github.com/ilpianista/libsystemd-qt&title=libsystemd-qt&language=&tags=github&category=software)
 
 ##Build and Installation##
 It requires cmake >= 2.8.8 and Qt 5.x
