@@ -17,7 +17,6 @@
  *
  */
 
-#include "seat.h"
 #include "seat_p.h"
 #include "ldmanager_p.h"
 
@@ -29,7 +28,7 @@ Systemd::Logind::SeatPrivate::SeatPrivate(const QString &path) :
     canMultiSession = seatIface.canMultiSession();
     canTTY = seatIface.canTTY();
     id = seatIface.id();
-    Q_FOREACH(const SeatDBusSession &seatSession, seatIface.sessions()) {
+    Q_FOREACH(const DBusStringObject &seatSession, seatIface.sessions()) {
         sessions << seatSession.path.path();
     }
 }

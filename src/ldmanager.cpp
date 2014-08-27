@@ -52,9 +52,9 @@ void Systemd::Logind::LogindPrivate::init()
 
 QList<Systemd::Logind::Seat *> Systemd::Logind::LogindPrivate::listSeats()
 {
-    qDBusRegisterMetaType<LoginDBusSeat>;
-    qDBusRegisterMetaType<LoginDBusSeatList>;
-    QDBusPendingReply<LoginDBusSeatList> reply = ildface.ListSeats();
+    qDBusRegisterMetaType<DBusStringObject>;
+    qDBusRegisterMetaType<DBusStringObjectList>;
+    QDBusPendingReply<DBusStringObjectList> reply = ildface.ListSeats();
     reply.waitForFinished();
 
     if (reply.isError()) {
@@ -65,8 +65,8 @@ QList<Systemd::Logind::Seat *> Systemd::Logind::LogindPrivate::listSeats()
     QList<Systemd::Logind::Seat *> seatLists;
     const QDBusMessage message = reply.reply();
     if (message.type() == QDBusMessage::ReplyMessage) {
-        const LoginDBusSeatList seats = qdbus_cast<LoginDBusSeatList>(message.arguments().first());
-        Q_FOREACH(const LoginDBusSeat seat, seats) {
+        const DBusStringObjectList seats = qdbus_cast<DBusStringObjectList>(message.arguments().first());
+        Q_FOREACH(const DBusStringObject seat, seats) {
             Systemd::Logind::Seat *s = new Systemd::Logind::Seat(seat.path.path());
             seatLists.append(s);
         }

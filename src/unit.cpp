@@ -17,7 +17,6 @@
  *
  */
 
-#include "unit.h"
 #include "unit_p.h"
 #include "sdmanager_p.h"
 
@@ -58,7 +57,7 @@ Systemd::UnitPrivate::UnitPrivate(const QString &path) :
     inactiveEnterTimestampMonotonic = unitIface.inactiveEnterTimestampMonotonic();
     inactiveExitTimestamp = unitIface.inactiveExitTimestamp();
     inactiveExitTimestampMonotonic = unitIface.inactiveExitTimestampMonotonic();
-    job = unitIface.job().id.toUInt();
+    job = unitIface.job().id;
     jobTimeoutUSec = unitIface.jobTimeoutUSec();
     joinsNamespaceOf = unitIface.joinsNamespaceOf();
     //loadError = unitIface.loadError();
@@ -97,19 +96,11 @@ Systemd::UnitPrivate::~UnitPrivate()
 Systemd::Unit::Unit(const QString &path, QObject *parent) :
                     QObject(parent), d_ptr(new UnitPrivate(path))
 {
-    init();
 }
 
 Systemd::Unit::Unit(UnitPrivate &unit, QObject *parent) :
                     QObject(parent), d_ptr(&unit)
 {
-    init();
-}
-
-void Systemd::Unit::init()
-{
-    Q_D(Unit);
-    qDBusRegisterMetaType<UnitDBusJob>();
 }
 
 Systemd::Unit::~Unit()

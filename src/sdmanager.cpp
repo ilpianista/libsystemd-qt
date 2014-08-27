@@ -51,15 +51,15 @@ SystemdPrivate::~SystemdPrivate()
 
 void SystemdPrivate::init()
 {
-    qDBusRegisterMetaType<UnitDBusJob>();
-    qDBusRegisterMetaType<JobDBusUnit>();
+    qDBusRegisterMetaType<DBusStringObject>();
+    qDBusRegisterMetaType<DBusUIntObject>();
 }
 
 void SystemdPrivate::disableUnitFiles(const QStringList &files, const bool runtime)
 {
-    qDBusRegisterMetaType<DBusUnitFileChange>();
-    qDBusRegisterMetaType<DBusUnitFileChangeList>();
-    QDBusPendingReply<DBusUnitFileChangeList> reply = isdface.DisableUnitFiles(files, runtime);
+    qDBusRegisterMetaType<ManagerDBusUnitFileChange>();
+    qDBusRegisterMetaType<ManagerDBusUnitFileChangeList>();
+    QDBusPendingReply<ManagerDBusUnitFileChangeList> reply = isdface.DisableUnitFiles(files, runtime);
     reply.waitForFinished();
 
     if (reply.isError()) {
@@ -69,9 +69,9 @@ void SystemdPrivate::disableUnitFiles(const QStringList &files, const bool runti
 
 void SystemdPrivate::enableUnitFiles(const QStringList &files, const bool runtime, const bool force)
 {
-    qDBusRegisterMetaType<DBusUnitFileChange>();
-    qDBusRegisterMetaType<DBusUnitFileChangeList>();
-    QDBusPendingReply<bool, DBusUnitFileChangeList> reply = isdface.EnableUnitFiles(files, runtime, force);
+    qDBusRegisterMetaType<ManagerDBusUnitFileChange>();
+    qDBusRegisterMetaType<ManagerDBusUnitFileChangeList>();
+    QDBusPendingReply<bool, ManagerDBusUnitFileChangeList> reply = isdface.EnableUnitFiles(files, runtime, force);
     reply.waitForFinished();
 
     if (reply.isError()) {

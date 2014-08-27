@@ -209,20 +209,20 @@
    <arg type="s" direction="in"/>
   </method>
   <method name="SetUnitProperties">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="DBusUnitFilePropertyList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="UnitDBusPropertyList"/>
    <arg type="s" direction="in"/>
    <arg type="b" direction="in"/>
    <arg type="a(sv)" direction="in">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="DBusUnitFilePropertyList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="UnitDBusPropertyList"/>
    </arg>
   </method>
   <method name="StartTransientUnit">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="DBusUnitFilePropertyList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="UnitDBusPropertyList"/>
    <annotation name="org.qtproject.QtDBus.QtTypeName.In3" value="ManagerDBusAuxList"/>
    <arg type="s" direction="in"/>
    <arg type="s" direction="in"/>
    <arg type="a(sv)" direction="in">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="DBusUnitFilePropertyList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="UnitDBusPropertyList"/>
    </arg>
    <arg type="a(sa(sv))" direction="in">
     <annotation name="org.qtproject.QtDBus.QtTypeName.In3" value="ManagerDBusAuxList"/>
@@ -326,98 +326,98 @@
    <arg type="s" direction="out"/>
   </method>
   <method name="EnableUnitFiles">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="ManagerDBusUnitFileChangeList"/>
    <arg type="as" direction="in"/>
    <arg type="b" direction="in"/>
    <arg type="b" direction="in"/>
    <arg type="b" direction="out"/>
    <arg type="a(sss)" direction="out">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="ManagerDBusUnitFileChangeList"/>
    </arg>
   </method>
   <method name="DisableUnitFiles">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitFileChangeList"/>
    <arg type="as" direction="in"/>
    <arg type="b" direction="in"/>
    <arg type="a(sss)" direction="out">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitFileChangeList"/>
    </arg>
   </method>
   <method name="ReenableUnitFiles">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="ManagerDBusUnitFileChangeList"/>
    <arg type="as" direction="in"/>
    <arg type="b" direction="in"/>
    <arg type="b" direction="in"/>
    <arg type="b" direction="out"/>
    <arg type="a(sss)" direction="out">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="ManagerDBusUnitFileChangeList"/>
    </arg>
   </method>
   <method name="LinkUnitFiles">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitFileChangeList"/>
    <arg type="as" direction="in"/>
    <arg type="b" direction="in"/>
    <arg type="b" direction="in"/>
    <arg type="a(sss)" direction="out">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitFileChangeList"/>
    </arg>
   </method>
   <method name="PresetUnitFiles">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="ManagerDBusUnitFileChangeList"/>
    <arg type="as" direction="in"/>
    <arg type="b" direction="in"/>
    <arg type="b" direction="in"/>
    <arg type="b" direction="out"/>
    <arg type="a(sss)" direction="out">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="ManagerDBusUnitFileChangeList"/>
    </arg>
   </method>
   <method name="PresetUnitFilesWithMode">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="ManagerDBusUnitFileChangeList"/>
    <arg type="as" direction="in"/>
    <arg type="s" direction="in"/>
    <arg type="b" direction="in"/>
    <arg type="b" direction="in"/>
    <arg type="b" direction="out"/>
    <arg type="a(sss)" direction="out">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="ManagerDBusUnitFileChangeList"/>
    </arg>
   </method>
   <method name="MaskUnitFiles">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitFileChangeList"/>
    <arg type="as" direction="in"/>
    <arg type="b" direction="in"/>
    <arg type="b" direction="in"/>
    <arg type="a(sss)" direction="out">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitFileChangeList"/>
    </arg>
   </method>
   <method name="UnmaskUnitFiles">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitFileChangeList"/>
    <arg type="as" direction="in"/>
    <arg type="b" direction="in"/>
    <arg type="a(sss)" direction="out">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitFileChangeList"/>
    </arg>
   </method>
   <method name="SetDefaultTarget">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitFileChangeList"/>
    <arg type="s" direction="in"/>
    <arg type="b" direction="in"/>
    <arg type="a(sss)" direction="out">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitFileChangeList"/>
    </arg>
   </method>
   <method name="GetDefaultTarget">
    <arg type="s" direction="out"/>
   </method>
   <method name="PresetAllUnitFiles">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitFileChangeList"/>
    <arg type="s" direction="in"/>
    <arg type="b" direction="in"/>
    <arg type="b" direction="in"/>
    <arg type="a(sss)" direction="out">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitFileChangeList"/>
    </arg>
   </method>
   <signal name="UnitNew">

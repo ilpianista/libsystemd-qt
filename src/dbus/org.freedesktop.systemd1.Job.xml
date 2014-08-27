@@ -5,7 +5,7 @@
   <method name="Cancel"/>
   <property name="Id" type="u" access="read"/>
   <property name="Unit" type="(so)" access="read">
-    <annotation name="org.qtproject.QtDBus.QtTypeName" value="JobDBusUnit"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusStringObject"/>
   </property>
   <property name="JobType" type="s" access="read"/>
   <property name="State" type="s" access="read"/>

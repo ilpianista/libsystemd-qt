@@ -30,15 +30,15 @@
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="BlockIODeviceWeight" type="a(st)" access="read">
-   <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupBlockIODeviceWeightList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupDBusBlockIODeviceWeightList"/>
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="BlockIOReadBandwidth" type="a(st)" access="read">
-   <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupBlockIODeviceWeightList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupDBusBlockIODeviceWeightList"/>
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="BlockIOWriteBandwidth" type="a(st)" access="read">
-   <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupBlockIODeviceWeightList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupDBusBlockIODeviceWeightList"/>
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="MemoryAccounting" type="b" access="read">
@@ -51,7 +51,7 @@
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="DeviceAllow" type="a(ss)" access="read">
-   <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupDeviceAllowList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupDBusDeviceAllowList"/>
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
  </interface>

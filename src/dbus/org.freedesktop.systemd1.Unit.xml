@@ -134,7 +134,7 @@
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="Job" type="(uo)" access="read">
-   <annotation name="org.qtproject.QtDBus.QtTypeName" value="UnitDBusJob"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusUIntObject"/>
   </property>
   <property name="StopWhenUnneeded" type="b" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
@@ -227,10 +227,10 @@
    <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="SetProperties">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="DBusUnitFilePropertyList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="UnitDBusPropertyList"/>
    <arg type="b" direction="in"/>
    <arg type="a(sv)" direction="in">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="DBusUnitFilePropertyList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="UnitDBusPropertyList"/>
    </arg>
    <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>

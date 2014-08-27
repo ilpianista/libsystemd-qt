@@ -14,11 +14,11 @@
   <property name="Result" type="s" access="read">
   </property>
   <property name="ExecActivate" type="a(sasbttttuii)" access="read">
-   <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommandList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="ExecuteDBusExecCommandList"/>
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="invalidates"/>
   </property>
   <property name="ExecDeactivate" type="a(sasbttttuii)" access="read">
-   <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommandList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="ExecuteDBusExecCommandList"/>
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="invalidates"/>
   </property>
   <property name="Slice" type="s" access="read">
@@ -49,15 +49,15 @@
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="BlockIODeviceWeight" type="a(st)" access="read">
-   <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupBlockIODeviceWeightList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupDBusBlockIODeviceWeightList"/>
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="BlockIOReadBandwidth" type="a(st)" access="read">
-   <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupBlockIODeviceWeightList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupDBusBlockIODeviceWeightList"/>
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="BlockIOWriteBandwidth" type="a(st)" access="read">
-   <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupBlockIODeviceWeightList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupDBusBlockIODeviceWeightList"/>
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="MemoryAccounting" type="b" access="read">
@@ -70,14 +70,14 @@
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="DeviceAllow" type="a(ss)" access="read">
-   <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupDeviceAllowList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupDBusDeviceAllowList"/>
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="Environment" type="as" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="EnvironmentFiles" type="a(sb)" access="read">
-   <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusEnvironmentFileList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="ExecuteDBusEnvironmentFileList"/>
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="UMask" type="u" access="read">
@@ -250,7 +250,7 @@
   </property>
 <!--
   <property name="SELinuxContext" type="(bs)" access="read">
-   <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommandList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="ExecuteExecCommandList"/>
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="AppArmorProfile" type="(bs)" access="read">

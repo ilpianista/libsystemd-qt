@@ -19,7 +19,39 @@
 
 #include "generic-types.h"
 
-QDBusArgument& operator<<(QDBusArgument &argument, const CGroupBlockIODeviceWeight &cGroupBlockIODeviceWeight)
+QDBusArgument& operator<<(QDBusArgument &argument, const DBusUIntObject &object)
+{
+    argument.beginStructure();
+    argument << object.id << object.path;
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument& operator>>(const QDBusArgument &argument, DBusUIntObject &object)
+{
+    argument.beginStructure();
+    argument >> object.id >> object.path;
+    argument.endStructure();
+    return argument;
+}
+
+QDBusArgument& operator<<(QDBusArgument &argument, const DBusStringObject &object)
+{
+    argument.beginStructure();
+    argument << object.id << object.path;
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument& operator>>(const QDBusArgument &argument, DBusStringObject &object)
+{
+    argument.beginStructure();
+    argument >> object.id >> object.path;
+    argument.endStructure();
+    return argument;
+}
+
+QDBusArgument& operator<<(QDBusArgument &argument, const CGroupDBusBlockIODeviceWeight &cGroupBlockIODeviceWeight)
 {
     argument.beginStructure();
     argument << cGroupBlockIODeviceWeight.path << cGroupBlockIODeviceWeight.weight;
@@ -27,7 +59,7 @@ QDBusArgument& operator<<(QDBusArgument &argument, const CGroupBlockIODeviceWeig
     return argument;
 }
 
-const QDBusArgument& operator>>(const QDBusArgument &argument, CGroupBlockIODeviceWeight &cGroupBlockIODeviceWeight)
+const QDBusArgument& operator>>(const QDBusArgument &argument, CGroupDBusBlockIODeviceWeight &cGroupBlockIODeviceWeight)
 {
     argument.beginStructure();
     argument >> cGroupBlockIODeviceWeight.path >> cGroupBlockIODeviceWeight.weight;
@@ -35,7 +67,7 @@ const QDBusArgument& operator>>(const QDBusArgument &argument, CGroupBlockIODevi
     return argument;
 }
 
-QDBusArgument& operator<<(QDBusArgument &argument, const CGroupDeviceAllow &cGroupDeviceAllow)
+QDBusArgument& operator<<(QDBusArgument &argument, const CGroupDBusDeviceAllow &cGroupDeviceAllow)
 {
     argument.beginStructure();
     argument << cGroupDeviceAllow.path << cGroupDeviceAllow.rwm;
@@ -43,7 +75,7 @@ QDBusArgument& operator<<(QDBusArgument &argument, const CGroupDeviceAllow &cGro
     return argument;
 }
 
-const QDBusArgument& operator>>(const QDBusArgument &argument, CGroupDeviceAllow &cGroupDeviceAllow)
+const QDBusArgument& operator>>(const QDBusArgument &argument, CGroupDBusDeviceAllow &cGroupDeviceAllow)
 {
     argument.beginStructure();
     argument >> cGroupDeviceAllow.path >> cGroupDeviceAllow.rwm;
@@ -51,7 +83,7 @@ const QDBusArgument& operator>>(const QDBusArgument &argument, CGroupDeviceAllow
     return argument;
 }
 
-QDBusArgument& operator<<(QDBusArgument &argument, const DBusEnvironmentFile &environmentFile)
+QDBusArgument& operator<<(QDBusArgument &argument, const ExecuteDBusEnvironmentFile &environmentFile)
 {
     argument.beginStructure();
     argument << environmentFile.fileName << environmentFile.dash;
@@ -59,7 +91,7 @@ QDBusArgument& operator<<(QDBusArgument &argument, const DBusEnvironmentFile &en
     return argument;
 }
 
-const QDBusArgument& operator>>(const QDBusArgument &argument, DBusEnvironmentFile &environmentFile)
+const QDBusArgument& operator>>(const QDBusArgument &argument, ExecuteDBusEnvironmentFile &environmentFile)
 {
     argument.beginStructure();
     argument >> environmentFile.fileName >> environmentFile.dash;
@@ -67,7 +99,7 @@ const QDBusArgument& operator>>(const QDBusArgument &argument, DBusEnvironmentFi
     return argument;
 }
 
-QDBusArgument& operator<<(QDBusArgument &argument, const DBusExecCommand &execCommand)
+QDBusArgument& operator<<(QDBusArgument &argument, const ExecuteDBusExecCommand &execCommand)
 {
     argument.beginStructure();
     argument << execCommand.path << execCommand.argv << execCommand.ignore;
@@ -77,7 +109,7 @@ QDBusArgument& operator<<(QDBusArgument &argument, const DBusExecCommand &execCo
     return argument;
 }
 
-const QDBusArgument& operator>>(const QDBusArgument &argument, DBusExecCommand &execCommand)
+const QDBusArgument& operator>>(const QDBusArgument &argument, ExecuteDBusExecCommand &execCommand)
 {
     argument.beginStructure();
     argument >> execCommand.path >> execCommand.argv >> execCommand.ignore;
@@ -87,84 +119,20 @@ const QDBusArgument& operator>>(const QDBusArgument &argument, DBusExecCommand &
     return argument;
 }
 
-QDBusArgument& operator<<(QDBusArgument &argument, const DBusUnitFileChange &unitFileChange)
+QDBusArgument& operator<<(QDBusArgument &argument, const LoginDBusInhibitor &inhibitor)
 {
     argument.beginStructure();
-    argument << unitFileChange.type << unitFileChange.path << unitFileChange.source;
+    argument << inhibitor.what << inhibitor.who << inhibitor.why << inhibitor.mode;
+    argument << inhibitor.uid << inhibitor.pid;
     argument.endStructure();
     return argument;
 }
 
-const QDBusArgument& operator>>(const QDBusArgument &argument, DBusUnitFileChange &unitFileChange)
+const QDBusArgument& operator>>(const QDBusArgument &argument, LoginDBusInhibitor &inhibitor)
 {
     argument.beginStructure();
-    argument >> unitFileChange.type >> unitFileChange.path >> unitFileChange.source;
-    argument.endStructure();
-    return argument;
-}
-
-QDBusArgument& operator<<(QDBusArgument &argument, const ManagerDBusUnitFile &unitFile)
-{
-    argument.beginStructure();
-    argument << unitFile.path << unitFile.state;
-    argument.endStructure();
-    return argument;
-}
-
-const QDBusArgument& operator>>(const QDBusArgument &argument, ManagerDBusUnitFile &unitFile)
-{
-    argument.beginStructure();
-    argument >> unitFile.path >> unitFile.state;
-    argument.endStructure();
-    return argument;
-}
-
-QDBusArgument& operator<<(QDBusArgument &argument, const DBusUnitFileProperty &unitFileProperty)
-{
-    argument.beginStructure();
-    argument << unitFileProperty.name << unitFileProperty.value.toString();
-    argument.endStructure();
-    return argument;
-}
-
-const QDBusArgument& operator>>(const QDBusArgument &argument, DBusUnitFileProperty &unitFileProperty)
-{
-    argument.beginStructure();
-    argument >> unitFileProperty.name >> unitFileProperty.value;
-    argument.endStructure();
-    return argument;
-}
-
-QDBusArgument& operator<<(QDBusArgument &argument, const JobDBusUnit &unit)
-{
-    argument.beginStructure();
-    argument << unit.id << unit.path;
-    argument.endStructure();
-    return argument;
-}
-
-const QDBusArgument& operator>>(const QDBusArgument &argument, JobDBusUnit &unit)
-{
-    argument.beginStructure();
-    argument >> unit.id >> unit.path;
-    argument.endStructure();
-    return argument;
-}
-
-QDBusArgument& operator<<(QDBusArgument &argument, const LoginDBusInhibitor &inhibitors)
-{
-    argument.beginStructure();
-    argument << inhibitors.what << inhibitors.who << inhibitors.why << inhibitors.mode;
-    argument << inhibitors.uid << inhibitors.pid;
-    argument.endStructure();
-    return argument;
-}
-
-const QDBusArgument& operator>>(const QDBusArgument &argument, LoginDBusInhibitor &inhibitors)
-{
-    argument.beginStructure();
-    argument >> inhibitors.what >> inhibitors.who >> inhibitors.why >> inhibitors.mode;
-    argument >> inhibitors.uid >> inhibitors.pid;
+    argument >> inhibitor.what >> inhibitor.who >> inhibitor.why >> inhibitor.mode;
+    argument >> inhibitor.uid >> inhibitor.pid;
     argument.endStructure();
     return argument;
 }
@@ -181,22 +149,6 @@ const QDBusArgument& operator>>(const QDBusArgument &argument, LoginDBusScopePro
 {
     argument.beginStructure();
     argument >> scopeProperty.name >> scopeProperty.value;
-    argument.endStructure();
-    return argument;
-}
-
-QDBusArgument& operator<<(QDBusArgument &argument, const LoginDBusSeat &seat)
-{
-    argument.beginStructure();
-    argument << seat.id << seat.path;
-    argument.endStructure();
-    return argument;
-}
-
-const QDBusArgument& operator>>(const QDBusArgument &argument, LoginDBusSeat &seat)
-{
-    argument.beginStructure();
-    argument >> seat.id >> seat.path;
     argument.endStructure();
     return argument;
 }
@@ -231,22 +183,6 @@ const QDBusArgument& operator>>(const QDBusArgument &argument, LoginDBusUser &us
 {
     argument.beginStructure();
     argument >> user.uid >> user.name >> user.path;
-    argument.endStructure();
-    return argument;
-}
-
-QDBusArgument& operator<<(QDBusArgument &argument, const ManagerDBusAux &aux)
-{
-    argument.beginStructure();
-    argument << aux.name << aux.properties;
-    argument.endStructure();
-    return argument;
-}
-
-const QDBusArgument& operator>>(const QDBusArgument &argument, ManagerDBusAux &aux)
-{
-    argument.beginStructure();
-    argument >> aux.name >> aux.properties;
     argument.endStructure();
     return argument;
 }
@@ -289,6 +225,38 @@ const QDBusArgument& operator>>(const QDBusArgument &argument, ManagerDBusUnit &
     return argument;
 }
 
+QDBusArgument& operator<<(QDBusArgument &argument, const ManagerDBusUnitFile &unitFile)
+{
+    argument.beginStructure();
+    argument << unitFile.path << unitFile.state;
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument& operator>>(const QDBusArgument &argument, ManagerDBusUnitFile &unitFile)
+{
+    argument.beginStructure();
+    argument >> unitFile.path >> unitFile.state;
+    argument.endStructure();
+    return argument;
+}
+
+QDBusArgument& operator<<(QDBusArgument &argument, const ManagerDBusUnitFileChange &unitFileChange)
+{
+    argument.beginStructure();
+    argument << unitFileChange.type << unitFileChange.path << unitFileChange.source;
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument& operator>>(const QDBusArgument &argument, ManagerDBusUnitFileChange &unitFileChange)
+{
+    argument.beginStructure();
+    argument >> unitFileChange.type >> unitFileChange.path >> unitFileChange.source;
+    argument.endStructure();
+    return argument;
+}
+
 QDBusArgument& operator<<(QDBusArgument &argument, const PathDBusPath &path)
 {
     argument.beginStructure();
@@ -301,22 +269,6 @@ const QDBusArgument& operator>>(const QDBusArgument &argument, PathDBusPath &pat
 {
     argument.beginStructure();
     argument >> path.type >> path.path;
-    argument.endStructure();
-    return argument;
-}
-
-QDBusArgument& operator<<(QDBusArgument &argument, const SeatDBusSession &session)
-{
-    argument.beginStructure();
-    argument << session.id << session.path;
-    argument.endStructure();
-    return argument;
-}
-
-const QDBusArgument& operator>>(const QDBusArgument &argument, SeatDBusSession &session)
-{
-    argument.beginStructure();
-    argument >> session.id >> session.path;
     argument.endStructure();
     return argument;
 }
@@ -387,22 +339,6 @@ const QDBusArgument& operator>>(const QDBusArgument &argument, UnitDBusCondition
     return argument;
 }
 
-QDBusArgument& operator<<(QDBusArgument &argument, const UnitDBusJob &job)
-{
-    argument.beginStructure();
-    argument << job.id << job.path;
-    argument.endStructure();
-    return argument;
-}
-
-const QDBusArgument& operator>>(const QDBusArgument &argument, UnitDBusJob &job)
-{
-    argument.beginStructure();
-    argument >> job.id >> job.path;
-    argument.endStructure();
-    return argument;
-}
-
 QDBusArgument& operator<<(QDBusArgument &argument, const UnitDBusLoadError &loadError)
 {
     argument.beginStructure();
@@ -419,18 +355,34 @@ const QDBusArgument& operator>>(const QDBusArgument &argument, UnitDBusLoadError
     return argument;
 }
 
-QDBusArgument& operator<<(QDBusArgument &argument, const UserDBusSession &session)
+QDBusArgument& operator<<(QDBusArgument &argument, const UnitDBusProperty &property)
 {
     argument.beginStructure();
-    argument << session.id << session.path;
+    argument << property.name << property.value.toString();
     argument.endStructure();
     return argument;
 }
 
-const QDBusArgument& operator>>(const QDBusArgument &argument, UserDBusSession &session)
+const QDBusArgument& operator>>(const QDBusArgument &argument, UnitDBusProperty &property)
 {
     argument.beginStructure();
-    argument >> session.id >> session.path;
+    argument >> property.name >> property.value;
+    argument.endStructure();
+    return argument;
+}
+
+QDBusArgument& operator<<(QDBusArgument &argument, const ManagerDBusAux&aux)
+{
+    argument.beginStructure();
+    argument << aux.name << aux.properties;
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument& operator>>(const QDBusArgument &argument, ManagerDBusAux &aux)
+{
+    argument.beginStructure();
+    argument >> aux.name >> aux.properties;
     argument.endStructure();
     return argument;
 }
