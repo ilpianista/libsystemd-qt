@@ -52,6 +52,7 @@ SystemdPrivate::~SystemdPrivate()
 void SystemdPrivate::init()
 {
     qDBusRegisterMetaType<UnitDBusJob>();
+    qDBusRegisterMetaType<JobDBusUnit>();
 }
 
 void SystemdPrivate::disableUnitFiles(const QStringList &files, const bool runtime)
