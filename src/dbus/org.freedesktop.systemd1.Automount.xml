@@ -2,8 +2,13 @@
 "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
 <node>
  <interface name="org.freedesktop.systemd1.Automount">
-  <property name="Where" type="s" access="read"/>
-  <property name="DirectoryMode" type="u" access="read"/>
-  <property name="Result" type="s" access="read"/>
+  <property name="Where" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DirectoryMode" type="u" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="Result" type="s" access="read">
+  </property>
  </interface>
 </node>

@@ -18,8 +18,6 @@ set(QtSystemd_PART_SRCS
 )
 
 set(INTERFACE_INTROSPECTION_XML_FILES
-    dbus/org.freedesktop.hostname1.xml
-    dbus/org.freedesktop.locale1.xml
     dbus/org.freedesktop.login1.LDManager.xml
     dbus/org.freedesktop.login1.Seat.xml
     dbus/org.freedesktop.login1.Session.xml
@@ -30,14 +28,15 @@ set(INTERFACE_INTROSPECTION_XML_FILES
     dbus/org.freedesktop.systemd1.Manager.xml
     dbus/org.freedesktop.systemd1.Mount.xml
     dbus/org.freedesktop.systemd1.Path.xml
+    dbus/org.freedesktop.systemd1.Scope.xml
     dbus/org.freedesktop.systemd1.Service.xml
+    dbus/org.freedesktop.systemd1.Slice.xml
     dbus/org.freedesktop.systemd1.Snapshot.xml
     dbus/org.freedesktop.systemd1.Socket.xml
     dbus/org.freedesktop.systemd1.Swap.xml
     dbus/org.freedesktop.systemd1.Target.xml
     dbus/org.freedesktop.systemd1.Timer.xml
     dbus/org.freedesktop.systemd1.Unit.xml
-    dbus/org.freedesktop.timedate1.xml
 )
 
 set_property(SOURCE ${INTERFACE_INTROSPECTION_XML_FILES}

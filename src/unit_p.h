@@ -70,11 +70,12 @@ public:
     qulonglong inactiveExitTimestampMonotonic;
     uint job;
     qulonglong jobTimeoutUSec;
+    QStringList joinsNamespaceOf;
     QString loadState;
     QStringList names;
     bool needDaemonReload;
     QStringList onFailure;
-    bool onFailureIsolate;
+    QString onFailureJobMode;
     QStringList partOf;
     QStringList propagatesReloadTo;
     bool refuseManualStart;

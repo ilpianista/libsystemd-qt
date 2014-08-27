@@ -321,38 +321,6 @@ const QDBusArgument& operator>>(const QDBusArgument &argument, SeatDBusSession &
     return argument;
 }
 
-QDBusArgument& operator<<(QDBusArgument &argument, const SessionDBusSeat &seat)
-{
-    argument.beginStructure();
-    argument << seat.id << seat.path;
-    argument.endStructure();
-    return argument;
-}
-
-const QDBusArgument& operator>>(const QDBusArgument &argument, SessionDBusSeat &seat)
-{
-    argument.beginStructure();
-    argument >> seat.id >> seat.path;
-    argument.endStructure();
-    return argument;
-}
-
-QDBusArgument& operator<<(QDBusArgument &argument, const SessionDBusUser &user)
-{
-    argument.beginStructure();
-    argument << user.id << user.path;
-    argument.endStructure();
-    return argument;
-}
-
-const QDBusArgument& operator>>(const QDBusArgument &argument, SessionDBusUser &user)
-{
-    argument.beginStructure();
-    argument >> user.id >> user.path;
-    argument.endStructure();
-    return argument;
-}
-
 QDBusArgument& operator<<(QDBusArgument &argument, const SocketDBusSocket &socket)
 {
     argument.beginStructure();

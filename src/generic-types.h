@@ -24,9 +24,6 @@
 
 Q_DECLARE_METATYPE(QVariantMap)
 
-typedef QList<quint32> UIntList;
-Q_DECLARE_METATYPE(UIntList)
-
 typedef struct
 {
     QString path;
@@ -267,26 +264,6 @@ Q_DECLARE_METATYPE(SeatDBusSessionList)
 
 QDBusArgument &operator<<(QDBusArgument &argument, const SeatDBusSession &session);
 const QDBusArgument &operator>>(const QDBusArgument &argument, SeatDBusSession &session);
-
-typedef struct
-{
-    QString id;
-    QDBusObjectPath path;
-} SessionDBusSeat;
-Q_DECLARE_METATYPE(SessionDBusSeat)
-
-QDBusArgument &operator<<(QDBusArgument &argument, const SessionDBusSeat &seat);
-const QDBusArgument &operator>>(const QDBusArgument &argument, SessionDBusSeat &seat);
-
-typedef struct
-{
-    QString id;
-    QDBusObjectPath path;
-} SessionDBusUser;
-Q_DECLARE_METATYPE(SessionDBusUser)
-
-QDBusArgument &operator<<(QDBusArgument &argument, const SessionDBusUser &user);
-const QDBusArgument &operator>>(const QDBusArgument &argument, SessionDBusUser &user);
 
 typedef struct
 {

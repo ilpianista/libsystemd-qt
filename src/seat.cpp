@@ -29,9 +29,6 @@ Systemd::Logind::SeatPrivate::SeatPrivate(const QString &path) :
     canMultiSession = seatIface.canMultiSession();
     canTTY = seatIface.canTTY();
     id = seatIface.id();
-    idleHint = seatIface.idleHint();
-    idleSinceHint = seatIface.idleSinceHint();
-    idleSinceHintMonotonic = seatIface.idleSinceHintMonotonic();
     Q_FOREACH(const SeatDBusSession &seatSession, seatIface.sessions()) {
         sessions << seatSession.path.path();
     }
@@ -59,7 +56,7 @@ Systemd::Logind::Seat::~Seat()
 QString Systemd::Logind::Seat::activeSession() const
 {
     Q_D(const Seat);
-    return d->activeSession;
+    return d->activeSession.id;
 }
 
 bool Systemd::Logind::Seat::canGraphical() const
@@ -84,24 +81,6 @@ QString Systemd::Logind::Seat::id() const
 {
     Q_D(const Seat);
     return d->id;
-}
-
-bool Systemd::Logind::Seat::idleHint() const
-{
-    Q_D(const Seat);
-    return d->idleHint;
-}
-
-qulonglong Systemd::Logind::Seat::idleSinceHint() const
-{
-    Q_D(const Seat);
-    return d->idleSinceHint;
-}
-
-qulonglong Systemd::Logind::Seat::idleSinceHintMonotonic() const
-{
-    Q_D(const Seat);
-    return d->idleSinceHintMonotonic;
 }
 
 QStringList Systemd::Logind::Seat::sessions() const

@@ -2,293 +2,455 @@
 "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
 <node>
  <interface name="org.freedesktop.systemd1.Manager">
+  <property name="Version" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="Features" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="Virtualization" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="Architecture" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="Tainted" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="FirmwareTimestamp" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="FirmwareTimestampMonotonic" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="LoaderTimestamp" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="LoaderTimestampMonotonic" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="KernelTimestamp" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="KernelTimestampMonotonic" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="InitRDTimestamp" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="InitRDTimestampMonotonic" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="UserspaceTimestamp" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="UserspaceTimestampMonotonic" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="FinishTimestamp" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="FinishTimestampMonotonic" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="SecurityStartTimestamp" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="SecurityStartTimestampMonotonic" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="SecurityFinishTimestamp" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="SecurityFinishTimestampMonotonic" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="GeneratorsStartTimestamp" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="GeneratorsStartTimestampMonotonic" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="GeneratorsFinishTimestamp" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="GeneratorsFinishTimestampMonotonic" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="UnitsLoadStartTimestamp" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="UnitsLoadStartTimestampMonotonic" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="UnitsLoadFinishTimestamp" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="UnitsLoadFinishTimestampMonotonic" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="LogLevel" type="s" access="readwrite">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
+  </property>
+  <property name="LogTarget" type="s" access="readwrite">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
+  </property>
+  <property name="NNames" type="u" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="NFailedUnits" type="u" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="NJobs" type="u" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="NInstalledJobs" type="u" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="NFailedJobs" type="u" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="Progress" type="d" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="Environment" type="as" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="ConfirmSpawn" type="b" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="ShowStatus" type="b" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="UnitPath" type="as" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultStandardOutput" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultStandardError" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="RuntimeWatchdogUSec" type="t" access="readwrite">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
+  </property>
+  <property name="ShutdownWatchdogUSec" type="t" access="readwrite">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
+  </property>
+  <property name="ControlGroup" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="SystemState" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
   <method name="GetUnit">
-   <arg name="name" type="s" direction="in"/>
-   <arg name="unit" type="o" direction="out"/>
+   <arg type="s" direction="in"/>
+   <arg type="o" direction="out"/>
   </method>
   <method name="GetUnitByPID">
-   <arg name="pid" type="u" direction="in"/>
-   <arg name="unit" type="o" direction="out"/>
+   <arg type="u" direction="in"/>
+   <arg type="o" direction="out"/>
   </method>
   <method name="LoadUnit">
-   <arg name="name" type="s" direction="in"/>
-   <arg name="unit" type="o" direction="out"/>
+   <arg type="s" direction="in"/>
+   <arg type="o" direction="out"/>
   </method>
   <method name="StartUnit">
-   <arg name="name" type="s" direction="in"/>
-   <arg name="mode" type="s" direction="in"/>
-   <arg name="job" type="o" direction="out"/>
+   <arg type="s" direction="in"/>
+   <arg type="s" direction="in"/>
+   <arg type="o" direction="out"/>
   </method>
   <method name="StartUnitReplace">
-   <arg name="old_unit" type="s" direction="in"/>
-   <arg name="new_unit" type="s" direction="in"/>
-   <arg name="mode" type="s" direction="in"/>
-   <arg name="job" type="o" direction="out"/>
+   <arg type="s" direction="in"/>
+   <arg type="s" direction="in"/>
+   <arg type="s" direction="in"/>
+   <arg type="o" direction="out"/>
   </method>
   <method name="StopUnit">
-   <arg name="name" type="s" direction="in"/>
-   <arg name="mode" type="s" direction="in"/>
-   <arg name="job" type="o" direction="out"/>
+   <arg type="s" direction="in"/>
+   <arg type="s" direction="in"/>
+   <arg type="o" direction="out"/>
   </method>
   <method name="ReloadUnit">
-   <arg name="name" type="s" direction="in"/>
-   <arg name="mode" type="s" direction="in"/>
-   <arg name="job" type="o" direction="out"/>
+   <arg type="s" direction="in"/>
+   <arg type="s" direction="in"/>
+   <arg type="o" direction="out"/>
   </method>
   <method name="RestartUnit">
-   <arg name="name" type="s" direction="in"/>
-   <arg name="mode" type="s" direction="in"/>
-   <arg name="job" type="o" direction="out"/>
+   <arg type="s" direction="in"/>
+   <arg type="s" direction="in"/>
+   <arg type="o" direction="out"/>
   </method>
   <method name="TryRestartUnit">
-   <arg name="name" type="s" direction="in"/>
-   <arg name="mode" type="s" direction="in"/>
-   <arg name="job" type="o" direction="out"/>
+   <arg type="s" direction="in"/>
+   <arg type="s" direction="in"/>
+   <arg type="o" direction="out"/>
   </method>
   <method name="ReloadOrRestartUnit">
-   <arg name="name" type="s" direction="in"/>
-   <arg name="mode" type="s" direction="in"/>
-   <arg name="job" type="o" direction="out"/>
+   <arg type="s" direction="in"/>
+   <arg type="s" direction="in"/>
+   <arg type="o" direction="out"/>
   </method>
   <method name="ReloadOrTryRestartUnit">
-   <arg name="name" type="s" direction="in"/>
-   <arg name="mode" type="s" direction="in"/>
-   <arg name="job" type="o" direction="out"/>
+   <arg type="s" direction="in"/>
+   <arg type="s" direction="in"/>
+   <arg type="o" direction="out"/>
   </method>
   <method name="KillUnit">
-   <arg name="name" type="s" direction="in"/>
-   <arg name="who" type="s" direction="in"/>
-   <arg name="signal" type="i" direction="in"/>
+   <arg type="s" direction="in"/>
+   <arg type="s" direction="in"/>
+   <arg type="i" direction="in"/>
   </method>
   <method name="ResetFailedUnit">
-   <arg name="name" type="s" direction="in"/>
-  </method>
-  <method name="GetJob">
-   <arg name="id" type="u" direction="in"/>
-   <arg name="job" type="o" direction="out"/>
-  </method>
-  <method name="CancelJob">
-   <arg name="id" type="u" direction="in"/>
-  </method>
-  <method name="ClearJobs"/>
-  <method name="ResetFailed"/>
-  <method name="ListUnits">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitList"/>
-    <arg name="units" type="a(ssssssouso)" direction="out">
-      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitList"/>
-     </arg>
-  </method>
-  <method name="ListJobs">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusJobList"/>
-    <arg name="jobs" type="a(usssoo)" direction="out">
-      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusJobList"/>
-     </arg>
-  </method>
-  <method name="Subscribe"/>
-  <method name="Unsubscribe"/>
-  <method name="Dump">
-   <arg name="dump" type="s" direction="out"/>
-  </method>
-  <method name="CreateSnapshot">
-   <arg name="name" type="s" direction="in"/>
-   <arg name="cleanup" type="b" direction="in"/>
-   <arg name="unit" type="o" direction="out"/>
-  </method>
-  <method name="RemoveSnapshot">
-   <arg name="name" type="s" direction="in"/>
-  </method>
-  <method name="Reload"/>
-  <method name="Reexecute"/>
-  <method name="Exit"/>
-  <method name="Reboot"/>
-  <method name="PowerOff"/>
-  <method name="Halt"/>
-  <method name="KExec"/>
-  <method name="SwitchRoot">
-   <arg name="new_root" type="s" direction="in"/>
-   <arg name="init" type="s" direction="in"/>
-  </method>
-  <method name="SetEnvironment">
-   <arg name="names" type="as" direction="in"/>
-  </method>
-  <method name="UnsetEnvironment">
-   <arg name="names" type="as" direction="in"/>
-  </method>
-  <method name="UnsetAndSetEnvironment">
-   <arg name="unset" type="as" direction="in"/>
-   <arg name="set" type="as" direction="in"/>
-  </method>
-  <method name="ListUnitFiles">
-     <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitFileList"/>
-   <arg name="files" type="a(ss)" direction="out">
-     <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitFileList"/>
-   </arg>
-  </method>
-  <method name="GetUnitFileState">
-   <arg name="file" type="s" direction="in"/>
-   <arg name="state" type="s" direction="out"/>
-  </method>
-  <method name="EnableUnitFiles">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
-   <arg name="files" type="as" direction="in"/>
-   <arg name="runtime" type="b" direction="in"/>
-   <arg name="force" type="b" direction="in"/>
-   <arg name="carries_install_info" type="b" direction="out"/>
-   <arg name="changes" type="a(sss)" direction="out">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
-   </arg>
-  </method>
-  <method name="DisableUnitFiles">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
-   <arg name="files" type="as" direction="in"/>
-   <arg name="runtime" type="b" direction="in"/>
-   <arg name="changes" type="a(sss)" direction="out">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
-   </arg>
-  </method>
-  <method name="ReenableUnitFiles">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
-   <arg name="files" type="as" direction="in"/>
-   <arg name="runtime" type="b" direction="in"/>
-   <arg name="force" type="b" direction="in"/>
-   <arg name="carries_install_info" type="b" direction="out"/>
-   <arg name="changes" type="a(sss)" direction="out">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
-   </arg>
-  </method>
-  <method name="LinkUnitFiles">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
-   <arg name="files" type="as" direction="in"/>
-   <arg name="runtime" type="b" direction="in"/>
-   <arg name="force" type="b" direction="in"/>
-   <arg name="changes" type="a(sss)" direction="out">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
-   </arg>
-  </method>
-  <method name="PresetUnitFiles">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
-   <arg name="files" type="as" direction="in"/>
-   <arg name="runtime" type="b" direction="in"/>
-   <arg name="force" type="b" direction="in"/>
-   <arg name="carries_install_info" type="b" direction="out"/>
-   <arg name="changes" type="a(sss)" direction="out">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
-   </arg>
-  </method>
-  <method name="MaskUnitFiles">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
-   <arg name="files" type="as" direction="in"/>
-   <arg name="runtime" type="b" direction="in"/>
-   <arg name="force" type="b" direction="in"/>
-   <arg name="changes" type="a(sss)" direction="out">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
-   </arg>
-  </method>
-  <method name="UnmaskUnitFiles">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
-   <arg name="files" type="as" direction="in"/>
-   <arg name="runtime" type="b" direction="in"/>
-   <arg name="changes" type="a(sss)" direction="out">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
-   </arg>
-  </method>
-  <method name="SetDefaultTarget">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
-   <arg name="files" type="as" direction="in"/>
-   <arg name="changes" type="a(sss)" direction="out">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
-   </arg>
-  </method>
-  <method name="GetDefaultTarget">
-   <arg name="name" type="s" direction="out"/>
+   <arg type="s" direction="in"/>
   </method>
   <method name="SetUnitProperties">
    <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="DBusUnitFilePropertyList"/>
-   <arg name="name" type="s" direction="in"/>
-   <arg name="runtime" type="b" direction="in"/>
-   <arg name="properties" type="a(sv)" direction="in">
+   <arg type="s" direction="in"/>
+   <arg type="b" direction="in"/>
+   <arg type="a(sv)" direction="in">
     <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="DBusUnitFilePropertyList"/>
    </arg>
   </method>
   <method name="StartTransientUnit">
    <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="DBusUnitFilePropertyList"/>
    <annotation name="org.qtproject.QtDBus.QtTypeName.In3" value="ManagerDBusAuxList"/>
-   <arg name="name" type="s" direction="in"/>
-   <arg name="mode" type="s" direction="in"/>
-   <arg name="properties" type="a(sv)" direction="in">
+   <arg type="s" direction="in"/>
+   <arg type="s" direction="in"/>
+   <arg type="a(sv)" direction="in">
     <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="DBusUnitFilePropertyList"/>
    </arg>
-   <arg name="aux" type="a(sa(sv))" direction="in">
+   <arg type="a(sa(sv))" direction="in">
     <annotation name="org.qtproject.QtDBus.QtTypeName.In3" value="ManagerDBusAuxList"/>
    </arg>
-   <arg name="job" type="o" direction="out"/>
+   <arg type="o" direction="out"/>
+  </method>
+  <method name="GetJob">
+   <arg type="u" direction="in"/>
+   <arg type="o" direction="out"/>
+  </method>
+  <method name="CancelJob">
+   <arg type="u" direction="in"/>
+  </method>
+  <method name="ClearJobs">
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
+  </method>
+  <method name="ResetFailed">
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
+  </method>
+  <method name="ListUnits">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitList"/>
+   <arg type="a(ssssssouso)" direction="out">
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitList"/>
+   </arg>
+  </method>
+  <method name="ListUnitsFiltered">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitList"/>
+   <arg type="as" direction="in"/>
+   <arg type="a(ssssssouso)" direction="out">
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitList"/>
+   </arg>
+  </method>
+  <method name="ListJobs">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusJobList"/>
+   <arg type="a(usssoo)" direction="out">
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusJobList"/>
+   </arg>
+  </method>
+  <method name="Subscribe">
+  </method>
+  <method name="Unsubscribe">
+  </method>
+  <method name="Dump">
+   <arg type="s" direction="out"/>
+  </method>
+  <method name="CreateSnapshot">
+   <arg type="s" direction="in"/>
+   <arg type="b" direction="in"/>
+   <arg type="o" direction="out"/>
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
+  </method>
+  <method name="RemoveSnapshot">
+   <arg type="s" direction="in"/>
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
+  </method>
+  <method name="Reload">
+  </method>
+  <method name="Reexecute">
+  </method>
+  <method name="Exit">
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
+  </method>
+  <method name="Reboot">
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
+  </method>
+  <method name="PowerOff">
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
+  </method>
+  <method name="Halt">
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
+  </method>
+  <method name="KExec">
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
+  </method>
+  <method name="SwitchRoot">
+   <arg type="s" direction="in"/>
+   <arg type="s" direction="in"/>
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
+  </method>
+  <method name="SetEnvironment">
+   <arg type="as" direction="in"/>
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
+  </method>
+  <method name="UnsetEnvironment">
+   <arg type="as" direction="in"/>
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
+  </method>
+  <method name="UnsetAndSetEnvironment">
+   <arg type="as" direction="in"/>
+   <arg type="as" direction="in"/>
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
+  </method>
+  <method name="ListUnitFiles">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitFileList"/>
+   <arg type="a(ss)" direction="out">
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitFileList"/>
+   </arg>
+  </method>
+  <method name="GetUnitFileState">
+   <arg type="s" direction="in"/>
+   <arg type="s" direction="out"/>
+  </method>
+  <method name="EnableUnitFiles">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
+   <arg type="as" direction="in"/>
+   <arg type="b" direction="in"/>
+   <arg type="b" direction="in"/>
+   <arg type="b" direction="out"/>
+   <arg type="a(sss)" direction="out">
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
+   </arg>
+  </method>
+  <method name="DisableUnitFiles">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+   <arg type="as" direction="in"/>
+   <arg type="b" direction="in"/>
+   <arg type="a(sss)" direction="out">
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+   </arg>
+  </method>
+  <method name="ReenableUnitFiles">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
+   <arg type="as" direction="in"/>
+   <arg type="b" direction="in"/>
+   <arg type="b" direction="in"/>
+   <arg type="b" direction="out"/>
+   <arg type="a(sss)" direction="out">
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
+   </arg>
+  </method>
+  <method name="LinkUnitFiles">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+   <arg type="as" direction="in"/>
+   <arg type="b" direction="in"/>
+   <arg type="b" direction="in"/>
+   <arg type="a(sss)" direction="out">
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+   </arg>
+  </method>
+  <method name="PresetUnitFiles">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
+   <arg type="as" direction="in"/>
+   <arg type="b" direction="in"/>
+   <arg type="b" direction="in"/>
+   <arg type="b" direction="out"/>
+   <arg type="a(sss)" direction="out">
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
+   </arg>
+  </method>
+  <method name="PresetUnitFilesWithMode">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
+   <arg type="as" direction="in"/>
+   <arg type="s" direction="in"/>
+   <arg type="b" direction="in"/>
+   <arg type="b" direction="in"/>
+   <arg type="b" direction="out"/>
+   <arg type="a(sss)" direction="out">
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="DBusUnitFileChangeList"/>
+   </arg>
+  </method>
+  <method name="MaskUnitFiles">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+   <arg type="as" direction="in"/>
+   <arg type="b" direction="in"/>
+   <arg type="b" direction="in"/>
+   <arg type="a(sss)" direction="out">
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+   </arg>
+  </method>
+  <method name="UnmaskUnitFiles">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+   <arg type="as" direction="in"/>
+   <arg type="b" direction="in"/>
+   <arg type="a(sss)" direction="out">
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+   </arg>
+  </method>
+  <method name="SetDefaultTarget">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+   <arg type="s" direction="in"/>
+   <arg type="b" direction="in"/>
+   <arg type="a(sss)" direction="out">
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+   </arg>
+  </method>
+  <method name="GetDefaultTarget">
+   <arg type="s" direction="out"/>
+  </method>
+  <method name="PresetAllUnitFiles">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+   <arg type="s" direction="in"/>
+   <arg type="b" direction="in"/>
+   <arg type="b" direction="in"/>
+   <arg type="a(sss)" direction="out">
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusUnitFileChangeList"/>
+   </arg>
   </method>
   <signal name="UnitNew">
-   <arg name="id" type="s"/>
-   <arg name="unit" type="o"/>
+   <arg type="s"/>
+   <arg type="o"/>
   </signal>
   <signal name="UnitRemoved">
-   <arg name="id" type="s"/>
-   <arg name="unit" type="o"/>
+   <arg type="s"/>
+   <arg type="o"/>
   </signal>
   <signal name="JobNew">
-   <arg name="id" type="u"/>
-   <arg name="job" type="o"/>
-   <arg name="unit" type="s"/>
+   <arg type="u"/>
+   <arg type="o"/>
+   <arg type="s"/>
   </signal>
   <signal name="JobRemoved">
-   <arg name="id" type="u"/>
-   <arg name="job" type="o"/>
-   <arg name="unit" type="s"/>
-   <arg name="result" type="s"/>
-  </signal> <signal name="StartupFinished">
-   <arg name="firmware" type="t"/>
-   <arg name="loader" type="t"/>
-   <arg name="kernel" type="t"/>
-   <arg name="initrd" type="t"/>
-   <arg name="userspace" type="t"/>
-   <arg name="total" type="t"/>
-  </signal> <signal name="UnitFilesChanged"/>
+   <arg type="u"/>
+   <arg type="o"/>
+   <arg type="s"/>
+   <arg type="s"/>
+  </signal>
+  <signal name="StartupFinished">
+   <arg type="t"/>
+   <arg type="t"/>
+   <arg type="t"/>
+   <arg type="t"/>
+   <arg type="t"/>
+   <arg type="t"/>
+  </signal>
+  <signal name="UnitFilesChanged">
+  </signal>
   <signal name="Reloading">
-   <arg name="active" type="b"/>
-  </signal> <property name="Version" type="s" access="read"/>
-  <property name="Features" type="s" access="read"/>
-  <property name="Tainted" type="s" access="read"/>
-  <property name="FirmwareTimestamp" type="t" access="read"/>
-  <property name="FirmwareTimestampMonotonic" type="t" access="read"/>
-  <property name="LoaderTimestamp" type="t" access="read"/>
-  <property name="LoaderTimestampMonotonic" type="t" access="read"/>
-  <property name="KernelTimestamp" type="t" access="read"/>
-  <property name="KernelTimestampMonotonic" type="t" access="read"/>
-  <property name="InitRDTimestamp" type="t" access="read"/>
-  <property name="InitRDTimestampMonotonic" type="t" access="read"/>
-  <property name="UserspaceTimestamp" type="t" access="read"/>
-  <property name="UserspaceTimestampMonotonic" type="t" access="read"/>
-  <property name="FinishTimestamp" type="t" access="read"/>
-  <property name="FinishTimestampMonotonic" type="t" access="read"/>
-  <property name="GeneratorsStartTimestamp" type="t" access="read"/>
-  <property name="GeneratorsStartTimestampMonotonic" type="t" access="read"/>
-  <property name="GeneratorsFinishTimestamp" type="t" access="read"/>
-  <property name="GeneratorsFinishTimestampMonotonic" type="t" access="read"/>
-  <property name="UnitsLoadStartTimestamp" type="t" access="read"/>
-  <property name="UnitsLoadStartTimestampMonotonic" type="t" access="read"/>
-  <property name="UnitsLoadFinishTimestamp" type="t" access="read"/>
-  <property name="UnitsLoadFinishTimestampMonotonic" type="t" access="read"/>
-  <property name="LogLevel" type="s" access="readwrite"/>
-  <property name="LogTarget" type="s" access="readwrite"/>
-  <property name="NNames" type="u" access="read"/>
-  <property name="NJobs" type="u" access="read"/>
-  <property name="NInstalledJobs" type="u" access="read"/>
-  <property name="NFailedJobs" type="u" access="read"/>
-  <property name="Progress" type="d" access="read"/>
-  <property name="Environment" type="as" access="read"/>
-  <property name="ConfirmSpawn" type="b" access="read"/>
-  <property name="ShowStatus" type="b" access="read"/>
-  <property name="UnitPath" type="as" access="read"/>
-  <property name="DefaultStandardOutput" type="s" access="read"/>
-  <property name="DefaultStandardError" type="s" access="read"/>
-  <property name="RuntimeWatchdogUSec" type="t" access="readwrite"/>
-  <property name="ShutdownWatchdogUSec" type="t" access="readwrite"/>
-  <property name="Virtualization" type="s" access="read"/>
+   <arg type="b"/>
+  </signal>
  </interface>
 </node>

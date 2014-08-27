@@ -45,9 +45,6 @@ public:
     bool canMultiSession() const;
     bool canTTY() const;
     QString id() const;
-    bool idleHint() const;
-    qulonglong idleSinceHint() const;
-    qulonglong idleSinceHintMonotonic() const;
     QStringList sessions() const;
 
 protected:

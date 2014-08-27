@@ -76,11 +76,12 @@ public:
     qulonglong inactiveExitTimestampMonotonic() const;
     uint job() const;
     qulonglong jobTimeoutUSec() const;
+    QStringList joinsNamespaceOf() const;
     QString loadState() const;
     QStringList names() const;
     bool needDaemonReload() const;
     QStringList onFailure() const;
-    bool onFailureIsolate() const;
+    QString onFailureJobMode() const;
     QStringList partOf() const;
     QStringList propagatesReloadTo() const;
     bool refuseManualStart() const;

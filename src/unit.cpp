@@ -39,9 +39,9 @@ Systemd::UnitPrivate::UnitPrivate(const QString &path) :
     canStart = unitIface.canStart();
     canStop = unitIface.canStop();
     conditionResult = unitIface.conditionResult();
-    //conditions = unitIface.conditions();
     conditionTimestamp = unitIface.conditionTimestamp();
     conditionTimestampMonotonic = unitIface.conditionTimestampMonotonic();
+    //conditions = unitIface.conditions();
     conflictedBy = unitIface.conflictedBy();
     conflicts = unitIface.conflicts();
     consistsOf = unitIface.consistsOf();
@@ -60,12 +60,13 @@ Systemd::UnitPrivate::UnitPrivate(const QString &path) :
     inactiveExitTimestampMonotonic = unitIface.inactiveExitTimestampMonotonic();
     job = unitIface.job().id.toUInt();
     jobTimeoutUSec = unitIface.jobTimeoutUSec();
+    joinsNamespaceOf = unitIface.joinsNamespaceOf();
     //loadError = unitIface.loadError();
     loadState = unitIface.loadState();
     names = unitIface.names();
     needDaemonReload = unitIface.needDaemonReload();
     onFailure = unitIface.onFailure();
-    onFailureIsolate = unitIface.onFailureIsolate();
+    onFailureJobMode = unitIface.onFailureJobMode();
     partOf = unitIface.partOf();
     propagatesReloadTo = unitIface.propagatesReloadTo();
     refuseManualStart = unitIface.refuseManualStart();
@@ -326,6 +327,12 @@ qulonglong Systemd::Unit::jobTimeoutUSec() const
     return d->jobTimeoutUSec;
 }
 
+QStringList Systemd::Unit::joinsNamespaceOf() const
+{
+    Q_D(const Unit);
+    return d->joinsNamespaceOf;
+}
+
 QString Systemd::Unit::loadState() const
 {
     Q_D(const Unit);
@@ -350,10 +357,10 @@ QStringList Systemd::Unit::onFailure() const
     return d->onFailure;
 }
 
-bool Systemd::Unit::onFailureIsolate() const
+QString Systemd::Unit::onFailureJobMode() const
 {
     Q_D(const Unit);
-    return d->onFailureIsolate;
+    return d->onFailureJobMode;
 }
 
 QStringList Systemd::Unit::partOf() const
