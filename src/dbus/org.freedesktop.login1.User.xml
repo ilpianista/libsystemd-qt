@@ -27,13 +27,13 @@
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="Display" type="(so)" access="read">
-   <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusStringObject"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusSession"/>
   </property>
   <property name="State" type="s" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="Sessions" type="a(so)" access="read">
-   <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusStringObjectList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusSessionList"/>
   </property>
   <property name="IdleHint" type="b" access="read">
   </property>

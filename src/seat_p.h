@@ -37,7 +37,7 @@ public:
 
     OrgFreedesktopLogin1SeatInterface seatIface;
 
-    DBusStringObject activeSession;
+    DBusSession activeSession;
     bool canGraphical;
     bool canMultiSession;
     bool canTTY;

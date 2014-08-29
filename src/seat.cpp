@@ -23,12 +23,15 @@
 Systemd::Logind::SeatPrivate::SeatPrivate(const QString &path) :
     seatIface(Systemd::Logind::LogindPrivate::LD_DBUS_SERVICE, path, QDBusConnection::systemBus())
 {
+    qDBusRegisterMetaType<DBusSession>;
+    qDBusRegisterMetaType<DBusSessionList>;
+
     activeSession = seatIface.activeSession();
     canGraphical = seatIface.canGraphical();
     canMultiSession = seatIface.canMultiSession();
     canTTY = seatIface.canTTY();
     id = seatIface.id();
-    Q_FOREACH(const DBusStringObject &seatSession, seatIface.sessions()) {
+    Q_FOREACH(const DBusSession &seatSession, seatIface.sessions()) {
         sessions << seatSession.path.path();
     }
 }

@@ -28,23 +28,55 @@ typedef struct
 {
     uint id;
     QDBusObjectPath path;
-} DBusUIntObject;
-Q_DECLARE_METATYPE(DBusUIntObject)
+} DBusJob;
+Q_DECLARE_METATYPE(DBusJob)
 
-QDBusArgument &operator<<(QDBusArgument &argument, const DBusUIntObject &object);
-const QDBusArgument &operator>>(const QDBusArgument &argument, DBusUIntObject &object);
+QDBusArgument &operator<<(QDBusArgument &argument, const DBusJob &job);
+const QDBusArgument &operator>>(const QDBusArgument &argument, DBusJob &job);
 
 typedef struct
 {
     QString id;
     QDBusObjectPath path;
-} DBusStringObject;
-Q_DECLARE_METATYPE(DBusStringObject)
-typedef QList<DBusStringObject> DBusStringObjectList;
-Q_DECLARE_METATYPE(DBusStringObjectList)
+} DBusSeat;
+Q_DECLARE_METATYPE(DBusSeat)
+typedef QList<DBusSeat> DBusSeatList;
+Q_DECLARE_METATYPE(DBusSeatList)
 
-QDBusArgument &operator<<(QDBusArgument &argument, const DBusStringObject &object);
-const QDBusArgument &operator>>(const QDBusArgument &argument, DBusStringObject &object);
+QDBusArgument &operator<<(QDBusArgument &argument, const DBusSeat &seat);
+const QDBusArgument &operator>>(const QDBusArgument &argument, DBusSeat &seat);
+
+typedef struct
+{
+    QString id;
+    QDBusObjectPath path;
+} DBusSession;
+Q_DECLARE_METATYPE(DBusSession)
+typedef QList<DBusSession> DBusSessionList;
+Q_DECLARE_METATYPE(DBusSessionList)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const DBusSession &session);
+const QDBusArgument &operator>>(const QDBusArgument &argument, DBusSession &session);
+
+typedef struct
+{
+    QString id;
+    QDBusObjectPath path;
+} DBusUnit;
+Q_DECLARE_METATYPE(DBusUnit)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const DBusUnit &unit);
+const QDBusArgument &operator>>(const QDBusArgument &argument, DBusUnit &unit);
+
+typedef struct
+{
+    uint id;
+    QDBusObjectPath path;
+} DBusUser;
+Q_DECLARE_METATYPE(DBusUser)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const DBusUser &user);
+const QDBusArgument &operator>>(const QDBusArgument &argument, DBusUser &user);
 
 typedef struct
 {
@@ -69,6 +101,26 @@ Q_DECLARE_METATYPE(CGroupDBusDeviceAllowList)
 
 QDBusArgument &operator<<(QDBusArgument &argument, const CGroupDBusDeviceAllow &cGroupDeviceAllow);
 const QDBusArgument &operator>>(const QDBusArgument &argument, CGroupDBusDeviceAllow &cGroupDeviceAllow);
+
+typedef struct
+{
+    bool whitelist;
+    QStringList names;
+} ExecuteDBusAddressFamilies;
+Q_DECLARE_METATYPE(ExecuteDBusAddressFamilies)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const ExecuteDBusAddressFamilies &addressFamilies);
+const QDBusArgument &operator>>(const QDBusArgument &argument, ExecuteDBusAddressFamilies &addressFamilies);
+
+typedef struct
+{
+    bool ignore;
+    QString profile;
+} ExecuteDBusAppArmorProfile;
+Q_DECLARE_METATYPE(ExecuteDBusAppArmorProfile)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const ExecuteDBusAppArmorProfile &appArmorProfile);
+const QDBusArgument &operator>>(const QDBusArgument &argument, ExecuteDBusAppArmorProfile &appArmorProfile);
 
 typedef struct
 {
@@ -99,6 +151,26 @@ Q_DECLARE_METATYPE(ExecuteDBusExecCommandList)
 
 QDBusArgument &operator<<(QDBusArgument &argument, const ExecuteDBusExecCommand &execCommand);
 const QDBusArgument &operator>>(const QDBusArgument &argument, ExecuteDBusExecCommand &execCommand);
+
+typedef struct
+{
+    bool ignore;
+    QString context;
+} ExecuteDBusSELinuxContext;
+Q_DECLARE_METATYPE(ExecuteDBusSELinuxContext)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const ExecuteDBusSELinuxContext &seLinuxContext);
+const QDBusArgument &operator>>(const QDBusArgument &argument, ExecuteDBusSELinuxContext &seLinuxContext);
+
+typedef struct
+{
+    bool whitelist;
+    QStringList names;
+} ExecuteDBusSystemCall;
+Q_DECLARE_METATYPE(ExecuteDBusSystemCall)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const ExecuteDBusSystemCall &systemCall);
+const QDBusArgument &operator>>(const QDBusArgument &argument, ExecuteDBusSystemCall &systemCall);
 
 typedef struct
 {

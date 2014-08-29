@@ -134,7 +134,7 @@
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="Job" type="(uo)" access="read">
-   <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusUIntObject"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusJob"/>
   </property>
   <property name="StopWhenUnneeded" type="b" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>

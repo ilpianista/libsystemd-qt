@@ -84,9 +84,9 @@
    </arg>
   </method>
   <method name="ListSeats">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusStringObjectList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusSeatList"/>
    <arg type="a(so)" direction="out">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusStringObjectList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="DBusSeatList"/>
    </arg>
   </method>
   <method name="ListInhibitors">

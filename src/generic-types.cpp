@@ -19,34 +19,83 @@
 
 #include "generic-types.h"
 
-QDBusArgument& operator<<(QDBusArgument &argument, const DBusUIntObject &object)
+
+QDBusArgument& operator<<(QDBusArgument &argument, const DBusJob &job)
 {
     argument.beginStructure();
-    argument << object.id << object.path;
+    argument << job.id << job.path;
     argument.endStructure();
     return argument;
 }
 
-const QDBusArgument& operator>>(const QDBusArgument &argument, DBusUIntObject &object)
+const QDBusArgument& operator>>(const QDBusArgument &argument, DBusJob &job)
 {
     argument.beginStructure();
-    argument >> object.id >> object.path;
+    argument >> job.id >> job.path;
     argument.endStructure();
     return argument;
 }
 
-QDBusArgument& operator<<(QDBusArgument &argument, const DBusStringObject &object)
+QDBusArgument& operator<<(QDBusArgument &argument, const DBusSeat &seat)
 {
     argument.beginStructure();
-    argument << object.id << object.path;
+    argument << seat.id << seat.path;
     argument.endStructure();
     return argument;
 }
 
-const QDBusArgument& operator>>(const QDBusArgument &argument, DBusStringObject &object)
+const QDBusArgument& operator>>(const QDBusArgument &argument, DBusSeat &seat)
 {
     argument.beginStructure();
-    argument >> object.id >> object.path;
+    argument >> seat.id >> seat.path;
+    argument.endStructure();
+    return argument;
+}
+
+QDBusArgument& operator<<(QDBusArgument &argument, const DBusSession &session)
+{
+    argument.beginStructure();
+    argument << session.id << session.path;
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument& operator>>(const QDBusArgument &argument, DBusSession &session)
+{
+    argument.beginStructure();
+    argument >> session.id >> session.path;
+    argument.endStructure();
+    return argument;
+}
+
+QDBusArgument& operator<<(QDBusArgument &argument, const DBusUnit &unit)
+{
+    argument.beginStructure();
+    argument << unit.id << unit.path;
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument& operator>>(const QDBusArgument &argument, DBusUnit &unit)
+{
+    argument.beginStructure();
+    argument >> unit.id >> unit.path;
+    argument.endStructure();
+    return argument;
+}
+
+QDBusArgument& operator<<(QDBusArgument &argument, const DBusUser &user)
+{
+    argument.beginStructure();
+    argument << user.id << user.path;
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument& operator>>(const QDBusArgument &argument, DBusUser &user)
+{
+    argument.beginStructure();
+    argument >> user.id >> user.path;
     argument.endStructure();
     return argument;
 }
@@ -83,6 +132,38 @@ const QDBusArgument& operator>>(const QDBusArgument &argument, CGroupDBusDeviceA
     return argument;
 }
 
+QDBusArgument& operator<<(QDBusArgument &argument, const ExecuteDBusAddressFamilies &addressFamilies)
+{
+    argument.beginStructure();
+    argument << addressFamilies.whitelist << addressFamilies.names;
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument& operator>>(const QDBusArgument &argument, ExecuteDBusAddressFamilies &addressFamilies)
+{
+    argument.beginStructure();
+    argument >> addressFamilies.whitelist >> addressFamilies.names;
+    argument.endStructure();
+    return argument;
+}
+
+QDBusArgument& operator<<(QDBusArgument &argument, const ExecuteDBusAppArmorProfile &appArmorProfile)
+{
+    argument.beginStructure();
+    argument << appArmorProfile.ignore << appArmorProfile.profile;
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument& operator>>(const QDBusArgument &argument, ExecuteDBusAppArmorProfile &appArmorProfile)
+{
+    argument.beginStructure();
+    argument >> appArmorProfile.ignore >> appArmorProfile.profile;
+    argument.endStructure();
+    return argument;
+}
+
 QDBusArgument& operator<<(QDBusArgument &argument, const ExecuteDBusEnvironmentFile &environmentFile)
 {
     argument.beginStructure();
@@ -115,6 +196,38 @@ const QDBusArgument& operator>>(const QDBusArgument &argument, ExecuteDBusExecCo
     argument >> execCommand.path >> execCommand.argv >> execCommand.ignore;
     argument >> execCommand.startTimestamp >> execCommand.exitTimestamp >> execCommand.pid;
     argument >> execCommand.exitCode >> execCommand.exitStatus;
+    argument.endStructure();
+    return argument;
+}
+
+QDBusArgument& operator<<(QDBusArgument &argument, const ExecuteDBusSELinuxContext &seLinuxContext)
+{
+    argument.beginStructure();
+    argument << seLinuxContext.ignore << seLinuxContext.context;
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument& operator>>(const QDBusArgument &argument, ExecuteDBusSELinuxContext &seLinuxContext)
+{
+    argument.beginStructure();
+    argument >> seLinuxContext.ignore >> seLinuxContext.context;
+    argument.endStructure();
+    return argument;
+}
+
+QDBusArgument& operator<<(QDBusArgument &argument, const ExecuteDBusSystemCall &systemCall)
+{
+    argument.beginStructure();
+    argument << systemCall.whitelist << systemCall.names;
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument& operator>>(const QDBusArgument &argument, ExecuteDBusSystemCall &systemCall)
+{
+    argument.beginStructure();
+    argument >> systemCall.whitelist >> systemCall.names;
     argument.endStructure();
     return argument;
 }

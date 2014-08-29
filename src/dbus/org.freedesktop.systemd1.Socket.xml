@@ -367,26 +367,24 @@
   <property name="UtmpIdentifier" type="s" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
-<!--
   <property name="SELinuxContext" type="(bs)" access="read">
-   <annotation name="org.qtproject.QtDBus.QtTypeName" value="DBusExecCommandList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="ExecuteDBusSELinuxContext"/>
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="AppArmorProfile" type="(bs)" access="read">
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="ExecuteDBusAppArmorProfile"/>
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
--->
   <property name="IgnoreSIGPIPE" type="b" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="NoNewPrivileges" type="b" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
-<!--
   <property name="SystemCallFilter" type="(bas)" access="read">
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="ExecuteDBusSystemCall"/>
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
--->
   <property name="SystemCallArchitectures" type="as" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
@@ -396,11 +394,10 @@
   <property name="Personality" type="s" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
-<!--
   <property name="RestrictAddressFamilies" type="(bas)" access="read">
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="ExecuteDBusAddressFamilies"/>
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
--->
   <property name="RuntimeDirectoryMode" type="u" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
