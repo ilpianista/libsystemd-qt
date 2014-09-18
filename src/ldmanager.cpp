@@ -48,12 +48,12 @@ Systemd::Logind::LogindPrivate::~LogindPrivate()
 
 void Systemd::Logind::LogindPrivate::init()
 {
-    qDBusRegisterMetaType<DBusSeat>;
+
 }
 
 QList<Systemd::Logind::Seat *> Systemd::Logind::LogindPrivate::listSeats()
 {
-    qDBusRegisterMetaType<DBusSeatList>;
+
     QDBusPendingReply<DBusSeatList> reply = ildface.ListSeats();
     reply.waitForFinished();
 

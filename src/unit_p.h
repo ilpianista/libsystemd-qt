@@ -30,7 +30,7 @@ class UnitPrivate
 {
 
 public:
-    explicit UnitPrivate(const QString &path);
+    explicit UnitPrivate(const QString &path, const QDBusConnection &connection);
     virtual ~UnitPrivate();
 
     OrgFreedesktopSystemd1UnitInterface unitIface;

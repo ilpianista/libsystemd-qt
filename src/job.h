@@ -24,6 +24,8 @@
 
 #include "QtSystemd-export.h"
 
+class QDBusConnection;
+
 namespace Systemd {
 
 class JobPrivate;
@@ -36,7 +38,7 @@ class SDQT_EXPORT Job : public QObject
 public:
     typedef QSharedPointer<Job> Ptr;
 
-    explicit Job(const QString &path, QObject *parent = 0);
+    explicit Job(const QString &path, const QDBusConnection &connection, QObject *parent = 0);
     explicit Job(JobPrivate &job, QObject *parent = 0);
     virtual ~Job();
 

@@ -21,6 +21,7 @@
 #include <QCoreApplication>
 
 #include "../src/sdmanager.h"
+#include "../src/generic-types.h"
 
 using namespace Systemd;
 
@@ -32,7 +33,7 @@ public:
         f << QLatin1String("upower.service");
 
         qDebug() << f;
-        Systemd::disableUnitFiles(f, false);;
+        Systemd::disableUnitFiles(Systemd::SystemSession, f, false);;
     }
 
     static void enableUnitFiles()
@@ -41,63 +42,84 @@ public:
         f << QLatin1String("mysqld.service");
 
         qDebug() << f;
-        Systemd::enableUnitFiles(f, false, false);
+        Systemd::enableUnitFiles(Systemd::SystemSession, f, false, false);
     }
 
     static void getUnit()
     {
-        qDebug() << Systemd::getUnit("mysqld.service")->id();
+        qDebug() << Systemd::getUnit(Systemd::SystemSession, "mysqld.service")->id();
     }
 
     static void getUnitByPID()
     {
-        qDebug() << Systemd::getUnitByPID(31493)->id();
+        qDebug() << Systemd::getUnitByPID(Systemd::SystemSession, 31493)->id();
     }
 
     static void listJobs()
     {
-        Q_FOREACH(const Job::Ptr &job, Systemd::listJobs()) {
+        Q_FOREACH(const Job::Ptr &job, Systemd::listJobs(Systemd::SystemSession)) {
             qDebug() << job->id();
         }
     }
 
     static void listUnits()
     {
-        Q_FOREACH(const Unit::Ptr &unit, Systemd::listUnits()) {
+        Q_FOREACH(const Unit::Ptr &unit, Systemd::listUnits(Systemd::SystemSession)) {
             qDebug() << unit->id();
         }
     }
 
     static void listUnitFiles()
     {
-        Q_FOREACH(const QString &unit, Systemd::listUnitFiles()) {
+        Q_FOREACH(const QString &unit, Systemd::listUnitFiles(Systemd::SystemSession)) {
             qDebug() << unit;
         }
     }
 
     static void loadUnit()
     {
-        qDebug() << Systemd::loadUnit("mysqld.service")->loadState();
+        qDebug() << Systemd::loadUnit(Systemd::SystemSession, "mysqld.service")->loadState();
     }
 
     static void reloadUnit()
     {
-        qDebug() << Systemd::reloadUnit(QLatin1String("mysqld.service"), Systemd::Replace);
+        qDebug() << Systemd::reloadUnit(Systemd::SystemSession, QLatin1String("mysqld.service"), Systemd::Replace);
     }
 
     static void restartUnit()
     {
-        qDebug() << Systemd::restartUnit(QLatin1String("mysqld.service"), Systemd::Replace);
+        qDebug() << Systemd::restartUnit(Systemd::SystemSession, QLatin1String("mysqld.service"), Systemd::Replace);
     }
 
     static void startUnit()
     {
-        qDebug() << Systemd::startUnit(QLatin1String("mysqld.service"), Systemd::Replace);
+        qDebug() << Systemd::startUnit(Systemd::SystemSession, QLatin1String("mysqld.service"), Systemd::Replace);
+    }
+
+    static void startTransientUnit()
+    {
+        QMultiMap<QString,QVariant> props;
+        UnitDBusExecCommand xterm = {0};
+        xterm.path = QLatin1String("/usr/sbin/xterm");
+        xterm.argv << QLatin1String("/usr/sbin/xterm");
+        xterm.ignore = false;
+
+        UnitDBusExecCommandList args;
+        args << xterm;
+
+        props.insert(QLatin1String("Description"), QLatin1String("Test scope") );
+        props.insert(QLatin1String("RemainAfterExit"), true );
+        props.insert(QLatin1String("Environment"), QStringList(QLatin1String("DISPLAY=:0")));
+        props.insert(QLatin1String("ExecStart"), QVariant::fromValue(args));
+
+        qDebug() << Systemd::startTransientUnit(Systemd::UserSession, QLatin1String("mycool.service"), Systemd::Fail, props);
+
+
     }
 
     static void stopUnit()
     {
-        qDebug() << Systemd::stopUnit(QLatin1String("mysqld.service"), Systemd::Replace);
+        qDebug() << Systemd::stopUnit(Systemd::SystemSession, QLatin1String("mysqld.service"), Systemd::Replace);
     }
 };
 
@@ -113,11 +135,11 @@ int main(int argc, char* argv[])
 
 //     SDManagerTest::getUnitByPID();
 
-//    SDManagerTest::listJobs();
+//     SDManagerTest::listJobs();
 
-    SDManagerTest::listUnits();
+//     SDManagerTest::listUnits();
 
-    SDManagerTest::listUnitFiles();
+//     SDManagerTest::listUnitFiles();
 
 //     SDManagerTest::loadUnit();
 
@@ -126,6 +148,8 @@ int main(int argc, char* argv[])
 //     SDManagerTest::restartUnit();
 
 //     SDManagerTest::startUnit();
+
+       SDManagerTest::startTransientUnit();
 
 //     SDManagerTest::stopUnit();
 }
