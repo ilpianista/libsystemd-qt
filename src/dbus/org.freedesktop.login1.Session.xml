@@ -73,15 +73,12 @@
   <property name="IdleSinceHintMonotonic" type="t" access="read">
   </property>
   <method name="Terminate">
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="Activate">
   </method>
   <method name="Lock">
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="Unlock">
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="SetIdleHint">
    <arg type="b" direction="in"/>
@@ -89,7 +86,6 @@
   <method name="Kill">
    <arg type="s" direction="in"/>
    <arg type="i" direction="in"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="TakeControl">
    <arg type="b" direction="in"/>

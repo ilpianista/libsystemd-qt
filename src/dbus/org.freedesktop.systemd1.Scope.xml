@@ -13,12 +13,23 @@
   <signal name="RequestStop">
   </signal>
   <method name="Abandon">
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <property name="Slice" type="s" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="ControlGroup" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="MemoryCurrent" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="CPUUsageNSec" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="TasksCurrent" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="Delegate" type="b" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="CPUAccounting" type="b" access="read">
@@ -65,6 +76,12 @@
   </property>
   <property name="DeviceAllow" type="a(ss)" access="read">
    <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupDBusDeviceAllowList"/>
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="TasksAccounting" type="b" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="TasksMax" type="t" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="KillMode" type="s" access="read">

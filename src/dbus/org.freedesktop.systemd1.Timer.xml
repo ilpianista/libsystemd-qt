@@ -17,20 +17,7 @@
   </property>
   <property name="NextElapseUSecMonotonic" type="t" access="read">
   </property>
-  <property name="LastTriggerUSec" type="t" access="read">
-  </property>
-  <property name="LastTriggerUSecMonotonic" type="t" access="read">
-  </property>
   <property name="Result" type="s" access="read">
-  </property>
-  <property name="AccuracyUSec" type="t" access="read">
-   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
-  </property>
-  <property name="Persistent" type="b" access="read">
-   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
-  </property>
-  <property name="WakeSystem" type="b" access="read">
-   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
  </interface>
 </node>

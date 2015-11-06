@@ -38,6 +38,12 @@
   <property name="RequiredByOverridable" type="as" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
+  <property name="RequisiteOf" type="as" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="RequisiteOfOverridable" type="as" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
   <property name="WantedBy" type="as" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
@@ -105,6 +111,9 @@
   <property name="UnitFileState" type="s" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
+  <property name="UnitFilePreset" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
   <property name="InactiveExitTimestamp" type="t" access="read">
   </property>
   <property name="InactiveExitTimestampMonotonic" type="t" access="read">
@@ -166,14 +175,30 @@
   <property name="JobTimeoutUSec" type="t" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
+  <property name="JobTimeoutAction" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="JobTimeoutRebootArgument" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
   <property name="ConditionResult" type="b" access="read">
+  </property>
+  <property name="AssertResult" type="b" access="read">
   </property>
   <property name="ConditionTimestamp" type="t" access="read">
   </property>
   <property name="ConditionTimestampMonotonic" type="t" access="read">
   </property>
+  <property name="AssertTimestamp" type="t" access="read">
+  </property>
+  <property name="AssertTimestampMonotonic" type="t" access="read">
+  </property>
   <property name="Conditions" type="a(sbbsi)" access="read">
    <annotation name="org.qtproject.QtDBus.QtTypeName" value="UnitDBusConditionList"/>
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="Asserts" type="a(sbbsi)" access="read">
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="UnitDBusAssertList"/>
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="LoadError" type="(ss)" access="read">
@@ -183,48 +208,42 @@
   <property name="Transient" type="b" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
+  <property name="NetClass" type="u" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
   <method name="Start">
    <arg type="s" direction="in"/>
    <arg type="o" direction="out"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="Stop">
    <arg type="s" direction="in"/>
    <arg type="o" direction="out"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="Reload">
    <arg type="s" direction="in"/>
    <arg type="o" direction="out"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="Restart">
    <arg type="s" direction="in"/>
    <arg type="o" direction="out"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="TryRestart">
    <arg type="s" direction="in"/>
    <arg type="o" direction="out"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="ReloadOrRestart">
    <arg type="s" direction="in"/>
    <arg type="o" direction="out"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="ReloadOrTryRestart">
    <arg type="s" direction="in"/>
    <arg type="o" direction="out"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="Kill">
    <arg type="s" direction="in"/>
    <arg type="i" direction="in"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="ResetFailed">
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="SetProperties">
    <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="UnitDBusPropertyList"/>
@@ -232,7 +251,6 @@
    <arg type="a(sv)" direction="in">
     <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="UnitDBusPropertyList"/>
    </arg>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
  </interface>
 </node>

@@ -91,17 +91,14 @@
   </property>
   <property name="LogLevel" type="s" access="readwrite">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </property>
   <property name="LogTarget" type="s" access="readwrite">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </property>
   <property name="NNames" type="u" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="NFailedUnits" type="u" access="read">
-   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="NJobs" type="u" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
@@ -134,17 +131,18 @@
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="RuntimeWatchdogUSec" type="t" access="readwrite">
-   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="ShutdownWatchdogUSec" type="t" access="readwrite">
-   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="ControlGroup" type="s" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="SystemState" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="ExitCode" type="y" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <method name="GetUnit">
@@ -237,10 +235,8 @@
    <arg type="u" direction="in"/>
   </method>
   <method name="ClearJobs">
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="ResetFailed">
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="ListUnits">
    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitList"/>
@@ -272,48 +268,37 @@
    <arg type="s" direction="in"/>
    <arg type="b" direction="in"/>
    <arg type="o" direction="out"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="RemoveSnapshot">
    <arg type="s" direction="in"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="Reload">
   </method>
   <method name="Reexecute">
   </method>
   <method name="Exit">
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="Reboot">
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="PowerOff">
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="Halt">
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="KExec">
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="SwitchRoot">
    <arg type="s" direction="in"/>
    <arg type="s" direction="in"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="SetEnvironment">
    <arg type="as" direction="in"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="UnsetEnvironment">
    <arg type="as" direction="in"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="UnsetAndSetEnvironment">
    <arg type="as" direction="in"/>
    <arg type="as" direction="in"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="ListUnitFiles">
    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitFileList"/>
@@ -419,6 +404,20 @@
    <arg type="a(sss)" direction="out">
     <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitFileChangeList"/>
    </arg>
+  </method>
+  <method name="AddDependencyUnitFiles">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitFileChangeList"/>
+   <arg type="as" direction="in"/>
+   <arg type="s" direction="in"/>
+   <arg type="s" direction="in"/>
+   <arg type="b" direction="in"/>
+   <arg type="b" direction="in"/>
+   <arg type="a(sss)" direction="out">
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitFileChangeList"/>
+   </arg>
+  </method>
+  <method name="SetExitCode">
+   <arg type="y" direction="in"/>
   </method>
   <signal name="UnitNew">
    <arg type="s"/>

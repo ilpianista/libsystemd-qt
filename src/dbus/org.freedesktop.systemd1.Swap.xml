@@ -6,6 +6,8 @@
   </property>
   <property name="Priority" type="i" access="read">
   </property>
+  <property name="Options" type="s" access="read">
+  </property>
   <property name="TimeoutUSec" type="t" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
@@ -25,6 +27,18 @@
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="ControlGroup" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="MemoryCurrent" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="CPUUsageNSec" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="TasksCurrent" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="Delegate" type="b" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="CPUAccounting" type="b" access="read">
@@ -71,6 +85,12 @@
   </property>
   <property name="DeviceAllow" type="a(ss)" access="read">
    <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupDBusDeviceAllowList"/>
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="TasksAccounting" type="b" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="TasksMax" type="t" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="Environment" type="as" access="read">
@@ -248,12 +268,19 @@
   <property name="UtmpIdentifier" type="s" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
+  <property name="UtmpMode" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
   <property name="SELinuxContext" type="(bs)" access="read">
    <annotation name="org.qtproject.QtDBus.QtTypeName" value="ExecuteDBusSELinuxContext"/>
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="AppArmorProfile" type="(bs)" access="read">
    <annotation name="org.qtproject.QtDBus.QtTypeName" value="ExecuteDBusAppArmorProfile"/>
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="SmackProcessLabel" type="(bs)" access="read">
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="ExecuteDBusSmackProcessLabel"/>
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="IgnoreSIGPIPE" type="b" access="read">

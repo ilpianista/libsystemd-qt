@@ -2,6 +2,14 @@
 "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
 <node>
  <interface name="org.freedesktop.login1.Manager">
+  <property name="EnableWallMessages" type="b" access="readwrite">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
+  </property>
+  <property name="WallMessage" type="s" access="readwrite">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
+  </property>
   <property name="NAutoVTs" type="u" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
@@ -12,6 +20,9 @@
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="KillUserProcesses" type="b" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="RebootToFirmwareSetup" type="b" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="IdleHint" type="b" access="read">
@@ -39,6 +50,12 @@
   <property name="HandleLidSwitch" type="s" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
+  <property name="HandleLidSwitchDocked" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="HoldoffTimeoutUSec" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
   <property name="IdleAction" type="s" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
@@ -49,6 +66,13 @@
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="PreparingForSleep" type="b" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="ScheduledShutdown" type="(st)" access="read">
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="LoginDBusScheduledShutdown"/>
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="Docked" type="b" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <method name="GetSession">
@@ -121,11 +145,9 @@
    <arg type="s" direction="out"/>
    <arg type="u" direction="out"/>
    <arg type="b" direction="out"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="ReleaseSession">
    <arg type="s" direction="in"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="ActivateSession">
    <arg type="s" direction="in"/>
@@ -136,40 +158,31 @@
   </method>
   <method name="LockSession">
    <arg type="s" direction="in"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="UnlockSession">
    <arg type="s" direction="in"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="LockSessions">
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="UnlockSessions">
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="KillSession">
    <arg type="s" direction="in"/>
    <arg type="s" direction="in"/>
    <arg type="i" direction="in"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="KillUser">
    <arg type="u" direction="in"/>
    <arg type="i" direction="in"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="TerminateSession">
    <arg type="s" direction="in"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="TerminateUser">
    <arg type="u" direction="in"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="TerminateSeat">
    <arg type="s" direction="in"/>
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="SetUserLinger">
    <arg type="u" direction="in"/>
@@ -214,12 +227,29 @@
   <method name="CanHybridSleep">
    <arg type="s" direction="out"/>
   </method>
+  <method name="ScheduleShutdown">
+   <arg type="s" direction="in"/>
+   <arg type="t" direction="in"/>
+  </method>
+  <method name="CancelScheduledShutdown">
+   <arg type="b" direction="out"/>
+  </method>
   <method name="Inhibit">
    <arg type="s" direction="in"/>
    <arg type="s" direction="in"/>
    <arg type="s" direction="in"/>
    <arg type="s" direction="in"/>
    <arg type="h" direction="out"/>
+  </method>
+  <method name="CanRebootToFirmwareSetup">
+   <arg type="s" direction="out"/>
+  </method>
+  <method name="SetRebootToFirmwareSetup">
+   <arg type="b" direction="in"/>
+  </method>
+  <method name="SetWallMessage">
+   <arg type="s" direction="in"/>
+   <arg type="b" direction="in"/>
   </method>
   <signal name="SessionNew">
    <arg type="s"/>

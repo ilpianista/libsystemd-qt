@@ -124,6 +124,16 @@ const QDBusArgument &operator>>(const QDBusArgument &argument, ExecuteDBusAppArm
 
 typedef struct
 {
+    bool ignore;
+    QString profile;
+} ExecuteDBusSmackProcessLabel;
+Q_DECLARE_METATYPE(ExecuteDBusSmackProcessLabel)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const ExecuteDBusSmackProcessLabel &smackProcessLabel);
+const QDBusArgument &operator>>(const QDBusArgument &argument, ExecuteDBusSmackProcessLabel &smackProcessLabel);
+
+typedef struct
+{
     QString fileName;
     bool dash;
 } ExecuteDBusEnvironmentFile;
@@ -187,6 +197,16 @@ Q_DECLARE_METATYPE(LoginDBusInhibitorList)
 
 QDBusArgument &operator<<(QDBusArgument &argument, const LoginDBusInhibitor &inhibitor);
 const QDBusArgument &operator>>(const QDBusArgument &argument, LoginDBusInhibitor &inhibitor);
+
+typedef struct
+{
+    QString type;
+    qulonglong timeout;
+} LoginDBusScheduledShutdown;
+Q_DECLARE_METATYPE(LoginDBusScheduledShutdown)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const LoginDBusScheduledShutdown &scheduledShutdown);
+const QDBusArgument &operator>>(const QDBusArgument &argument, LoginDBusScheduledShutdown &scheduledShutdown);
 
 typedef struct
 {
@@ -353,6 +373,21 @@ Q_DECLARE_METATYPE(UnitDBusConditionList)
 
 QDBusArgument &operator<<(QDBusArgument &argument, const UnitDBusCondition &condition);
 const QDBusArgument &operator>>(const QDBusArgument &argument, UnitDBusCondition &condition);
+
+typedef struct
+{
+    QString name;
+    bool trigger;
+    bool negate;
+    QString param;
+    qint32 state;
+} UnitDBusAssert;
+Q_DECLARE_METATYPE(UnitDBusAssert)
+typedef QList<UnitDBusAssert> UnitDBusAssertList;
+Q_DECLARE_METATYPE(UnitDBusAssertList)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const UnitDBusAssert &assert);
+const QDBusArgument &operator>>(const QDBusArgument &argument, UnitDBusAssert &assert);
 
 typedef struct
 {

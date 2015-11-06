@@ -164,6 +164,22 @@ const QDBusArgument& operator>>(const QDBusArgument &argument, ExecuteDBusAppArm
     return argument;
 }
 
+QDBusArgument& operator<<(QDBusArgument &argument, const ExecuteDBusSmackProcessLabel &smackProcessLabel)
+{
+    argument.beginStructure();
+    argument << smackProcessLabel.ignore << smackProcessLabel.profile;
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument& operator>>(const QDBusArgument &argument, ExecuteDBusSmackProcessLabel &smackProcessLabel)
+{
+    argument.beginStructure();
+    argument >> smackProcessLabel.ignore >> smackProcessLabel.profile;
+    argument.endStructure();
+    return argument;
+}
+
 QDBusArgument& operator<<(QDBusArgument &argument, const ExecuteDBusEnvironmentFile &environmentFile)
 {
     argument.beginStructure();
@@ -246,6 +262,22 @@ const QDBusArgument& operator>>(const QDBusArgument &argument, LoginDBusInhibito
     argument.beginStructure();
     argument >> inhibitor.what >> inhibitor.who >> inhibitor.why >> inhibitor.mode;
     argument >> inhibitor.uid >> inhibitor.pid;
+    argument.endStructure();
+    return argument;
+}
+
+QDBusArgument& operator<<(QDBusArgument &argument, const LoginDBusScheduledShutdown &scheduledShutdown)
+{
+    argument.beginStructure();
+    argument << scheduledShutdown.type << scheduledShutdown.timeout;
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument& operator>>(const QDBusArgument &argument, LoginDBusScheduledShutdown &scheduledShutdown)
+{
+    argument.beginStructure();
+    argument >> scheduledShutdown.type >> scheduledShutdown.timeout;
     argument.endStructure();
     return argument;
 }
@@ -448,6 +480,24 @@ const QDBusArgument& operator>>(const QDBusArgument &argument, UnitDBusCondition
     argument.beginStructure();
     argument >> condition.name >> condition.trigger >> condition.negate >> condition.param;
     argument >> condition.state;
+    argument.endStructure();
+    return argument;
+}
+
+QDBusArgument& operator<<(QDBusArgument &argument, const UnitDBusAssert &assert)
+{
+    argument.beginStructure();
+    argument << assert.name << assert.trigger << assert.negate << assert.param;
+    argument << assert.state;
+    argument.endStructure();
+    return argument;
+}
+
+const QDBusArgument& operator>>(const QDBusArgument &argument, UnitDBusAssert &assert)
+{
+    argument.beginStructure();
+    argument >> assert.name >> assert.trigger >> assert.negate >> assert.param;
+    argument >> assert.state;
     argument.endStructure();
     return argument;
 }
