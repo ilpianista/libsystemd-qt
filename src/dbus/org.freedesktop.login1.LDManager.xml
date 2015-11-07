@@ -145,9 +145,11 @@
    <arg type="s" direction="out"/>
    <arg type="u" direction="out"/>
    <arg type="b" direction="out"/>
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="ReleaseSession">
    <arg type="s" direction="in"/>
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="ActivateSession">
    <arg type="s" direction="in"/>
