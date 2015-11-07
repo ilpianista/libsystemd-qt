@@ -37,11 +37,10 @@ namespace Systemd
 namespace Logind
 {
     enum Permission {
-        Na,
-        Yes,
-        No,
         Challenge,
-        Unknown
+        Na,
+        No,
+        Yes
     };
 
     class SDQT_EXPORT Notifier : public QObject

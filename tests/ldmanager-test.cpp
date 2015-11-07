@@ -29,47 +29,102 @@ public:
     }
 
     static void canHibernate() {
+        qDebug() << "Can hibernate?";
         Systemd::Logind::Permission perm = Systemd::Logind::canHibernate();
-        if (perm == Systemd::Logind::Yes) {
-            qDebug() << "Yes";
-        } else {
-            qDebug() << "Some other value";
+        switch (perm)
+        {
+            case Systemd::Logind::Challenge:
+                qDebug() << "Challenge";
+                break;
+            case Systemd::Logind::Na:
+                qDebug() << "Na";
+                break;
+            case Systemd::Logind::No:
+                qDebug() << "No";
+                break;
+            case Systemd::Logind::Yes:
+                qDebug() << "Yes";
+                break;
         }
     }
 
     static void canHybridSleep() {
+        qDebug() << "Can hybrid sleep?";
         Systemd::Logind::Permission perm = Systemd::Logind::canHybridSleep();
-        if (perm == Systemd::Logind::Yes) {
-            qDebug() << "Yes";
-        } else {
-            qDebug() << "Some other value";
+        switch (perm)
+        {
+            case Systemd::Logind::Challenge:
+                qDebug() << "Challenge";
+                break;
+            case Systemd::Logind::Na:
+                qDebug() << "Na";
+                break;
+            case Systemd::Logind::No:
+                qDebug() << "No";
+                break;
+            case Systemd::Logind::Yes:
+                qDebug() << "Yes";
+                break;
         }
     }
 
     static void canPowerOff() {
+        qDebug() << "Can power off?";
         Systemd::Logind::Permission perm = Systemd::Logind::canPowerOff();
-        if (perm == Systemd::Logind::Yes) {
-            qDebug() << "Yes";
-        } else {
-            qDebug() << "Some other value";
+        switch (perm)
+        {
+            case Systemd::Logind::Challenge:
+                qDebug() << "Challenge";
+                break;
+            case Systemd::Logind::Na:
+                qDebug() << "Na";
+                break;
+            case Systemd::Logind::No:
+                qDebug() << "No";
+                break;
+            case Systemd::Logind::Yes:
+                qDebug() << "Yes";
+                break;
         }
     }
 
     static void canReboot() {
+        qDebug() << "Can reboot?";
         Systemd::Logind::Permission perm = Systemd::Logind::canReboot();
-        if (perm == Systemd::Logind::Yes) {
-            qDebug() << "Yes";
-        } else {
-            qDebug() << "Some other value";
+        switch (perm)
+        {
+            case Systemd::Logind::Challenge:
+                qDebug() << "Challenge";
+                break;
+            case Systemd::Logind::Na:
+                qDebug() << "Na";
+                break;
+            case Systemd::Logind::No:
+                qDebug() << "No";
+                break;
+            case Systemd::Logind::Yes:
+                qDebug() << "Yes";
+                break;
         }
     }
 
     static void canSuspend() {
+        qDebug() << "Can suspend?";
         Systemd::Logind::Permission perm = Systemd::Logind::canSuspend();
-        if (perm == Systemd::Logind::Yes) {
-            qDebug() << "Yes";
-        } else {
-            qDebug() << "Some other value";
+        switch (perm)
+        {
+            case Systemd::Logind::Challenge:
+                qDebug() << "Challenge";
+                break;
+            case Systemd::Logind::Na:
+                qDebug() << "Na";
+                break;
+            case Systemd::Logind::No:
+                qDebug() << "No";
+                break;
+            case Systemd::Logind::Yes:
+                qDebug() << "Yes";
+                break;
         }
     }
 };

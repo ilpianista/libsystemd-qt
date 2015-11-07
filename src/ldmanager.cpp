@@ -82,7 +82,7 @@ Systemd::Logind::Permission Systemd::Logind::LogindPrivate::canHibernate()
 
     if (reply.isError()) {
         qDebug() << reply.error().message();
-        return Systemd::Logind::Unknown;
+        return Systemd::Logind::No;
     }
 
     const QString permission = qdbus_cast<QString>(reply.reply().arguments().first());
@@ -97,7 +97,7 @@ Systemd::Logind::Permission Systemd::Logind::LogindPrivate::canHybridSleep()
 
     if (reply.isError()) {
         qDebug() << reply.error().message();
-        return Systemd::Logind::Unknown;
+        return Systemd::Logind::No;
     }
 
     const QString permission = qdbus_cast<QString>(reply.reply().arguments().first());
@@ -112,7 +112,7 @@ Systemd::Logind::Permission Systemd::Logind::LogindPrivate::canPowerOff()
 
     if (reply.isError()) {
         qDebug() << reply.error().message();
-        return Systemd::Logind::Unknown;
+        return Systemd::Logind::No;
     }
 
     const QString permission = qdbus_cast<QString>(reply.reply().arguments().first());
@@ -127,7 +127,7 @@ Systemd::Logind::Permission Systemd::Logind::LogindPrivate::canReboot()
 
     if (reply.isError()) {
         qDebug() << reply.error().message();
-        return Systemd::Logind::Unknown;
+        return Systemd::Logind::No;
     }
 
     const QString permission = qdbus_cast<QString>(reply.reply().arguments().first());
@@ -142,7 +142,7 @@ Systemd::Logind::Permission Systemd::Logind::LogindPrivate::canSuspend()
 
     if (reply.isError()) {
         qDebug() << reply.error().message();
-        return Systemd::Logind::Unknown;
+        return Systemd::Logind::No;
     }
 
     const QString permission = qdbus_cast<QString>(reply.reply().arguments().first());
@@ -226,12 +226,10 @@ Systemd::Logind::Permission Systemd::Logind::LogindPrivate::stringToPermission(c
         return Systemd::Logind::Na;
     } else if (permission == QLatin1String("yes")) {
         return Systemd::Logind::Yes;
-    } else if (permission == QLatin1String("no")) {
-        return Systemd::Logind::No;
     } else if (permission == QLatin1String("challenge")) {
         return Systemd::Logind::Challenge;
     } else {
-        return Systemd::Logind::Unknown;
+        return Systemd::Logind::No;
     }
 }
 
