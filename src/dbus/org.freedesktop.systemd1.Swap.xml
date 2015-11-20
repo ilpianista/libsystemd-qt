@@ -100,6 +100,9 @@
    <annotation name="org.qtproject.QtDBus.QtTypeName" value="ExecuteDBusEnvironmentFileList"/>
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
+  <property name="PassEnvironment" type="as" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
   <property name="UMask" type="u" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
@@ -212,6 +215,12 @@
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="SyslogLevelPrefix" type="b" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="SyslogLevel" type="i" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="SyslogFacility" type="i" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="Capabilities" type="s" access="read">

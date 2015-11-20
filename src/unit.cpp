@@ -30,6 +30,10 @@ Systemd::UnitPrivate::UnitPrivate(const QString &path) :
     activeState = unitIface.activeState();
     after = unitIface.after();
     allowIsolate = unitIface.allowIsolate();
+    assertResult = unitIface.assertResult();
+    assertTimestamp = unitIface.assertTimestamp();
+    assertTimestampMonotonic = unitIface.assertTimestampMonotonic();
+    //asserts = unitIface.asserts();
     before = unitIface.before();
     bindsTo = unitIface.bindsTo();
     boundBy = unitIface.boundBy();
@@ -52,18 +56,20 @@ Systemd::UnitPrivate::UnitPrivate(const QString &path) :
     fragmentPath = unitIface.fragmentPath();
     id = unitIface.id();
     ignoreOnIsolate = unitIface.ignoreOnIsolate();
-    ignoreOnSnapshot = unitIface.ignoreOnSnapshot();
     inactiveEnterTimestamp = unitIface.inactiveEnterTimestamp();
     inactiveEnterTimestampMonotonic = unitIface.inactiveEnterTimestampMonotonic();
     inactiveExitTimestamp = unitIface.inactiveExitTimestamp();
     inactiveExitTimestampMonotonic = unitIface.inactiveExitTimestampMonotonic();
     job = unitIface.job().id;
+    jobTimeoutAction = unitIface.jobTimeoutAction();
+    jobTimeoutRebootArgument = unitIface.jobTimeoutRebootArgument();
     jobTimeoutUSec = unitIface.jobTimeoutUSec();
     joinsNamespaceOf = unitIface.joinsNamespaceOf();
     //loadError = unitIface.loadError();
     loadState = unitIface.loadState();
     names = unitIface.names();
     needDaemonReload = unitIface.needDaemonReload();
+    netClass = unitIface.netClass();
     onFailure = unitIface.onFailure();
     onFailureJobMode = unitIface.onFailureJobMode();
     partOf = unitIface.partOf();
@@ -72,12 +78,10 @@ Systemd::UnitPrivate::UnitPrivate(const QString &path) :
     refuseManualStop = unitIface.refuseManualStop();
     reloadPropagatedFrom = unitIface.reloadPropagatedFrom();
     requiredBy = unitIface.requiredBy();
-    requiredByOverridable = unitIface.requiredByOverridable();
     requires = unitIface.requires();
     requiresMountsFor = unitIface.requiresMountsFor();
-    requiresOverridable = unitIface.requiresOverridable();
     requisite = unitIface.requisite();
-    requisiteOverridable = unitIface.requisiteOverridable();
+    requisiteOf = unitIface.requisiteOf();
     sourcePath = unitIface.sourcePath();
     stopWhenUnneeded = unitIface.stopWhenUnneeded();
     subState = unitIface.subState();
@@ -148,6 +152,24 @@ bool Systemd::Unit::allowIsolate() const
 {
     Q_D(const Unit);
     return d->allowIsolate;
+}
+
+bool Systemd::Unit::assertResult() const
+{
+    Q_D(const Unit);
+    return d->assertResult;
+}
+
+qulonglong Systemd::Unit::assertTimestamp() const
+{
+    Q_D(const Unit);
+    return d->assertTimestamp;
+}
+
+qulonglong Systemd::Unit::assertTimestampMonotonic() const
+{
+    Q_D(const Unit);
+    return d->assertTimestampMonotonic;
 }
 
 QStringList Systemd::Unit::before() const
@@ -276,12 +298,6 @@ bool Systemd::Unit::ignoreOnIsolate() const
     return d->ignoreOnIsolate;
 }
 
-bool Systemd::Unit::ignoreOnSnapshot() const
-{
-    Q_D(const Unit);
-    return d->ignoreOnSnapshot;
-}
-
 qulonglong Systemd::Unit::inactiveEnterTimestamp() const
 {
     Q_D(const Unit);
@@ -312,6 +328,18 @@ uint Systemd::Unit::job() const
     return d->job;
 }
 
+QString Systemd::Unit::jobTimeoutAction() const
+{
+    Q_D(const Unit);
+    return d->jobTimeoutAction;
+}
+
+QString Systemd::Unit::jobTimeoutRebootArgument() const
+{
+    Q_D(const Unit);
+    return d->jobTimeoutRebootArgument;
+}
+
 qulonglong Systemd::Unit::jobTimeoutUSec() const
 {
     Q_D(const Unit);
@@ -340,6 +368,12 @@ bool Systemd::Unit::needDaemonReload() const
 {
     Q_D(const Unit);
     return d->needDaemonReload;
+}
+
+uint Systemd::Unit::netClass() const
+{
+    Q_D(const Unit);
+    return d->netClass;
 }
 
 QStringList Systemd::Unit::onFailure() const
@@ -390,12 +424,6 @@ QStringList Systemd::Unit::requiredBy() const
     return d->requiredBy;
 }
 
-QStringList Systemd::Unit::requiredByOverridable() const
-{
-    Q_D(const Unit);
-    return d->requiredByOverridable;
-}
-
 QStringList Systemd::Unit::requires() const
 {
     Q_D(const Unit);
@@ -408,22 +436,16 @@ QStringList Systemd::Unit::requiresMountsFor() const
     return d->requiresMountsFor;
 }
 
-QStringList Systemd::Unit::requiresOverridable() const
-{
-    Q_D(const Unit);
-    return d->requiredByOverridable;
-}
-
 QStringList Systemd::Unit::requisite() const
 {
     Q_D(const Unit);
     return d->requisite;
 }
 
-QStringList Systemd::Unit::requisiteOverridable() const
+QStringList Systemd::Unit::requisiteOf() const
 {
     Q_D(const Unit);
-    return d->requisiteOverridable;
+    return d->requisiteOf;
 }
 
 QString Systemd::Unit::sourcePath() const

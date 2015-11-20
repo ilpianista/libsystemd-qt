@@ -31,7 +31,6 @@ set(INTERFACE_INTROSPECTION_XML_FILES
     dbus/org.freedesktop.systemd1.Scope.xml
     dbus/org.freedesktop.systemd1.Service.xml
     dbus/org.freedesktop.systemd1.Slice.xml
-    dbus/org.freedesktop.systemd1.Snapshot.xml
     dbus/org.freedesktop.systemd1.Socket.xml
     dbus/org.freedesktop.systemd1.Swap.xml
     dbus/org.freedesktop.systemd1.Target.xml

@@ -10,5 +10,8 @@
   </property>
   <property name="Result" type="s" access="read">
   </property>
+  <property name="TimeoutIdleUSec" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
  </interface>
 </node>

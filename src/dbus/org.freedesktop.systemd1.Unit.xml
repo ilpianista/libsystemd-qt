@@ -14,13 +14,7 @@
   <property name="Requires" type="as" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
-  <property name="RequiresOverridable" type="as" access="read">
-   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
-  </property>
   <property name="Requisite" type="as" access="read">
-   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
-  </property>
-  <property name="RequisiteOverridable" type="as" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="Wants" type="as" access="read">
@@ -35,13 +29,7 @@
   <property name="RequiredBy" type="as" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
-  <property name="RequiredByOverridable" type="as" access="read">
-   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
-  </property>
   <property name="RequisiteOf" type="as" access="read">
-   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
-  </property>
-  <property name="RequisiteOfOverridable" type="as" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="WantedBy" type="as" access="read">
@@ -164,9 +152,6 @@
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="IgnoreOnIsolate" type="b" access="read">
-   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
-  </property>
-  <property name="IgnoreOnSnapshot" type="b" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="NeedDaemonReload" type="b" access="read">

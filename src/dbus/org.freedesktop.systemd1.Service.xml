@@ -69,6 +69,9 @@
   <property name="FileDescriptorStoreMax" type="u" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
+  <property name="NFileDescriptorStore" type="u" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
   <property name="StatusText" type="s" access="read">
   </property>
   <property name="StatusErrno" type="i" access="read">
@@ -185,13 +188,16 @@
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="TasksMax" type="t" access="read">
-    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="Environment" type="as" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="EnvironmentFiles" type="a(sb)" access="read">
    <annotation name="org.qtproject.QtDBus.QtTypeName" value="ExecuteDBusEnvironmentFileList"/>
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="PassEnvironment" type="as" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="UMask" type="u" access="read">
@@ -306,6 +312,12 @@
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="SyslogLevelPrefix" type="b" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="SyslogLevel" type="i" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="SyslogFacility" type="i" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="Capabilities" type="s" access="read">

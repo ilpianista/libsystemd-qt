@@ -91,9 +91,11 @@
   </property>
   <property name="LogLevel" type="s" access="readwrite">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </property>
   <property name="LogTarget" type="s" access="readwrite">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </property>
   <property name="NNames" type="u" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
@@ -132,9 +134,11 @@
   </property>
   <property name="RuntimeWatchdogUSec" type="t" access="readwrite">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </property>
   <property name="ShutdownWatchdogUSec" type="t" access="readwrite">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </property>
   <property name="ControlGroup" type="s" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
@@ -144,6 +148,90 @@
   </property>
   <property name="ExitCode" type="y" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="DefaultTimerAccuracyUSec" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultTimeoutStartUSec" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultTimeoutStopUSec" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultRestartUSec" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultStartLimitInterval" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultStartLimitBurst" type="u" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultCPUAccounting" type="b" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultBlockIOAccounting" type="b" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultMemoryAccounting" type="b" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultTasksAccounting" type="b" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultLimitCPU" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultLimitFSIZE" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultLimitDATA" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultLimitSTACK" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultLimitCORE" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultLimitRSS" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultLimitNOFILE" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultLimitAS" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultLimitNPROC" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultLimitMEMLOCK" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultLimitLOCKS" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultLimitSIGPENDING" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultLimitMSGQUEUE" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultLimitNICE" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultLimitRTPRIO" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultLimitRTTIME" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="DefaultTasksMax" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="TimerSlackNSec" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <method name="GetUnit">
    <arg type="s" direction="in"/>
@@ -277,18 +365,24 @@
   <method name="Reexecute">
   </method>
   <method name="Exit">
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="Reboot">
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="PowerOff">
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="Halt">
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="KExec">
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="SwitchRoot">
    <arg type="s" direction="in"/>
    <arg type="s" direction="in"/>
+   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="SetEnvironment">
    <arg type="as" direction="in"/>
