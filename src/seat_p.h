@@ -32,7 +32,7 @@ class SeatPrivate
 {
 
 public:
-    explicit SeatPrivate(const QString &path);
+    explicit SeatPrivate(const QString &path, const QDBusConnection &connection);
     virtual ~SeatPrivate();
 
     OrgFreedesktopLogin1SeatInterface seatIface;

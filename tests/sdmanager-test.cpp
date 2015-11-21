@@ -28,76 +28,105 @@ class SDManagerTest {
 public:
     static void disableUnitFiles()
     {
-        QStringList f;
-        f << QLatin1String("upower.service");
+        const QString unitName("lm_sensors.service");
 
-        qDebug() << f;
-        Systemd::disableUnitFiles(f, false);;
+        QStringList f;
+        f << unitName;
+
+        qDebug() << "Disabling units:" << f;
+        Systemd::disableUnitFiles(Systemd::System, f, false);
+
+        qDebug() << "State:" << Systemd::getUnit(Systemd::System, unitName).data()->activeState();
     }
 
     static void enableUnitFiles()
     {
-        QStringList f;
-        f << QLatin1String("mysqld.service");
+        const QString unitName("lm_sensors.service");
 
-        qDebug() << f;
-        Systemd::enableUnitFiles(f, false, false);
+        QStringList f;
+        f << unitName;
+
+        qDebug() << "Enabling units:" << f;
+        Systemd::enableUnitFiles(Systemd::System, f, false, false);
+
+        qDebug() << "State:" << Systemd::getUnit(Systemd::System, unitName).data()->activeState();
     }
 
     static void getUnit()
     {
-        qDebug() << Systemd::getUnit("mysqld.service")->id();
+        const QString unitName("lm_sensors.service");
+
+        qDebug() << "Got unit, id:" << Systemd::getUnit(Systemd::System, unitName)->id();
     }
 
     static void getUnitByPID()
     {
-        qDebug() << Systemd::getUnitByPID(31493)->id();
+        qDebug() << Systemd::getUnitByPID(Systemd::System, 1)->id();
     }
 
     static void listJobs()
     {
-        Q_FOREACH(const Job::Ptr &job, Systemd::listJobs()) {
-            qDebug() << job->id();
+        qDebug() << "Listing jobs:";
+        Q_FOREACH(const Job::Ptr &job, Systemd::listJobs(Systemd::System)) {
+            qDebug() << "\t" << job->id();
         }
     }
 
     static void listUnits()
     {
-        Q_FOREACH(const Unit::Ptr &unit, Systemd::listUnits()) {
-            qDebug() << unit->id();
+        qDebug() << "Listing units:";
+        Q_FOREACH(const Unit::Ptr &unit, Systemd::listUnits(Systemd::System)) {
+            qDebug() << "\t" << unit->id();
         }
     }
 
     static void listUnitFiles()
     {
-        Q_FOREACH(const QString &unit, Systemd::listUnitFiles()) {
-            qDebug() << unit;
+        qDebug() << "Listing unit files:";
+
+        Q_FOREACH(const QString &unitFile, Systemd::listUnitFiles(Systemd::System)) {
+            qDebug() << "\t" << unitFile;
         }
     }
 
     static void loadUnit()
     {
-        qDebug() << Systemd::loadUnit("mysqld.service")->loadState();
+        const QString unitName("lm_sensors.service");
+
+        qDebug() << "Loading unit:" << unitName;
+        qDebug() << "State:" << Systemd::loadUnit(Systemd::System, unitName)->loadState();
     }
 
     static void reloadUnit()
     {
-        qDebug() << Systemd::reloadUnit(QLatin1String("mysqld.service"), Systemd::Replace);
+        const QString unitName("lm_sensors.service");
+
+        qDebug() << "Reloading unit:" << unitName;
+        qDebug() << Systemd::reloadUnit(Systemd::System, unitName, Systemd::Replace);
     }
 
     static void restartUnit()
     {
-        qDebug() << Systemd::restartUnit(QLatin1String("mysqld.service"), Systemd::Replace);
+        const QString unitName("lm_sensors.service");
+
+        qDebug() << "Restaring unit:" << unitName;
+        qDebug() << Systemd::restartUnit(Systemd::System, unitName, Systemd::Replace);
     }
 
     static void startUnit()
     {
-        qDebug() << Systemd::startUnit(QLatin1String("mysqld.service"), Systemd::Replace);
+        const QString unitName("lm_sensors.service");
+
+        qDebug() << "Starting unit:" << unitName;
+        qDebug() << Systemd::startUnit(Systemd::System, unitName, Systemd::Replace);
     }
 
     static void stopUnit()
     {
-        qDebug() << Systemd::stopUnit(QLatin1String("mysqld.service"), Systemd::Replace);
+        const QString unitName("lm_sensors.service");
+
+        qDebug() << "Stopping unit:" << unitName;
+        qDebug() << Systemd::stopUnit(Systemd::System, unitName, Systemd::Replace);
     }
 };
 
@@ -109,11 +138,11 @@ int main(int argc, char* argv[])
 
 //     SDManagerTest::enableUnitFiles();
 
-//     SDManagerTest::getUnit();
+     SDManagerTest::getUnit();
 
 //     SDManagerTest::getUnitByPID();
 
-//    SDManagerTest::listJobs();
+    SDManagerTest::listJobs();
 
     SDManagerTest::listUnits();
 

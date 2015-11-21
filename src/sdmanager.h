@@ -32,10 +32,15 @@
  *
  * It is the unique entry point for systemd.
  *
- * Note that it is implemented as a singleton
+ * Note that it is implemented as a singleton.
  */
 namespace Systemd
 {
+    enum SessionType {
+        System,
+        User
+    };
+
     enum Mode {
         Replace,
         Fail,
@@ -97,73 +102,73 @@ namespace Systemd
      * Disables one or more units in the system, i.e. removes all symlinks to
      * them in /etc and /run.
      */
-    SDQT_EXPORT void disableUnitFiles(const QStringList &files, const bool runtime);
+    SDQT_EXPORT void disableUnitFiles(const SessionType &session, const QStringList &files, const bool runtime);
 
     /*
      * May be used to enable one or more units in the system (by creating
      * symlinks to them in /etc or /run).
      */
-    SDQT_EXPORT void enableUnitFiles(const QStringList &files, const bool runtime, const bool force);
+    SDQT_EXPORT void enableUnitFiles(const SessionType &session, const QStringList &files, const bool runtime, const bool force);
 
     /*
      * Returns the job object path for a specific job, identified by its id.
      */
-    SDQT_EXPORT Job::Ptr getJob(const uint id);
+    SDQT_EXPORT Job::Ptr getJob(const SessionType &session, const uint id);
 
     /*
      * May be used to get the unit object path for a unit name. It takes the
      * unit name and returns the object path. If a unit has not been loaded
      * yet by this name this call will fail.
      */
-    SDQT_EXPORT Unit::Ptr getUnit(const QString &name);
+    SDQT_EXPORT Unit::Ptr getUnit(const SessionType &session, const QString &name);
 
     /*
      * May be used to get the unit object path of the unit a process ID
      * belongs to. Takes a Unix PID and returns the object path. The PID must
      * refer to an existing process of the system.
      */
-    SDQT_EXPORT Unit::Ptr getUnitByPID(const uint pid);
+    SDQT_EXPORT Unit::Ptr getUnitByPID(const SessionType &session, const uint pid);
 
     /*
      * Returns the current enablement status of specific unit file.
      */
-    SDQT_EXPORT QString getUnitFileState(const QString &file);
+    SDQT_EXPORT QString getUnitFileState(const SessionType &session, const QString &file);
 
     /*
      * May be used to kill (i.e. send a signal to) all processes of a unit.
      */
-    SDQT_EXPORT void killUnit(const QString &name, const Systemd::Who who, const int signal);
+    SDQT_EXPORT void killUnit(const SessionType &session, const QString &name, const Systemd::Who who, const int signal);
 
     /*
      * Returns an array with all currently queued jobs.
      */
-    SDQT_EXPORT QList<Job::Ptr> listJobs();
+    SDQT_EXPORT QList<Job::Ptr> listJobs(const SessionType &session);
 
     /*
      * Returns an array with all currently loaded units. Note that units may
      * be known by multiple names at the same name, and hence there might be
      * more unit names loaded than actual units behind them.
      */
-    SDQT_EXPORT QList<Unit::Ptr> listUnits();
+    SDQT_EXPORT QList<Unit::Ptr> listUnits(const SessionType &session);
 
     /*
      * Returns an array of unit names. Note that listUnit() returns a list of
      * units currently loaded into memory, while listUnitFiles() returns a
      * list of unit files that could be found on disk.
      */
-    SDQT_EXPORT QStringList listUnitFiles();
+    SDQT_EXPORT QStringList listUnitFiles(const SessionType &session);
 
     /*
      * Is similar to getUnit() but will load the unit from disk if possible.
      */
-    SDQT_EXPORT Unit::Ptr loadUnit(const QString &name);
+    SDQT_EXPORT Unit::Ptr loadUnit(const SessionType &session, const QString &name);
 
     /*
      * May be used to reload a unit, and takes similar arguments as
      * startUnit(). Reloading is done only if the unit is already running and
      * fails otherwise.
      */
-    SDQT_EXPORT Job::Ptr reloadUnit(const QString &name, const Mode mode);
+    SDQT_EXPORT Job::Ptr reloadUnit(const SessionType &session, const QString &name, const Mode mode);
 
     /*
      * Is similar to reloadUnit() but will restart the unit. If a service is
@@ -171,23 +176,26 @@ namespace Systemd
      * flavor is used in which case a service that isn't running is not
      * affected by the restart.
      */
-    SDQT_EXPORT Job::Ptr restartUnit(const QString &name, const Mode mode);
+    SDQT_EXPORT Job::Ptr restartUnit(const SessionType &session, const QString &name, const Mode mode);
 
     /*
      * Enqeues a start job, and possibly depending jobs. Takes the unit to
      * activate, plus a mode string.
      */
-    SDQT_EXPORT Job::Ptr startUnit(const QString &name, const Mode mode);
+    SDQT_EXPORT Job::Ptr startUnit(const SessionType &session, const QString &name, const Mode mode);
 
     /*
      * Is similar to startUnit() but stops the specified unit rather than
      * starting it. Note that "isolate" mode is invalid for this call.
      */
-    SDQT_EXPORT Job::Ptr stopUnit(const QString &name, const Mode mode);
+    SDQT_EXPORT Job::Ptr stopUnit(const SessionType &session, const QString &name, const Mode mode);
 
-    SDQT_EXPORT void resetFailedUnit(const QString &name);
+    /*
+     * Resets the "failed" state of a specific unit.
+     */
+    SDQT_EXPORT void resetFailedUnit(const SessionType &session, const QString &name);
 
-    SDQT_EXPORT Notifier* notifier();
+    SDQT_EXPORT Notifier* notifier(const SessionType &session);
 }
 
 #endif

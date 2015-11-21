@@ -67,7 +67,7 @@ QList<Systemd::Logind::Seat *> Systemd::Logind::LogindPrivate::listSeats()
     if (message.type() == QDBusMessage::ReplyMessage) {
         const DBusSeatList seats = qdbus_cast<DBusSeatList>(message.arguments().first());
         Q_FOREACH(const DBusSeat seat, seats) {
-            Systemd::Logind::Seat *s = new Systemd::Logind::Seat(seat.path.path());
+            Systemd::Logind::Seat *s = new Systemd::Logind::Seat(seat.path.path(), ildface.connection());
             seatLists.append(s);
         }
     }

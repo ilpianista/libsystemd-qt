@@ -25,11 +25,23 @@ using namespace Systemd;
 const QString SystemdPrivate::SD_DBUS_SERVICE(QLatin1String("org.freedesktop.systemd1"));
 const QString SystemdPrivate::SD_DBUS_DAEMON_PATH(QLatin1String("/org/freedesktop/systemd1"));
 
-Q_GLOBAL_STATIC(Systemd::SystemdPrivate, globalSystemd)
+Q_GLOBAL_STATIC_WITH_ARGS(Systemd::SystemdPrivate, globalSystemdSystemBus, (QDBusConnection::systemBus()))
+Q_GLOBAL_STATIC_WITH_ARGS(Systemd::SystemdPrivate, globalSystemdSessionBus, (QDBusConnection::sessionBus()))
 
-SystemdPrivate::SystemdPrivate() :
+static SystemdPrivate *globalSystemd(const SessionType &sessionType)
+{
+    switch (sessionType) {
+        case User:
+            return globalSystemdSessionBus();
+        case System:
+        default:
+            return globalSystemdSystemBus();
+    }
+}
+
+SystemdPrivate::SystemdPrivate(const QDBusConnection &connection) :
     isdface(SystemdPrivate::SD_DBUS_SERVICE, SystemdPrivate::SD_DBUS_DAEMON_PATH,
-            QDBusConnection::systemBus())
+            connection)
 {
     connect(&isdface, SIGNAL(JobNew(uint,QDBusObjectPath,QString)), this,
             SLOT(onJobNew(uint,QDBusObjectPath,QString)));
@@ -90,7 +102,7 @@ Job::Ptr SystemdPrivate::getJob(const uint id)
         qDebug() << reply.error().message();
     } else if (! reply.reply().arguments().isEmpty()) {
         QString jobPath = qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
-        job = Job::Ptr(new Job(jobPath), &QObject::deleteLater);
+        job = Job::Ptr(new Job(jobPath, isdface.connection()), &QObject::deleteLater);
     }
 
     return job;
@@ -107,7 +119,7 @@ Unit::Ptr SystemdPrivate::getUnit(const QString &name)
         qDebug() << reply.error().message();
     } else if (! reply.reply().arguments().isEmpty()) {
         QString unitPath = qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
-        unit = Unit::Ptr(new Unit(unitPath), &QObject::deleteLater);
+        unit = Unit::Ptr(new Unit(unitPath, isdface.connection()), &QObject::deleteLater);
     }
 
     return unit;
@@ -124,7 +136,7 @@ Unit::Ptr SystemdPrivate::getUnitByPID(const uint pid)
         qDebug() << reply.error().message();
     } else if (! reply.reply().arguments().isEmpty()) {
         QString unitPath = qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
-        unit = Unit::Ptr(new Unit(unitPath), &QObject::deleteLater);
+        unit = Unit::Ptr(new Unit(unitPath, isdface.connection()), &QObject::deleteLater);
     }
 
     return unit;
@@ -168,7 +180,7 @@ QList<Job::Ptr> SystemdPrivate::listJobs()
         if (message.type() == QDBusMessage::ReplyMessage) {
             const ManagerDBusJobList queued = qdbus_cast<ManagerDBusJobList>(message.arguments().first());
             Q_FOREACH(const ManagerDBusJob job, queued) {
-                jobs.append(Job::Ptr(new Job(job.path.path()), &QObject::deleteLater));
+                jobs.append(Job::Ptr(new Job(job.path.path(), isdface.connection()), &QObject::deleteLater));
             }
         }
     }
@@ -192,7 +204,7 @@ QList<Unit::Ptr> SystemdPrivate::listUnits()
         if (message.type() == QDBusMessage::ReplyMessage) {
             const ManagerDBusUnitList loaded = qdbus_cast<ManagerDBusUnitList>(message.arguments().first());
             Q_FOREACH(const ManagerDBusUnit unit, loaded) {
-                units.append(Unit::Ptr(new Unit(unit.path.path()), &QObject::deleteLater));
+                units.append(Unit::Ptr(new Unit(unit.path.path(), isdface.connection()), &QObject::deleteLater));
             }
         }
     }
@@ -235,7 +247,7 @@ Unit::Ptr SystemdPrivate::loadUnit(const QString &name)
         qDebug() << reply.error().message();
     } else if (! reply.reply().arguments().isEmpty()) {
         QString unitPath = qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
-        unit = Unit::Ptr(new Unit(unitPath), &QObject::deleteLater);
+        unit = Unit::Ptr(new Unit(unitPath, isdface.connection()), &QObject::deleteLater);
     }
 
     return unit;
@@ -277,7 +289,7 @@ Job::Ptr SystemdPrivate::reloadUnit(const QString &name, const Systemd::Mode mod
         qDebug() << reply.error().message();
     } else if (! reply.reply().arguments().isEmpty()) {
         QString jobPath = qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
-        job = Job::Ptr(new Job(jobPath), &QObject::deleteLater);
+        job = Job::Ptr(new Job(jobPath, isdface.connection()), &QObject::deleteLater);
     }
 
     return job;
@@ -294,7 +306,7 @@ Job::Ptr SystemdPrivate::restartUnit(const QString &name, const Systemd::Mode mo
         qDebug() << reply.error().message();
     } else if (! reply.reply().arguments().isEmpty()) {
         QString jobPath = qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
-        job = Job::Ptr(new Job(jobPath), &QObject::deleteLater);
+        job = Job::Ptr(new Job(jobPath, isdface.connection()), &QObject::deleteLater);
     }
 
     return job;
@@ -311,7 +323,7 @@ Job::Ptr SystemdPrivate::startUnit(const QString &name, const Systemd::Mode mode
         qDebug() << reply.error().message();
     } else if (! reply.reply().arguments().isEmpty()) {
         QString jobPath = qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
-        job = Job::Ptr(new Job(jobPath), &QObject::deleteLater);
+        job = Job::Ptr(new Job(jobPath, isdface.connection()), &QObject::deleteLater);
     }
 
     return job;
@@ -328,7 +340,7 @@ Job::Ptr SystemdPrivate::stopUnit(const QString &name, const Systemd::Mode mode)
         qDebug() << reply.error().message();
     } else if (! reply.reply().arguments().isEmpty()) {
         QString jobPath = qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
-        job = Job::Ptr(new Job(jobPath), &QObject::deleteLater);
+        job = Job::Ptr(new Job(jobPath, isdface.connection()), &QObject::deleteLater);
     }
 
     return job;
@@ -382,87 +394,87 @@ Systemd::Result SystemdPrivate::stringToResult(const QString &result)
     }
 }
 
-void Systemd::disableUnitFiles(const QStringList &files, const bool runtime)
+void Systemd::disableUnitFiles(const SessionType &session, const QStringList &files, const bool runtime)
 {
-    globalSystemd()->disableUnitFiles(files, runtime);
+    globalSystemd(session)->disableUnitFiles(files, runtime);
 }
 
-void Systemd::enableUnitFiles(const QStringList &files, const bool runtime, const bool force)
+void Systemd::enableUnitFiles(const SessionType &session, const QStringList &files, const bool runtime, const bool force)
 {
-    globalSystemd()->enableUnitFiles(files, runtime, force);
+    globalSystemd(session)->enableUnitFiles(files, runtime, force);
 }
 
-Job::Ptr Systemd::getJob(const uint id)
+Job::Ptr Systemd::getJob(const SessionType &session, const uint id)
 {
-    return globalSystemd()->getJob(id);
+    return globalSystemd(session)->getJob(id);
 }
 
-Unit::Ptr Systemd::getUnit(const QString &name)
+Unit::Ptr Systemd::getUnit(const SessionType &session, const QString &name)
 {
-    return globalSystemd()->getUnit(name);
+    return globalSystemd(session)->getUnit(name);
 }
 
-Unit::Ptr Systemd::getUnitByPID(const uint pid)
+Unit::Ptr Systemd::getUnitByPID(const SessionType &session, const uint pid)
 {
-    return globalSystemd()->getUnitByPID(pid);
+    return globalSystemd(session)->getUnitByPID(pid);
 }
 
-QString getUnitFileState(const QString& file)
+QString getUnitFileState(const SessionType &session, const QString& file)
 {
-    return globalSystemd()->getUnitFileState(file);
+    return globalSystemd(session)->getUnitFileState(file);
 }
 
-void Systemd::killUnit(const QString& name, const Systemd::Who who, const int signal)
+void Systemd::killUnit(const SessionType &session, const QString& name, const Systemd::Who who, const int signal)
 {
-    return globalSystemd()->killUnit(name, who, signal);
+    return globalSystemd(session)->killUnit(name, who, signal);
 }
 
-QList<Job::Ptr> Systemd::listJobs()
+QList<Job::Ptr> Systemd::listJobs(const SessionType &session)
 {
-    return globalSystemd()->listJobs();
+    return globalSystemd(session)->listJobs();
 }
 
-QList<Unit::Ptr> Systemd::listUnits()
+QList<Unit::Ptr> Systemd::listUnits(const SessionType &session)
 {
-    return globalSystemd()->listUnits();
+    return globalSystemd(session)->listUnits();
 }
 
-QStringList Systemd::listUnitFiles()
+QStringList Systemd::listUnitFiles(const SessionType &session)
 {
-    return globalSystemd()->listUnitFiles();
+    return globalSystemd(session)->listUnitFiles();
 }
 
-Unit::Ptr Systemd::loadUnit(const QString &name)
+Unit::Ptr Systemd::loadUnit(const SessionType &session, const QString &name)
 {
-    return globalSystemd()->loadUnit(name);
+    return globalSystemd(session)->loadUnit(name);
 }
 
-Job::Ptr Systemd::reloadUnit(const QString &name, const Systemd::Mode mode)
+Job::Ptr Systemd::reloadUnit(const SessionType &session, const QString &name, const Systemd::Mode mode)
 {
-    return globalSystemd()->reloadUnit(name, mode);
+    return globalSystemd(session)->reloadUnit(name, mode);
 }
 
-Job::Ptr Systemd::restartUnit(const QString &name, const Systemd::Mode mode)
+Job::Ptr Systemd::restartUnit(const SessionType &session, const QString &name, const Systemd::Mode mode)
 {
-    return globalSystemd()->restartUnit(name, mode);
+    return globalSystemd(session)->restartUnit(name, mode);
 }
 
-Job::Ptr Systemd::startUnit(const QString &name, const Systemd::Mode mode)
+Job::Ptr Systemd::startUnit(const SessionType &session, const QString &name, const Systemd::Mode mode)
 {
-    return globalSystemd()->startUnit(name, mode);
+    return globalSystemd(session)->startUnit(name, mode);
 }
 
-Job::Ptr Systemd::stopUnit(const QString &name, const Systemd::Mode mode)
+Job::Ptr Systemd::stopUnit(const SessionType &session, const QString &name, const Systemd::Mode mode)
 {
-    return globalSystemd()->stopUnit(name, mode);
+    return globalSystemd(session)->stopUnit(name, mode);
 }
 
-void Systemd::resetFailedUnit(const QString &name)
+void Systemd::resetFailedUnit(const SessionType &session, const QString &name)
 {
-    return globalSystemd()->resetFailedUnit(name);
+    return globalSystemd(session)->resetFailedUnit(name);
 }
 
-Notifier* Systemd::notifier()
+Notifier* Systemd::notifier(const SessionType &session)
 {
-    return globalSystemd();
+    return globalSystemd(session);
 }

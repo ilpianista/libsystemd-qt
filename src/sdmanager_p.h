@@ -34,7 +34,7 @@ public:
     static const QString SD_DBUS_SERVICE;
     static const QString SD_DBUS_DAEMON_PATH;
 
-    SystemdPrivate();
+    SystemdPrivate(const QDBusConnection &connection);
     ~SystemdPrivate();
     OrgFreedesktopSystemd1ManagerInterface isdface;
 

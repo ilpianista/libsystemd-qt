@@ -20,8 +20,8 @@
 #include "job_p.h"
 #include "sdmanager_p.h"
 
-Systemd::JobPrivate::JobPrivate(const QString &path) :
-    jobIface(Systemd::SystemdPrivate::SD_DBUS_SERVICE, path, QDBusConnection::systemBus())
+Systemd::JobPrivate::JobPrivate(const QString &path, const QDBusConnection &connection) :
+    jobIface(Systemd::SystemdPrivate::SD_DBUS_SERVICE, path, connection)
 {
     id = jobIface.id();
     jobType = jobIface.jobType();
@@ -33,8 +33,8 @@ Systemd::JobPrivate::~JobPrivate()
 {
 }
 
-Systemd::Job::Job(const QString &path, QObject *parent) :
-                  QObject(parent), d_ptr(new JobPrivate(path))
+Systemd::Job::Job(const QString &path, const QDBusConnection &connection, QObject *parent) :
+                  QObject(parent), d_ptr(new JobPrivate(path, connection))
 {
 }
 

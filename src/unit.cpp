@@ -20,8 +20,8 @@
 #include "unit_p.h"
 #include "sdmanager_p.h"
 
-Systemd::UnitPrivate::UnitPrivate(const QString &path) :
-    unitIface(Systemd::SystemdPrivate::SD_DBUS_SERVICE, path, QDBusConnection::systemBus())
+Systemd::UnitPrivate::UnitPrivate(const QString &path, const QDBusConnection &connection) :
+    unitIface(Systemd::SystemdPrivate::SD_DBUS_SERVICE, path, connection)
 {
     activeEnterTimestamp = unitIface.activeEnterTimestamp();
     activeEnterTimestampMonotonic = unitIface.activeEnterTimestampMonotonic();
@@ -97,8 +97,8 @@ Systemd::UnitPrivate::~UnitPrivate()
 {
 }
 
-Systemd::Unit::Unit(const QString &path, QObject *parent) :
-                    QObject(parent), d_ptr(new UnitPrivate(path))
+Systemd::Unit::Unit(const QString &path, const QDBusConnection &connection, QObject *parent) :
+                    QObject(parent), d_ptr(new UnitPrivate(path, connection))
 {
 }
 
