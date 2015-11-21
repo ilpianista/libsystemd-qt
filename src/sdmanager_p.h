@@ -24,6 +24,8 @@
 
 #include "sdmanager.h"
 
+class QDBusConnection;
+
 namespace Systemd {
 
 class SystemdPrivate : public Notifier
@@ -34,7 +36,7 @@ public:
     static const QString SD_DBUS_SERVICE;
     static const QString SD_DBUS_DAEMON_PATH;
 
-    SystemdPrivate();
+    SystemdPrivate(const QDBusConnection &connection);
     ~SystemdPrivate();
     OrgFreedesktopSystemd1ManagerInterface isdface;
 
@@ -52,6 +54,7 @@ public:
     Job::Ptr reloadUnit(const QString &name, const Mode mode);
     Job::Ptr restartUnit(const QString &name, const Mode mode);
     Job::Ptr startUnit(const QString &name, const Mode mode);
+    Job::Ptr startTransientUnit(const QString &name, const Mode mode, const QMultiMap<QString,QVariant> &properties);
     Job::Ptr stopUnit(const QString &name, const Mode mode);
     void resetFailedUnit(const QString &name);
 
@@ -68,6 +71,19 @@ private:
     Result stringToResult(const QString &result);
     void init();
 };
+
+
+class ManagerSystemSession : public SystemdPrivate {
+public:
+    ManagerSystemSession();
+};
+
+class ManagerUserSession : public SystemdPrivate {
+public:
+    ManagerUserSession();
+};
+
+
 }
 
 #endif

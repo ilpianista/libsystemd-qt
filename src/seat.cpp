@@ -23,9 +23,6 @@
 Systemd::Logind::SeatPrivate::SeatPrivate(const QString &path) :
     seatIface(Systemd::Logind::LogindPrivate::LD_DBUS_SERVICE, path, QDBusConnection::systemBus())
 {
-    qDBusRegisterMetaType<DBusSession>;
-    qDBusRegisterMetaType<DBusSessionList>;
-
     activeSession = seatIface.activeSession();
     canGraphical = seatIface.canGraphical();
     canMultiSession = seatIface.canMultiSession();

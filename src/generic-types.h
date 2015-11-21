@@ -164,6 +164,19 @@ const QDBusArgument &operator>>(const QDBusArgument &argument, ExecuteDBusExecCo
 
 typedef struct
 {
+    QString path;
+    QList<QString> argv;
+    bool ignore;
+} UnitDBusExecCommand;
+Q_DECLARE_METATYPE(UnitDBusExecCommand)
+typedef QList<UnitDBusExecCommand> UnitDBusExecCommandList;
+Q_DECLARE_METATYPE(UnitDBusExecCommandList)
+
+QDBusArgument &operator<<(QDBusArgument &argument, const UnitDBusExecCommand &execCommand);
+const QDBusArgument &operator>>(const QDBusArgument &argument, UnitDBusExecCommand &execCommand);
+
+typedef struct
+{
     bool ignore;
     QString context;
 } ExecuteDBusSELinuxContext;

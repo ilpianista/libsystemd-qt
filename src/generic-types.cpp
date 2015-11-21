@@ -18,7 +18,31 @@
  */
 
 #include "generic-types.h"
+#include <QDBusMetaType>
 
+static int dbus_types[] = {
+    qDBusRegisterMetaType<DBusUnit>(),
+    qDBusRegisterMetaType<DBusJob>(),
+    qDBusRegisterMetaType<UnitDBusProperty>(),
+    qDBusRegisterMetaType<UnitDBusPropertyList>(),
+    qDBusRegisterMetaType<ManagerDBusAux>(),
+    qDBusRegisterMetaType<ManagerDBusAuxList>(),
+    qDBusRegisterMetaType<UnitDBusExecCommand>(),
+    qDBusRegisterMetaType<UnitDBusExecCommandList>(),
+    qDBusRegisterMetaType<ManagerDBusUnitFileChange>(),
+    qDBusRegisterMetaType<ManagerDBusUnitFileChangeList>(),
+    qDBusRegisterMetaType<ManagerDBusJob>(),
+    qDBusRegisterMetaType<ManagerDBusJobList>(),
+    qDBusRegisterMetaType<ManagerDBusUnit>(),
+    qDBusRegisterMetaType<ManagerDBusUnitList>(),
+    qDBusRegisterMetaType<ManagerDBusUnitFile>(),
+    qDBusRegisterMetaType<ManagerDBusUnitFileList>(),
+    qDBusRegisterMetaType<DBusSession>(),
+    qDBusRegisterMetaType<DBusSessionList>(),
+    qDBusRegisterMetaType<DBusSeat>(),
+    qDBusRegisterMetaType<DBusSeatList>(),
+
+};
 
 QDBusArgument& operator<<(QDBusArgument &argument, const DBusJob &job)
 {
@@ -521,16 +545,19 @@ const QDBusArgument& operator>>(const QDBusArgument &argument, UnitDBusLoadError
 QDBusArgument& operator<<(QDBusArgument &argument, const UnitDBusProperty &property)
 {
     argument.beginStructure();
-    argument << property.name << property.value.toString();
+    argument << property.name << QDBusVariant(property.value);
     argument.endStructure();
     return argument;
 }
 
 const QDBusArgument& operator>>(const QDBusArgument &argument, UnitDBusProperty &property)
 {
+    QDBusVariant value;
     argument.beginStructure();
-    argument >> property.name >> property.value;
+    argument >> property.name >> value;
     argument.endStructure();
+
+    property.value = value.variant();
     return argument;
 }
 
@@ -546,6 +573,24 @@ const QDBusArgument& operator>>(const QDBusArgument &argument, ManagerDBusAux &a
 {
     argument.beginStructure();
     argument >> aux.name >> aux.properties;
+    argument.endStructure();
+    return argument;
+}
+
+
+QDBusArgument &operator<<(QDBusArgument &argument, const UnitDBusExecCommand &execCommand)
+{
+    argument.beginStructure();
+    argument << execCommand.path << execCommand.argv << execCommand.ignore;
+    argument.endStructure();
+    return argument;
+}
+
+
+const QDBusArgument &operator>>(const QDBusArgument &argument, UnitDBusExecCommand &execCommand)
+{
+    argument.beginStructure();
+    argument >> execCommand.path >> execCommand.argv >> execCommand.ignore;
     argument.endStructure();
     return argument;
 }

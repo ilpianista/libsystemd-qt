@@ -30,7 +30,7 @@ class JobPrivate
 {
 
 public:
-    explicit JobPrivate(const QString &path);
+    explicit JobPrivate(const QString &path, const QDBusConnection &connection);
     virtual ~JobPrivate();
 
     OrgFreedesktopSystemd1JobInterface jobIface;

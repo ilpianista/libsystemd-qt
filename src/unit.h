@@ -25,6 +25,7 @@
 
 #include "QtSystemd-export.h"
 
+class QDBusConnection;
 namespace Systemd {
 
 class UnitPrivate;
@@ -37,7 +38,7 @@ class SDQT_EXPORT Unit : public QObject
 public:
     typedef QSharedPointer<Unit> Ptr;
 
-    explicit Unit(const QString &path, QObject *parent = 0);
+    explicit Unit(const QString &path, const QDBusConnection &connection, QObject *parent = 0);
     explicit Unit(UnitPrivate &unit, QObject *parent = 0);
     virtual ~Unit();
 
