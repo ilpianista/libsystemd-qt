@@ -47,6 +47,8 @@ SystemdPrivate::SystemdPrivate(const QDBusConnection &connection) :
             SLOT(onJobNew(uint,QDBusObjectPath,QString)));
     connect(&isdface, SIGNAL(JobRemoved(uint,QDBusObjectPath,QString,QString)), this,
             SLOT(onJobRemoved(uint,QDBusObjectPath,QString,QString)));
+    connect(&isdface, SIGNAL(Reloading(bool)), this,
+            SLOT(onReloading(bool)));
     connect(&isdface, SIGNAL(UnitNew(QString,QDBusObjectPath)), this,
             SLOT(onUnitNew(QString,QDBusObjectPath)));
     connect(&isdface, SIGNAL(UnitRemoved(QString,QDBusObjectPath)), this,
@@ -65,6 +67,26 @@ void SystemdPrivate::init()
 {
     qDBusRegisterMetaType<DBusUnit>();
     qDBusRegisterMetaType<DBusJob>();
+}
+
+void SystemdPrivate::cancelJob(const uint id)
+{
+    QDBusPendingReply<void> reply = isdface.CancelJob(id);
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+    }
+}
+
+void SystemdPrivate::clearJobs()
+{
+    QDBusPendingReply<void> reply = isdface.ClearJobs();
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+    }
 }
 
 void SystemdPrivate::disableUnitFiles(const QStringList &files, const bool runtime)
@@ -263,6 +285,11 @@ void SystemdPrivate::onJobRemoved(const uint id, const QDBusObjectPath &job, con
     emit Notifier::jobRemoved(job.path(), unit, stringToResult(result));
 }
 
+void SystemdPrivate::onReloading(const bool active)
+{
+    emit Notifier::reloading(active);
+}
+
 void SystemdPrivate::onUnitNew(const QString &id, const QDBusObjectPath &unit)
 {
     emit Notifier::unitNew(unit.path());
@@ -276,6 +303,26 @@ void SystemdPrivate::onUnitRemoved(const QString &id, const QDBusObjectPath &uni
 void SystemdPrivate::onUnitFilesChanged()
 {
     emit Notifier::unitFilesChanged();
+}
+
+void SystemdPrivate::reexecute()
+{
+    QDBusPendingReply<void> reply = isdface.Reexecute();
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+    }
+}
+
+void SystemdPrivate::reload()
+{
+    QDBusPendingReply<void> reply = isdface.Reload();
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+    }
 }
 
 Job::Ptr SystemdPrivate::reloadUnit(const QString &name, const Unit::Mode mode)
@@ -346,13 +393,24 @@ Job::Ptr SystemdPrivate::stopUnit(const QString &name, const Unit::Mode mode)
     return job;
 }
 
-void SystemdPrivate::resetFailedUnit(const QString& name)
+void SystemdPrivate::resetFailed()
 {
-    QDBusPendingReply<QDBusObjectPath> reply = isdface.ResetFailedUnit(name);
+    QDBusPendingReply<void> reply = isdface.ResetFailed();
     reply.waitForFinished();
 
-    if (reply.isError())
+    if (reply.isError()) {
         qDebug() << reply.error().message();
+    }
+}
+
+void SystemdPrivate::resetFailedUnit(const QString& name)
+{
+    QDBusPendingReply<void> reply = isdface.ResetFailedUnit(name);
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+    }
 }
 
 QString SystemdPrivate::modeToString(const Unit::Mode mode)
@@ -392,6 +450,16 @@ Unit::Result SystemdPrivate::stringToResult(const QString &result)
     } else { // "done"
         return Unit::Done;
     }
+}
+
+void Systemd::cancelJob(const SessionType &session, const uint id)
+{
+    globalSystemd(session)->cancelJob(id);
+}
+
+void Systemd::clearJobs(const SessionType &session)
+{
+    globalSystemd(session)->clearJobs();
 }
 
 void Systemd::disableUnitFiles(const SessionType &session, const QStringList &files, const bool runtime)
@@ -449,6 +517,16 @@ Unit::Ptr Systemd::loadUnit(const SessionType &session, const QString &name)
     return globalSystemd(session)->loadUnit(name);
 }
 
+void Systemd::reexecute(const SessionType &session)
+{
+    return globalSystemd(session)->reexecute();
+}
+
+void Systemd::reload(const SessionType &session)
+{
+    return globalSystemd(session)->reload();
+}
+
 Job::Ptr Systemd::reloadUnit(const SessionType &session, const QString &name, const Unit::Mode mode)
 {
     return globalSystemd(session)->reloadUnit(name, mode);
@@ -467,6 +545,11 @@ Job::Ptr Systemd::startUnit(const SessionType &session, const QString &name, con
 Job::Ptr Systemd::stopUnit(const SessionType &session, const QString &name, const Unit::Mode mode)
 {
     return globalSystemd(session)->stopUnit(name, mode);
+}
+
+void Systemd::resetFailed(const SessionType &session)
+{
+    return globalSystemd(session)->resetFailed();
 }
 
 void Systemd::resetFailedUnit(const SessionType &session, const QString &name)

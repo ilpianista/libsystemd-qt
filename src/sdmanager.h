@@ -57,6 +57,13 @@ namespace Systemd
         void jobRemoved(const QString &jobPath, const QString &unit, const Unit::Result result);
 
         /*
+         * Is sent out immediately before a daemon reload is done (with the
+         * boolean parameter set to True) and after a daemon reload is completed
+         * (with the boolean parameter set to False).
+         */
+        void reloading(const bool active);
+
+        /*
          * Sent out each time a new unit is loaded.
          */
         void unitNew(const QString &unitPath);
@@ -74,6 +81,22 @@ namespace Systemd
     };
 
     // See http://www.freedesktop.org/wiki/Software/systemd/dbus for more info.
+
+    /*
+     * Cancels a specific job identified by its numer ID. This operation is also
+     * available in the Cancel() method of Job objects (see below), and exists
+     * primarily to reduce the necessary round trips to execute this operation.
+     * Note that this will not have any effect on jobs whose execution has
+     * already begun.
+     */
+    SDQT_EXPORT void cancelJob(const SessionType &session, const uint id);
+
+    /*
+     * Flushes the job queue, removing all jobs that are still queued. Note that
+     * this does not have any effect on jobs whose execution has already begun,
+     * it only flushes jobs that are queued and have not yet begun execution.
+     */
+    SDQT_EXPORT void clearJobs(const SessionType &session);
 
     /*
      * Disables one or more units in the system, i.e. removes all symlinks to
@@ -141,11 +164,33 @@ namespace Systemd
     SDQT_EXPORT Unit::Ptr loadUnit(const SessionType &session, const QString &name);
 
     /*
+     * May be invoked to reexecute the main manager process. It will serialize
+     * its state, reexecute, and deserizalize the state again. This is useful
+     * for upgrades and is a more comprehensive version of Reload().
+     */
+    SDQT_EXPORT void reexecute(const SessionType &session);
+
+    /*
+     * May be invoked to reload all unit files.
+     */
+    SDQT_EXPORT void reload(const SessionType &session);
+
+    /*
      * May be used to reload a unit, and takes similar arguments as
      * startUnit(). Reloading is done only if the unit is already running and
      * fails otherwise.
      */
     SDQT_EXPORT Job::Ptr reloadUnit(const SessionType &session, const QString &name, const Unit::Mode mode);
+
+    /*
+     * Resets the "failed" state of all units.
+     */
+    SDQT_EXPORT void resetFailed(const SessionType &session);
+
+    /*
+     * Resets the "failed" state of a specific unit.
+     */
+    SDQT_EXPORT void resetFailedUnit(const SessionType &session, const QString &name);
 
     /*
      * Is similar to reloadUnit() but will restart the unit. If a service is
@@ -166,11 +211,6 @@ namespace Systemd
      * starting it. Note that "isolate" mode is invalid for this call.
      */
     SDQT_EXPORT Job::Ptr stopUnit(const SessionType &session, const QString &name, const Unit::Mode mode);
-
-    /*
-     * Resets the "failed" state of a specific unit.
-     */
-    SDQT_EXPORT void resetFailedUnit(const SessionType &session, const QString &name);
 
     SDQT_EXPORT Notifier* notifier(const SessionType &session);
 }

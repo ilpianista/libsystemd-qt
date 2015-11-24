@@ -38,6 +38,8 @@ public:
     ~SystemdPrivate();
     OrgFreedesktopSystemd1ManagerInterface isdface;
 
+    void cancelJob(const uint id);
+    void clearJobs();
     void disableUnitFiles(const QStringList &files, const bool runtime);
     void enableUnitFiles(const QStringList &files, const bool runtime, const bool force);
     Job::Ptr getJob(const uint id);
@@ -49,15 +51,19 @@ public:
     QList<Unit::Ptr> listUnits();
     QStringList listUnitFiles();
     Unit::Ptr loadUnit(const QString &name);
+    void reexecute();
+    void reload();
     Job::Ptr reloadUnit(const QString &name, const Unit::Mode mode);
+    void resetFailed();
+    void resetFailedUnit(const QString &name);
     Job::Ptr restartUnit(const QString &name, const Unit::Mode mode);
     Job::Ptr startUnit(const QString &name, const Unit::Mode mode);
     Job::Ptr stopUnit(const QString &name, const Unit::Mode mode);
-    void resetFailedUnit(const QString &name);
 
 protected Q_SLOTS:
     void onJobNew(const uint id, const QDBusObjectPath &job, const QString &unit);
     void onJobRemoved(const uint id, const QDBusObjectPath &job, const QString &unit, const QString &result);
+    void onReloading(const bool active);
     void onUnitNew(const QString &id, const QDBusObjectPath &unit);
     void onUnitRemoved(const QString &id, const QDBusObjectPath &unit);
     void onUnitFilesChanged();
