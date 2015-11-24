@@ -176,7 +176,7 @@ QString SystemdPrivate::getUnitFileState(const QString& file)
     return qdbus_cast<QString>(reply.reply().arguments().first());
 }
 
-void SystemdPrivate::killUnit(const QString& name, const Unit::Who who, const int signal)
+void SystemdPrivate::killUnit(const QString& name, const Unit::Who &who, const int signal)
 {
     QDBusPendingReply<void> reply = isdface.KillUnit(name, whoToString(who), signal);
     reply.waitForFinished();
@@ -325,7 +325,7 @@ void SystemdPrivate::reload()
     }
 }
 
-Job::Ptr SystemdPrivate::reloadUnit(const QString &name, const Unit::Mode mode)
+Job::Ptr SystemdPrivate::reloadUnit(const QString &name, const Unit::Mode &mode)
 {
     Job::Ptr job;
 
@@ -342,7 +342,7 @@ Job::Ptr SystemdPrivate::reloadUnit(const QString &name, const Unit::Mode mode)
     return job;
 }
 
-Job::Ptr SystemdPrivate::restartUnit(const QString &name, const Unit::Mode mode)
+Job::Ptr SystemdPrivate::restartUnit(const QString &name, const Unit::Mode &mode)
 {
     Job::Ptr job;
 
@@ -359,7 +359,34 @@ Job::Ptr SystemdPrivate::restartUnit(const QString &name, const Unit::Mode mode)
     return job;
 }
 
-Job::Ptr SystemdPrivate::startUnit(const QString &name, const Unit::Mode mode)
+void SystemdPrivate::setUnitProperties(const QString &name, const bool runtime, const QVariantMap &properties)
+{
+    QDBusPendingReply<void> reply = isdface.SetUnitProperties(name, runtime, properties);
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+    }
+}
+
+Job::Ptr SystemdPrivate::startTransientUnit(const QString &name, const Unit::Mode &mode, const QVariantMap &properties)
+{
+    Job::Ptr job;
+
+    QDBusPendingReply<QDBusObjectPath> reply = isdface.StartTransientUnit(name, modeToString(mode), properties, ManagerDBusAuxList());
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+    } else if (! reply.reply().arguments().isEmpty()) {
+        QString jobPath = qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
+        job = Job::Ptr(new Job(jobPath, isdface.connection()), &QObject::deleteLater);
+    }
+
+    return job;
+}
+
+Job::Ptr SystemdPrivate::startUnit(const QString &name, const Unit::Mode &mode)
 {
     Job::Ptr job;
 
@@ -376,7 +403,7 @@ Job::Ptr SystemdPrivate::startUnit(const QString &name, const Unit::Mode mode)
     return job;
 }
 
-Job::Ptr SystemdPrivate::stopUnit(const QString &name, const Unit::Mode mode)
+Job::Ptr SystemdPrivate::stopUnit(const QString &name, const Unit::Mode &mode)
 {
     Job::Ptr job;
 
@@ -413,7 +440,7 @@ void SystemdPrivate::resetFailedUnit(const QString& name)
     }
 }
 
-QString SystemdPrivate::modeToString(const Unit::Mode mode)
+QString SystemdPrivate::modeToString(const Unit::Mode &mode) const
 {
     switch(mode) {
         case Unit::Fail: return "fail";
@@ -425,7 +452,7 @@ QString SystemdPrivate::modeToString(const Unit::Mode mode)
     }
 }
 
-QString SystemdPrivate::whoToString(const Unit::Who who)
+QString SystemdPrivate::whoToString(const Unit::Who &who) const
 {
     switch(who) {
         case Unit::All: return "all";
@@ -487,12 +514,12 @@ Unit::Ptr Systemd::getUnitByPID(const SessionType &session, const uint pid)
     return globalSystemd(session)->getUnitByPID(pid);
 }
 
-QString getUnitFileState(const SessionType &session, const QString& file)
+QString getUnitFileState(const SessionType &session, const QString &file)
 {
     return globalSystemd(session)->getUnitFileState(file);
 }
 
-void Systemd::killUnit(const SessionType &session, const QString& name, const Unit::Who who, const int signal)
+void Systemd::killUnit(const SessionType &session, const QString &name, const Unit::Who &who, const int signal)
 {
     return globalSystemd(session)->killUnit(name, who, signal);
 }
@@ -527,22 +554,32 @@ void Systemd::reload(const SessionType &session)
     return globalSystemd(session)->reload();
 }
 
-Job::Ptr Systemd::reloadUnit(const SessionType &session, const QString &name, const Unit::Mode mode)
+Job::Ptr Systemd::reloadUnit(const SessionType &session, const QString &name, const Unit::Mode &mode)
 {
     return globalSystemd(session)->reloadUnit(name, mode);
 }
 
-Job::Ptr Systemd::restartUnit(const SessionType &session, const QString &name, const Unit::Mode mode)
+Job::Ptr Systemd::restartUnit(const SessionType &session, const QString &name, const Unit::Mode &mode)
 {
     return globalSystemd(session)->restartUnit(name, mode);
 }
 
-Job::Ptr Systemd::startUnit(const SessionType &session, const QString &name, const Unit::Mode mode)
+void Systemd::setUnitProperties(const SessionType &session, const QString &name, const bool runtime, const QVariantMap &properties)
+{
+    globalSystemd(session)->setUnitProperties(name, runtime, properties);
+}
+
+Job::Ptr Systemd::startTransientUnit(const SessionType &session, const QString &name, const Unit::Mode &mode, const QVariantMap &properties)
+{
+    return globalSystemd(session)->startTransientUnit(name, mode, properties);
+}
+
+Job::Ptr Systemd::startUnit(const SessionType &session, const QString &name, const Unit::Mode &mode)
 {
     return globalSystemd(session)->startUnit(name, mode);
 }
 
-Job::Ptr Systemd::stopUnit(const SessionType &session, const QString &name, const Unit::Mode mode)
+Job::Ptr Systemd::stopUnit(const SessionType &session, const QString &name, const Unit::Mode &mode)
 {
     return globalSystemd(session)->stopUnit(name, mode);
 }

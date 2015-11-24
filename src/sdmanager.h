@@ -137,7 +137,7 @@ namespace Systemd
     /*
      * May be used to kill (i.e. send a signal to) all processes of a unit.
      */
-    SDQT_EXPORT void killUnit(const SessionType &session, const QString &name, const Unit::Who who, const int signal);
+    SDQT_EXPORT void killUnit(const SessionType &session, const QString &name, const Unit::Who &who, const int signal);
 
     /*
      * Returns an array with all currently queued jobs.
@@ -180,7 +180,7 @@ namespace Systemd
      * startUnit(). Reloading is done only if the unit is already running and
      * fails otherwise.
      */
-    SDQT_EXPORT Job::Ptr reloadUnit(const SessionType &session, const QString &name, const Unit::Mode mode);
+    SDQT_EXPORT Job::Ptr reloadUnit(const SessionType &session, const QString &name, const Unit::Mode &mode);
 
     /*
      * Resets the "failed" state of all units.
@@ -198,19 +198,33 @@ namespace Systemd
      * flavor is used in which case a service that isn't running is not
      * affected by the restart.
      */
-    SDQT_EXPORT Job::Ptr restartUnit(const SessionType &session, const QString &name, const Unit::Mode mode);
+    SDQT_EXPORT Job::Ptr restartUnit(const SessionType &session, const QString &name, const Unit::Mode &mode);
+
+    /*
+     * May be used to modify certain unit properties at runtime. Not all
+     * properties may be changed at runtime, but many resource management
+     * settings may.
+     */
+    SDQT_EXPORT void setUnitProperties(const SessionType &session, const QString &name, const bool runtime, const QVariantMap &properties);
+
+    /*
+     * May be used to create and start a transient unit, which will be released
+     * as soon as it is not running or referenced anymore or the system is
+     * rebooted.
+     */
+    SDQT_EXPORT Job::Ptr startTransientUnit(const SessionType &session, const QString &name, const Unit::Mode &mode, const QVariantMap &properties);
 
     /*
      * Enqeues a start job, and possibly depending jobs. Takes the unit to
      * activate, plus a mode string.
      */
-    SDQT_EXPORT Job::Ptr startUnit(const SessionType &session, const QString &name, const Unit::Mode mode);
+    SDQT_EXPORT Job::Ptr startUnit(const SessionType &session, const QString &name, const Unit::Mode &mode);
 
     /*
      * Is similar to startUnit() but stops the specified unit rather than
      * starting it. Note that "isolate" mode is invalid for this call.
      */
-    SDQT_EXPORT Job::Ptr stopUnit(const SessionType &session, const QString &name, const Unit::Mode mode);
+    SDQT_EXPORT Job::Ptr stopUnit(const SessionType &session, const QString &name, const Unit::Mode &mode);
 
     SDQT_EXPORT Notifier* notifier(const SessionType &session);
 }

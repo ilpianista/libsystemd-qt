@@ -46,19 +46,21 @@ public:
     Unit::Ptr getUnit(const QString &name);
     Unit::Ptr getUnitByPID(const uint pid);
     QString getUnitFileState(const QString &file);
-    void killUnit(const QString &name, const Unit::Who who, const int signal);
+    void killUnit(const QString &name, const Unit::Who &who, const int signal);
     QList<Job::Ptr> listJobs();
     QList<Unit::Ptr> listUnits();
     QStringList listUnitFiles();
     Unit::Ptr loadUnit(const QString &name);
     void reexecute();
     void reload();
-    Job::Ptr reloadUnit(const QString &name, const Unit::Mode mode);
+    Job::Ptr reloadUnit(const QString &name, const Unit::Mode &mode);
     void resetFailed();
     void resetFailedUnit(const QString &name);
-    Job::Ptr restartUnit(const QString &name, const Unit::Mode mode);
-    Job::Ptr startUnit(const QString &name, const Unit::Mode mode);
-    Job::Ptr stopUnit(const QString &name, const Unit::Mode mode);
+    Job::Ptr restartUnit(const QString &name, const Unit::Mode &mode);
+    void setUnitProperties(const QString &name, const bool runtime, const QVariantMap &properties);
+    Job::Ptr startTransientUnit(const QString &name, const Unit::Mode &mode, const QVariantMap &properties);
+    Job::Ptr startUnit(const QString &name, const Unit::Mode &mode);
+    Job::Ptr stopUnit(const QString &name, const Unit::Mode &mode);
 
 protected Q_SLOTS:
     void onJobNew(const uint id, const QDBusObjectPath &job, const QString &unit);
@@ -69,8 +71,8 @@ protected Q_SLOTS:
     void onUnitFilesChanged();
 
 private:
-    QString modeToString(const Unit::Mode mode);
-    QString whoToString(const Unit::Who mode);
+    QString modeToString(const Unit::Mode &mode) const;
+    QString whoToString(const Unit::Who &mode) const;
     Unit::Result stringToResult(const QString &result);
     void init();
 };
