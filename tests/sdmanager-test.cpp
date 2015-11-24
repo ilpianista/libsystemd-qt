@@ -102,7 +102,7 @@ public:
         const QString unitName("lm_sensors.service");
 
         qDebug() << "Reloading unit:" << unitName;
-        qDebug() << Systemd::reloadUnit(Systemd::System, unitName, Systemd::Replace);
+        qDebug() << Systemd::reloadUnit(Systemd::System, unitName, Unit::Replace);
     }
 
     static void restartUnit()
@@ -110,7 +110,7 @@ public:
         const QString unitName("lm_sensors.service");
 
         qDebug() << "Restaring unit:" << unitName;
-        qDebug() << Systemd::restartUnit(Systemd::System, unitName, Systemd::Replace);
+        qDebug() << Systemd::restartUnit(Systemd::System, unitName, Unit::Replace);
     }
 
     static void startUnit()
@@ -118,7 +118,7 @@ public:
         const QString unitName("lm_sensors.service");
 
         qDebug() << "Starting unit:" << unitName;
-        qDebug() << Systemd::startUnit(Systemd::System, unitName, Systemd::Replace);
+        qDebug() << Systemd::startUnit(Systemd::System, unitName, Unit::Replace);
     }
 
     static void stopUnit()
@@ -126,7 +126,7 @@ public:
         const QString unitName("lm_sensors.service");
 
         qDebug() << "Stopping unit:" << unitName;
-        qDebug() << Systemd::stopUnit(Systemd::System, unitName, Systemd::Replace);
+        qDebug() << Systemd::stopUnit(Systemd::System, unitName, Unit::Replace);
     }
 };
 

@@ -154,7 +154,7 @@ QString SystemdPrivate::getUnitFileState(const QString& file)
     return qdbus_cast<QString>(reply.reply().arguments().first());
 }
 
-void SystemdPrivate::killUnit(const QString& name, const Who who, const int signal)
+void SystemdPrivate::killUnit(const QString& name, const Unit::Who who, const int signal)
 {
     QDBusPendingReply<void> reply = isdface.KillUnit(name, whoToString(who), signal);
     reply.waitForFinished();
@@ -278,7 +278,7 @@ void SystemdPrivate::onUnitFilesChanged()
     emit Notifier::unitFilesChanged();
 }
 
-Job::Ptr SystemdPrivate::reloadUnit(const QString &name, const Systemd::Mode mode)
+Job::Ptr SystemdPrivate::reloadUnit(const QString &name, const Unit::Mode mode)
 {
     Job::Ptr job;
 
@@ -295,7 +295,7 @@ Job::Ptr SystemdPrivate::reloadUnit(const QString &name, const Systemd::Mode mod
     return job;
 }
 
-Job::Ptr SystemdPrivate::restartUnit(const QString &name, const Systemd::Mode mode)
+Job::Ptr SystemdPrivate::restartUnit(const QString &name, const Unit::Mode mode)
 {
     Job::Ptr job;
 
@@ -312,7 +312,7 @@ Job::Ptr SystemdPrivate::restartUnit(const QString &name, const Systemd::Mode mo
     return job;
 }
 
-Job::Ptr SystemdPrivate::startUnit(const QString &name, const Systemd::Mode mode)
+Job::Ptr SystemdPrivate::startUnit(const QString &name, const Unit::Mode mode)
 {
     Job::Ptr job;
 
@@ -329,7 +329,7 @@ Job::Ptr SystemdPrivate::startUnit(const QString &name, const Systemd::Mode mode
     return job;
 }
 
-Job::Ptr SystemdPrivate::stopUnit(const QString &name, const Systemd::Mode mode)
+Job::Ptr SystemdPrivate::stopUnit(const QString &name, const Unit::Mode mode)
 {
     Job::Ptr job;
 
@@ -355,42 +355,42 @@ void SystemdPrivate::resetFailedUnit(const QString& name)
         qDebug() << reply.error().message();
 }
 
-QString SystemdPrivate::modeToString(const Systemd::Mode mode)
+QString SystemdPrivate::modeToString(const Unit::Mode mode)
 {
     switch(mode) {
-        case Systemd::Fail: return "fail";
-        case Systemd::IgnoreDependencies: return "ignore-dependencies";
-        case Systemd::IgnoreRequirements: return "ignore-requirements";
-        case Systemd::Isolate: return "isolate";
-        case Systemd::Replace: return "replace";
+        case Unit::Fail: return "fail";
+        case Unit::IgnoreDependencies: return "ignore-dependencies";
+        case Unit::IgnoreRequirements: return "ignore-requirements";
+        case Unit::Isolate: return "isolate";
+        case Unit::Replace: return "replace";
         default: return QString();
     }
 }
 
-QString SystemdPrivate::whoToString(const Systemd::Who who)
+QString SystemdPrivate::whoToString(const Unit::Who who)
 {
     switch(who) {
-        case Systemd::All: return "all";
-        case Systemd::Control: return "control";
-        case Systemd::Main: return "main";
+        case Unit::All: return "all";
+        case Unit::Control: return "control";
+        case Unit::Main: return "main";
         default: return QString();
     }
 }
 
-Systemd::Result SystemdPrivate::stringToResult(const QString &result)
+Unit::Result SystemdPrivate::stringToResult(const QString &result)
 {
     if ( result == "canceled" ) {
-        return Systemd::Canceled;
+        return Unit::Canceled;
     } else if ( result == "dependency" ) {
-        return Systemd::Dependency;
+        return Unit::Dependency;
     } else if ( result == "failed" ) {
-        return Systemd::Failed;
+        return Unit::Failed;
     } else if ( result == "skipped" ) {
-        return Systemd::Skipped;
+        return Unit::Skipped;
     } else if ( result == "timeout" ) {
-        return Systemd::Timeout;
+        return Unit::Timeout;
     } else { // "done"
-        return Systemd::Done;
+        return Unit::Done;
     }
 }
 
@@ -424,7 +424,7 @@ QString getUnitFileState(const SessionType &session, const QString& file)
     return globalSystemd(session)->getUnitFileState(file);
 }
 
-void Systemd::killUnit(const SessionType &session, const QString& name, const Systemd::Who who, const int signal)
+void Systemd::killUnit(const SessionType &session, const QString& name, const Unit::Who who, const int signal)
 {
     return globalSystemd(session)->killUnit(name, who, signal);
 }
@@ -449,22 +449,22 @@ Unit::Ptr Systemd::loadUnit(const SessionType &session, const QString &name)
     return globalSystemd(session)->loadUnit(name);
 }
 
-Job::Ptr Systemd::reloadUnit(const SessionType &session, const QString &name, const Systemd::Mode mode)
+Job::Ptr Systemd::reloadUnit(const SessionType &session, const QString &name, const Unit::Mode mode)
 {
     return globalSystemd(session)->reloadUnit(name, mode);
 }
 
-Job::Ptr Systemd::restartUnit(const SessionType &session, const QString &name, const Systemd::Mode mode)
+Job::Ptr Systemd::restartUnit(const SessionType &session, const QString &name, const Unit::Mode mode)
 {
     return globalSystemd(session)->restartUnit(name, mode);
 }
 
-Job::Ptr Systemd::startUnit(const SessionType &session, const QString &name, const Systemd::Mode mode)
+Job::Ptr Systemd::startUnit(const SessionType &session, const QString &name, const Unit::Mode mode)
 {
     return globalSystemd(session)->startUnit(name, mode);
 }
 
-Job::Ptr Systemd::stopUnit(const SessionType &session, const QString &name, const Systemd::Mode mode)
+Job::Ptr Systemd::stopUnit(const SessionType &session, const QString &name, const Unit::Mode mode)
 {
     return globalSystemd(session)->stopUnit(name, mode);
 }

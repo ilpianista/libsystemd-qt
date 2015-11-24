@@ -37,6 +37,30 @@ class SDQT_EXPORT Unit : public QObject
     Q_DECLARE_PRIVATE(Unit)
 
 public:
+
+    enum Mode {
+        Replace,
+        Fail,
+        Isolate,
+        IgnoreDependencies,
+        IgnoreRequirements
+    };
+
+    enum Result {
+        Done,
+        Canceled,
+        Timeout,
+        Failed,
+        Dependency,
+        Skipped
+    };
+
+    enum Who {
+        Main,
+        Control,
+        All
+    };
+
     typedef QSharedPointer<Unit> Ptr;
 
     explicit Unit(const QString &path, const QDBusConnection &connection, QObject *parent = 0);
