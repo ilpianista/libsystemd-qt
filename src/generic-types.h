@@ -22,8 +22,6 @@
 
 #include <QDBusArgument>
 
-Q_DECLARE_METATYPE(QVariantMap)
-
 typedef struct
 {
     uint id;
@@ -210,18 +208,6 @@ const QDBusArgument &operator>>(const QDBusArgument &argument, LoginDBusSchedule
 
 typedef struct
 {
-    QString name;
-    QVariant value;
-} LoginDBusScopeProperty;
-Q_DECLARE_METATYPE(LoginDBusScopeProperty)
-typedef QList<LoginDBusScopeProperty> LoginDBusScopePropertyList;
-Q_DECLARE_METATYPE(LoginDBusScopePropertyList)
-
-QDBusArgument &operator<<(QDBusArgument &argument, const LoginDBusScopeProperty &scopeProperty);
-const QDBusArgument &operator>>(const QDBusArgument &argument, LoginDBusScopeProperty &scopeProperty);
-
-typedef struct
-{
     QString id;
     quint32 uid;
     QString name;
@@ -402,19 +388,7 @@ const QDBusArgument &operator>>(const QDBusArgument &argument, UnitDBusLoadError
 typedef struct
 {
     QString name;
-    QVariant value;
-} UnitDBusProperty;
-Q_DECLARE_METATYPE(UnitDBusProperty)
-typedef QList<UnitDBusProperty> UnitDBusPropertyList;
-Q_DECLARE_METATYPE(UnitDBusPropertyList);
-
-QDBusArgument &operator<<(QDBusArgument &argument, const UnitDBusProperty &property);
-const QDBusArgument &operator>>(const QDBusArgument &argument, UnitDBusProperty &property);
-
-typedef struct
-{
-    QString name;
-    UnitDBusPropertyList properties;
+    QVariantMap properties;
 } ManagerDBusAux;
 Q_DECLARE_METATYPE(ManagerDBusAux)
 typedef QList<ManagerDBusAux> ManagerDBusAuxList;

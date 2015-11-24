@@ -295,20 +295,20 @@
    <arg type="s" direction="in"/>
   </method>
   <method name="SetUnitProperties">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="UnitDBusPropertyList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="QVariantMap"/>
    <arg type="s" direction="in"/>
    <arg type="b" direction="in"/>
    <arg type="a(sv)" direction="in">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="UnitDBusPropertyList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="QVariantMap"/>
    </arg>
   </method>
   <method name="StartTransientUnit">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="UnitDBusPropertyList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="QVariantMap"/>
    <annotation name="org.qtproject.QtDBus.QtTypeName.In3" value="ManagerDBusAuxList"/>
    <arg type="s" direction="in"/>
    <arg type="s" direction="in"/>
    <arg type="a(sv)" direction="in">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="UnitDBusPropertyList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.In2" value="QVariantMap"/>
    </arg>
    <arg type="a(sa(sv))" direction="in">
     <annotation name="org.qtproject.QtDBus.QtTypeName.In3" value="ManagerDBusAuxList"/>

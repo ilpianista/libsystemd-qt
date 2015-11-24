@@ -120,7 +120,7 @@
    </arg>
   </method>
   <method name="CreateSession">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.In13" value="LoginDBusScopePropertyList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName.In13" value="QVariantMap"/>
    <arg type="u" direction="in"/>
    <arg type="u" direction="in"/>
    <arg type="s" direction="in"/>
@@ -135,7 +135,7 @@
    <arg type="s" direction="in"/>
    <arg type="s" direction="in"/>
    <arg type="a(sv)" direction="in">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.In13" value="LoginDBusScopePropertyList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.In13" value="QVariantMap"/>
    </arg>
    <arg type="s" direction="out"/>
    <arg type="o" direction="out"/>

@@ -282,22 +282,6 @@ const QDBusArgument& operator>>(const QDBusArgument &argument, LoginDBusSchedule
     return argument;
 }
 
-QDBusArgument& operator<<(QDBusArgument &argument, const LoginDBusScopeProperty &scopeProperty)
-{
-    argument.beginStructure();
-    argument << scopeProperty.name << QDBusVariant(scopeProperty.value);
-    argument.endStructure();
-    return argument;
-}
-
-const QDBusArgument& operator>>(const QDBusArgument &argument, LoginDBusScopeProperty &scopeProperty)
-{
-    argument.beginStructure();
-    argument >> scopeProperty.name >> scopeProperty.value;
-    argument.endStructure();
-    return argument;
-}
-
 QDBusArgument& operator<<(QDBusArgument &argument, const LoginDBusSession &session)
 {
     argument.beginStructure();
@@ -514,22 +498,6 @@ const QDBusArgument& operator>>(const QDBusArgument &argument, UnitDBusLoadError
 {
     argument.beginStructure();
     argument >> loadError.name >> loadError.message;
-    argument.endStructure();
-    return argument;
-}
-
-QDBusArgument& operator<<(QDBusArgument &argument, const UnitDBusProperty &property)
-{
-    argument.beginStructure();
-    argument << property.name << QDBusVariant(property.value);
-    argument.endStructure();
-    return argument;
-}
-
-const QDBusArgument& operator>>(const QDBusArgument &argument, UnitDBusProperty &property)
-{
-    argument.beginStructure();
-    argument >> property.name >> property.value;
     argument.endStructure();
     return argument;
 }

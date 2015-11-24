@@ -231,10 +231,10 @@
   <method name="ResetFailed">
   </method>
   <method name="SetProperties">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="UnitDBusPropertyList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="QVariantMap"/>
    <arg type="b" direction="in"/>
    <arg type="a(sv)" direction="in">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="UnitDBusPropertyList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.In1" value="QVariantMap"/>
    </arg>
   </method>
  </interface>
