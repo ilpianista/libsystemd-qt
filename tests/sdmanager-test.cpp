@@ -24,7 +24,8 @@
 
 using namespace Systemd;
 
-class SDManagerTest {
+class SDManagerTest
+{
 public:
     static void disableUnitFiles()
     {
@@ -67,7 +68,7 @@ public:
     static void listJobs()
     {
         qDebug() << "Listing jobs:";
-        Q_FOREACH(const Job::Ptr &job, Systemd::listJobs(Systemd::System)) {
+        Q_FOREACH (const Job::Ptr &job, Systemd::listJobs(Systemd::System)) {
             qDebug() << "\t" << job->id();
         }
     }
@@ -75,7 +76,7 @@ public:
     static void listUnits()
     {
         qDebug() << "Listing units:";
-        Q_FOREACH(const Unit::Ptr &unit, Systemd::listUnits(Systemd::System)) {
+        Q_FOREACH (const Unit::Ptr &unit, Systemd::listUnits(Systemd::System)) {
             qDebug() << "\t" << unit->id();
         }
     }
@@ -84,7 +85,7 @@ public:
     {
         qDebug() << "Listing unit files:";
 
-        Q_FOREACH(const QString &unitFile, Systemd::listUnitFiles(Systemd::System)) {
+        Q_FOREACH (const QString &unitFile, Systemd::listUnitFiles(Systemd::System)) {
             qDebug() << "\t" << unitFile;
         }
     }
@@ -138,7 +139,7 @@ int main(int argc, char* argv[])
 
 //     SDManagerTest::enableUnitFiles();
 
-     SDManagerTest::getUnit();
+    SDManagerTest::getUnit();
 
 //     SDManagerTest::getUnitByPID();
 

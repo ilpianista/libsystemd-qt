@@ -24,7 +24,8 @@
 
 #include "job.h"
 
-namespace Systemd {
+namespace Systemd
+{
 
 class JobPrivate
 {

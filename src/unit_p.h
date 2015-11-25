@@ -24,7 +24,8 @@
 
 #include "unit.h"
 
-namespace Systemd {
+namespace Systemd
+{
 
 class UnitPrivate
 {

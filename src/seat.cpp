@@ -31,7 +31,7 @@ Systemd::Logind::SeatPrivate::SeatPrivate(const QString &path, const QDBusConnec
     canMultiSession = seatIface.canMultiSession();
     canTTY = seatIface.canTTY();
     id = seatIface.id();
-    Q_FOREACH(const DBusSession &seatSession, seatIface.sessions()) {
+    Q_FOREACH (const DBusSession &seatSession, seatIface.sessions()) {
         sessions << seatSession.path.path();
     }
 }
@@ -41,12 +41,12 @@ Systemd::Logind::SeatPrivate::~SeatPrivate()
 }
 
 Systemd::Logind::Seat::Seat(const QString &path, const QDBusConnection &connection, QObject *parent) :
-                    QObject(parent), d_ptr(new SeatPrivate(path, connection))
+    QObject(parent), d_ptr(new SeatPrivate(path, connection))
 {
 }
 
 Systemd::Logind::Seat::Seat(SeatPrivate &seat, QObject *parent) :
-                    QObject(parent), d_ptr(&seat)
+    QObject(parent), d_ptr(&seat)
 {
 }
 

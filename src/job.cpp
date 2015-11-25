@@ -34,12 +34,12 @@ Systemd::JobPrivate::~JobPrivate()
 }
 
 Systemd::Job::Job(const QString &path, const QDBusConnection &connection, QObject *parent) :
-                  QObject(parent), d_ptr(new JobPrivate(path, connection))
+    QObject(parent), d_ptr(new JobPrivate(path, connection))
 {
 }
 
 Systemd::Job::Job(JobPrivate &job, QObject *parent) :
-                  QObject(parent), d_ptr(&job)
+    QObject(parent), d_ptr(&job)
 {
 }
 

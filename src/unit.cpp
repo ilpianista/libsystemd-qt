@@ -98,12 +98,12 @@ Systemd::UnitPrivate::~UnitPrivate()
 }
 
 Systemd::Unit::Unit(const QString &path, const QDBusConnection &connection, QObject *parent) :
-                    QObject(parent), d_ptr(new UnitPrivate(path, connection))
+    QObject(parent), d_ptr(new UnitPrivate(path, connection))
 {
 }
 
 Systemd::Unit::Unit(UnitPrivate &unit, QObject *parent) :
-                    QObject(parent), d_ptr(&unit)
+    QObject(parent), d_ptr(&unit)
 {
 }
 

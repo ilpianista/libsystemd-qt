@@ -31,11 +31,11 @@ Q_GLOBAL_STATIC_WITH_ARGS(Systemd::SystemdPrivate, globalSystemdSessionBus, (QDB
 static SystemdPrivate *globalSystemd(const SessionType &sessionType)
 {
     switch (sessionType) {
-        case User:
-            return globalSystemdSessionBus();
-        case System:
-        default:
-            return globalSystemdSystemBus();
+    case User:
+        return globalSystemdSessionBus();
+    case System:
+    default:
+        return globalSystemdSystemBus();
     }
 }
 
@@ -43,16 +43,16 @@ SystemdPrivate::SystemdPrivate(const QDBusConnection &connection) :
     isdface(SystemdPrivate::SD_DBUS_SERVICE, SystemdPrivate::SD_DBUS_DAEMON_PATH,
             connection)
 {
-    connect(&isdface, SIGNAL(JobNew(uint,QDBusObjectPath,QString)), this,
-            SLOT(onJobNew(uint,QDBusObjectPath,QString)));
-    connect(&isdface, SIGNAL(JobRemoved(uint,QDBusObjectPath,QString,QString)), this,
-            SLOT(onJobRemoved(uint,QDBusObjectPath,QString,QString)));
+    connect(&isdface, SIGNAL(JobNew(uint, QDBusObjectPath, QString)), this,
+            SLOT(onJobNew(uint, QDBusObjectPath, QString)));
+    connect(&isdface, SIGNAL(JobRemoved(uint, QDBusObjectPath, QString, QString)), this,
+            SLOT(onJobRemoved(uint, QDBusObjectPath, QString, QString)));
     connect(&isdface, SIGNAL(Reloading(bool)), this,
             SLOT(onReloading(bool)));
-    connect(&isdface, SIGNAL(UnitNew(QString,QDBusObjectPath)), this,
-            SLOT(onUnitNew(QString,QDBusObjectPath)));
-    connect(&isdface, SIGNAL(UnitRemoved(QString,QDBusObjectPath)), this,
-            SLOT(onUnitRemoved(QString,QDBusObjectPath)));
+    connect(&isdface, SIGNAL(UnitNew(QString, QDBusObjectPath)), this,
+            SLOT(onUnitNew(QString, QDBusObjectPath)));
+    connect(&isdface, SIGNAL(UnitRemoved(QString, QDBusObjectPath)), this,
+            SLOT(onUnitRemoved(QString, QDBusObjectPath)));
     connect(&isdface, SIGNAL(UnitFilesChanged()), this,
             SLOT(onUnitFilesChanged()));
 
@@ -201,7 +201,7 @@ QList<Job::Ptr> SystemdPrivate::listJobs()
         const QDBusMessage message = reply.reply();
         if (message.type() == QDBusMessage::ReplyMessage) {
             const ManagerDBusJobList queued = qdbus_cast<ManagerDBusJobList>(message.arguments().first());
-            Q_FOREACH(const ManagerDBusJob job, queued) {
+            Q_FOREACH (const ManagerDBusJob job, queued) {
                 jobs.append(Job::Ptr(new Job(job.path.path(), isdface.connection()), &QObject::deleteLater));
             }
         }
@@ -225,7 +225,7 @@ QList<Unit::Ptr> SystemdPrivate::listUnits()
         const QDBusMessage message = reply.reply();
         if (message.type() == QDBusMessage::ReplyMessage) {
             const ManagerDBusUnitList loaded = qdbus_cast<ManagerDBusUnitList>(message.arguments().first());
-            Q_FOREACH(const ManagerDBusUnit unit, loaded) {
+            Q_FOREACH (const ManagerDBusUnit unit, loaded) {
                 units.append(Unit::Ptr(new Unit(unit.path.path(), isdface.connection()), &QObject::deleteLater));
             }
         }
@@ -249,7 +249,7 @@ QStringList SystemdPrivate::listUnitFiles()
         const QDBusMessage message = reply.reply();
         if (message.type() == QDBusMessage::ReplyMessage) {
             const ManagerDBusUnitFileList files = qdbus_cast<ManagerDBusUnitFileList>(message.arguments().first());
-            Q_FOREACH(const ManagerDBusUnitFile file, files) {
+            Q_FOREACH (const ManagerDBusUnitFile file, files) {
                 unitFiles.append(file.path);
             }
         }
@@ -442,37 +442,37 @@ void SystemdPrivate::resetFailedUnit(const QString& name)
 
 QString SystemdPrivate::modeToString(const Unit::Mode &mode) const
 {
-    switch(mode) {
-        case Unit::Fail: return "fail";
-        case Unit::IgnoreDependencies: return "ignore-dependencies";
-        case Unit::IgnoreRequirements: return "ignore-requirements";
-        case Unit::Isolate: return "isolate";
-        case Unit::Replace: return "replace";
-        default: return QString();
+    switch (mode) {
+    case Unit::Fail: return QLatin1Literal("fail");
+    case Unit::IgnoreDependencies: return QLatin1Literal("ignore-dependencies");
+    case Unit::IgnoreRequirements: return QLatin1Literal("ignore-requirements");
+    case Unit::Isolate: return QLatin1Literal("isolate");
+    case Unit::Replace: return QLatin1Literal("replace");
+    default: return QString();
     }
 }
 
 QString SystemdPrivate::whoToString(const Unit::Who &who) const
 {
-    switch(who) {
-        case Unit::All: return "all";
-        case Unit::Control: return "control";
-        case Unit::Main: return "main";
-        default: return QString();
+    switch (who) {
+    case Unit::All: return QLatin1Literal("all");
+    case Unit::Control: return QLatin1Literal("control");
+    case Unit::Main: return QLatin1Literal("main");
+    default: return QString();
     }
 }
 
-Unit::Result SystemdPrivate::stringToResult(const QString &result)
+Unit::Result SystemdPrivate::stringToResult(const QString &result) const
 {
-    if ( result == "canceled" ) {
+    if (QString::compare(result, QLatin1Literal("canceled")) == 0) {
         return Unit::Canceled;
-    } else if ( result == "dependency" ) {
+    } else if (QString::compare(result, QLatin1Literal("dependency")) == 0) {
         return Unit::Dependency;
-    } else if ( result == "failed" ) {
+    } else if (QString::compare(result, QLatin1Literal("failed")) == 0) {
         return Unit::Failed;
-    } else if ( result == "skipped" ) {
+    } else if (QString::compare(result, QLatin1Literal("skipped")) == 0) {
         return Unit::Skipped;
-    } else if ( result == "timeout" ) {
+    } else if (QString::compare(result, QLatin1Literal("timeout")) == 0) {
         return Unit::Timeout;
     } else { // "done"
         return Unit::Done;

@@ -22,7 +22,7 @@
 
 /** \file QtSystemd-export.h
  \ brief Contains Macr*os for exporting symbols
- 
+
  This file contains macros needed for exporting/importing symbols
  */
 

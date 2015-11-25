@@ -34,10 +34,10 @@ Systemd::Logind::LogindPrivate::LogindPrivate() :
     connect(&ildface, SIGNAL(PrepareForSleep(bool)),
             this, SLOT(onPrepareForSleep(bool)));
 
-    connect(&ildface, SIGNAL(SeatNew(QString,QDBusObjectPath)), this,
-            SLOT(onSeatNew(QString,QDBusObjectPath)));
-    connect(&ildface, SIGNAL(SeatRemoved(QString,QDBusObjectPath)), this,
-            SLOT(onSeatRemoved(QString,QDBusObjectPath)));
+    connect(&ildface, SIGNAL(SeatNew(QString, QDBusObjectPath)), this,
+            SLOT(onSeatNew(QString, QDBusObjectPath)));
+    connect(&ildface, SIGNAL(SeatRemoved(QString, QDBusObjectPath)), this,
+            SLOT(onSeatRemoved(QString, QDBusObjectPath)));
 
     init();
 }
@@ -66,7 +66,7 @@ QList<Systemd::Logind::Seat *> Systemd::Logind::LogindPrivate::listSeats()
     const QDBusMessage message = reply.reply();
     if (message.type() == QDBusMessage::ReplyMessage) {
         const DBusSeatList seats = qdbus_cast<DBusSeatList>(message.arguments().first());
-        Q_FOREACH(const DBusSeat seat, seats) {
+        Q_FOREACH (const DBusSeat seat, seats) {
             Systemd::Logind::Seat *s = new Systemd::Logind::Seat(seat.path.path(), ildface.connection());
             seatLists.append(s);
         }

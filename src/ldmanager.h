@@ -36,47 +36,47 @@ namespace Systemd
 {
 namespace Logind
 {
-    enum Permission {
-        Challenge,
-        Na,
-        No,
-        Yes
-    };
+enum Permission {
+    Challenge,
+    Na,
+    No,
+    Yes
+};
 
-    class SDQT_EXPORT Notifier : public QObject
-    {
-        Q_OBJECT
+class SDQT_EXPORT Notifier : public QObject
+{
+    Q_OBJECT
 
-    Q_SIGNALS:
-        void prepareForSleep(const bool active);
-        void prepareForShutdown(const bool active);
-        void seatNew(const QString &seatPath);
-        void seatRemoved(const QString &seatPath);
-    };
+Q_SIGNALS:
+    void prepareForSleep(const bool active);
+    void prepareForShutdown(const bool active);
+    void seatNew(const QString &seatPath);
+    void seatRemoved(const QString &seatPath);
+};
 
-    SDQT_EXPORT Permission canHibernate();
+SDQT_EXPORT Permission canHibernate();
 
-    SDQT_EXPORT Permission canHybridSleep();
+SDQT_EXPORT Permission canHybridSleep();
 
-    SDQT_EXPORT Permission canPowerOff();
+SDQT_EXPORT Permission canPowerOff();
 
-    SDQT_EXPORT Permission canReboot();
+SDQT_EXPORT Permission canReboot();
 
-    SDQT_EXPORT Permission canSuspend();
+SDQT_EXPORT Permission canSuspend();
 
-    SDQT_EXPORT void hibernate(const bool interactive);
+SDQT_EXPORT void hibernate(const bool interactive);
 
-    SDQT_EXPORT void hybridSleep(const bool interactive);
+SDQT_EXPORT void hybridSleep(const bool interactive);
 
-    SDQT_EXPORT QList<Seat *> listSeats();
+SDQT_EXPORT QList<Seat *> listSeats();
 
-    SDQT_EXPORT void powerOff(const bool interactive);
+SDQT_EXPORT void powerOff(const bool interactive);
 
-    SDQT_EXPORT void reboot(const bool interactive);
+SDQT_EXPORT void reboot(const bool interactive);
 
-    SDQT_EXPORT void suspend(const bool interactive);
+SDQT_EXPORT void suspend(const bool interactive);
 
-    SDQT_EXPORT Notifier* notifier();
+SDQT_EXPORT Notifier* notifier();
 }
 }
 

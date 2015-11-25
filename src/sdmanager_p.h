@@ -24,7 +24,8 @@
 
 #include "sdmanager.h"
 
-namespace Systemd {
+namespace Systemd
+{
 
 class SystemdPrivate : public Notifier
 {
@@ -73,7 +74,7 @@ protected Q_SLOTS:
 private:
     QString modeToString(const Unit::Mode &mode) const;
     QString whoToString(const Unit::Who &mode) const;
-    Unit::Result stringToResult(const QString &result);
+    Unit::Result stringToResult(const QString &result) const;
     void init();
 };
 }

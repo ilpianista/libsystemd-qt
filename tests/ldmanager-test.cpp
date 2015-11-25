@@ -22,109 +22,110 @@
 
 #include "../src/ldmanager.h"
 
-class LDManagerTest {
+class LDManagerTest
+{
 public:
     LDManagerTest()
     {
     }
 
-    static void canHibernate() {
+    static void canHibernate()
+    {
         qDebug() << "Can hibernate?";
         Systemd::Logind::Permission perm = Systemd::Logind::canHibernate();
-        switch (perm)
-        {
-            case Systemd::Logind::Challenge:
-                qDebug() << "Challenge";
-                break;
-            case Systemd::Logind::Na:
-                qDebug() << "Na";
-                break;
-            case Systemd::Logind::No:
-                qDebug() << "No";
-                break;
-            case Systemd::Logind::Yes:
-                qDebug() << "Yes";
-                break;
+        switch (perm) {
+        case Systemd::Logind::Challenge:
+            qDebug() << "Challenge";
+            break;
+        case Systemd::Logind::Na:
+            qDebug() << "Na";
+            break;
+        case Systemd::Logind::No:
+            qDebug() << "No";
+            break;
+        case Systemd::Logind::Yes:
+            qDebug() << "Yes";
+            break;
         }
     }
 
-    static void canHybridSleep() {
+    static void canHybridSleep()
+    {
         qDebug() << "Can hybrid sleep?";
         Systemd::Logind::Permission perm = Systemd::Logind::canHybridSleep();
-        switch (perm)
-        {
-            case Systemd::Logind::Challenge:
-                qDebug() << "Challenge";
-                break;
-            case Systemd::Logind::Na:
-                qDebug() << "Na";
-                break;
-            case Systemd::Logind::No:
-                qDebug() << "No";
-                break;
-            case Systemd::Logind::Yes:
-                qDebug() << "Yes";
-                break;
+        switch (perm) {
+        case Systemd::Logind::Challenge:
+            qDebug() << "Challenge";
+            break;
+        case Systemd::Logind::Na:
+            qDebug() << "Na";
+            break;
+        case Systemd::Logind::No:
+            qDebug() << "No";
+            break;
+        case Systemd::Logind::Yes:
+            qDebug() << "Yes";
+            break;
         }
     }
 
-    static void canPowerOff() {
+    static void canPowerOff()
+    {
         qDebug() << "Can power off?";
         Systemd::Logind::Permission perm = Systemd::Logind::canPowerOff();
-        switch (perm)
-        {
-            case Systemd::Logind::Challenge:
-                qDebug() << "Challenge";
-                break;
-            case Systemd::Logind::Na:
-                qDebug() << "Na";
-                break;
-            case Systemd::Logind::No:
-                qDebug() << "No";
-                break;
-            case Systemd::Logind::Yes:
-                qDebug() << "Yes";
-                break;
+        switch (perm) {
+        case Systemd::Logind::Challenge:
+            qDebug() << "Challenge";
+            break;
+        case Systemd::Logind::Na:
+            qDebug() << "Na";
+            break;
+        case Systemd::Logind::No:
+            qDebug() << "No";
+            break;
+        case Systemd::Logind::Yes:
+            qDebug() << "Yes";
+            break;
         }
     }
 
-    static void canReboot() {
+    static void canReboot()
+    {
         qDebug() << "Can reboot?";
         Systemd::Logind::Permission perm = Systemd::Logind::canReboot();
-        switch (perm)
-        {
-            case Systemd::Logind::Challenge:
-                qDebug() << "Challenge";
-                break;
-            case Systemd::Logind::Na:
-                qDebug() << "Na";
-                break;
-            case Systemd::Logind::No:
-                qDebug() << "No";
-                break;
-            case Systemd::Logind::Yes:
-                qDebug() << "Yes";
-                break;
+        switch (perm) {
+        case Systemd::Logind::Challenge:
+            qDebug() << "Challenge";
+            break;
+        case Systemd::Logind::Na:
+            qDebug() << "Na";
+            break;
+        case Systemd::Logind::No:
+            qDebug() << "No";
+            break;
+        case Systemd::Logind::Yes:
+            qDebug() << "Yes";
+            break;
         }
     }
 
-    static void canSuspend() {
+    static void canSuspend()
+    {
         qDebug() << "Can suspend?";
         Systemd::Logind::Permission perm = Systemd::Logind::canSuspend();
-        switch (perm)
-        {
-            case Systemd::Logind::Challenge:
-                qDebug() << "Challenge";
-                break;
-            case Systemd::Logind::Na:
-                qDebug() << "Na";
-                break;
-            case Systemd::Logind::No:
-                qDebug() << "No";
-                break;
-            case Systemd::Logind::Yes:
-                qDebug() << "Yes";
-                break;
+        switch (perm) {
+        case Systemd::Logind::Challenge:
+            qDebug() << "Challenge";
+            break;
+        case Systemd::Logind::Na:
+            qDebug() << "Na";
+            break;
+        case Systemd::Logind::No:
+            qDebug() << "No";
+            break;
+        case Systemd::Logind::Yes:
+            qDebug() << "Yes";
+            break;
         }
     }
 };

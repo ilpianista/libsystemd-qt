@@ -26,7 +26,8 @@
 
 class QDBusConnection;
 
-namespace Systemd {
+namespace Systemd
+{
 
 class JobPrivate;
 
