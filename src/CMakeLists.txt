@@ -4,7 +4,9 @@ set(QtSystemd_HEADERS
     ldmanager.h
     sdmanager.h
     seat.h
+    session.h
     unit.h
+    user.h
     QtSystemd-export.h
 )
 
@@ -14,7 +16,9 @@ set(QtSystemd_PART_SRCS
     ldmanager.cpp
     sdmanager.cpp
     seat.cpp
+    session.cpp
     unit.cpp
+    user.cpp
 )
 
 set(INTERFACE_INTROSPECTION_XML_FILES

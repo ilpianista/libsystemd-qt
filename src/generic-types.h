@@ -54,7 +54,7 @@ QDBusArgument &operator<<(QDBusArgument &argument, const DBusSession &session);
 const QDBusArgument &operator>>(const QDBusArgument &argument, DBusSession &session);
 
 typedef struct {
-    QString id;
+    QString name;
     QDBusObjectPath path;
 } DBusUnit;
 Q_DECLARE_METATYPE(DBusUnit)

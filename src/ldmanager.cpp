@@ -20,8 +20,8 @@
 #include "ldmanager.h"
 #include "ldmanager_p.h"
 
-const QString Systemd::Logind::LogindPrivate::LD_DBUS_SERVICE(QString::fromLatin1("org.freedesktop.login1"));
-const QString Systemd::Logind::LogindPrivate::LD_DBUS_DAEMON_PATH(QString::fromLatin1("/org/freedesktop/login1"));
+const QString Systemd::Logind::LogindPrivate::LD_DBUS_SERVICE(QLatin1Literal("org.freedesktop.login1"));
+const QString Systemd::Logind::LogindPrivate::LD_DBUS_DAEMON_PATH(QLatin1Literal("/org/freedesktop/login1"));
 
 Q_GLOBAL_STATIC(Systemd::Logind::LogindPrivate, globalLogind)
 
@@ -39,6 +39,16 @@ Systemd::Logind::LogindPrivate::LogindPrivate() :
     connect(&ildface, SIGNAL(SeatRemoved(QString, QDBusObjectPath)), this,
             SLOT(onSeatRemoved(QString, QDBusObjectPath)));
 
+    connect(&ildface, SIGNAL(SessionNew(QString, QDBusObjectPath)), this,
+            SLOT(onSessionNew(QString, QDBusObjectPath)));
+    connect(&ildface, SIGNAL(SessionRemoved(QString, QDBusObjectPath)), this,
+            SLOT(onSessionRemoved(QString, QDBusObjectPath)));
+
+    connect(&ildface, SIGNAL(UserNew(uint, QDBusObjectPath)), this,
+            SLOT(onUserNew(uint, QDBusObjectPath)));
+    connect(&ildface, SIGNAL(UserRemoved(uint, QDBusObjectPath)), this,
+            SLOT(onUserRemoved(uint, QDBusObjectPath)));
+
     init();
 }
 
@@ -51,7 +61,7 @@ void Systemd::Logind::LogindPrivate::init()
     qDBusRegisterMetaType<DBusSeat>;
 }
 
-QList<Systemd::Logind::Seat *> Systemd::Logind::LogindPrivate::listSeats()
+QList<Systemd::Logind::Seat::Ptr> Systemd::Logind::LogindPrivate::listSeats()
 {
     qDBusRegisterMetaType<DBusSeatList>;
     QDBusPendingReply<DBusSeatList> reply = ildface.ListSeats();
@@ -59,15 +69,15 @@ QList<Systemd::Logind::Seat *> Systemd::Logind::LogindPrivate::listSeats()
 
     if (reply.isError()) {
         qDebug() << reply.error().message();
-        return QList<Systemd::Logind::Seat*>();
+        return QList<Seat::Ptr>();
     }
 
-    QList<Systemd::Logind::Seat *> seatLists;
+    QList<Seat::Ptr> seatLists;
     const QDBusMessage message = reply.reply();
     if (message.type() == QDBusMessage::ReplyMessage) {
         const DBusSeatList seats = qdbus_cast<DBusSeatList>(message.arguments().first());
         Q_FOREACH (const DBusSeat seat, seats) {
-            Systemd::Logind::Seat *s = new Systemd::Logind::Seat(seat.path.path(), ildface.connection());
+            Seat::Ptr s = Seat::Ptr(new Seat(seat.path.path(), ildface.connection()));
             seatLists.append(s);
         }
     }
@@ -172,12 +182,38 @@ void Systemd::Logind::LogindPrivate::hybridSleep(const bool interactive)
 
 void Systemd::Logind::LogindPrivate::onSeatNew(const QString &id, const QDBusObjectPath &seat)
 {
-    emit Logind::Notifier::seatNew(seat.path());
+    Q_UNUSED(id)
+    emit Logind::Notifier::seatNew(Seat::Ptr(new Seat(seat.path(), ildface.connection())));
 }
 
 void Systemd::Logind::LogindPrivate::onSeatRemoved(const QString &id, const QDBusObjectPath &seat)
 {
-    emit Logind::Notifier::seatRemoved(seat.path());
+    Q_UNUSED(id)
+    emit Logind::Notifier::seatRemoved(Seat::Ptr(new Seat(seat.path(), ildface.connection())));
+}
+
+void Systemd::Logind::LogindPrivate::onSessionNew(const QString &id, const QDBusObjectPath &session)
+{
+    Q_UNUSED(id)
+    emit Logind::Notifier::sessionNew(Session::Ptr(new Session(session.path(), ildface.connection())));
+}
+
+void Systemd::Logind::LogindPrivate::onSessionRemoved(const QString &id, const QDBusObjectPath &session)
+{
+    Q_UNUSED(id)
+    emit Logind::Notifier::sessionRemoved(Session::Ptr(new Session(session.path(), ildface.connection())));
+}
+
+void Systemd::Logind::LogindPrivate::onUserNew(const uint &id, const QDBusObjectPath &user)
+{
+    Q_UNUSED(id)
+    emit Logind::Notifier::userNew(User::Ptr(new User(user.path(), ildface.connection())));
+}
+
+void Systemd::Logind::LogindPrivate::onUserRemoved(const uint &id, const QDBusObjectPath &user)
+{
+    Q_UNUSED(id)
+    emit Logind::Notifier::userRemoved(User::Ptr(new User(user.path(), ildface.connection())));
 }
 
 void Systemd::Logind::LogindPrivate::powerOff(const bool interactive)
@@ -220,13 +256,13 @@ void Systemd::Logind::LogindPrivate::onPrepareForSleep(const bool active)
     emit Logind::Notifier::prepareForSleep(active);
 }
 
-Systemd::Logind::Permission Systemd::Logind::LogindPrivate::stringToPermission(const QString &permission)
+Systemd::Logind::Permission Systemd::Logind::LogindPrivate::stringToPermission(const QString &permission) const
 {
-    if (permission == QLatin1String("na")) {
+    if (QString::compare(permission, QLatin1String("na")) == 0) {
         return Systemd::Logind::Na;
-    } else if (permission == QLatin1String("yes")) {
+    } else if (QString::compare(permission, QLatin1String("yes")) == 0) {
         return Systemd::Logind::Yes;
-    } else if (permission == QLatin1String("challenge")) {
+    } else if (QString::compare(permission, QLatin1String("challenge")) == 0) {
         return Systemd::Logind::Challenge;
     } else {
         return Systemd::Logind::No;
@@ -268,7 +304,7 @@ void Systemd::Logind::hybridSleep(const bool interactive)
     globalLogind()->hybridSleep(interactive);
 }
 
-QList<Systemd::Logind::Seat *> Systemd::Logind::listSeats()
+QList<Systemd::Logind::Seat::Ptr> Systemd::Logind::listSeats()
 {
     return globalLogind()->listSeats();
 }

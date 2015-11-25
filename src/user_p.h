@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013  Andrea Scarpino <me@andreascarpino.it>
+ * Copyright (C) 2015  Andrea Scarpino <me@andreascarpino.it>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -17,43 +17,39 @@
  *
  */
 
-#ifndef SD_SEAT_H
-#define SD_SEAT_H
+#ifndef SD_USER_P_H
+#define SD_USER_P_H
 
-#include <QObject>
-#include <QSharedPointer>
+#include "userinterface.h"
 
-#include "QtSystemd-export.h"
-
-class QDBusConnection;
+#include "user.h"
 
 namespace Systemd
 {
 namespace Logind
 {
-class SeatPrivate;
-
-class SDQT_EXPORT Seat : public QObject
+class UserPrivate
 {
-    Q_OBJECT
-    Q_DECLARE_PRIVATE(Seat)
 
 public:
-    typedef QSharedPointer<Seat> Ptr;
+    explicit UserPrivate(const QString &path, const QDBusConnection &connection);
+    virtual ~UserPrivate();
 
-    explicit Seat(const QString &path, const QDBusConnection &connection, QObject *parent = 0);
-    explicit Seat(SeatPrivate &seat, QObject *parent = 0);
-    virtual ~Seat();
+    OrgFreedesktopLogin1UserInterface userIface;
 
-    QString activeSession() const;
-    bool canGraphical() const;
-    bool canMultiSession() const;
-    bool canTTY() const;
-    QString id() const;
-    QStringList sessions() const;
-
-protected:
-    SeatPrivate *d_ptr;
+    uint gid;
+    bool idleHint;
+    qulonglong idleSinceHint;
+    qulonglong idleSinceHintMonotonic;
+    bool linger;
+    QString name;
+    QString runtimePath;
+    QString service;
+    QString slice;
+    QString state;
+    qulonglong timestamp;
+    qulonglong timestampMonotonic;
+    uint uid;
 };
 }
 }

@@ -71,7 +71,7 @@ const QDBusArgument& operator>>(const QDBusArgument &argument, DBusSession &sess
 QDBusArgument& operator<<(QDBusArgument &argument, const DBusUnit &unit)
 {
     argument.beginStructure();
-    argument << unit.id << unit.path;
+    argument << unit.name << unit.path;
     argument.endStructure();
     return argument;
 }
@@ -79,7 +79,7 @@ QDBusArgument& operator<<(QDBusArgument &argument, const DBusUnit &unit)
 const QDBusArgument& operator>>(const QDBusArgument &argument, DBusUnit &unit)
 {
     argument.beginStructure();
-    argument >> unit.id >> unit.path;
+    argument >> unit.name >> unit.path;
     argument.endStructure();
     return argument;
 }

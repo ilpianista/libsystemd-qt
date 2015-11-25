@@ -47,7 +47,7 @@ public:
     Permission canSuspend();
     void hibernate(const bool interactive);
     void hybridSleep(const bool interactive);
-    QList<Seat *> listSeats();
+    QList<Seat::Ptr> listSeats();
     void powerOff(const bool interactive);
     void reboot(const bool interactive);
     void suspend(const bool interactive);
@@ -57,9 +57,13 @@ protected Q_SLOTS:
     void onPrepareForSleep(const bool active);
     void onSeatNew(const QString &id, const QDBusObjectPath &seat);
     void onSeatRemoved(const QString &id, const QDBusObjectPath &seat);
+    void onSessionNew(const QString &id, const QDBusObjectPath &session);
+    void onSessionRemoved(const QString &id, const QDBusObjectPath &session);
+    void onUserNew(const uint &id, const QDBusObjectPath &user);
+    void onUserRemoved(const uint &id, const QDBusObjectPath &user);
 
 private:
-    Permission stringToPermission(const QString &permission);
+    Permission stringToPermission(const QString &permission) const;
     void init();
 };
 }

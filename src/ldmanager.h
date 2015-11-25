@@ -24,6 +24,8 @@
 
 #include "QtSystemd-export.h"
 #include "seat.h"
+#include "session.h"
+#include "user.h"
 
 /**
  * This class allows querying the underlying system.
@@ -50,8 +52,12 @@ class SDQT_EXPORT Notifier : public QObject
 Q_SIGNALS:
     void prepareForSleep(const bool active);
     void prepareForShutdown(const bool active);
-    void seatNew(const QString &seatPath);
-    void seatRemoved(const QString &seatPath);
+    void seatNew(Seat::Ptr seat);
+    void seatRemoved(Seat::Ptr seat);
+    void sessionNew(Session::Ptr session);
+    void sessionRemoved(Session::Ptr session);
+    void userNew(User::Ptr user);
+    void userRemoved(User::Ptr user);
 };
 
 SDQT_EXPORT Permission canHibernate();
@@ -68,7 +74,7 @@ SDQT_EXPORT void hibernate(const bool interactive);
 
 SDQT_EXPORT void hybridSleep(const bool interactive);
 
-SDQT_EXPORT QList<Seat *> listSeats();
+SDQT_EXPORT QList<Seat::Ptr> listSeats();
 
 SDQT_EXPORT void powerOff(const bool interactive);
 

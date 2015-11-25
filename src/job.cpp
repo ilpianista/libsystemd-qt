@@ -26,7 +26,7 @@ Systemd::JobPrivate::JobPrivate(const QString &path, const QDBusConnection &conn
     id = jobIface.id();
     jobType = jobIface.jobType();
     state = jobIface.state();
-    unit = jobIface.unit().path.path();
+    unit = jobIface.unit().name;
 }
 
 Systemd::JobPrivate::~JobPrivate()
