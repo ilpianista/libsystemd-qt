@@ -128,6 +128,30 @@ public:
             break;
         }
     }
+
+    static void listSeats()
+    {
+        qDebug() << "Listing seats:";
+        Q_FOREACH (const Systemd::Logind::Seat::Ptr &seat, Systemd::Logind::listSeats()) {
+            qDebug() << "\t" << seat->id();
+        }
+    }
+
+    static void listSessions()
+    {
+        qDebug() << "Listing sessions:";
+        Q_FOREACH (const Systemd::Logind::Session::Ptr &session, Systemd::Logind::listSessions()) {
+            qDebug() << "\t" << session->id();
+        }
+    }
+
+    static void listUsers()
+    {
+        qDebug() << "Listing users:";
+        Q_FOREACH (const Systemd::Logind::User::Ptr &user, Systemd::Logind::listUsers()) {
+            qDebug() << "\t" << user->name();
+        }
+    }
 };
 
 int main(int argc, char* argv[])
@@ -143,4 +167,10 @@ int main(int argc, char* argv[])
     LDManagerTest::canReboot();
 
     LDManagerTest::canSuspend();
+
+    LDManagerTest::listSeats();
+
+    LDManagerTest::listSessions();
+
+    LDManagerTest::listUsers();
 }

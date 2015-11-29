@@ -40,6 +40,11 @@ public:
     ~LogindPrivate();
     OrgFreedesktopLogin1ManagerInterface ildface;
 
+    Seat::Ptr getSeat(const QString &id);
+    Session::Ptr getSession(const QString &id);
+    Session::Ptr getSessionByPID(const uint &pid);
+    User::Ptr getUser(const uint &id);
+    User::Ptr getUserByPID(const uint &pid);
     Permission canHibernate();
     Permission canHybridSleep();
     Permission canPowerOff();
@@ -48,6 +53,8 @@ public:
     void hibernate(const bool interactive);
     void hybridSleep(const bool interactive);
     QList<Seat::Ptr> listSeats();
+    QList<Session::Ptr> listSessions();
+    QList<User::Ptr> listUsers();
     void powerOff(const bool interactive);
     void reboot(const bool interactive);
     void suspend(const bool interactive);

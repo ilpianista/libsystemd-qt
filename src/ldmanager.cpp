@@ -61,8 +61,94 @@ void Systemd::Logind::LogindPrivate::init()
     qDBusRegisterMetaType<DBusSeat>();
 }
 
+Systemd::Logind::Seat::Ptr Systemd::Logind::LogindPrivate::getSeat(const QString &id)
+{
+    Seat::Ptr seat;
+
+    QDBusPendingReply<QDBusObjectPath> reply = ildface.GetSeat(id);
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+    } else if (! reply.reply().arguments().isEmpty()) {
+        QString seatPath = qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
+        seat = Seat::Ptr(new Seat(seatPath), &QObject::deleteLater);
+    }
+
+    return seat;
+}
+
+Systemd::Logind::Session::Ptr Systemd::Logind::LogindPrivate::getSession(const QString &id)
+{
+    Session::Ptr session;
+
+    QDBusPendingReply<QDBusObjectPath> reply = ildface.GetSession(id);
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+    } else if (! reply.reply().arguments().isEmpty()) {
+        QString sessionPath = qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
+        session = Session::Ptr(new Session(sessionPath), &QObject::deleteLater);
+    }
+
+    return session;
+}
+
+Systemd::Logind::Session::Ptr Systemd::Logind::LogindPrivate::getSessionByPID(const uint &pid)
+{
+    Session::Ptr session;
+
+    QDBusPendingReply<QDBusObjectPath> reply = ildface.GetSessionByPID(pid);
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+    } else if (! reply.reply().arguments().isEmpty()) {
+        QString sessionPath = qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
+        session = Session::Ptr(new Session(sessionPath), &QObject::deleteLater);
+    }
+
+    return session;
+}
+
+Systemd::Logind::User::Ptr Systemd::Logind::LogindPrivate::getUser(const uint &id)
+{
+    User::Ptr user;
+
+    QDBusPendingReply<QDBusObjectPath> reply = ildface.GetUser(id);
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+    } else if (! reply.reply().arguments().isEmpty()) {
+        QString userPath = qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
+        user = User::Ptr(new User(userPath), &QObject::deleteLater);
+    }
+
+    return user;
+}
+
+Systemd::Logind::User::Ptr Systemd::Logind::LogindPrivate::getUserByPID(const uint &pid)
+{
+    User::Ptr user;
+
+    QDBusPendingReply<QDBusObjectPath> reply = ildface.GetUserByPID(pid);
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+    } else if (! reply.reply().arguments().isEmpty()) {
+        QString userPath = qdbus_cast<QDBusObjectPath>(reply.reply().arguments().first()).path();
+        user = User::Ptr(new User(userPath), &QObject::deleteLater);
+    }
+
+    return user;
+}
+
 QList<Systemd::Logind::Seat::Ptr> Systemd::Logind::LogindPrivate::listSeats()
 {
+    qDBusRegisterMetaType<DBusSeat>();
     qDBusRegisterMetaType<DBusSeatList>();
     QDBusPendingReply<DBusSeatList> reply = ildface.ListSeats();
     reply.waitForFinished();
@@ -72,17 +158,68 @@ QList<Systemd::Logind::Seat::Ptr> Systemd::Logind::LogindPrivate::listSeats()
         return QList<Seat::Ptr>();
     }
 
-    QList<Seat::Ptr> seatLists;
+    QList<Seat::Ptr> seatsList;
     const QDBusMessage message = reply.reply();
     if (message.type() == QDBusMessage::ReplyMessage) {
         const DBusSeatList seats = qdbus_cast<DBusSeatList>(message.arguments().first());
         Q_FOREACH (const DBusSeat seat, seats) {
             Seat::Ptr s = Seat::Ptr(new Seat(seat.path.path()));
-            seatLists.append(s);
+            seatsList.append(s);
         }
     }
 
-    return seatLists;
+    return seatsList;
+}
+
+QList<Systemd::Logind::Session::Ptr> Systemd::Logind::LogindPrivate::listSessions()
+{
+    qDBusRegisterMetaType<DBusUser>();
+    qDBusRegisterMetaType<LoginDBusSession>();
+    qDBusRegisterMetaType<LoginDBusSessionList>();
+    QDBusPendingReply<LoginDBusSessionList> reply = ildface.ListSessions();
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+        return QList<Session::Ptr>();
+    }
+
+    QList<Session::Ptr> sessionsList;
+    const QDBusMessage message = reply.reply();
+    if (message.type() == QDBusMessage::ReplyMessage) {
+        const LoginDBusSessionList sessions = qdbus_cast<LoginDBusSessionList>(message.arguments().first());
+        Q_FOREACH (const LoginDBusSession session, sessions) {
+            Session::Ptr s = Session::Ptr(new Session(session.path.path()));
+            sessionsList.append(s);
+        }
+    }
+
+    return sessionsList;
+}
+
+QList<Systemd::Logind::User::Ptr> Systemd::Logind::LogindPrivate::listUsers()
+{
+    qDBusRegisterMetaType<LoginDBusUser>();
+    qDBusRegisterMetaType<LoginDBusUserList>();
+    QDBusPendingReply<LoginDBusUserList> reply = ildface.ListUsers();
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+        return QList<User::Ptr>();
+    }
+
+    QList<User::Ptr> usersList;
+    const QDBusMessage message = reply.reply();
+    if (message.type() == QDBusMessage::ReplyMessage) {
+        const LoginDBusUserList users = qdbus_cast<LoginDBusUserList>(message.arguments().first());
+        Q_FOREACH (const LoginDBusUser user, users) {
+            User::Ptr s = User::Ptr(new User(user.path.path()));
+            usersList.append(s);
+        }
+    }
+
+    return usersList;
 }
 
 Systemd::Logind::Permission Systemd::Logind::LogindPrivate::canHibernate()
@@ -294,6 +431,31 @@ Systemd::Logind::Permission Systemd::Logind::canSuspend()
     return globalLogind()->canSuspend();
 }
 
+Systemd::Logind::Seat::Ptr Systemd::Logind::getSeat(const QString &id)
+{
+    return globalLogind()->getSeat(id);
+}
+
+Systemd::Logind::Session::Ptr Systemd::Logind::getSession(const QString &id)
+{
+    return globalLogind()->getSession(id);
+}
+
+Systemd::Logind::Session::Ptr Systemd::Logind::getSessionByPID(const uint &pid)
+{
+    return globalLogind()->getSessionByPID(pid);
+}
+
+Systemd::Logind::User::Ptr Systemd::Logind::getUser(const uint &id)
+{
+    return globalLogind()->getUser(id);
+}
+
+Systemd::Logind::User::Ptr Systemd::Logind::getUserByPID(const uint &pid)
+{
+    return globalLogind()->getUserByPID(pid);
+}
+
 void Systemd::Logind::hibernate(const bool interactive)
 {
     globalLogind()->hibernate(interactive);
@@ -307,6 +469,16 @@ void Systemd::Logind::hybridSleep(const bool interactive)
 QList<Systemd::Logind::Seat::Ptr> Systemd::Logind::listSeats()
 {
     return globalLogind()->listSeats();
+}
+
+QList<Systemd::Logind::Session::Ptr> Systemd::Logind::listSessions()
+{
+    return globalLogind()->listSessions();
+}
+
+QList<Systemd::Logind::User::Ptr> Systemd::Logind::listUsers()
+{
+    return globalLogind()->listUsers();
 }
 
 void Systemd::Logind::powerOff(const bool interactive)

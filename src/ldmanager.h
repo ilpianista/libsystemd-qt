@@ -70,11 +70,25 @@ SDQT_EXPORT Permission canReboot();
 
 SDQT_EXPORT Permission canSuspend();
 
+SDQT_EXPORT Seat::Ptr getSeat(const QString &id);
+
+SDQT_EXPORT Session::Ptr getSession(const QString &id);
+
+SDQT_EXPORT Session::Ptr getSessionByPID(const uint &pid);
+
+SDQT_EXPORT User::Ptr getUser(const uint &id);
+
+SDQT_EXPORT User::Ptr getUserByPID(const uint &pid);
+
 SDQT_EXPORT void hibernate(const bool interactive);
 
 SDQT_EXPORT void hybridSleep(const bool interactive);
 
 SDQT_EXPORT QList<Seat::Ptr> listSeats();
+
+SDQT_EXPORT QList<Session::Ptr> listSessions();
+
+SDQT_EXPORT QList<User::Ptr> listUsers();
 
 SDQT_EXPORT void powerOff(const bool interactive);
 
