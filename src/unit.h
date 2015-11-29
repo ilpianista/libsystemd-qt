@@ -24,6 +24,7 @@
 #include <QSharedPointer>
 
 #include "QtSystemd-export.h"
+#include "generic-types.h"
 
 class QDBusConnection;
 
@@ -78,6 +79,7 @@ public:
     bool assertResult() const;
     qulonglong assertTimestamp() const;
     qulonglong assertTimestampMonotonic() const;
+    QList<UnitCondition> asserts() const;
     QStringList before() const;
     QStringList bindsTo() const;
     QStringList boundBy() const;
@@ -88,6 +90,7 @@ public:
     bool conditionResult() const;
     qulonglong conditionTimestamp() const;
     qulonglong conditionTimestampMonotonic() const;
+    QList<UnitCondition> conditions() const;
     QStringList conflictedBy() const;
     QStringList conflicts() const;
     QStringList consistsOf() const;
@@ -108,6 +111,7 @@ public:
     QString jobTimeoutRebootArgument() const;
     qulonglong jobTimeoutUSec() const;
     QStringList joinsNamespaceOf() const;
+    UnitLoadError loadError() const;
     QString loadState() const;
     QStringList names() const;
     bool needDaemonReload() const;

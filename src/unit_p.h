@@ -46,6 +46,7 @@ public:
     bool assertResult;
     qulonglong assertTimestamp;
     qulonglong assertTimestampMonotonic;
+    QList<UnitCondition> asserts;
     QStringList before;
     QStringList bindsTo;
     QStringList boundBy;
@@ -56,6 +57,7 @@ public:
     bool conditionResult;
     qulonglong conditionTimestamp;
     qulonglong conditionTimestampMonotonic;
+    QList<UnitCondition> conditions;
     QStringList conflictedBy;
     QStringList conflicts;
     QStringList consistsOf;
@@ -76,6 +78,7 @@ public:
     QString jobTimeoutRebootArgument;
     qulonglong jobTimeoutUSec;
     QStringList joinsNamespaceOf;
+    UnitLoadError loadError;
     QString loadState;
     QStringList names;
     bool needDaemonReload;

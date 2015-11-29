@@ -133,7 +133,7 @@ const QDBusArgument &operator>>(const QDBusArgument &argument, ExecuteDBusEnviro
 
 typedef struct {
     QString path;
-    QList<QString> argv;
+    QStringList argv;
     bool ignore;
     qlonglong startTimestamp;
     qlonglong exitTimestamp;
@@ -325,22 +325,22 @@ typedef struct {
     bool negate;
     QString param;
     qint32 state;
-} UnitDBusCondition;
-Q_DECLARE_METATYPE(UnitDBusCondition)
-typedef QList<UnitDBusCondition> UnitDBusConditionList;
-Q_DECLARE_METATYPE(UnitDBusConditionList)
+} UnitCondition;
+Q_DECLARE_METATYPE(UnitCondition)
+typedef QList<UnitCondition> UnitConditionList;
+Q_DECLARE_METATYPE(UnitConditionList)
 
-QDBusArgument &operator<<(QDBusArgument &argument, const UnitDBusCondition &condition);
-const QDBusArgument &operator>>(const QDBusArgument &argument, UnitDBusCondition &condition);
+QDBusArgument &operator<<(QDBusArgument &argument, const UnitCondition &condition);
+const QDBusArgument &operator>>(const QDBusArgument &argument, UnitCondition &condition);
 
 typedef struct {
     QString name;
     QString message;
-} UnitDBusLoadError;
-Q_DECLARE_METATYPE(UnitDBusLoadError)
+} UnitLoadError;
+Q_DECLARE_METATYPE(UnitLoadError)
 
-QDBusArgument &operator<<(QDBusArgument &argument, const UnitDBusLoadError &loadError);
-const QDBusArgument &operator>>(const QDBusArgument &argument, UnitDBusLoadError &loadError);
+QDBusArgument &operator<<(QDBusArgument &argument, const UnitLoadError &loadError);
+const QDBusArgument &operator>>(const QDBusArgument &argument, UnitLoadError &loadError);
 
 typedef struct {
     QString name;

@@ -450,7 +450,7 @@ const QDBusArgument& operator>>(const QDBusArgument &argument, TimerDBusMonotoni
     return argument;
 }
 
-QDBusArgument& operator<<(QDBusArgument &argument, const UnitDBusCondition &condition)
+QDBusArgument& operator<<(QDBusArgument &argument, const UnitCondition &condition)
 {
     argument.beginStructure();
     argument << condition.name << condition.trigger << condition.negate << condition.param;
@@ -459,7 +459,7 @@ QDBusArgument& operator<<(QDBusArgument &argument, const UnitDBusCondition &cond
     return argument;
 }
 
-const QDBusArgument& operator>>(const QDBusArgument &argument, UnitDBusCondition &condition)
+const QDBusArgument& operator>>(const QDBusArgument &argument, UnitCondition &condition)
 {
     argument.beginStructure();
     argument >> condition.name >> condition.trigger >> condition.negate >> condition.param;
@@ -468,7 +468,7 @@ const QDBusArgument& operator>>(const QDBusArgument &argument, UnitDBusCondition
     return argument;
 }
 
-QDBusArgument& operator<<(QDBusArgument &argument, const UnitDBusLoadError &loadError)
+QDBusArgument& operator<<(QDBusArgument &argument, const UnitLoadError &loadError)
 {
     argument.beginStructure();
     argument << loadError.name << loadError.message;
@@ -476,7 +476,7 @@ QDBusArgument& operator<<(QDBusArgument &argument, const UnitDBusLoadError &load
     return argument;
 }
 
-const QDBusArgument& operator>>(const QDBusArgument &argument, UnitDBusLoadError &loadError)
+const QDBusArgument& operator>>(const QDBusArgument &argument, UnitLoadError &loadError)
 {
     argument.beginStructure();
     argument >> loadError.name >> loadError.message;

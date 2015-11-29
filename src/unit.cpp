@@ -33,7 +33,7 @@ Systemd::UnitPrivate::UnitPrivate(const QString &path, const QDBusConnection &co
     assertResult = unitIface.assertResult();
     assertTimestamp = unitIface.assertTimestamp();
     assertTimestampMonotonic = unitIface.assertTimestampMonotonic();
-    //asserts = unitIface.asserts();
+    asserts = unitIface.asserts();
     before = unitIface.before();
     bindsTo = unitIface.bindsTo();
     boundBy = unitIface.boundBy();
@@ -44,7 +44,7 @@ Systemd::UnitPrivate::UnitPrivate(const QString &path, const QDBusConnection &co
     conditionResult = unitIface.conditionResult();
     conditionTimestamp = unitIface.conditionTimestamp();
     conditionTimestampMonotonic = unitIface.conditionTimestampMonotonic();
-    //conditions = unitIface.conditions();
+    conditions = unitIface.conditions();
     conflictedBy = unitIface.conflictedBy();
     conflicts = unitIface.conflicts();
     consistsOf = unitIface.consistsOf();
@@ -65,7 +65,7 @@ Systemd::UnitPrivate::UnitPrivate(const QString &path, const QDBusConnection &co
     jobTimeoutRebootArgument = unitIface.jobTimeoutRebootArgument();
     jobTimeoutUSec = unitIface.jobTimeoutUSec();
     joinsNamespaceOf = unitIface.joinsNamespaceOf();
-    //loadError = unitIface.loadError();
+    loadError = unitIface.loadError();
     loadState = unitIface.loadState();
     names = unitIface.names();
     needDaemonReload = unitIface.needDaemonReload();
@@ -172,6 +172,12 @@ qulonglong Systemd::Unit::assertTimestampMonotonic() const
     return d->assertTimestampMonotonic;
 }
 
+QList<UnitCondition> Systemd::Unit::asserts() const
+{
+    Q_D(const Unit);
+    return d->asserts;
+}
+
 QStringList Systemd::Unit::before() const
 {
     Q_D(const Unit);
@@ -230,6 +236,12 @@ qulonglong Systemd::Unit::conditionTimestampMonotonic() const
 {
     Q_D(const Unit);
     return d->conditionTimestampMonotonic;
+}
+
+QList<UnitCondition> Systemd::Unit::conditions() const
+{
+    Q_D(const Unit);
+    return d->conditions;
 }
 
 QStringList Systemd::Unit::conflictedBy() const
@@ -350,6 +362,12 @@ QStringList Systemd::Unit::joinsNamespaceOf() const
 {
     Q_D(const Unit);
     return d->joinsNamespaceOf;
+}
+
+UnitLoadError Systemd::Unit::loadError() const
+{
+    Q_D(const Unit);
+    return d->loadError;
 }
 
 QString Systemd::Unit::loadState() const

@@ -179,15 +179,15 @@
   <property name="AssertTimestampMonotonic" type="t" access="read">
   </property>
   <property name="Conditions" type="a(sbbsi)" access="read">
-   <annotation name="org.qtproject.QtDBus.QtTypeName" value="UnitDBusConditionList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="UnitConditionList"/>
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="Asserts" type="a(sbbsi)" access="read">
-   <annotation name="org.qtproject.QtDBus.QtTypeName" value="UnitDBusConditionList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="UnitConditionList"/>
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="LoadError" type="(ss)" access="read">
-   <annotation name="org.qtproject.QtDBus.QtTypeName" value="UnitDBusLoadError"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="UnitLoadError"/>
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="Transient" type="b" access="read">
