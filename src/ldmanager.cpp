@@ -112,11 +112,11 @@ Systemd::Logind::Session::Ptr Systemd::Logind::LogindPrivate::getSessionByPID(co
     return session;
 }
 
-Systemd::Logind::User::Ptr Systemd::Logind::LogindPrivate::getUser(const uint &id)
+Systemd::Logind::User::Ptr Systemd::Logind::LogindPrivate::getUser(const uint &uid)
 {
     User::Ptr user;
 
-    QDBusPendingReply<QDBusObjectPath> reply = ildface.GetUser(id);
+    QDBusPendingReply<QDBusObjectPath> reply = ildface.GetUser(uid);
     reply.waitForFinished();
 
     if (reply.isError()) {
@@ -446,9 +446,9 @@ Systemd::Logind::Session::Ptr Systemd::Logind::getSessionByPID(const uint &pid)
     return globalLogind()->getSessionByPID(pid);
 }
 
-Systemd::Logind::User::Ptr Systemd::Logind::getUser(const uint &id)
+Systemd::Logind::User::Ptr Systemd::Logind::getUser(const uint &uid)
 {
-    return globalLogind()->getUser(id);
+    return globalLogind()->getUser(uid);
 }
 
 Systemd::Logind::User::Ptr Systemd::Logind::getUserByPID(const uint &pid)

@@ -52,48 +52,102 @@ class SDQT_EXPORT Notifier : public QObject
 Q_SIGNALS:
     void prepareForSleep(const bool active);
     void prepareForShutdown(const bool active);
-    void seatNew(Seat::Ptr seat);
-    void seatRemoved(Seat::Ptr seat);
-    void sessionNew(Session::Ptr session);
-    void sessionRemoved(Session::Ptr session);
-    void userNew(User::Ptr user);
-    void userRemoved(User::Ptr user);
+    void seatNew(const Seat::Ptr &seat);
+    void seatRemoved(const Seat::Ptr &seat);
+    void sessionNew(const Session::Ptr &session);
+    void sessionRemoved(const Session::Ptr &session);
+    void userNew(const User::Ptr &user);
+    void userRemoved(const User::Ptr &user);
 };
 
+/*
+ * Tests whether the system supports hibernation.
+ */
 SDQT_EXPORT Permission canHibernate();
 
+/*
+ * Tests whether the system supports hibernation + suspension.
+ */
 SDQT_EXPORT Permission canHybridSleep();
 
+/*
+ * Tests whether the system can be powered off.
+ */
 SDQT_EXPORT Permission canPowerOff();
 
+/*
+ * Tests whether the system supports reboot.
+ */
 SDQT_EXPORT Permission canReboot();
 
+/*
+ * Tests whether the system supports suspension.
+ */
 SDQT_EXPORT Permission canSuspend();
 
+/**
+  * May be used to get a Seat for the given id.
+  */
 SDQT_EXPORT Seat::Ptr getSeat(const QString &id);
 
+/**
+  * May be used to get a Session for the given id.
+  */
 SDQT_EXPORT Session::Ptr getSession(const QString &id);
 
+/**
+  * May be used to get a Session for the given process id.
+  */
 SDQT_EXPORT Session::Ptr getSessionByPID(const uint &pid);
 
-SDQT_EXPORT User::Ptr getUser(const uint &id);
+/**
+  * May be used to get a User for the given user id.
+  */
+SDQT_EXPORT User::Ptr getUser(const uint &uid);
 
+/**
+  * May be used to get a User for the given process id.
+  */
 SDQT_EXPORT User::Ptr getUserByPID(const uint &pid);
 
+/**
+  * Results in the system being hibernated.
+  */
 SDQT_EXPORT void hibernate(const bool interactive);
 
+/**
+  * Results in the system being hibernated + suspended.
+  */
 SDQT_EXPORT void hybridSleep(const bool interactive);
 
+/**
+  * Returns an array with all currently available seats.
+  */
 SDQT_EXPORT QList<Seat::Ptr> listSeats();
 
+/**
+  * Returns an array with all currently available sessions.
+  */
 SDQT_EXPORT QList<Session::Ptr> listSessions();
 
+/**
+  * Returns an array with all currently available users.
+  */
 SDQT_EXPORT QList<User::Ptr> listUsers();
 
+/**
+  * Results in the system being powered off.
+  */
 SDQT_EXPORT void powerOff(const bool interactive);
 
+/**
+  * Results in the system being rebooted.
+  */
 SDQT_EXPORT void reboot(const bool interactive);
 
+/**
+  * Results in the system being suspended.
+  */
 SDQT_EXPORT void suspend(const bool interactive);
 
 SDQT_EXPORT Notifier* notifier();
