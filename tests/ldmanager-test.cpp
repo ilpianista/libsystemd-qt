@@ -129,6 +129,14 @@ public:
         }
     }
 
+    static void listInhibitors()
+    {
+        qDebug() << "Listing inhibitors:";
+        Q_FOREACH (const LoginInhibitor &inhibitor, Systemd::Logind::listInhibitors()) {
+            qDebug() << "\t" << inhibitor.who << "(" << inhibitor.what << ")";
+        }
+    }
+
     static void listSeats()
     {
         qDebug() << "Listing seats:";
@@ -167,6 +175,8 @@ int main(int argc, char* argv[])
     LDManagerTest::canReboot();
 
     LDManagerTest::canSuspend();
+
+    LDManagerTest::listInhibitors();
 
     LDManagerTest::listSeats();
 

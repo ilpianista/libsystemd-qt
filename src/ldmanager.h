@@ -23,6 +23,7 @@
 #include <QObject>
 
 #include "QtSystemd-export.h"
+#include "generic-types.h"
 #include "seat.h"
 #include "session.h"
 #include "user.h"
@@ -119,6 +120,11 @@ SDQT_EXPORT void hibernate(const bool interactive);
   * Results in the system being hibernated + suspended.
   */
 SDQT_EXPORT void hybridSleep(const bool interactive);
+
+/**
+  * Returns an array with all currently available inhibitors.
+  */
+SDQT_EXPORT QList<LoginInhibitor> listInhibitors();
 
 /**
   * Returns an array with all currently available seats.

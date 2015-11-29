@@ -248,7 +248,7 @@ const QDBusArgument& operator>>(const QDBusArgument &argument, ExecuteDBusSystem
     return argument;
 }
 
-QDBusArgument& operator<<(QDBusArgument &argument, const LoginDBusInhibitor &inhibitor)
+QDBusArgument& operator<<(QDBusArgument &argument, const LoginInhibitor &inhibitor)
 {
     argument.beginStructure();
     argument << inhibitor.what << inhibitor.who << inhibitor.why << inhibitor.mode;
@@ -257,7 +257,7 @@ QDBusArgument& operator<<(QDBusArgument &argument, const LoginDBusInhibitor &inh
     return argument;
 }
 
-const QDBusArgument& operator>>(const QDBusArgument &argument, LoginDBusInhibitor &inhibitor)
+const QDBusArgument& operator>>(const QDBusArgument &argument, LoginInhibitor &inhibitor)
 {
     argument.beginStructure();
     argument >> inhibitor.what >> inhibitor.who >> inhibitor.why >> inhibitor.mode;

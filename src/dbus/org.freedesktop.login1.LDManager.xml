@@ -114,9 +114,9 @@
    </arg>
   </method>
   <method name="ListInhibitors">
-   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="LoginDBusInhibitorList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="LoginInhibitorList"/>
    <arg type="a(ssssuu)" direction="out">
-    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="LoginDBusInhibitorList"/>
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="LoginInhibitorList"/>
    </arg>
   </method>
   <method name="CreateSession">

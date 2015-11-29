@@ -52,6 +52,7 @@ public:
     Permission canSuspend();
     void hibernate(const bool interactive);
     void hybridSleep(const bool interactive);
+    QList<LoginInhibitor> listInhibitors();
     QList<Seat::Ptr> listSeats();
     QList<Session::Ptr> listSessions();
     QList<User::Ptr> listUsers();

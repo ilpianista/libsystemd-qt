@@ -146,6 +146,27 @@ Systemd::Logind::User::Ptr Systemd::Logind::LogindPrivate::getUserByPID(const ui
     return user;
 }
 
+QList<LoginInhibitor> Systemd::Logind::LogindPrivate::listInhibitors()
+{
+    qDBusRegisterMetaType<LoginInhibitor>();
+    qDBusRegisterMetaType<LoginInhibitorList>();
+    QDBusPendingReply<LoginInhibitorList> reply = ildface.ListInhibitors();
+    reply.waitForFinished();
+
+    if (reply.isError()) {
+        qDebug() << reply.error().message();
+        return QList<LoginInhibitor>();
+    }
+
+    QList<LoginInhibitor> inhibitors;
+    const QDBusMessage message = reply.reply();
+    if (message.type() == QDBusMessage::ReplyMessage) {
+        inhibitors = qdbus_cast<LoginInhibitorList>(message.arguments().first());
+    }
+
+    return inhibitors;
+}
+
 QList<Systemd::Logind::Seat::Ptr> Systemd::Logind::LogindPrivate::listSeats()
 {
     qDBusRegisterMetaType<DBusSeat>();
@@ -465,6 +486,12 @@ void Systemd::Logind::hybridSleep(const bool interactive)
 {
     globalLogind()->hybridSleep(interactive);
 }
+
+QList<LoginInhibitor> Systemd::Logind::listInhibitors()
+{
+    return globalLogind()->listInhibitors();
+}
+
 
 QList<Systemd::Logind::Seat::Ptr> Systemd::Logind::listSeats()
 {

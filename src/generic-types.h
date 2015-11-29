@@ -173,13 +173,13 @@ typedef struct {
     QString mode;
     quint32 uid;
     quint32 pid;
-} LoginDBusInhibitor;
-Q_DECLARE_METATYPE(LoginDBusInhibitor)
-typedef QList<LoginDBusInhibitor> LoginDBusInhibitorList;
-Q_DECLARE_METATYPE(LoginDBusInhibitorList)
+} LoginInhibitor;
+Q_DECLARE_METATYPE(LoginInhibitor)
+typedef QList<LoginInhibitor> LoginInhibitorList;
+Q_DECLARE_METATYPE(LoginInhibitorList)
 
-QDBusArgument &operator<<(QDBusArgument &argument, const LoginDBusInhibitor &inhibitor);
-const QDBusArgument &operator>>(const QDBusArgument &argument, LoginDBusInhibitor &inhibitor);
+QDBusArgument &operator<<(QDBusArgument &argument, const LoginInhibitor &inhibitor);
+const QDBusArgument &operator>>(const QDBusArgument &argument, LoginInhibitor &inhibitor);
 
 typedef struct {
     QString type;
