@@ -23,7 +23,7 @@
 Systemd::Logind::UserPrivate::UserPrivate(const QString &path) :
     userIface(Systemd::Logind::LogindPrivate::LD_DBUS_SERVICE, path, QDBusConnection::systemBus())
 {
-    //display = userIface.display();
+    display = userIface.display().id;
     gid = userIface.uID();
     idleHint = userIface.idleHint();
     idleSinceHint = userIface.idleSinceHint();
@@ -31,8 +31,10 @@ Systemd::Logind::UserPrivate::UserPrivate(const QString &path) :
     linger = userIface.linger();
     name = userIface.name();
     runtimePath = userIface.runtimePath();
-    //sessions = userIface.sessions();
     service = userIface.service();
+    Q_FOREACH (const DBusSession &session, userIface.sessions()) {
+        sessions << session.id;
+    }
     slice = userIface.slice();
     state = userIface.state();
     timestamp = userIface.timestamp();
@@ -57,6 +59,12 @@ Systemd::Logind::User::User(UserPrivate &user, QObject *parent) :
 Systemd::Logind::User::~User()
 {
     delete d_ptr;
+}
+
+QString Systemd::Logind::User::display() const
+{
+    Q_D(const User);
+    return d->display;
 }
 
 uint Systemd::Logind::User::gid() const
@@ -105,6 +113,12 @@ QString Systemd::Logind::User::service() const
 {
     Q_D(const User);
     return d->service;
+}
+
+QStringList Systemd::Logind::User::sessions() const
+{
+    Q_D(const User);
+    return d->sessions;
 }
 
 QString Systemd::Logind::User::slice() const

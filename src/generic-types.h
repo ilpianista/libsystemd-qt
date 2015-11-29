@@ -335,20 +335,6 @@ const QDBusArgument &operator>>(const QDBusArgument &argument, UnitDBusCondition
 
 typedef struct {
     QString name;
-    bool trigger;
-    bool negate;
-    QString param;
-    qint32 state;
-} UnitDBusAssert;
-Q_DECLARE_METATYPE(UnitDBusAssert)
-typedef QList<UnitDBusAssert> UnitDBusAssertList;
-Q_DECLARE_METATYPE(UnitDBusAssertList)
-
-QDBusArgument &operator<<(QDBusArgument &argument, const UnitDBusAssert &assert);
-const QDBusArgument &operator>>(const QDBusArgument &argument, UnitDBusAssert &assert);
-
-typedef struct {
-    QString name;
     QString message;
 } UnitDBusLoadError;
 Q_DECLARE_METATYPE(UnitDBusLoadError)

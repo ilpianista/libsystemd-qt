@@ -37,6 +37,7 @@ public:
 
     OrgFreedesktopLogin1UserInterface userIface;
 
+    QString display;
     uint gid;
     bool idleHint;
     qulonglong idleSinceHint;
@@ -45,6 +46,7 @@ public:
     QString name;
     QString runtimePath;
     QString service;
+    QStringList sessions;
     QString slice;
     QString state;
     qulonglong timestamp;

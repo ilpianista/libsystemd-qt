@@ -183,7 +183,7 @@
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="Asserts" type="a(sbbsi)" access="read">
-   <annotation name="org.qtproject.QtDBus.QtTypeName" value="UnitDBusAssertList"/>
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="UnitDBusConditionList"/>
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
   <property name="LoadError" type="(ss)" access="read">

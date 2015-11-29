@@ -468,24 +468,6 @@ const QDBusArgument& operator>>(const QDBusArgument &argument, UnitDBusCondition
     return argument;
 }
 
-QDBusArgument& operator<<(QDBusArgument &argument, const UnitDBusAssert &assert)
-{
-    argument.beginStructure();
-    argument << assert.name << assert.trigger << assert.negate << assert.param;
-    argument << assert.state;
-    argument.endStructure();
-    return argument;
-}
-
-const QDBusArgument& operator>>(const QDBusArgument &argument, UnitDBusAssert &assert)
-{
-    argument.beginStructure();
-    argument >> assert.name >> assert.trigger >> assert.negate >> assert.param;
-    argument >> assert.state;
-    argument.endStructure();
-    return argument;
-}
-
 QDBusArgument& operator<<(QDBusArgument &argument, const UnitDBusLoadError &loadError)
 {
     argument.beginStructure();

@@ -43,6 +43,7 @@ public:
     explicit User(UserPrivate &user, QObject *parent = 0);
     virtual ~User();
 
+    QString display() const;
     uint gid() const;
     bool idleHint() const;
     qulonglong idleSinceHint() const;
@@ -51,6 +52,7 @@ public:
     QString name() const;
     QString runtimePath() const;
     QString service() const;
+    QStringList sessions() const;
     QString slice() const;
     QString state() const;
     qulonglong timestamp() const;
