@@ -20,8 +20,8 @@
 #include "seat_p.h"
 #include "ldmanager_p.h"
 
-Systemd::Logind::SeatPrivate::SeatPrivate(const QString &path, const QDBusConnection &connection) :
-    seatIface(Systemd::Logind::LogindPrivate::LD_DBUS_SERVICE, path, connection)
+Systemd::Logind::SeatPrivate::SeatPrivate(const QString &path) :
+    seatIface(Systemd::Logind::LogindPrivate::LD_DBUS_SERVICE, path, QDBusConnection::systemBus())
 {
     qDBusRegisterMetaType<DBusSession>();
     qDBusRegisterMetaType<DBusSessionList>();
@@ -40,8 +40,8 @@ Systemd::Logind::SeatPrivate::~SeatPrivate()
 {
 }
 
-Systemd::Logind::Seat::Seat(const QString &path, const QDBusConnection &connection, QObject *parent) :
-    QObject(parent), d_ptr(new SeatPrivate(path, connection))
+Systemd::Logind::Seat::Seat(const QString &path, QObject *parent) :
+    QObject(parent), d_ptr(new SeatPrivate(path))
 {
 }
 

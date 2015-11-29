@@ -20,8 +20,8 @@
 #include "user_p.h"
 #include "ldmanager_p.h"
 
-Systemd::Logind::UserPrivate::UserPrivate(const QString &path, const QDBusConnection &connection) :
-    userIface(Systemd::Logind::LogindPrivate::LD_DBUS_SERVICE, path, connection)
+Systemd::Logind::UserPrivate::UserPrivate(const QString &path) :
+    userIface(Systemd::Logind::LogindPrivate::LD_DBUS_SERVICE, path, QDBusConnection::systemBus())
 {
     //display = userIface.display();
     gid = userIface.uID();
@@ -44,8 +44,8 @@ Systemd::Logind::UserPrivate::~UserPrivate()
 {
 }
 
-Systemd::Logind::User::User(const QString &path, const QDBusConnection &connection, QObject *parent) :
-    QObject(parent), d_ptr(new UserPrivate(path, connection))
+Systemd::Logind::User::User(const QString &path, QObject *parent) :
+    QObject(parent), d_ptr(new UserPrivate(path))
 {
 }
 

@@ -32,7 +32,7 @@ class SessionPrivate
 {
 
 public:
-    explicit SessionPrivate(const QString &path, const QDBusConnection &connection);
+    explicit SessionPrivate(const QString &path);
     virtual ~SessionPrivate();
 
     OrgFreedesktopLogin1SessionInterface sessionIface;

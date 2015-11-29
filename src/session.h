@@ -25,8 +25,6 @@
 
 #include "QtSystemd-export.h"
 
-class QDBusConnection;
-
 namespace Systemd
 {
 namespace Logind
@@ -41,7 +39,7 @@ class SDQT_EXPORT Session : public QObject
 public:
     typedef QSharedPointer<Session> Ptr;
 
-    explicit Session(const QString &path, const QDBusConnection &connection, QObject *parent = 0);
+    explicit Session(const QString &path, QObject *parent = 0);
     explicit Session(SessionPrivate &session, QObject *parent = 0);
     virtual ~Session();
 

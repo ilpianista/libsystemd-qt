@@ -77,7 +77,7 @@ QList<Systemd::Logind::Seat::Ptr> Systemd::Logind::LogindPrivate::listSeats()
     if (message.type() == QDBusMessage::ReplyMessage) {
         const DBusSeatList seats = qdbus_cast<DBusSeatList>(message.arguments().first());
         Q_FOREACH (const DBusSeat seat, seats) {
-            Seat::Ptr s = Seat::Ptr(new Seat(seat.path.path(), ildface.connection()));
+            Seat::Ptr s = Seat::Ptr(new Seat(seat.path.path()));
             seatLists.append(s);
         }
     }
@@ -183,37 +183,37 @@ void Systemd::Logind::LogindPrivate::hybridSleep(const bool interactive)
 void Systemd::Logind::LogindPrivate::onSeatNew(const QString &id, const QDBusObjectPath &seat)
 {
     Q_UNUSED(id)
-    emit Logind::Notifier::seatNew(Seat::Ptr(new Seat(seat.path(), ildface.connection())));
+    emit Logind::Notifier::seatNew(Seat::Ptr(new Seat(seat.path())));
 }
 
 void Systemd::Logind::LogindPrivate::onSeatRemoved(const QString &id, const QDBusObjectPath &seat)
 {
     Q_UNUSED(id)
-    emit Logind::Notifier::seatRemoved(Seat::Ptr(new Seat(seat.path(), ildface.connection())));
+    emit Logind::Notifier::seatRemoved(Seat::Ptr(new Seat(seat.path())));
 }
 
 void Systemd::Logind::LogindPrivate::onSessionNew(const QString &id, const QDBusObjectPath &session)
 {
     Q_UNUSED(id)
-    emit Logind::Notifier::sessionNew(Session::Ptr(new Session(session.path(), ildface.connection())));
+    emit Logind::Notifier::sessionNew(Session::Ptr(new Session(session.path())));
 }
 
 void Systemd::Logind::LogindPrivate::onSessionRemoved(const QString &id, const QDBusObjectPath &session)
 {
     Q_UNUSED(id)
-    emit Logind::Notifier::sessionRemoved(Session::Ptr(new Session(session.path(), ildface.connection())));
+    emit Logind::Notifier::sessionRemoved(Session::Ptr(new Session(session.path())));
 }
 
 void Systemd::Logind::LogindPrivate::onUserNew(const uint &id, const QDBusObjectPath &user)
 {
     Q_UNUSED(id)
-    emit Logind::Notifier::userNew(User::Ptr(new User(user.path(), ildface.connection())));
+    emit Logind::Notifier::userNew(User::Ptr(new User(user.path())));
 }
 
 void Systemd::Logind::LogindPrivate::onUserRemoved(const uint &id, const QDBusObjectPath &user)
 {
     Q_UNUSED(id)
-    emit Logind::Notifier::userRemoved(User::Ptr(new User(user.path(), ildface.connection())));
+    emit Logind::Notifier::userRemoved(User::Ptr(new User(user.path())));
 }
 
 void Systemd::Logind::LogindPrivate::powerOff(const bool interactive)

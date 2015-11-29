@@ -32,7 +32,7 @@ class UserPrivate
 {
 
 public:
-    explicit UserPrivate(const QString &path, const QDBusConnection &connection);
+    explicit UserPrivate(const QString &path);
     virtual ~UserPrivate();
 
     OrgFreedesktopLogin1UserInterface userIface;
