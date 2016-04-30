@@ -69,11 +69,11 @@ Systemd::UnitPrivate::UnitPrivate(const QString &path, const QDBusConnection &co
     loadState = unitIface.loadState();
     names = unitIface.names();
     needDaemonReload = unitIface.needDaemonReload();
-    netClass = unitIface.netClass();
     onFailure = unitIface.onFailure();
     onFailureJobMode = unitIface.onFailureJobMode();
     partOf = unitIface.partOf();
     propagatesReloadTo = unitIface.propagatesReloadTo();
+    rebootArgument = unitIface.rebootArgument();
     refuseManualStart = unitIface.refuseManualStart();
     refuseManualStop = unitIface.refuseManualStop();
     reloadPropagatedFrom = unitIface.reloadPropagatedFrom();
@@ -83,6 +83,11 @@ Systemd::UnitPrivate::UnitPrivate(const QString &path, const QDBusConnection &co
     requisite = unitIface.requisite();
     requisiteOf = unitIface.requisiteOf();
     sourcePath = unitIface.sourcePath();
+    stateChangeTimestamp = unitIface.stateChangeTimestamp();
+    stateChangeTimestampMonotonic = unitIface.stateChangeTimestampMonotonic();
+    startLimitAction = unitIface.startLimitAction();
+    startLimitBurst = unitIface.startLimitBurst();
+    startLimitInterval = unitIface.startLimitInterval();
     stopWhenUnneeded = unitIface.stopWhenUnneeded();
     subState = unitIface.subState();
     transient = unitIface.transient();
@@ -388,12 +393,6 @@ bool Systemd::Unit::needDaemonReload() const
     return d->needDaemonReload;
 }
 
-uint Systemd::Unit::netClass() const
-{
-    Q_D(const Unit);
-    return d->netClass;
-}
-
 QStringList Systemd::Unit::onFailure() const
 {
     Q_D(const Unit);
@@ -416,6 +415,12 @@ QStringList Systemd::Unit::propagatesReloadTo() const
 {
     Q_D(const Unit);
     return d->propagatesReloadTo;
+}
+
+QString Systemd::Unit::rebootArgument() const
+{
+    Q_D(const Unit);
+    return d->rebootArgument;
 }
 
 bool Systemd::Unit::refuseManualStart() const
@@ -470,6 +475,36 @@ QString Systemd::Unit::sourcePath() const
 {
     Q_D(const Unit);
     return d->sourcePath;
+}
+
+qulonglong Systemd::Unit::stateChangeTimestamp() const
+{
+    Q_D(const Unit);
+    return d->stateChangeTimestamp;
+}
+
+qulonglong Systemd::Unit::stateChangeTimestampMonotonic() const
+{
+    Q_D(const Unit);
+    return d->stateChangeTimestampMonotonic;
+}
+
+QString Systemd::Unit::startLimitAction() const
+{
+    Q_D(const Unit);
+    return d->startLimitAction;
+}
+
+uint Systemd::Unit::startLimitBurst() const
+{
+    Q_D(const Unit);
+    return d->startLimitBurst;
+}
+
+qulonglong Systemd::Unit::startLimitInterval() const
+{
+    Q_D(const Unit);
+    return d->startLimitInterval;
 }
 
 bool Systemd::Unit::stopWhenUnneeded() const

@@ -82,11 +82,11 @@ public:
     QString loadState;
     QStringList names;
     bool needDaemonReload;
-    uint netClass;
     QStringList onFailure;
     QString onFailureJobMode;
     QStringList partOf;
     QStringList propagatesReloadTo;
+    QString rebootArgument;
     bool refuseManualStart;
     bool refuseManualStop;
     QStringList reloadPropagatedFrom;
@@ -96,6 +96,11 @@ public:
     QStringList requisite;
     QStringList requisiteOf;
     QString sourcePath;
+    qulonglong stateChangeTimestamp;
+    qulonglong stateChangeTimestampMonotonic;
+    QString startLimitAction;
+    uint startLimitBurst;
+    qulonglong startLimitInterval;
     bool stopWhenUnneeded;
     QString subState;
     bool transient;

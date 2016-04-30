@@ -102,6 +102,10 @@
   <property name="UnitFilePreset" type="s" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
+  <property name="StateChangeTimestamp" type="t" access="read">
+  </property>
+  <property name="StateChangeTimestampMonotonic" type="t" access="read">
+  </property>
   <property name="InactiveExitTimestamp" type="t" access="read">
   </property>
   <property name="InactiveExitTimestampMonotonic" type="t" access="read">
@@ -193,8 +197,17 @@
   <property name="Transient" type="b" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
-  <property name="NetClass" type="u" access="read">
-   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  <property name="StartLimitInterval" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="StartLimitBurst" type="u" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="StartLimitAction" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="RebootArgument" type="s" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <method name="Start">
    <arg type="s" direction="in"/>

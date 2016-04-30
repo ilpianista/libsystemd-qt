@@ -115,11 +115,11 @@ public:
     QString loadState() const;
     QStringList names() const;
     bool needDaemonReload() const;
-    uint netClass() const;
     QStringList onFailure() const;
     QString onFailureJobMode() const;
     QStringList partOf() const;
     QStringList propagatesReloadTo() const;
+    QString rebootArgument() const;
     bool refuseManualStart() const;
     bool refuseManualStop() const;
     QStringList reloadPropagatedFrom() const;
@@ -129,6 +129,11 @@ public:
     QStringList requisite() const;
     QStringList requisiteOf() const;
     QString sourcePath() const;
+    qulonglong stateChangeTimestamp() const;
+    qulonglong stateChangeTimestampMonotonic() const;
+    QString startLimitAction() const;
+    uint startLimitBurst() const;
+    qulonglong startLimitInterval() const;
     bool stopWhenUnneeded() const;
     QString subState() const;
     bool transient() const;
