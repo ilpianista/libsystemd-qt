@@ -52,7 +52,7 @@ endif()
 
 find_package(PkgConfig)
 
-pkg_check_modules(SYSTEMD "libsystemd-daemon libsystemd-login" REQUIRED)
+pkg_check_modules(SYSTEMD "libsystemd" REQUIRED)
 IF(NOT SYSTEMD_FOUND)
     message(FATAL_ERROR "ERROR: Systemd not found")
 ENDIF(NOT SYSTEMD_FOUND)
