@@ -40,6 +40,7 @@ set(INTERFACE_INTROSPECTION_XML_FILES
     dbus/org.freedesktop.systemd1.Target.xml
     dbus/org.freedesktop.systemd1.Timer.xml
     dbus/org.freedesktop.systemd1.Unit.xml
+    dbus/org.freedesktop.DBus.Properties.xml
 )
 
 set_property(SOURCE ${INTERFACE_INTROSPECTION_XML_FILES}
