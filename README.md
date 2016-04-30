@@ -5,7 +5,7 @@ Qt-only wrapper for [Systemd D-Bus API](http://www.freedesktop.org/wiki/Software
 
 Also supports [logind D-Bus interface](http://www.freedesktop.org/wiki/Software/systemd/logind/).
 
-[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=ascarpino&url=https://github.com/ascarpino/libsystemd-qt&title=libsystemd-qt&language=&tags=systemd&category=software)
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=ilpianista&url=https://gitlab.com/ilpianista/libsystemd-qt&title=libsystemd-qt&language=&tags=systemd&category=software)
 
 ##Build and Installation##
 
