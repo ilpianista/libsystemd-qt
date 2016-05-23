@@ -141,6 +141,35 @@
   <property name="CPUQuotaPerSecUSec" type="t" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
+  <property name="IOAccounting" type="b" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="IOWeight" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="StartupIOWeight" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="IODeviceWeight" type="a(st)" access="read">
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupDBusBlockIODeviceWeightList"/>
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="IOReadBandwidthMax" type="a(st)" access="read">
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupDBusBlockIODeviceWeightList"/>
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="IOWriteBandwidthMax" type="a(st)" access="read">
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupDBusBlockIODeviceWeightList"/>
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="IOReadIOPSMax" type="a(st)" access="read">
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupDBusBlockIODeviceWeightList"/>
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="IOWriteIOPSMax" type="a(st)" access="read">
+   <annotation name="org.qtproject.QtDBus.QtTypeName" value="CGroupDBusBlockIODeviceWeightList"/>
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
   <property name="BlockIOAccounting" type="b" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
@@ -357,9 +386,6 @@
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="SyslogFacility" type="i" access="read">
-   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
-  </property>
-  <property name="Capabilities" type="s" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="SecureBits" type="i" access="read">

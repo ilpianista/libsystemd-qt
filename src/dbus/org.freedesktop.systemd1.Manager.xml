@@ -161,7 +161,7 @@
   <property name="DefaultRestartUSec" type="t" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
-  <property name="DefaultStartLimitInterval" type="t" access="read">
+  <property name="DefaultStartLimitIntervalSec" type="t" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
   </property>
   <property name="DefaultStartLimitBurst" type="u" access="read">
@@ -381,6 +381,21 @@
    </arg>
   </method>
   <method name="ListUnitsFiltered">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitList"/>
+   <arg type="as" direction="in"/>
+   <arg type="a(ssssssouso)" direction="out">
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitList"/>
+   </arg>
+  </method>
+  <method name="ListUnitsByPatterns">
+   <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitList"/>
+   <arg type="as" direction="in"/>
+   <arg type="as" direction="in"/>
+   <arg type="a(ssssssouso)" direction="out">
+    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitList"/>
+   </arg>
+  </method>
+  <method name="ListUnitsByNames">
    <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="ManagerDBusUnitList"/>
    <arg type="as" direction="in"/>
    <arg type="a(ssssssouso)" direction="out">

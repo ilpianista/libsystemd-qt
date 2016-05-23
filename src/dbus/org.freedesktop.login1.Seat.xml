@@ -27,7 +27,6 @@
   <property name="IdleSinceHintMonotonic" type="t" access="read">
   </property>
   <method name="Terminate">
-   <annotation name="org.freedesktop.systemd1.Privileged" value="true"/>
   </method>
   <method name="ActivateSession">
    <arg type="s" direction="in"/>

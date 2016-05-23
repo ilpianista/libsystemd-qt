@@ -75,6 +75,27 @@
   <property name="Docked" type="b" access="read">
    <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
   </property>
+  <property name="RemoveIPC" type="b" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="RuntimeDirectorySize" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="InhibitorsMax" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="NCurrentInhibitors" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="SessionsMax" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
+  <property name="NCurrentSessions" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="false"/>
+  </property>
+  <property name="UserTasksMax" type="t" access="read">
+   <annotation name="org.freedesktop.DBus.Property.EmitsChangedSignal" value="const"/>
+  </property>
   <method name="GetSession">
    <arg type="s" direction="in"/>
    <arg type="o" direction="out"/>

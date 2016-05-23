@@ -72,6 +72,8 @@
   </property>
   <property name="IdleSinceHintMonotonic" type="t" access="read">
   </property>
+  <property name="LockedHint" type="b" access="read">
+  </property>
   <method name="Terminate">
   </method>
   <method name="Activate">
@@ -81,6 +83,9 @@
   <method name="Unlock">
   </method>
   <method name="SetIdleHint">
+   <arg type="b" direction="in"/>
+  </method>
+  <method name="SetLockedHint">
    <arg type="b" direction="in"/>
   </method>
   <method name="Kill">
