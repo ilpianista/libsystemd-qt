@@ -134,6 +134,9 @@ Unit::Ptr SystemdPrivate::getUnit(const QString &name)
 {
     Unit::Ptr unit;
 
+    qDBusRegisterMetaType<UnitCondition>();
+    qDBusRegisterMetaType<UnitConditionList>();
+    qDBusRegisterMetaType<UnitLoadError>();
     QDBusPendingReply<QDBusObjectPath> reply = isdface.GetUnit(name);
     reply.waitForFinished();
 
