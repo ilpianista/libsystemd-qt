@@ -167,7 +167,7 @@ Unit::Ptr SystemdPrivate::getUnitByPID(const uint pid)
     return unit;
 }
 
-QString SystemdPrivate::getUnitFileState(const QString& file)
+QString SystemdPrivate::getUnitFileState(const QString &file)
 {
     QDBusPendingReply<QString> reply = isdface.GetUnitFileState(file);
     reply.waitForFinished();
@@ -517,7 +517,7 @@ Unit::Ptr Systemd::getUnitByPID(const SessionType &session, const uint pid)
     return globalSystemd(session)->getUnitByPID(pid);
 }
 
-QString getUnitFileState(const SessionType &session, const QString &file)
+QString Systemd::getUnitFileState(const SessionType &session, const QString &file)
 {
     return globalSystemd(session)->getUnitFileState(file);
 }

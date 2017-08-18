@@ -60,6 +60,13 @@ public:
         qDebug() << "Got unit, id:" << Systemd::getUnit(Systemd::System, unitName)->id();
     }
 
+    static void getUnitFileState()
+    {
+        const QString unitName("lm_sensors.service");
+
+        qDebug() << "lm_sesnsors unit file state:" << Systemd::getUnitFileState(Systemd::System, unitName);
+    }
+
     static void getUnitByPID()
     {
         qDebug() << Systemd::getUnitByPID(Systemd::System, 1)->id();
@@ -140,6 +147,8 @@ int main(int argc, char* argv[])
 //     SDManagerTest::enableUnitFiles();
 
     SDManagerTest::getUnit();
+
+    SDManagerTest::getUnitFileState();
 
 //     SDManagerTest::getUnitByPID();
 
