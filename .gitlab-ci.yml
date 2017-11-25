@@ -1,0 +1,7 @@
+image: centos/systemd
+
+build:
+  script:
+  - yum install -y make gcc-c++ cmake systemd-devel qt5-qtbase-devel
+  - mkdir build && cd build && cmake ..
+  - make
